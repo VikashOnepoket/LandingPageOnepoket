@@ -17,12 +17,17 @@ steps:
 
 - script: |
     npm install
-    npm run build
+    npm install -g firebase-tools
   displayName: 'npm install and build'
 
 - script: |
-    firebase init
-  displayName: 'start firebase'
+    npm run build
+  displayName: 'build production artifacts'
+
+
+- script: |
+    firebase deploy --token $(FIREBASE-TOKEN) 
+  displayName: 'deploy to firbase'
 
 - script: |
     firebase use --add hosting
