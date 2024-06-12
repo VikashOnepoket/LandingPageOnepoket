@@ -24,11 +24,10 @@ steps:
     npm run build
   displayName: 'build production artifacts'
 
+- script: |
+    firebase use --add OnePoketStage
+  displayName: 'selecting the project'
 
 - script: |
     firebase deploy --token $(FIREBASE-TOKEN) 
   displayName: 'deploy to firbase'
-
-- script: |
-    firebase use --add hosting
-  displayName: 'hosting on firebase'
