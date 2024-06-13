@@ -17,17 +17,26 @@ steps:
 
 - script: |
     npm install
-    npm install -g firebase-tools
+    npm run build
   displayName: 'npm install and build'
 
-- script: |
-    npm run build
-  displayName: 'build production artifacts'
+- task: CmdLine@2
+  inputs:
+    script: |
+      
+      npm install -g firebase-tools
+    
+    workingDirectory: '$(Agent.ToolsDirectory)'
+  displayName: 'install firebase tools'
 
-- script: |
-    firebase use --add OnePoketStage
-  displayName: 'selecting the project'
 
-- script: |
-    firebase deploy --token $(FIREBASE-TOKEN) 
-  displayName: 'deploy to firbase'
+- task: CmdLine@2
+  inputs:
+    script: 'firebase use --add OnePoketStage'
+  displayName: 'select the project'
+
+- task: CmdLine@2
+  inputs:
+    script: 'firebase deploy --token "$FIREBASE_TOKEN"'
+  displayName: 'deploy into firebase'
+
