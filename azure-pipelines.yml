@@ -20,7 +20,7 @@ steps:
   displayName: 'npm install'
 
 - script: |
-    npm run prod
+    npm run build
   displayName: 'npm build'
 
 - task: CmdLine@2
