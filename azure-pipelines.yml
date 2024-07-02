@@ -31,7 +31,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'firebase use --add OnePoketStage'
+    script: 'firebase use --add onepoketstage'
   displayName: 'select the project'
 
 - task: CmdLine@2
