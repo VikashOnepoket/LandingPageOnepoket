@@ -1,0 +1,10 @@
+.custom-shadow {
+    box-shadow: 0 15px 15px rgba(0, 70, 153, 0.5); /* 15px blur */
+    background-color: #004699;
+    border-radius: 8px;
+    /* height: 292px; */
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
