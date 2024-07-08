@@ -7,16 +7,24 @@ import FaqSection from './Faq/FaqSection'
 import CustomerScan from './CustomerScan/CustomerScan'
 import GifAnimation from './animation/GifAnimation'
 import Footer from './Footer/Footer'
+import line from '../assets/line.png'
+import HeroMain from './HeroMain'
 
 const Home = () => {
   return (
 
     <>
       <Navbar />
-      <HeroSection />
+      <HeroMain />
       <Fold2card />
       <GifAnimation />
+      {/* <div>
+        <img src={line} />
+      </div> */}
       <FaqSection />
+      {/* <div>
+        <img src={line} />
+      </div> */}
       <CustomerScan />
       <Footer />
     </>

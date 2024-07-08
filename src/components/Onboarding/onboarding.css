@@ -1,0 +1,148 @@
+.main-containerS {
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%2017%20(1).png?alt=media&token=9dce9b9f-ba75-4cde-8e30-52b1d80c12ea");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /* Ensure it covers the full viewport height */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.abhaya {
+  font-family: 'Abhaya Libre';
+}
+
+
+/* In your Tailwind CSS configuration or custom styles */
+.shadow-custom {
+  box-shadow: 0px 4px 17.9px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  background-color: white;
+}
+
+.btn-container {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* In your Tailwind CSS configuration or custom styles */
+.custom-input {
+  border: 1px solid #D1E4FF;
+  border-radius: 4px;
+  /* Example: Use a large value for a rounded shape */
+  padding: 12px 25px;
+  width: 100%;
+  color: #0052CC;
+  /* Text color */
+}
+
+.custom-input::placeholder {
+  color: #0052CC;
+  /* Placeholder color */
+}
+
+.custom-input:focus {
+  border-color: #0052CC;
+  /* Border color on focus */
+  outline: none;
+  /* Remove default focus outline */
+}
+
+
+@media (min-width: 1536px) and (max-width: 1680px) {
+  .abhaya {
+    font-size: 3.5rem !important;
+  }
+
+}
+
+@media (min-width: 1440px) and (max-width: 1536px) {
+  .abhaya {
+    font-size: 3.5rem !important;
+    line-height: 4.5rem !important;
+  }
+
+}
+
+@media (min-width: 1020px) and (max-width: 1278px) {
+  .box-container {
+    display: flex !important;
+    width: 50% !important;
+    flex-direction: column !important;
+    margin: auto !important;
+    padding-top: 3rem !important;
+  }
+  .sm-box-container{
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+  
+
+
+
+}
+
+@media (min-width: 744px) and (max-width: 1050px) {
+  .box-container {
+
+    width: 70% !important;
+
+    margin: auto !important;
+    padding-top: 3rem !important;
+  }
+  .sm-box-container{
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+
+
+}
+
+@media (min-width: 940px) and (max-width: 1050px) {
+  .box-container {
+
+    width: 60% !important;
+    padding-top: 3rem !important;
+    margin: auto !important;
+  }
+  .sm-box-container{
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+  
+}
+
+@media (min-width: 320px) and (max-width: 640px) {
+  .sm-box-container {
+    width: auto !important;
+  }
+  .shadow-custom{
+   box-shadow: none !important;
+  }
+  .box-container{
+    width: 100% !important;
+  }
+  .main-containerS{
+    background-image: none;
+    justify-content: none !important;
+    align-items: normal !important;
+  }
+  .hide-container{
+    width: 100% !important;
+  }
+
+}
+
+@media (min-width: 640px) and (max-width: 744px) {
+
+  .sm-box-container{
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+  }
+  .box-container {
+    padding-top: 3rem !important;
+  }
+}

@@ -43,7 +43,7 @@ const Fold2Card = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="bg-container  w-[100%] lg:h-[727px] sm:h-[900px] h-[1000px] mx-auto"
+            className="bg-container  w-[100%] lg:h-[827px] sm:h-[900px] h-[1000px] mx-auto "
         >
             <motion.div
                 variants={containerVariants}

@@ -51,8 +51,8 @@ const HeroSection = () => {
         <>
             <div className='bodyBorder 2xl:h-[800px] lg:h-[575px] h-[900px] main-container w-[100%]'>
                 <div className='flex lg:flex-row sm:flex-col-reverse flex-col justify-between hero-section-container'>
-                    <div className={`2xl:w-[830px] 2xl:h-[720px] xl:h-[520px] xl:w-[590px] lg:w-[450px] lg:h-[520px] flex gap-10 flex-col text-container text-loyal-container ${animateText ? 'animate-slide-in-left text-center sm:text-start' : ''}`}>
-                        <h1 className='text-[#0052CC] 2xl:text-[50px] 2xl:leading-[70px] xl:text-[36px] xl:leading-[42px] font-bold inter text-[40px] leading-[55px]'>1 QR = 1 Loyal Customer</h1>
+                    <div className={` 2xl:h-[720px] xl:h-[520px] xl:w-[590px] lg:w-[450px] lg:h-[520px] flex gap-10 flex-col text-container text-loyal-container ${animateText ? 'animate-slide-in-left text-center sm:text-start' : ''}`}>
+                        <h1 className='text-[#0052CC] 2xl:text-[3rem] 2xl:leading-[4rem] xl:text-[2rem] xl:leading-[2rem] font-bold inter text-[2.5rem] leading-[55px]'>1 QR = 1 Loyal Customer</h1>
                         <div>
                             <p className='text-[18px] leading-[30px] font-normal'>
                                 Onepoket’s QR technology not only gets you <span className='text-[18px] leading-[30px] font-bold'>Customer Name, Number,</span> and <span className='text-[18px] leading-[30px] font-bold'>Demographics</span>; it's your <span className='text-[18px] leading-[30px] font-bold'>VIP pass</span> to the first-party data of your target market.

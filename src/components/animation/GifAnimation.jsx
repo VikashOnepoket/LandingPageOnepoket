@@ -4,6 +4,8 @@ import './hover.css'; // Import the custom CSS file
 import { useInView, motion } from 'framer-motion';
 import group from '../../assets/Group.png'
 
+import line from '../../assets/line.png'
+
 const GifAnimation = () => {
     const containerRef = useRef(null);
     const isInView = useInView(containerRef, { once: true, amount: 0.1 });
@@ -29,13 +31,13 @@ const GifAnimation = () => {
                 className='xl:w-[639px] xl:h-[748px] lg:w-[506px] lg:h-[557px] md:w-[390px] w-auto'
                 variants={containerVariants}
             >
-                <h1 className='lg:text-[32px] text-[24px] font-medium text-[#0052CC] lg:leading-[60px] leading-[40px] md:text-start text-center'>
+                <h1 className='lg:text-[28px] text-[24px] font-medium text-[#0052CC] lg:leading-[60px] leading-[40px] md:text-start text-center sm:ml-[1.1rem] ml-0 lg:w-[80%] w-[100%]'>
                     Be the Captain of your Customer Relationships in just
                 </h1>
-                <span className='md:text-[130px] text-[96px] font-extrabold text-[#0052CC] leading-[150px] inter ' id='span20'>
+                <span className='md:text-[130px] text-[96px] font-bold text-[#0052CC] leading-[150px] inter sm:ml-[1.1rem] ml-0' id='span20'>
                     20
                 </span>
-                <span className='md:text-[34px] text-[46px] text-[#0052CC] font-extrabold leading-[150px] inter' id='spanSec'>
+                <span className='md:text-[51px] text-[46px] text-[#0052CC] font-extrabold leading-[150px] inter' id='spanSec'>
                     Seconds!
                 </span>
 

@@ -1,0 +1,79 @@
+.login-container {
+    background-image: url("../../assets/bg-final.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    /* Ensure it covers the full viewport height */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-shadow-custom {
+    box-shadow: 0px 4px 17.9px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    background-color: white;
+}
+
+.custom-input {
+    border: 1px solid #D1E4FF;
+    border-radius: 4px;
+    /* Example: Use a large value for a rounded shape */
+    padding: 12px 25px;
+    width: 100%;
+    color: #0052CC;
+    /* Text color */
+}
+
+.custom-input::placeholder {
+    color: #0052CC;
+    /* Placeholder color */
+}
+
+.custom-input:focus {
+    border-color: #0052CC;
+    /* Border color on focus */
+    outline: none;
+    /* Remove default focus outline */
+}
+
+@media (min-width: 320px) and (max-width: 640px) {
+    /* .sm-box-container {
+      width: auto !important;
+    } */
+    .login-shadow-custom{
+     box-shadow: none !important;
+    }
+    .box-container{
+      width: 100% !important;
+    }
+    .login-container{
+      background-image: none;
+      /* justify-content: none !important;
+      align-items: normal !important; */
+    }
+   
+  }
+
+  /* Custom CSS File */
+
+.underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #004699;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
