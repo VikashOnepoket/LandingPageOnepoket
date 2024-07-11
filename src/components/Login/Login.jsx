@@ -29,10 +29,21 @@ const Login = () => {
             toast.error('All fields are required.');
             return true;
         }
-        const { data } = await axios.post("/user_login", {
-            email: user.email, password: user.password
-        });
-        console.log(data);
+        try {
+            const { data } = await axios.post("/user_login", {
+                email: user.email, password: user.password
+            });
+            console.log(data);
+
+            if (data.token) {
+                navigate(`/products`)
+            }
+        }
+        catch (error) {
+            toast.error(error?.response?.data?.message)
+
+        }
+
 
     };
 
@@ -79,7 +90,7 @@ const Login = () => {
                         />
                     </div>
                     <div className='mt-8 ' onClick={loginToDashboard}>
-                        <button className='w-[100%] bg-[#004699] border-[#004699] text-white px-[25px] py-[12px] rounded btn-container'>
+                        <button className='w-[100%] bg-[#0052cc] border-[#0052cc] text-white px-[25px] py-[12px] rounded btn-container'>
                             Login
                         </button>
                     </div>

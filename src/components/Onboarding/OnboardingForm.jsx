@@ -10,6 +10,7 @@ import logo1 from '../../assets/Frame 108.png';
 import arrow from '../../assets/arrow.png';
 import white from '../../assets/white.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useNavigate } from 'react-router-dom';
 
 const industryOptions = [
     { value: 'software', label: 'Software' },
@@ -31,6 +32,7 @@ const OnboardingForm = () => {
     const [selectedIndustry, setSelectedIndustry] = useState(null);
     const [selectedCompanySize, setSelectedCompanySize] = useState(null);
     const [hideLogoText, setHideLogoText] = useState(false);
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -121,15 +123,29 @@ const OnboardingForm = () => {
     //     }
     //     return true;
     // };
-
+    const [message, setShowMessage] = useState('')
     const incompleteData = async () => {
         if (!validatePersonalDetails()) return;
-        setIsPersonalDetailsCompleted(true);
-        setHideLogoText(true);
+        // setIsPersonalDetailsCompleted(true);
+        // setHideLogoText(true);
         const { data } = await axios.post("/user_register", {
             name: user.name, email: user.email, password: user.password, phone: user.phoneNumber
         });
         console.log(data, "data");
+        if (data.message == "User already registered") {
+            toast.success("User already registered")
+        }
+        // toast.success(data.message)
+
+        setShowMessage(data.message)
+        if (data.message === "User already registered") {
+            setIsPersonalDetailsCompleted(false);
+            setHideLogoText(false);
+        } else {
+            setIsPersonalDetailsCompleted(true);
+            setHideLogoText(true);
+        }
+
     };
 
     const goBack = () => {
@@ -148,6 +164,16 @@ const OnboardingForm = () => {
         const { data } = await axios.put("/user_update", {
             name: user.name, phone: user.phoneNumber, company_name: user.companyName, industry: user.industry, company_size: user.companySize, website_url: user.companyWebsite
         });
+
+        console.log(data, "data")
+        if (data.message) {
+            toast.success(data.message)
+
+            navigate(`/login`)
+
+
+
+        }
     };
 
     return (
