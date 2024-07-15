@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const RolesAndPermission = () => {
   const navigate = useNavigate();
   return (
-    <div className='mt-3 p-5'>
+    <div className='mt-3 p-8'>
       <div className='flex justify-between gap-10 items-center'>
         <div>
           <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Roles & Permissions</h3>

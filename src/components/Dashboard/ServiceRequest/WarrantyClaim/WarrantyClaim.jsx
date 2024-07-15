@@ -8,7 +8,7 @@ const WarrantyClaim = () => {
     };
     return (
         <>
-            <div className='mt-3 p-5'>
+            <div className='mt-3 p-8'>
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Request</h3>
                     {/* <FilterWarranty /> */}

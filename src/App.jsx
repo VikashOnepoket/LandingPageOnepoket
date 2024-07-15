@@ -24,6 +24,12 @@ import WarrantyClaim from './components/Dashboard/ServiceRequest/WarrantyClaim/W
 import AddServiceCentre from './components/Dashboard/ServiceRequest/ServiceNetwork/AddServiceCentre'
 import ServiceCentreDetails from './components/Dashboard/ServiceRequest/ServiceNetwork/ServiceCentreDetails'
 import WarrantyClaimDetails from './components/Dashboard/ServiceRequest/WarrantyClaim/WarrantyClaimDetails'
+import Proflile from './components/Dashboard/Profile/Proflile'
+import Profile from './components/Dashboard/Profile/Proflile'
+import Details from './components/Dashboard/Profile/Details'
+import QRUsage from './components/Dashboard/Profile/QRUsage'
+import Logo from './components/Dashboard/Profile/Logo'
+import AddLogo from './components/Dashboard/Profile/AddLogo/AddLogo'
 
 
 
@@ -56,6 +62,15 @@ function App() {
             <Route path='/service_request/warranty_claims' element={<WarrantyClaim />} />
             <Route path='/service_request/warranty_claims/:id' element={<WarrantyClaimDetails />} />
 
+
+
+            {/*  */}
+            <Route path="/profile" element={<Profile />}>
+              <Route path="details" element={<Details />} />
+              <Route path="QRUsage" element={<QRUsage />} />
+              <Route path="logo" element={<Logo />} />
+            </Route>
+            <Route path="/profile/logo/add_logo" element={<AddLogo />} />
 
 
             {/* Add more routes that should use the DashboardLayout */}

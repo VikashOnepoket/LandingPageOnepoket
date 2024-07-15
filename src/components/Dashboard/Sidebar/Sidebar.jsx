@@ -38,6 +38,9 @@ const Sidebar = () => {
             return location.pathname.startsWith('/service');
 
         }
+        else if(itemPath==='/profile'){
+            return location.pathname.startsWith('/profile');
+        }
         return location.pathname === itemPath;
     };
 
@@ -59,7 +62,7 @@ const Sidebar = () => {
                 {menuItems.map((item) => (
                     <Link to={item.path} key={item.name} className="">
                         <li
-                            className={`flex items-center gap-5 p-2 rounded-lg cursor-pointer mb-2 relative ${isActive(item.path) ? 'bg-[#004699] text-white' : 'text-[#7A7A7A]'}`}
+                            className={`flex items-center gap-5 p-2 rounded-lg cursor-pointer mb-2  ${isActive(item.path) ? 'bg-[#004699] text-white' : 'text-[#7A7A7A]'}`}
                             onClick={() => setActiveItem(item.path)}
                         >
                             <span

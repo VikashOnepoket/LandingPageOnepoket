@@ -1,0 +1,76 @@
+import React from 'react'
+
+const Purchase = () => {
+    return (
+        <div className='w-[100%] mt-10'>
+            <div>
+                <h1 className='text-[18px] leading-[23px] font-semibold'>Purchase Options</h1>
+            </div>
+            <div className='mt-2 border rounded-md p-5'>
+                <div className='flex flex-col gap-2 mt-5 '>
+                    <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Store Name</label>
+                    <input
+                        type='text'
+                        className='input  border 
+            border-gray-300 
+            dark:border-gray-600 
+            dark:bg-transparent 
+            rounded-md 
+            w-full 
+            py-2 px-3 
+            focus:border-[#0052cc]
+            focus:border
+           
+            focus-within:ring-1 
+            appearance-none 
+            transition 
+            duration-150 
+            dark:text-gray-100
+            ease-in-out'
+                        placeholder='Store Name'
+
+                    />
+                </div>
+                <div className='flex flex-col gap-2 mt-5 '>
+                    <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Product Review Link</label>
+                    <input
+                        type='text'
+                        className='input  border 
+            border-gray-300 
+            dark:border-gray-600 
+            dark:bg-transparent 
+            rounded-md 
+            w-full 
+            py-2 px-3 
+            focus:border-[#0052cc]
+            focus:border
+           
+            focus-within:ring-1 
+            appearance-none 
+            transition 
+            duration-150 
+            dark:text-gray-100
+            ease-in-out'
+                        placeholder='Product Review URL'
+
+                    />
+                </div>
+                <div className='flex justify-end'>
+                    <button block className='mt-2 text-[#FF4040] text-[12px] leading-[16px] font-semibold flex  items-center px-3 py-2' >
+                        <span className="material-symbols-outlined mr-2">delete</span>
+                        Delete Section
+                    </button>
+                </div>
+
+            </div>
+            <div className='mt-3 flex justify-end'>
+                <button  className=' text-[#0052cc] text-[12px] leading-[16px] font-semibold rounded-md flex  items-center px-3 py-2'>
+                    <span className="material-symbols-outlined mr-2">add</span>
+                    Add Section
+                </button>
+            </div>
+        </div>
+    )
+}
+
+export default Purchase

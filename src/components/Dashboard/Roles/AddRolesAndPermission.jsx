@@ -4,7 +4,7 @@ import './Role.css'
 const AddRolesAndPermission = () => {
   return (
     <>
-      <div className='mt-3 p-5 mb-[80px]'>
+      <div className='mt-3 p-8 mb-[80px]'>
         <div className='flex justify-between gap-10 items-center'>
           <div>
             <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Add User Roles & Permissions</h3>
@@ -137,10 +137,18 @@ const AddRolesAndPermission = () => {
 
           </div>
         </div>
+        <div className='flex justify-end lg:w-[70%] md:w-[80%] mt-10 gap-5'>
+          <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2'>
+            Discard
+          </button>
+          <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' >
+            Save
+          </button>
+        </div>
 
 
       </div>
-      <div className='border-t  h-[60px]  flex items-center justify-end gap-3 fixed bottom-0 md:w-[78%] z-50 2xl:w-[82%]'>
+      {/* <div className='border-t  h-[60px]  flex items-center justify-end gap-3  md:w-[78%] z-50 2xl:w-[82%]'>
         <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2'>
           Discard
         </button>
@@ -148,7 +156,7 @@ const AddRolesAndPermission = () => {
           Save
         </button>
 
-      </div>
+      </div> */}
 
     </>
   )

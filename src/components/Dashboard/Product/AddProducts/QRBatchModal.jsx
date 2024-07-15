@@ -1,11 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Select from 'react-select';
 
 const QRBatchModal = ({ isOpen, onClose }) => {
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [numberOfQRCodes, setNumberOfQRCodes] = useState('');
+
     const handleBackdropClick = (e) => {
         if (e.target.classList.contains('modal-backdrop')) {
             onClose();
         }
+    };
+
+    const products = [
+        { value: 'product1', label: 'Product 1' },
+        { value: 'product2', label: 'Product 2' },
+        { value: 'product3', label: 'Product 3' }
+    ];
+
+    const categories = [
+        { value: 'category1', label: 'Category 1' },
+        { value: 'category2', label: 'Category 2' },
+        { value: 'category3', label: 'Category 3' }
+    ];
+
+    const customStyles = {
+        control: (provided, state) => ({
+            ...provided,
+            borderColor: state.isFocused ? '#0052cc' : provided.borderColor,
+            boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : provided.boxShadow,
+            '&:hover': {
+                borderColor: state.isFocused ? '#0052cc' : provided.borderColor
+            }
+        })
+    };
+
+    const handleGenerateQR = () => {
+        // Add logic for generating QR codes here
+        console.log('Generate QR codes for', {
+            product: selectedProduct,
+            category: selectedCategory,
+            numberOfQRCodes
+        });
     };
 
     return (
@@ -25,11 +62,48 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                         className="bg-white p-8 rounded-lg shadow-lg"
                         style={{ minWidth: 300, maxWidth: 600 }}
                     >
-                        <h2 className="text-lg font-semibold mb-4">QR Batch Modal</h2>
-                        <p>Add your modal content here...</p>
-                        <button className="bg-gray-200 text-gray-700 py-2 px-4 mt-4 rounded-md hover:bg-gray-300" onClick={onClose}>
-                            Close
-                        </button>
+                
+                        <div className="mb-4">
+                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A] ">Select Product</label>
+                            <Select
+                                value={selectedProduct}
+                                onChange={setSelectedProduct}
+                                options={products}
+                                styles={customStyles}
+                                className='mt-1'
+                                placeholder="Select a product"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">Select Category</label>
+                            <Select
+                                value={selectedCategory}
+                                onChange={setSelectedCategory}
+                                options={categories}
+                                styles={customStyles}
+                                className='mt-1'
+                                placeholder="Select a category"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">Number Of QR</label>
+                            <input
+                                type="number"
+                                value={numberOfQRCodes}
+                                onChange={(e) => setNumberOfQRCodes(e.target.value)}
+                                className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
+                                placeholder="Enter number of QR codes"
+                            />
+                        </div>
+                        <div className='flex justify-center mt-8'>
+                            <button
+                                className=" py-2 px-5 rounded-md hover:bg-[#0052cc] bg-[#0052CC] text-white border border-[#0052CC] max-w-md w-48"
+                                onClick={handleGenerateQR}
+                            >
+                                Generate 
+                             </button>
+                        </div>
+
                     </motion.div>
                 </motion.div>
             )}

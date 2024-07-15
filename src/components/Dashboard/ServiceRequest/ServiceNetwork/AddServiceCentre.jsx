@@ -3,7 +3,7 @@ import React from 'react'
 const AddServiceCentre = () => {
     return (
         <>
-            <div className='mt-3 p-5 mb-[80px]'>
+            <div className='mt-3 p-8 mb-[80px]'>
                 <div className='flex justify-between gap-10 items-center'>
                     <div>
                         <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Add User Roles & Permissions</h3>
