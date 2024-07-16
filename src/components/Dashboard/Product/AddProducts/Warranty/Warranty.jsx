@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 
 const Warranty = () => {
+  
     return (
         <div className='w-[100%] mt-10'>
             <div>

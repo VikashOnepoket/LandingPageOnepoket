@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import QRBatchModal from './AddProducts/QRBatchModal';
 import { Drawer } from '@mui/material';
 import Select from 'react-select';
+import SearchInput from '../SearchInput/SearchInput';
 
 const Product = () => {
     const navigate = useNavigate();
@@ -82,6 +83,7 @@ const Product = () => {
                             <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Products</h3>
                         </div>
                         <div className='flex gap-3'>
+                            <SearchInput/>
                             <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={() => navigate(`/products/add_product`)}>
                                 <span className="material-symbols-outlined mr-2">add</span>
                                 Add Product
