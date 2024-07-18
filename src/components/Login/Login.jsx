@@ -32,12 +32,23 @@ const Login = () => {
         }
         setLoading(true);
         try {
-            const { data } = await axios.post("/user_login", {
-                email: user.email, password: user.password
-            });
+            const { data } = await axios.post("/user_login",
+                {
+                    email: user.email,
+                    password: user.password
+                },
+                {
+
+                    mode: 'no-cors',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
             console.log(data, "data");
             localStorage.setItem('token', data?.token);
-            
+
             if (data?.token) {
                 navigate(`/products`);
             } else if (data?.message === "Invalid Credentials") {
@@ -50,6 +61,7 @@ const Login = () => {
             setLoading(false);
         }
     };
+
 
     const goToOnboarding = () => {
         navigate(`/onboarding`);
