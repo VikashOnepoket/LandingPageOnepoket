@@ -37,14 +37,6 @@ const Login = () => {
                     email: user.email,
                     password: user.password
                 },
-                {
-
-                    mode: 'no-cors',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Content-Type': 'application/json',
-                    },
-                }
             );
             console.log(data, "data");
             localStorage.setItem('token', data?.token);
