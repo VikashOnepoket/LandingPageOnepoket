@@ -30,6 +30,8 @@ import Details from './components/Dashboard/Profile/Details'
 import QRUsage from './components/Dashboard/Profile/QRUsage'
 import Logo from './components/Dashboard/Profile/Logo'
 import AddLogo from './components/Dashboard/Profile/AddLogo/AddLogo'
+import Campaign from './components/Dashboard/Campaign/Campaign'
+import CreateCampaign from './components/Dashboard/Campaign/CreateCampaign/CreateCampaign'
 
 
 
@@ -74,7 +76,12 @@ function App() {
 
 
             {/* Add more routes that should use the DashboardLayout */}
+            <Route path='/campaign' element={<Campaign />}></Route>
+            <Route path='/campaign/create_campaign' element={<CreateCampaign />}></Route>
           </Route>
+          {/* campaign */}
+
+
         </Routes>
       </SidebarProvider>
     </>

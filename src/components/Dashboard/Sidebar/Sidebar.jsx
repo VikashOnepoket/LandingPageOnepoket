@@ -41,6 +41,9 @@ const Sidebar = () => {
         else if(itemPath==='/profile'){
             return location.pathname.startsWith('/profile');
         }
+        else if(itemPath==='/campaign'){
+            return location.pathname.startsWith('/campaign');
+        }
         return location.pathname === itemPath;
     };
 
