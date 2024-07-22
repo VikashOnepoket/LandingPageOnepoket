@@ -78,11 +78,11 @@ const Product = () => {
             <div className=''>
                 {/* <Header /> */}
                 <div className='mt-3 p-8'>
-                    <div className='flex justify-between gap-10 items-center'>
+                    <div className='flex lg:flex-row justify-between gap-10 lg:items-center flex-col'>
                         <div>
                             <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Products</h3>
                         </div>
-                        <div className='flex gap-3'>
+                        <div className='flex gap-3 sm:flex-row flex-col'>
                             <SearchInput/>
                             <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={() => navigate(`/products/add_product`)}>
                                 <span className="material-symbols-outlined mr-2">add</span>

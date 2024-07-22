@@ -19,8 +19,8 @@ const AddProduct = () => {
         </div>
 
         {/* information basic require */}
-        <div className='mt-10 flex   gap-10 '>
-          <div className='w-[70%] '>
+        <div className='mt-10 flex lg:flex-row flex-col   gap-10 '>
+          <div className='lg:w-[70%] w-[100%]'>
             <BasicInformation />
             <AdditionalInfo />
             <Purchase />
@@ -36,7 +36,7 @@ const AddProduct = () => {
               </button>
             </div>
           </div>
-          <div className='w-[30%]'>
+          <div className='lg:w-[30%] w-[100%]'>
             <ProductImge />
             <Category />
             <Logo />
