@@ -117,7 +117,7 @@ const Navbar = () => {
                                     </a>
                                 </li>
                                 <li className='flex items-center pt-5' onClick={goToLogin}>
-                                    <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[23px] text-[#20212380] font-bold'>
+                                    <a  className='text-[14px] cursor-pointer leading-[23px] text-[#20212380] font-bold'>
                                         Login
                                     </a>
                                 </li>
