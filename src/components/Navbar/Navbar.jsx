@@ -18,7 +18,7 @@ const Navbar = () => {
         setIsMenuOpen(false);
     };
 
-    const openTypeForm = () => {
+    const openOnboardingForm = () => {
         navigate(`/onboarding`);
     };
 
@@ -74,7 +74,7 @@ const Navbar = () => {
                             Login
                         </button>
                     </div> */}
-                    <div className='trial-button-container' onClick={openTypeForm}>
+                    <div className='trial-button-container' onClick={openOnboardingForm}>
                         <button className='hover:bg-[#1971D8] hover:text-white bg-white rounded-lg text-[14px] leading-[23px] font-bold px-[22px] py-[12px] gap-2 flex items-center text-[#0052CC]'>
                             Start free trial
                         </button>
@@ -116,12 +116,12 @@ const Navbar = () => {
                                         Support
                                     </a>
                                 </li>
-                                <li className='flex items-center pt-5'>
+                                <li className='flex items-center pt-5' onClick={goToLogin}>
                                     <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[23px] text-[#20212380] font-bold'>
                                         Login
                                     </a>
                                 </li>
-                                <li className='flex items-center pt-5 pb-[60px] w-[100%]' onClick={openTypeForm}>
+                                <li className='flex items-center pt-5 pb-[60px] w-[100%]' onClick={openOnboardingForm}>
                                     <button className='hover:bg-[#1971D8] bg-[#004699] rounded-lg text-[14px] leading-[23px] font-bold text-white px-[22px] py-[12px] gap-2 flex items-center w-full justify-center '>
                                         Start free trial
                                     </button>

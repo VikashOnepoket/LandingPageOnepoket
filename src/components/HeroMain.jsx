@@ -55,7 +55,7 @@ const HeroMain = () => {
                         </p>
                         <p className='text-[18px] leading-[35px] font-normal mt-4 para-container-text'>Want to see it in action?</p>
                     </div>
-                    <div className='text-center sm:text-start w-full' >
+                    <div className='text-center sm:text-start w-full' onClick={openTypeForm}>
                         <button className='hover:bg-[#1971D8] hover:text-white bg-[#0052CC] rounded-lg text-[18px] leading-[23px] font-bold text-white px-[16px] py-[14px] gap-3 sm:w-[221px] w-full mt-5 cursor-pointer button-id border border-[#0052CC] hover:border hover:border-[#1971D8]'>Claim Your Free Demo</button>
                     </div>
                 </div>
