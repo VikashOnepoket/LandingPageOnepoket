@@ -15,7 +15,7 @@ const ServiceRequest = () => {
                     {/* <ProductTableTools /> */}
                 </div>
                 {/* card */}
-                <div className='mt-12 2xl:grid-cols-4 grid xl:grid-cols-3 gap-8'>
+                <div className='mt-12 2xl:grid-cols-4 grid xl:grid-cols-3 md:grid-cols-2 gap-8'>
                     {/* completed installation card */}
                     <div style={boxShadowStyle} className='px-5 pt-5 pb-[110px] rounded-xl w-[300px] cursor-pointer' onClick={() => navigate(`/service_request/completed_installation`)}>
                         <div>

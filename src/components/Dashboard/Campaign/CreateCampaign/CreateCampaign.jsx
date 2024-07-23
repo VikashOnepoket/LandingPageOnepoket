@@ -32,7 +32,7 @@ const CreateCampaign = () => {
     };
     return (
         <>
-            <div className='p-8 lg:w-[50%] md:w-[80%]'>
+            <div className='p-8 lg:w-[50%] md:w-[80%] w-full'>
                 {/* campaing name */}
                 <div className="flex flex-col gap-2">
                     <label className="text-[16px] leading-[21px] text-[#000000] font-semibold">Campaign Name</label>

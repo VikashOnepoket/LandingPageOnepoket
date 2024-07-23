@@ -137,7 +137,7 @@ const AddRolesAndPermission = () => {
 
           </div>
         </div>
-        <div className='flex justify-end lg:w-[70%] md:w-[80%] mt-10 gap-5'>
+        <div className='flex justify-end lg:w-[70%] md:w-[80%] mt-10 gap-5 w-full'>
           <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2'>
             Discard
           </button>

@@ -36,7 +36,7 @@ const AddLogo = () => {
     };
 
     return (
-        <div className='p-8 lg:w-[70%] md:w-[80%]'>
+        <div className='p-8 lg:w-[70%] md:w-[80%] w-full'>
             <div>
                 <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Add Company Logo</h3>
             </div>

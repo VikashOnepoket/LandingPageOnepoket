@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import SearchInput from '../SearchInput/SearchInput'
 import { Drawer } from '@mui/material';
-import { RiWhatsappFill } from 'react-icons/ri';
+import { RiDeleteBin6Line, RiWhatsappFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import { TbMessage } from 'react-icons/tb';
 
 
 const Campaign = () => {
@@ -26,7 +27,7 @@ const Campaign = () => {
                 </div>
                 <div className='flex gap-5'>
                     <SearchInput />
-                    <button  className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={()=>navigate(`/campaign/create_campaign`)}>
+                    <button className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={() => navigate(`/campaign/create_campaign`)}>
                         <span className="material-symbols-outlined mr-2">add</span>
                         Create Campaign
                     </button>
@@ -75,9 +76,34 @@ const Campaign = () => {
                     </div>
                 </div>
                 {/* data */}
-                <div className="bg-white  rounded-lg p-4 mt-8" style={boxShadowStyle}>
-                    
-                  
+                <div className="bg-white  rounded-lg p-8 mt-8" style={boxShadowStyle}>
+
+                    <div className='flex gap-16'>
+                        <div>
+                            <p className='text-[12px] font-semibold leading-[16px] text-[#8F9091]'>Campaign Name</p>
+                            <p className='text-[16px] mt-2 leading-[20px] font-semibold text-[#202123]'>Warranty Registration</p>
+                        </div>
+                        <div>
+                            <p className='text-[12px] font-semibold leading-[16px] text-[#8F9091]'>Medium</p>
+                            <p className='text-[16px] mt-2 leading-[20px] font-semibold text-[#202123]'>Warranty Registration</p>
+                        </div>
+                        <div>
+                            <p className='text-[12px] font-semibold leading-[16px] text-[#8F9091]'>Created On</p>
+                            <p className='text-[16px] mt-2 leading-[20px] font-semibold text-[#202123]'>07-06-2024</p>
+                        </div>
+                        <div>
+                            <p className='text-[12px] font-semibold leading-[16px] text-[#8F9091]'>Status</p>
+                            <p className='bg-[#BAFFD3] text-[#00742A] py-1 px-5 rounded text-[16px] mt-1 leading-[20px] font-semibold '>Active</p>
+                        </div>
+                        <div className=''>
+
+                            <div className='flex justify-between gap-5'>
+                                <TbMessage size={22} />
+                                <RiDeleteBin6Line size={22} />
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 

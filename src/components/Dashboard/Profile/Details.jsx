@@ -95,7 +95,7 @@ const Details = () => {
     return (
         <>
             <div className='mt-10'>
-                <div className='flex justify-between mt-3 items-center  lg:w-[70%] md:w-[80%]'>
+                <div className='flex justify-between mt-3 items-center  lg:w-[70%] md:w-[80%] w-full'>
                     <div>
                         <h3 className='text-[1.2rem] leading-[1.5rem] font-semibold text-[#202123]'>Profile Details</h3>
                     </div>
