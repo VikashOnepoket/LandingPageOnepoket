@@ -21,11 +21,11 @@ const Campaign = () => {
     };
     return (
         <div className='p-8'>
-            <div className='flex justify-between gap-10 '>
+            <div className='flex sm:justify-between gap-10 sm:flex-row flex-col'>
                 <div>
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Campaign</h3>
                 </div>
-                <div className='flex gap-5'>
+                <div className='flex sm:flex-row flex-col gap-5'>
                     <SearchInput />
                     <button className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={() => navigate(`/campaign/create_campaign`)}>
                         <span className="material-symbols-outlined mr-2">add</span>
@@ -66,7 +66,7 @@ const Campaign = () => {
             </div>
 
             <div className='mt-12'>
-                <div className='flex justify-between items-center gap-10'>
+                <div className='flex sm:justify-between sm:items-center gap-10 sm:flex-row flex-col'>
                     <div>
                         <h3 className='text-[#58595A] text-[1.2rem] leading-[2rem] font-semibold'>Show All</h3>
                     </div>
@@ -76,7 +76,7 @@ const Campaign = () => {
                     </div>
                 </div>
                 {/* data */}
-                <div className="bg-white  rounded-lg p-8 mt-8" style={boxShadowStyle}>
+                {/* <div className="bg-white  rounded-lg p-8 mt-8" style={boxShadowStyle}>
 
                     <div className='flex gap-16'>
                         <div>
@@ -104,7 +104,7 @@ const Campaign = () => {
 
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </div>

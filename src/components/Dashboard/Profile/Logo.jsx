@@ -8,7 +8,7 @@ const Logo = () => {
   }
   return (
     <div className='mt-10'>
-      <div className='flex justify-between mt-3 items-center '>
+      <div className='flex sm:justify-between gap-10 sm:items-center sm:flex-row flex-col '>
         <div>
           <h3 className='text-[1.2rem] leading-[1.5rem] font-semibold text-[#202123]'>Logo</h3>
         </div>

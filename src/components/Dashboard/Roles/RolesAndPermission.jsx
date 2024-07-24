@@ -5,11 +5,11 @@ const RolesAndPermission = () => {
   const navigate = useNavigate();
   return (
     <div className='mt-3 p-8'>
-      <div className='flex justify-between gap-10 items-center'>
+      <div className='flex sm:justify-between gap-10 sm:items-center sm:flex-row flex-col'>
         <div>
-          <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Roles & Permissions</h3>
+          <h3 className="sm:mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Roles & Permissions</h3>
         </div>
-        <div>
+        <div className='sm:mt-0 mt-4' >
           <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' onClick={() => navigate(`/roles/add_roles_permission`)}>
             <span className="material-symbols-outlined mr-2">add</span>
             Add New User
@@ -18,7 +18,7 @@ const RolesAndPermission = () => {
       </div>
 
 
-      <div className="flex space-x-8 items-center mt-3">
+      <div className="flex space-x-8 items-center sm:mt-3 mt-8">
         <p className="text-[14px] leading-[18px] font-semibold text-[#202123BF]">We Will help you onboard your team smoothly.</p>
         <p className="text-[12px] leading-[16px] font-semibold text-[#0052CC]">Request Demo</p>
       </div>
