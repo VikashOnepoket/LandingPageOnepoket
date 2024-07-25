@@ -15,11 +15,11 @@ const ServiceCentreDetails = () => {
                     {/* <ProductTableTools /> */}
                 </div>
                 <div className='mt-5 rounded-lg ' style={boxShadowStyle}>
-                    <div className='flex justify-between p-8'>
-                        <div className='w-[50%]'>
+                    <div className='flex lg:justify-between p-8 lg:flex-row flex-col'>
+                        <div className='lg:w-[50%] w-full'>
                             <img src = {service} className='w-[100%] h-[100%]'/>
                         </div>
-                        <div className='w-[40%]'>
+                        <div className='lg:w-[40%] w-full'>
                             <div className='mx-10'>
                                 <h3 className='text-[4rem] leading-[5rem] font-bold text-[#0052CC]'>LG</h3>
                             </div>

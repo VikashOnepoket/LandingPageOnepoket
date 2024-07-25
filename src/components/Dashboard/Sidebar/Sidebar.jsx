@@ -5,6 +5,7 @@ import logo1 from '../../../assets/onepoket_logo.png';
 import { useSidebar } from './context/SidebarContext';
 import { Drawer } from '@mui/material';
 import SidebarContent from './SidebarContent';
+import FreePlan from './FreePlan';
 
 
 
@@ -52,7 +53,7 @@ const Sidebar = () => {
 
     return (
         <div
-            className={`hidden lg:block h-screen p-5 bg-[#FFFFFF] transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}
+            className={`hidden lg:block h-screen  p-5 bg-[#FFFFFF] transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}
             style={boxShadowStyle}
         >
             <SidebarContent
@@ -62,6 +63,7 @@ const Sidebar = () => {
                 menuItems={menuItems}
                 isActive={isActive}
             />
+            {/* <FreePlan/> */}
         </div>
     );
 };

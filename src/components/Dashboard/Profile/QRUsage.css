@@ -1,0 +1,40 @@
+
+
+
+@media screen and (max-width:510px){
+    .credit-box{
+      
+        width: 95%;
+    }
+    .table-box{
+        width: 95%;
+    }
+}
+@media screen and (max-width:440px){
+    .credit-box{
+      
+        width: 90%;
+    }
+    .table-box{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:420px){
+    .credit-box{
+      
+        width: 80%;
+    }
+    .table-box{
+        width: 80%;
+    }
+}
+@media screen and (max-width:400px){
+    .credit-box{
+      
+        width: 70%;
+    }
+    .table-box{
+        width: 70%;
+    }
+}

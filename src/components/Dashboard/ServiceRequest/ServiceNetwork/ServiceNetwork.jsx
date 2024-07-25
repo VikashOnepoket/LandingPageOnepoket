@@ -136,7 +136,7 @@ const ServiceNetwork = () => {
                     <div>
                         <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>24</h3>
                     </div>
-                    <div className=' mt-5 flex justify-between items-center'>
+                    <div className=' mt-5 flex lg:justify-between lg:items-center lg:flex-row flex-col gap-10'>
                         <div>
                             <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Service Network Details</h3>
                         </div>

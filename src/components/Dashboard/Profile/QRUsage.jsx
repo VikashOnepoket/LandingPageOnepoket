@@ -1,4 +1,5 @@
 import React from 'react';
+import './QRUsage.css';
 
 const QRUsage = () => {
   const boxShadowStyle = {
@@ -11,7 +12,7 @@ const QRUsage = () => {
           <h3 className='text-[1.2rem] leading-[1.5rem] font-semibold text-[#202123]'> Usage History</h3>
         </div>
       </div>
-      <div className='mt-8 rounded-lg' style={boxShadowStyle}>
+      <div className='mt-8 rounded-lg credit-box' style={boxShadowStyle}>
         <div className='flex sm:justify-between sm:items-center sm:flex-row flex-col'>
           <div className='mt-3 mb-10'>
             <h3 className='sm:text-[2.5rem] sm:leading-[3.2rem] text-[1.5rem] leading-[1.8rem] font-bold text-[#0052CC] px-5 py-2'>Total Credits Left</h3>
@@ -27,21 +28,21 @@ const QRUsage = () => {
         </div>
       </div>
       {/* table */}
-      <div className="container mx-auto mt-10">
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-gray-200">
+      <div className=" mt-10 table-box">
+        <div className="overflow-x-auto ">
+          <table className="w-full border-gray-200 ">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Created On</th>
+                <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold ">Created On</th>
                 <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Product</th>
                 <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Category</th>
                 <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">No. of QR Generated</th>
-                <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">No. of QR Left</th>
+                <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold ">No. of QR Left</th>
               </tr>
             </thead>
             <tbody>
               <tr className="p-5">
-                <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px] hover:underline"><a href="#">20-06-2024</a></td>
+                <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px] "><a href="#">20-06-2024</a></td>
                 <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">IPhone 15 Pro</td>
                 <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">Smartphone</td>
                 <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">2000</td>
@@ -51,6 +52,9 @@ const QRUsage = () => {
           </table>
         </div>
       </div>
+
+
+
     </div>
   );
 };
