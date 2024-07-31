@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -37,6 +37,18 @@ import Analytics from './components/Dashboard/Analytics/Analytics'
 
 
 function App() {
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     setIsAuthenticated(true);
+  //   } else {
+  //     setIsAuthenticated(false);
+  //     navigate('/');
+  //   }
+  // }, [navigate]);
 
   return (
     <>
