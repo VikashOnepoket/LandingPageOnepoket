@@ -67,6 +67,9 @@ const Header = () => {
         }
         return location.pathname === itemPath;
     };
+    const boxShadowStyle = {
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)', // X-offset, Y-offset, blur, spread, color
+    };
 
     return (
         <>
@@ -110,7 +113,8 @@ const Header = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.3 }}
-                                    className="absolute right-0 mt-5 w-72 bg-white rounded-md shadow-lg z-50"
+                                    className="absolute right-0 mt-1 w-72 bg-white rounded-md shadow-lg z-50 border"
+                                    sty
                                 >
                                     <div className="p-4">
                                         <div className="flex items-center gap-3 mb-4">
@@ -130,10 +134,10 @@ const Header = () => {
                                                 <span className="material-symbols-outlined text-[#58595A]">logout</span>
                                                 <span className='text-[12px] leading-[16px] font-semibold text-[#58595A]'>Logout</span>
                                             </div>
-                                            <div className="flex items-center gap-3 cursor-pointer text-blue-500 hover:bg-gray-100 p-2 rounded-md mt-2 justify-center">
+                                            {/* <div className="flex items-center gap-3 cursor-pointer text-blue-500 hover:bg-gray-100 p-2 rounded-md mt-2 justify-center">
                                                 <span className="material-symbols-outlined text-[#0052cc] ">add</span>
                                                 <span className='text-[12px] leading-[16px] font-semibold text-[#0052CC]'>Add Account</span>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </motion.div>
