@@ -33,6 +33,7 @@ import AddLogo from './components/Dashboard/Profile/AddLogo/AddLogo'
 import Campaign from './components/Dashboard/Campaign/Campaign'
 import CreateCampaign from './components/Dashboard/Campaign/CreateCampaign/CreateCampaign'
 import Analytics from './components/Dashboard/Analytics/Analytics'
+import FactoryManagement from './components/Dashboard/FactoryManagement/FactoryManagement'
 
 
 
@@ -95,6 +96,9 @@ function App() {
 
             {/* analytics */}
             <Route path='/analytics' element={<Analytics />}></Route>
+
+            {/* factorymanagement */}
+            <Route path='/factory' element={<FactoryManagement />}></Route>
           </Route>
           {/* campaign */}
 
