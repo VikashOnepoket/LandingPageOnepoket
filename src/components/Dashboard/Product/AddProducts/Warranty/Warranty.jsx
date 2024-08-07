@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
-
-const Warranty = () => {
+const Warranty = ({ formData, onInputChange }) => {
   
     return (
         <div className='w-[100%] mt-10'>
@@ -30,6 +29,8 @@ const Warranty = () => {
             dark:text-gray-100
             ease-in-out'
                         placeholder='years'
+                        value={formData.warranty_years}
+                        onChange={(e) => onInputChange('warranty_years', e.target.value)}
 
                     />
                 </div>
@@ -54,6 +55,8 @@ const Warranty = () => {
             dark:text-gray-100
             ease-in-out'
                         placeholder='month'
+                        value={formData.warranty_months}
+                        onChange={(e) => onInputChange('warranty_months', e.target.value)}
 
                     />
                 </div>

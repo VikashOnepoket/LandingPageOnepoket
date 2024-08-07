@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CustsomerDescription = () => {
+const CustsomerDescription = ({formData,onInputChange}) => {
     return (
         <div className='w-[100%] mt-10'>
             <div>
@@ -27,6 +27,8 @@ const CustsomerDescription = () => {
             dark:text-gray-100
             ease-in-out'
                     placeholder='Description'
+                    value={formData.product_desc_for_customer}
+                        onChange={(e) => onInputChange('product_desc_for_customer', e.target.value)}
 
                 ></textarea>
             </div>

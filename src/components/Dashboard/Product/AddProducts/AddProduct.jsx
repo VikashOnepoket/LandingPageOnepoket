@@ -1,15 +1,60 @@
-import React from 'react'
-import BasicInformation from './BasicInformation/BasicInformation'
-import ProductImge from './ProductImage/ProductImge'
-import Warranty from './Warranty/Warranty'
-import CustsomerDescription from './ProductDescCutomer/CustsomerDescription'
-import Category from './Category/Category'
-import Logo from './Logo/Logo'
-import Purchase from './PurchaseOption/Purchase'
-import ProductVideo from './Video/ProductVideo'
-import AdditionalInfo from '../Additional/Additional'
+import React, { useState } from 'react';
+import BasicInformation from './BasicInformation/BasicInformation';
+import ProductImge from './ProductImage/ProductImge';
+import Warranty from './Warranty/Warranty';
+import CustsomerDescription from './ProductDescCutomer/CustsomerDescription';
+import Category from './Category/Category';
+import Logo from './Logo/Logo';
+import Purchase from './PurchaseOption/Purchase';
+import ProductVideo from './Video/ProductVideo';
+import AdditionalInfo from '../Additional/Additional';
+import axios from '../../../../api/api';
 
 const AddProduct = () => {
+  const [formData, setFormData] = useState({
+    company_id: "22",
+    product_name: '',
+    model_number: '',
+    description: '',
+   
+    warranty_years: "",
+    warranty_months: "",
+    additionalInfo: [],
+    PurchaseOptions: [],
+    product_desc_for_customer: "",
+    // Add other fields as necessary
+  });
+
+  const handleInputChange = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleAdditionalInfoChange = (additionalInfo) => {
+    setFormData({
+      ...formData,
+      additionalInfo,
+    });
+  };
+
+  const handlePurchaseOptionsChange = (PurchaseOptions) => {
+    setFormData({
+      ...formData,
+      PurchaseOptions,
+    });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const { data } = await axios.post('/add_product_lp', formData);
+      console.log(data, "data");
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
   return (
     <>
       <div className='mt-3 p-8 mb-[80px]'>
@@ -18,23 +63,14 @@ const AddProduct = () => {
           <p className='text-[1.2rem] pt-5 leading-[1.5rem] font-semibold text-[#000000]'>Basic Information</p>
         </div>
 
-        {/* information basic require */}
-        <div className='mt-10 flex lg:flex-row flex-col   gap-10 '>
+        <div className='mt-10 flex lg:flex-row flex-col gap-10 '>
           <div className='lg:w-[70%] w-[100%]'>
-            <BasicInformation />
-            <AdditionalInfo />
-            <Purchase />
-            <Warranty />
+            <BasicInformation formData={formData} onInputChange={handleInputChange} />
+            <AdditionalInfo additionalInfo={formData.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} />
+            <Purchase purchaseOptions={formData.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} />
+            <Warranty formData={formData} onInputChange={handleInputChange} />
             <ProductVideo />
-            <CustsomerDescription />
-            <div className='flex justify-end mt-10 gap-5'>
-              <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2'>
-                Discard
-              </button>
-              <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' >
-                Save
-              </button>
-            </div>
+            <CustsomerDescription formData={formData} onInputChange={handleInputChange} />
           </div>
           <div className='lg:w-[30%] w-[100%]'>
             <ProductImge />
@@ -42,10 +78,21 @@ const AddProduct = () => {
             <Logo />
           </div>
         </div>
+
+        <div className='flex justify-end mt-10 gap-5 lg:w-[70%] w-[100%]'>
+          <button className='text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'>
+            Discard
+          </button>
+          <button
+            onClick={handleSubmit}
+            className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'
+          >
+            Save
+          </button>
+        </div>
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default AddProduct
+export default AddProduct;
