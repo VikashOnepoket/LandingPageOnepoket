@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BasicInformation from './BasicInformation/BasicInformation';
 import ProductImge from './ProductImage/ProductImge';
 import Warranty from './Warranty/Warranty';
@@ -9,14 +9,34 @@ import Purchase from './PurchaseOption/Purchase';
 import ProductVideo from './Video/ProductVideo';
 import AdditionalInfo from '../Additional/Additional';
 import axios from '../../../../api/api';
+import SpinnerMain from '../../Spinner/SpinnerMain';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserDetails } from '../../slice/userDetailsSlice';
 
 const AddProduct = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+
+
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUserDetails(token)).then((data) => {
+        setFormData({
+          company_id: data?.payload?.id
+        })
+      })
+
+    }
+  }, [dispatch, , token]);
+
+
   const [formData, setFormData] = useState({
-    company_id: "22",
+    company_id: "",
     product_name: '',
     model_number: '',
     description: '',
-   
+
     warranty_years: "",
     warranty_months: "",
     additionalInfo: [],
@@ -45,19 +65,26 @@ const AddProduct = () => {
       PurchaseOptions,
     });
   };
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.post('/add_product_lp', formData);
       console.log(data, "data");
+      if (data) {
+        toast.success(data.message)
+      }
+      setLoading(false)
     } catch (error) {
       console.log(error, "error");
+      setLoading(false)
     }
   };
 
   return (
     <>
-      <div className='mt-3 p-8 mb-[80px]'>
+      {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8 mb-[80px]'>
         <div>
           <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Add New Product</h3>
           <p className='text-[1.2rem] pt-5 leading-[1.5rem] font-semibold text-[#000000]'>Basic Information</p>
@@ -90,7 +117,7 @@ const AddProduct = () => {
             Save
           </button>
         </div>
-      </div>
+      </div>)}
     </>
   );
 };

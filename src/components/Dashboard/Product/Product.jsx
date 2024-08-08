@@ -6,6 +6,8 @@ import QRBatchModal from './AddProducts/QRBatchModal';
 import { Drawer } from '@mui/material';
 import Select from 'react-select';
 import SearchInput from '../SearchInput/SearchInput';
+import SpinnerMain from '../Spinner/SpinnerMain';
+
 
 const Product = () => {
     const navigate = useNavigate();
@@ -73,17 +75,21 @@ const Product = () => {
         })
     };
 
+    const [loading, setLoading] = useState(false)
+    console.log("hello")
+
     return (
         <>
+
             <div className=''>
-                {/* <Header /> */}
-                <div className='mt-3 p-8'>
+
+                <div className='mt-3 p-8 '>
                     <div className='flex lg:flex-row justify-between gap-10 lg:items-center flex-col'>
                         <div>
                             <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Products</h3>
                         </div>
                         <div className='flex gap-3 sm:flex-row flex-col'>
-                            <SearchInput/>
+                            <SearchInput />
                             <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={() => navigate(`/products/add_product`)}>
                                 <span className="material-symbols-outlined mr-2">add</span>
                                 Add Product
@@ -181,7 +187,7 @@ const Product = () => {
                     </Drawer>
                     {/* table */}
                     <div className="container mx-auto mt-10">
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto ">
                             <table className="min-w-full border-gray-200">
                                 <thead className="">
                                     <tr>
@@ -198,6 +204,8 @@ const Product = () => {
                     <QRBatchModal isOpen={showModal} onClose={closeModal} />
                 </div>
             </div>
+
+
         </>
     );
 };

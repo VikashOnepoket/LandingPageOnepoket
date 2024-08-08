@@ -4,8 +4,12 @@ import { Drawer } from '@mui/material';
 import SidebarContent from '../Sidebar/SidebarContent';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { signOutSuccess } from '../slice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserDetails } from '../slice/userDetailsSlice';
 
 const Header = () => {
+    const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -71,6 +75,25 @@ const Header = () => {
         boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)', // X-offset, Y-offset, blur, spread, color
     };
 
+    const handleLogout = ()=>{
+        dispatch(signOutSuccess())
+    
+
+    }
+
+ 
+    const token = useSelector((state) => state.auth.token);
+     const [name , setName] = useState("")
+  
+    useEffect(() => {
+      if (token) {
+        dispatch(fetchUserDetails(token)).then((data) => {
+            setName(data?.payload?.name)
+        })
+  
+      }
+    }, [dispatch, , token]);
+
     return (
         <>
             <div className='flex justify-between gap-10 items-center h-[54px] p-8 border-b sticky top-0 z-50 '>
@@ -123,14 +146,14 @@ const Header = () => {
                                                 alt="Profile"
                                                 className="w-8 h-8 rounded-full"
                                             />
-                                            <span className='text-[12px] leading-[16px] font-semibold text-[#58595A]'>ujjwal01@gmail.com</span>
+                                            <span className='text-[12px] leading-[16px] font-semibold text-[#58595A]'>{name}</span>
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
                                                 <span className="material-symbols-outlined text-[#58595A]">support_agent</span>
                                                 <span className='text-[12px] leading-[16px] font-semibold text-[#58595A]'>Support</span>
                                             </div>
-                                            <div className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
+                                            <div onClick={handleLogout} className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded-md">
                                                 <span className="material-symbols-outlined text-[#58595A]">logout</span>
                                                 <span className='text-[12px] leading-[16px] font-semibold text-[#58595A]'>Logout</span>
                                             </div>
