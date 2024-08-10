@@ -77,6 +77,7 @@ const Header = () => {
 
     const handleLogout = ()=>{
         dispatch(signOutSuccess())
+        localStorage.removeItem('token')
     
 
     }

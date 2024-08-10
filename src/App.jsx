@@ -33,6 +33,7 @@ import FactoryManagement from './components/Dashboard/FactoryManagement/FactoryM
 import PrivateRoute from './PrivateRoute'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInSuccess } from './components/Dashboard/slice/authSlice'
+import PublicRoute from './PublicRoute'
 
 
 function App() {
@@ -44,11 +45,10 @@ function App() {
     const savedToken = localStorage.getItem('token');
 
     if (savedToken) {
-      dispatch(signInSuccess(savedToken)); // Update Redux state with token from localStorage
-      // Optional: Navigate to the last visited route
-      // You could store the last visited route in localStorage before unmounting and navigate to it here
+      dispatch(signInSuccess(savedToken));
+
     } else if (!token) {
-      navigate('/login'); // Redirect to login if no token is present
+      navigate('/login');
     }
   }, [dispatch, token, navigate]);
 
@@ -56,11 +56,42 @@ function App() {
     <>
       <SidebarProvider>
         <Routes>
-          <Route path='/' element={<Home />} />
+          {/* <Route path='/' element={<Home />} />
           <Route path='/hero' element={<HeroMain />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/onboarding' element={<OnboardingForm />} />
-
+          <Route path='/onboarding' element={<OnboardingForm />} /> */}
+          <Route
+            path='/'
+            element={
+              <PublicRoute>
+                <Home />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/hero'
+            element={
+              <PublicRoute>
+                <HeroMain />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/login'
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/onboarding'
+            element={
+              <PublicRoute>
+                <OnboardingForm />
+              </PublicRoute>
+            }
+          />
           <Route element={<PrivateRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path='/sidebar' element={<Sidebar />} />
