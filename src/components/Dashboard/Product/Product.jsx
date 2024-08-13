@@ -216,7 +216,7 @@ const Product = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {product.map((prod, index) => (
+                                        {product?.map((prod, index) => (
                                             <tr key={index}>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.created_at}</td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.product_name}</td>
