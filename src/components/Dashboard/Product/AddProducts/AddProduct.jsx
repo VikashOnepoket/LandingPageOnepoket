@@ -13,8 +13,10 @@ import SpinnerMain from '../../Spinner/SpinnerMain';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from '../../slice/userDetailsSlice';
+import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
@@ -74,7 +76,7 @@ const AddProduct = () => {
       console.log(data, "data");
       if (data) {
         toast.success(data.message)
-        Navigate(`/products`)
+        navigate(`/products`)
       }
       setLoading(false)
     } catch (error) {

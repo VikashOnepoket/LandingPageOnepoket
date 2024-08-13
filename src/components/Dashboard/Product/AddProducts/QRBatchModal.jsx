@@ -56,13 +56,14 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                     onClick={handleBackdropClick}
                 >
                     <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                        initial={{ opacity: 0, scale: 0.9 }}  // Starting state
+                        animate={{ opacity: 1, scale: 1 }}   // Animation for appearing
+                        exit={{ opacity: 0, scale: 0.9 }}    // Animation for disappearing
+                        transition={{ duration: 0.3 }}       // Transition duration
                         className="bg-white p-8 rounded-lg shadow-lg"
                         style={{ minWidth: 300, maxWidth: 600 }}
                     >
-                
+
                         <div className="mb-4">
                             <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A] ">Select Product</label>
                             <Select
@@ -100,8 +101,8 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                 className=" py-2 px-5 rounded-md hover:bg-[#0052cc] bg-[#0052CC] text-white border border-[#0052CC] max-w-md w-48"
                                 onClick={handleGenerateQR}
                             >
-                                Generate 
-                             </button>
+                                Generate
+                            </button>
                         </div>
 
                     </motion.div>
