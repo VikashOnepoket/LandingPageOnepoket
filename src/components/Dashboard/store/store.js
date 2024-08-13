@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authSlice from '../slice/authSlice';
 import userDetailsReducer from '../slice/userDetailsSlice'; // Adjust the path as needed
+import productDetailsReducer from '../slice/productSlice'
 
 const persistConfig = {
   key: 'root',
@@ -16,6 +17,7 @@ const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     userDetails: userDetailsReducer,
+    productDetails:productDetailsReducer
   },
 });
 

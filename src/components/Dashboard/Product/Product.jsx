@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +7,12 @@ import { Drawer } from '@mui/material';
 import Select from 'react-select';
 import SearchInput from '../SearchInput/SearchInput';
 import SpinnerMain from '../Spinner/SpinnerMain';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../slice/productSlice';
 
 
 const Product = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false); // State to manage modal visibility
 
@@ -77,6 +80,21 @@ const Product = () => {
 
     const [loading, setLoading] = useState(false)
     console.log("hello")
+
+    const token = useSelector((state) => state.auth.token);
+    const[product , setProduct] = useState([])
+ 
+   useEffect(() => {
+     if (token) {
+        setLoading(true)
+       dispatch(fetchProducts(token)).then((data) => {
+           console.log(data ,"data")
+           setProduct(data?.payload)
+           setLoading(false)
+       })
+ 
+     }
+   }, [dispatch, token]);
 
     return (
         <>
@@ -197,6 +215,16 @@ const Product = () => {
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Warranty</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        {product.map((prod, index) => (
+                                            <tr key={index}>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.created_at}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.product_name}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">AC</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.warranty_years}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                     {/* Add tbody with your data */}
                                 </table>
                             </div>

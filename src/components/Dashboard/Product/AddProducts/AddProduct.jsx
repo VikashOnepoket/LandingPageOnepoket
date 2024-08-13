@@ -74,6 +74,7 @@ const AddProduct = () => {
       console.log(data, "data");
       if (data) {
         toast.success(data.message)
+        Navigate(`/products`)
       }
       setLoading(false)
     } catch (error) {
