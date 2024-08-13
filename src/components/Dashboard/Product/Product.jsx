@@ -213,12 +213,15 @@ const Product = () => {
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Name</th>
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Category</th>
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Warranty</th>
+                                            <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {product?.map((prod, index) => (
                                             <tr key={index}>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.created_at}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                    {prod?.created_at.split('T')[0]}
+                                                </td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.product_name}</td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">AC</td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
@@ -229,7 +232,16 @@ const Product = () => {
                                                             : prod?.warranty_months
                                                                 ? `${prod?.warranty_months > 1 ? prod?.warranty_months + ' months' : prod?.warranty_months + ' month'}`
                                                                 : 'N/A'
-                                                    }</td>
+                                                    }
+                                                </td>
+                                                <td className='py-2 px-4 border-b  font-medium text-[#58595A] flex gap-3'>
+                                                    <span class="material-symbols-outlined   text-[16px] leading-5 font-medium text-[#58595A]">
+                                                        edit
+                                                    </span>
+                                                    <span class="material-symbols-outlined   text-[16px] leading-5 font-medium text-[#58595A]">
+                                                        delete
+                                                    </span>
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
