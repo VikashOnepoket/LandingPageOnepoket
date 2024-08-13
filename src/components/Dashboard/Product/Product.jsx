@@ -82,19 +82,19 @@ const Product = () => {
     console.log("hello")
 
     const token = useSelector((state) => state.auth.token);
-    const[product , setProduct] = useState([])
- 
-   useEffect(() => {
-     if (token) {
-        setLoading(true)
-       dispatch(fetchProducts(token)).then((data) => {
-           console.log(data ,"data")
-           setProduct(data?.payload)
-           setLoading(false)
-       })
- 
-     }
-   }, [dispatch, token]);
+    const [product, setProduct] = useState([])
+
+    useEffect(() => {
+        if (token) {
+            setLoading(true)
+            dispatch(fetchProducts(token)).then((data) => {
+                console.log(data, "data")
+                setProduct(data?.payload)
+                setLoading(false)
+            })
+
+        }
+    }, [dispatch, token]);
 
     return (
         <>
@@ -218,10 +218,18 @@ const Product = () => {
                                     <tbody>
                                         {product?.map((prod, index) => (
                                             <tr key={index}>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.created_at}</td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.product_name}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.created_at}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.product_name}</td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">AC</td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod.warranty_years}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                    {prod?.warranty_years && prod?.warranty_months
+                                                        ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years ' : prod?.warranty_years + ' year '}${prod?.warranty_months > 1 ? prod?.warranty_months + ' months ' : prod?.warranty_months + ' month '}`
+                                                        : prod?.warranty_years
+                                                            ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years' : prod?.warranty_years + ' year'}`
+                                                            : prod?.warranty_months
+                                                                ? `${prod?.warranty_months > 1 ? prod?.warranty_months + ' months' : prod?.warranty_months + ' month'}`
+                                                                : 'N/A'
+                                                    }</td>
                                             </tr>
                                         ))}
                                     </tbody>
