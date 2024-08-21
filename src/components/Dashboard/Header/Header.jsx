@@ -75,24 +75,35 @@ const Header = () => {
         boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)', // X-offset, Y-offset, blur, spread, color
     };
 
-    const handleLogout = ()=>{
+    const handleLogout = () => {
         dispatch(signOutSuccess())
         localStorage.removeItem('token')
-    
+
 
     }
 
- 
+
     const token = useSelector((state) => state.auth.token);
-     const [name , setName] = useState("")
-  
+    const [name, setName] = useState("")
+
     useEffect(() => {
-      if (token) {
-        dispatch(fetchUserDetails(token)).then((data) => {
-            setName(data?.payload?.name)
-        })
-  
-      }
+        if (token) {
+            dispatch(fetchUserDetails(token)).unwrap().then((data) => {
+                console.log(data , "data")
+                setName(data?.name)
+            })
+                .catch((error) => {
+                    console.log(error.response.status, "error"); // This should now catch the error
+                    // if (error.response.status === 403) {
+                    //     dispatch(signOutSuccess())
+                    //     localStorage.removeItem('token')
+                    // }
+                })
+                .finally(() => {
+                    // setLoading(false);
+                });
+
+        }
     }, [dispatch, , token]);
 
     return (

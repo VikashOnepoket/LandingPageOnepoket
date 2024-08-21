@@ -9,6 +9,7 @@ import SearchInput from '../SearchInput/SearchInput';
 import SpinnerMain from '../Spinner/SpinnerMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../slice/productSlice';
+import { signOutSuccess } from '../slice/authSlice';
 
 
 const Product = () => {
@@ -80,21 +81,37 @@ const Product = () => {
 
     const [loading, setLoading] = useState(false)
     console.log("hello")
-
     const token = useSelector((state) => state.auth.token);
     const [product, setProduct] = useState([])
 
     useEffect(() => {
         if (token) {
-            setLoading(true)
-            dispatch(fetchProducts(token)).then((data) => {
-                console.log(data, "data")
-                setProduct(data?.payload)
-                setLoading(false)
-            })
-
+            setLoading(true);
+            dispatch(fetchProducts(token))
+                .unwrap() // Unwraps the result to either a fulfilled payload or throws a rejection error
+                .then((data) => {
+                    console.log(data, "data");
+                    setProduct(data);
+                })
+                .catch((error) => {
+                    console.log(error.response.status, "error"); // This should now catch the error
+                    // if (error.response.status === 403) {
+                    //     dispatch(signOutSuccess())
+                    //     localStorage.removeItem('token')
+                    // }
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
         }
     }, [dispatch, token]);
+
+
+
+
+    const handleEditNavigate = (id) => {
+        navigate(`/products/edit_product/${id}`)
+    }
 
     return (
         <>
@@ -204,7 +221,7 @@ const Product = () => {
                             </div>
                         </Drawer>
                         {/* table */}
-                        <div className="container mx-auto mt-10">
+                        <div className="  mt-10">
                             <div className="overflow-x-auto ">
                                 <table className="min-w-full border-gray-200">
                                     <thead className="">
@@ -217,12 +234,19 @@ const Product = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {product?.map((prod, index) => (
-                                            <tr key={index}>
+                                        {product?.slice().reverse().map((prod) => (
+                                            <tr key={prod?.product_id}>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
                                                     {prod?.created_at.split('T')[0]}
                                                 </td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.product_name}</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                    {/* <img
+                    src="https://via.placeholder.com/50"
+                    alt="placeholder"
+                    className="rounded-md"
+                /> */}
+                                                    {prod?.product_name}
+                                                </td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">AC</td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
                                                     {prod?.warranty_years && prod?.warranty_months
@@ -234,17 +258,18 @@ const Product = () => {
                                                                 : 'N/A'
                                                     }
                                                 </td>
-                                                <td className='py-2 px-4 border-b  font-medium text-[#58595A] flex gap-3'>
-                                                    <span class="material-symbols-outlined   text-[16px] leading-5 font-medium text-[#58595A]">
+                                                <td className='py-2 px-4 border-b font-medium text-[#58595A] flex gap-5 items-center'>
+                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
                                                         edit
                                                     </span>
-                                                    <span class="material-symbols-outlined   text-[16px] leading-5 font-medium text-[#58595A]">
+                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]">
                                                         delete
                                                     </span>
                                                 </td>
                                             </tr>
                                         ))}
                                     </tbody>
+
                                     {/* Add tbody with your data */}
                                 </table>
                             </div>

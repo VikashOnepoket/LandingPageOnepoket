@@ -34,6 +34,7 @@ import PrivateRoute from './PrivateRoute'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInSuccess } from './components/Dashboard/slice/authSlice'
 import PublicRoute from './PublicRoute'
+import EditProduct from './components/Dashboard/Product/EditProduct/EditProduct'
 
 
 function App() {
@@ -41,21 +42,33 @@ function App() {
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
 
-  useEffect(() => {
-    const savedToken = localStorage.getItem('token');
+  // useEffect(() => {
+  //   const savedToken = localStorage.getItem('token');
 
-    if (savedToken) {
-      dispatch(signInSuccess(savedToken));
+  //   if (savedToken) {
+  //     dispatch(signInSuccess(savedToken));
 
-    } else if (!token) {
-      navigate('/login');
-    }
-  }, [dispatch, token, navigate]);
+  //   } else if (!token) {
+  //     navigate('/');
+  //   }
+  // }, [dispatch, token, navigate]);
+  // useEffect(() => {
+  //   const savedToken = localStorage.getItem('token');
+
+  //   if (savedToken) {
+  //     dispatch(signInSuccess(savedToken));
+  //   } else if (!token && !['/login', '/onboarding', '/hero'].includes(window.location.pathname)) {
+  //     navigate('/');
+  //   }
+  // }, [dispatch, token, navigate]);
+
 
   return (
     <>
       <SidebarProvider>
         <Routes>
+          {/* <Route path='/factory' element = {<FactoryManagement/>}></Route> */}
+          
           {/* <Route path='/' element={<Home />} />
           <Route path='/hero' element={<HeroMain />} />
           <Route path='/login' element={<Login />} />
@@ -68,14 +81,14 @@ function App() {
               </PublicRoute>
             }
           />
-          <Route
+          {/* <Route
             path='/hero'
             element={
               <PublicRoute>
                 <HeroMain />
               </PublicRoute>
             }
-          />
+          /> */}
           <Route
             path='/login'
             element={
@@ -95,8 +108,12 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path='/sidebar' element={<Sidebar />} />
+              <Route path='/factory' element = {<FactoryManagement/>}></Route>
+              {/* Product */}
               <Route path='/products' element={<Product />} />
               <Route path='/products/add_product' element={<AddProduct />} />
+              <Route path='/products/edit_product/:id' element={<EditProduct />} />
+
               <Route path='/service_request' element={<ServiceRequest />} />
               <Route path='/roles' element={<RolesAndPermission />} />
               <Route path='/roles/add_roles_permission' element={<AddRolesAndPermission />} />

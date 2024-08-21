@@ -10,7 +10,7 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
-    async (token, { rejectWithValue }) => {
+    async (token, {rejectWithValue}) => {
         try {
             const response = await axios.get('/all_product_lp', {
                 headers: {
@@ -19,7 +19,9 @@ export const fetchProducts = createAsyncThunk(
             });
             return response.data;
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error);
+            // return Promise.reject(error);
+        
         }
     }
 );

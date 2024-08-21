@@ -7,7 +7,7 @@ import Category from './Category/Category';
 import Logo from './Logo/Logo';
 import Purchase from './PurchaseOption/Purchase';
 import ProductVideo from './Video/ProductVideo';
-import AdditionalInfo from '../Additional/Additional';
+import AdditionalInfo from './Additional/Additional';
 import axios from '../../../../api/api';
 import SpinnerMain from '../../Spinner/SpinnerMain';
 import toast from 'react-hot-toast';
@@ -44,6 +44,7 @@ const AddProduct = () => {
     additionalInfo: [],
     PurchaseOptions: [],
     product_desc_for_customer: "",
+    product_video_link : ""
     // Add other fields as necessary
   });
 
@@ -96,10 +97,10 @@ const AddProduct = () => {
         <div className='mt-10 flex lg:flex-row flex-col gap-10 '>
           <div className='lg:w-[70%] w-[100%]'>
             <BasicInformation formData={formData} onInputChange={handleInputChange} />
-            <AdditionalInfo additionalInfo={formData.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} />
-            <Purchase purchaseOptions={formData.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} />
+            <AdditionalInfo additionalInfo={formData?.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} />
+            <Purchase purchaseOptions={formData?.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} />
             <Warranty formData={formData} onInputChange={handleInputChange} />
-            <ProductVideo />
+            <ProductVideo formData={formData} onInputChange={handleInputChange}/>
             <CustsomerDescription formData={formData} onInputChange={handleInputChange} />
           </div>
           <div className='lg:w-[30%] w-[100%]'>

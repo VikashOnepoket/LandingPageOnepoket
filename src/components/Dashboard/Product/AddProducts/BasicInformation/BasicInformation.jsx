@@ -29,7 +29,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
           type="text"
           className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
           placeholder="Enter Product name"
-          value={formData.product_name}
+          value={formData?.product_name}
           onChange={(e) => onInputChange('product_name', e.target.value)}
         />
       </div>
@@ -40,7 +40,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
           type="text"
           className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
           placeholder="Enter Model number"
-          value={formData.model_number}
+          value={formData?.model_number}
           onChange={(e) => onInputChange('model_number', e.target.value)}
         />
       </div>
@@ -50,7 +50,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
         <textarea
           className="input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
           placeholder="Enter Description"
-          value={formData.description}
+          value={formData?.description}
           onChange={(e) => onInputChange('description', e.target.value)}
         ></textarea>
       </div>
@@ -58,12 +58,12 @@ const BasicInformation = ({ formData, onInputChange }) => {
       <div className="mt-5 flex gap-10">
         <Switch
           label="Show Manufacture Date"
-          value={formData.showManufactureDate}
+          value={formData?.showManufactureDate}
           onChange={(value) => onInputChange('showManufactureDate', value)}
         />
         <Switch
           label="Installation Details"
-          value={formData.installationDetails}
+          value={formData?.installationDetails}
           onChange={(value) => onInputChange('installationDetails', value)}
         />
       </div>

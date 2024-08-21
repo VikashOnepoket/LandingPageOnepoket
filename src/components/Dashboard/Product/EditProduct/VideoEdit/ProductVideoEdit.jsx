@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductVideo = ({ formData, onInputChange }) => {
+const ProductVideoEdit = ({ formData, onInputChange }) => {
     return (
         <div className='w-[100%] mt-10'>
             <div>
@@ -36,4 +36,4 @@ const ProductVideo = ({ formData, onInputChange }) => {
     )
 }
 
-export default ProductVideo
+export default ProductVideoEdit;

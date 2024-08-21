@@ -96,6 +96,17 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                 placeholder="Enter number of QR codes"
                             />
                         </div>
+                        <div className="mb-4">
+                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">QR Size</label>
+                            <Select
+                                value={selectedCategory}
+                                onChange={setSelectedCategory}
+                                options={categories}
+                                styles={customStyles}
+                                className='mt-1'
+                                placeholder="Select your PDF Template Size"
+                            />
+                        </div>
                         <div className='flex justify-center mt-8'>
                             <button
                                 className=" py-2 px-5 rounded-md hover:bg-[#0052cc] bg-[#0052CC] text-white border border-[#0052CC] max-w-md w-48"

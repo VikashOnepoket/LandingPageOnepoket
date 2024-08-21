@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CustsomerDescription = ({formData,onInputChange}) => {
+const ProductCustsomerDescriptionEdit = ({formData,onInputChange}) => {
     return (
         <div className='w-[100%] mt-10'>
             <div>
@@ -37,4 +37,4 @@ const CustsomerDescription = ({formData,onInputChange}) => {
     )
 }
 
-export default CustsomerDescription
+export default ProductCustsomerDescriptionEdit;

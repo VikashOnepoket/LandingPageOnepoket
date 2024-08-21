@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Warranty = ({ formData, onInputChange }) => {
+const WarrantyEdit = ({ formData, onInputChange }) => {
   
     return (
         <div className='w-[100%] mt-10'>
@@ -66,4 +66,4 @@ const Warranty = ({ formData, onInputChange }) => {
     )
 }
 
-export default Warranty
+export default WarrantyEdit;

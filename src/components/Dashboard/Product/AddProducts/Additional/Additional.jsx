@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const AdditionalInfo = ({ additionalInfo = [], onAdditionalInfoChange }) => {
+const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange }) => {
   const [sections, setSections] = useState(additionalInfo.length > 0 ? additionalInfo : [{ title: '', description: '' }]);
 
   useEffect(() => {
@@ -78,4 +78,4 @@ const AdditionalInfo = ({ additionalInfo = [], onAdditionalInfoChange }) => {
   );
 };
 
-export default AdditionalInfo;
+export default AdditionalInfoEdit;

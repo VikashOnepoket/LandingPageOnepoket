@@ -40,13 +40,15 @@ const Login = () => {
         email: user.email,
         password: user.password
       });
-    //   console.log(data, "data");
+      console.log(data, "data");
       localStorage.setItem('token', data?.token);
 
       if (data?.token) {
         dispatch(signInSuccess(data.token)); // Dispatch the signInSuccess action
         navigate(`/products`);
-      } else if (data?.message === "Invalid Credentials") {
+      } 
+     
+      else if (data?.message === "Invalid Credentials") {
         toast.error("Invalid Credentials");
       }
     } catch (error) {
