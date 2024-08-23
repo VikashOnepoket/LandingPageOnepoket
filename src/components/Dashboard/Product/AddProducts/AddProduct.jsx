@@ -16,112 +16,157 @@ import { fetchUserDetails } from '../../slice/userDetailsSlice';
 import { useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-
-
-  useEffect(() => {
-    if (token) {
-      dispatch(fetchUserDetails(token)).then((data) => {
-        setFormData({
-          company_id: data?.payload?.id
-        })
-      })
-
-    }
-  }, [dispatch, , token]);
-
 
   const [formData, setFormData] = useState({
     company_id: "",
     product_name: '',
     model_number: '',
     description: '',
-
+    category_title: '',
     warranty_years: "",
     warranty_months: "",
     additionalInfo: [],
     PurchaseOptions: [],
     product_desc_for_customer: "",
-    product_video_link : ""
-    // Add other fields as necessary
+    product_video_link: "",
+    logo_id: "",
+    image: null // Initialize image
   });
 
+  useEffect(() => {
+    if (token) {
+      dispatch(fetchUserDetails(token)).then((data) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          company_id: data?.payload?.id,
+        }));
+      });
+    }
+  }, [dispatch, token]);
+
   const handleInputChange = (name, value) => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
+  };
+
+  const handleCategoryChange = (category) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      category_title: category,
+    }));
   };
 
   const handleAdditionalInfoChange = (additionalInfo) => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       additionalInfo,
-    });
+    }));
   };
 
   const handlePurchaseOptionsChange = (PurchaseOptions) => {
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       PurchaseOptions,
-    });
+    }));
   };
-  const [loading, setLoading] = useState(false)
+
+  const handleLogoChange = (selectedLogo) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      logo_id: selectedLogo?.value || "",
+    }));
+  };
+
+  const handleImageChange = (file) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      image: file,
+    }));
+  };
+
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
+    const data = new FormData();
+    data.append('company_id', formData.company_id);
+    data.append('product_name', formData.product_name);
+    data.append('model_number', formData.model_number);
+    data.append('description', formData.description);
+    data.append('category_title', formData.category_title);
+    data.append('warranty_years', formData.warranty_years);
+    data.append('warranty_months', formData.warranty_months);
+    data.append('product_desc_for_customer', formData.product_desc_for_customer);
+    data.append('product_video_link', formData.product_video_link);
+    data.append('logo_id', formData.logo_id);
+    data.append('additionalInfo', JSON.stringify(formData.additionalInfo)); // Convert array to string
+    data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions)); // Convert array to string
+    if (formData.image) {
+      data.append('image', formData.image); // Append the selected image
+    }
+
     try {
-      setLoading(true)
-      const { data } = await axios.post('/add_product_lp', formData);
-      console.log(data, "data");
-      if (data) {
-        toast.success(data.message)
-        navigate(`/products`)
+      setLoading(true);
+      const response = await axios.post('/add_product_lp', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      if (response.data) {
+        toast.success(response.data.message);
+        navigate(`/products`);
       }
-      setLoading(false)
     } catch (error) {
-      console.log(error, "error");
-      setLoading(false)
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
-      {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8 mb-[80px]'>
-        <div>
-          <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Add New Product</h3>
-          <p className='text-[1.2rem] pt-5 leading-[1.5rem] font-semibold text-[#000000]'>Basic Information</p>
-        </div>
-
-        <div className='mt-10 flex lg:flex-row flex-col gap-10 '>
-          <div className='lg:w-[70%] w-[100%]'>
-            <BasicInformation formData={formData} onInputChange={handleInputChange} />
-            <AdditionalInfo additionalInfo={formData?.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} />
-            <Purchase purchaseOptions={formData?.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} />
-            <Warranty formData={formData} onInputChange={handleInputChange} />
-            <ProductVideo formData={formData} onInputChange={handleInputChange}/>
-            <CustsomerDescription formData={formData} onInputChange={handleInputChange} />
+      {loading ? (
+        <SpinnerMain />
+      ) : (
+        <div className='mt-3 p-8 mb-[80px]'>
+          <div>
+            <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Add New Product</h3>
+            <p className='text-[1.2rem] pt-5 leading-[1.5rem] font-semibold text-[#000000]'>Basic Information</p>
           </div>
-          <div className='lg:w-[30%] w-[100%]'>
-            <ProductImge />
-            <Category />
-            <Logo />
+
+          <div className='mt-10 flex lg:flex-row flex-col gap-10 '>
+            <div className='lg:w-[70%] w-[100%]'>
+              <BasicInformation formData={formData} onInputChange={handleInputChange} />
+              <AdditionalInfo additionalInfo={formData?.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} />
+              <Purchase purchaseOptions={formData?.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} />
+              <Warranty formData={formData} onInputChange={handleInputChange} />
+              <ProductVideo formData={formData} onInputChange={handleInputChange} />
+              <CustsomerDescription formData={formData} onInputChange={handleInputChange} />
+            </div>
+            <div className='lg:w-[30%] w-[100%]'>
+              <ProductImge onImageChange={handleImageChange} />
+              <Category onCategoryChange={handleCategoryChange} />
+              <Logo onLogoChange={handleLogoChange} />
+            </div>
+          </div>
+
+          <div className='flex justify-end mt-10 gap-5 lg:w-[70%] w-[100%]'>
+            <button className='text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'>
+              Discard
+            </button>
+            <button
+              onClick={handleSubmit}
+              className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'
+            >
+              Save
+            </button>
           </div>
         </div>
-
-        <div className='flex justify-end mt-10 gap-5 lg:w-[70%] w-[100%]'>
-          <button className='text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'>
-            Discard
-          </button>
-          <button
-            onClick={handleSubmit}
-            className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'
-          >
-            Save
-          </button>
-        </div>
-      </div>)}
+      )}
     </>
   );
 };

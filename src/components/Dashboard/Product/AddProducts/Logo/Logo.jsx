@@ -1,47 +1,82 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
+import { fetchLogo } from '../../../slice/logoSlice';
 
-const Logo = () => {
-    const options = [
-        { value: 'logo1', label: 'Logo 1', logoUrl: 'https://via.placeholder.com/50' },
-        { value: 'logo2', label: 'Logo 2', logoUrl: 'https://via.placeholder.com/50' },
-        { value: 'logo3', label: 'Logo 3', logoUrl: 'https://via.placeholder.com/50' },
-    ];
+const Logo = ({ onLogoChange }) => {
+    const [loading, setLoading] = useState(false);
+    const token = useSelector((state) => state.auth.token);
+    const dispatch = useDispatch();
+    const logos = useSelector((state) => state.logoDetails.logo);
+    const [selectedLogo, setSelectedLogo] = useState(null);
+
+    useEffect(() => {
+        if (token) {
+            setLoading(true);
+            dispatch(fetchLogo(token))
+                .unwrap()
+                .then((data) => {
+                    console.log(data, "data");
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error.response.status, "error");
+                    setLoading(false);
+                });
+        }
+    }, [dispatch, token]);
+
+    const options = logos.map((logo) => ({
+        value: logo.id,
+        label: logo.title,
+        logoUrl: logo.image, // Ensure this field matches your data structure
+    }));
 
     const customOption = (props) => {
         const { innerRef, innerProps, data } = props;
         return (
-            <div ref={innerRef} {...innerProps} className="flex items-center p-2 justify-between">
+            <div ref={innerRef} {...innerProps} className="flex items-center p-2">
                 <img src={data.logoUrl} alt={data.label} className="w-6 h-6 mr-2" />
                 <span>{data.label}</span>
             </div>
         );
     };
 
+    const handleChange = (selectedOption) => {
+        setSelectedLogo(selectedOption);
+        onLogoChange(selectedOption); // Notify parent component with the selected logo
+    };
+
     return (
-        <>
-            <div className='mt-10'>
-                <div className='flex justify-between gap-10'>
-                    <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Logo</p>
-                </div>
-                <div className="bg-white rounded-md border p-6 mt-2 h-[220px]">
-                    <Select
-                        options={options}
-                        placeholder="Select Logo"
-                        components={{ Option: customOption }}
-                        styles={{
-                            control: (base, state) => ({
-                                ...base,
-                                borderColor: state.isFocused ? '#0052cc' : base.borderColor,
-                                '&:hover': {
-                                    borderColor: state.isFocused ? '#0052cc' : base.borderColor,
-                                },
-                            }),
-                        }}
-                    />
-                </div>
+        <div className='mt-10'>
+            <div className='flex justify-between gap-10'>
+                <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Logo</p>
             </div>
-        </>
+            <div className="bg-white rounded-md border p-6 mt-2 h-[220px]">
+                <Select
+                    options={options}
+                    value={selectedLogo}
+                    onChange={handleChange}
+                    placeholder="Select Logo"
+                    components={{ Option: customOption }}
+                    styles={{
+                        control: (base, state) => ({
+                            ...base,
+                            borderColor: state.isFocused ? '#0052cc' : base.borderColor,
+                            '&:hover': {
+                                borderColor: state.isFocused ? '#0052cc' : base.borderColor,
+                            },
+                        }),
+                    }}
+                />
+                {selectedLogo && (
+                    <div className="mt-4 flex items-center">
+                        <img src={selectedLogo.logoUrl} alt={selectedLogo.label} className="w-12 h-12" />
+                        <span className="ml-3 text-[14px] leading-[18px] text-[#58595A]">{selectedLogo.label}</span>
+                    </div>
+                )}
+            </div>
+        </div>
     );
 };
 

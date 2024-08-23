@@ -239,7 +239,7 @@ const Product = () => {
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
                                                     {prod?.created_at.split('T')[0]}
                                                 </td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A] hover:text-[#0052cc] hover:cursor-pointer hover:underline">
                                                     {/* <img
                     src="https://via.placeholder.com/50"
                     alt="placeholder"

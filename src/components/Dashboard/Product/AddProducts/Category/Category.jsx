@@ -1,59 +1,136 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from '../../../../../api/api'; // Import Axios
+import { fetchCategory } from '../../../slice/categorySlice'; // Assuming this is correctly implemented
 
-const mockCategories = [
-    { id: 1, name: 'TWS' },
-    { id: 2, name: 'Smart Wearables' },
-    { id: 3, name: 'Cooktop' },
-    { id: 4, name: 'Light' },
-];
+const Category = ({ onCategoryChange }) => {
+    const token = useSelector((state) => state.auth.token);
+    const [loading, setLoading] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [newCategory, setNewCategory] = useState('');
+    const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
+    const dispatch = useDispatch();
 
-const Category = () => {
-    const [selectedCategories, setSelectedCategories] = useState([]);
+    useEffect(() => {
+        if (token) {
+            setLoading(true);
+            dispatch(fetchCategory(token))
+                .unwrap()
+                .then((data) => {
+                    setCategories(data);
+                })
+                .catch((error) => {
+                    console.error(error.response?.status, "error");
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    }, [dispatch, token]);
 
     const handleCheckboxChange = (event) => {
         const { value } = event.target;
-        setSelectedCategories((prevSelected) =>
-            prevSelected.includes(value)
-                ? prevSelected.filter((category) => category !== value)
-                : [...prevSelected, value]
-        );
+        setSelectedCategory(value);
+        onCategoryChange(value); // Pass the selected category as a string
     };
 
-    const isCategorySelected = (category) => selectedCategories.includes(category);
+    const handleAddNewCategory = () => {
+        setShowNewCategoryInput(true);
+    };
+
+    const handleSaveNewCategory = async () => {
+        if (newCategory.trim()) {
+            const newCategoryObj = { title: newCategory };
+
+            try {
+                setLoading(true);
+                const { data } = await axios.post('/add_category', newCategoryObj, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                dispatch(fetchCategory(token))
+                    .unwrap()
+                    .then((updatedData) => {
+                        setCategories(updatedData);
+                        setSelectedCategory(data.title); // Set the new category as selected
+                        onCategoryChange(data.title); // Notify parent component with the new category
+                    })
+                    .catch((error) => {
+                        console.error("Failed to fetch categories:", error);
+                    });
+
+                setNewCategory('');
+                setShowNewCategoryInput(false);
+            } catch (error) {
+                console.error("Failed to save category:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+    };
+
+    const handleDiscardNewCategory = () => {
+        setNewCategory('');
+        setShowNewCategoryInput(false);
+    };
 
     return (
-        <>
-            <div className='mt-10'>
-                <div className='flex justify-between gap-10'>
-                    <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Category</p>
-                    <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Select at least one category!</p>
-                </div>
-                <div className="bg-white rounded-md border p-6 mt-2 h-[220px] overflow-y-auto">
-                    {mockCategories.map((category) => (
-                        <div key={category.id} className="flex items-center mb-3">
+        <div className='mt-10'>
+            <div className='flex justify-between gap-10'>
+                <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Category</p>
+                <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Select one category!</p>
+            </div>
+            <div className="bg-white rounded-md border p-6 mt-2 h-[220px] overflow-y-auto">
+                {categories.map((cat) => (
+                    <div key={cat.id} className="flex items-center mb-3">
+                        <input
+                            type="checkbox"
+                            id={`category-${cat.id}`}
+                            value={cat.title}
+                            checked={selectedCategory === cat.title}
+                            onChange={handleCheckboxChange}
+                            className="mr-5 cursor-pointer"
+                            style={{ accentColor: selectedCategory === cat.title ? '#0052cc' : 'initial' }}
+                        />
+                        <label htmlFor={`category-${cat.id}`} className="text-[12px] leading-[16px] text-[#58595A]">
+                            {cat.title}
+                        </label>
+                    </div>
+                ))}
+
+                {showNewCategoryInput && (
+                    <div className="mb-3">
+                        <div className="flex items-center">
                             <input
-                                type="checkbox"
-                                id={`category-${category.id}`}
-                                value={category.name}
-                                checked={isCategorySelected(category.name)}
-                                onChange={handleCheckboxChange}
-                                className="mr-5  cursor-pointer"
-                                style={{ accentColor: isCategorySelected(category.name) ? '#0052cc' : 'initial' }}
+                                type="text"
+                                value={newCategory}
+                                onChange={(e) => setNewCategory(e.target.value)}
+                                className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                                placeholder="Enter new category name"
                             />
-                            <label htmlFor={`category-${category.id}`} className="text-[12px] leading-[16px] text-[#58595A]">
-                                {category.name}
-                            </label>
                         </div>
-                    ))}
-                   <div className='flex justify-end'>
-                   <button className="text-[#0052cc] text-[12px] leading-[16px] font-semibold mt-2 flex items-center">
+                        <div className="flex mt-2">
+                            <button onClick={handleSaveNewCategory} className="text-[#0052cc] text-[12px] leading-[16px] font-semibold mr-2">
+                                Save
+                            </button>
+                            <button onClick={handleDiscardNewCategory} className="text-[#FF0000BF] text-[12px] leading-[16px] font-semibold">
+                                Discard
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                <div className='flex justify-end'>
+                    <button onClick={handleAddNewCategory} className="text-[#0052cc] text-[12px] leading-[16px] font-semibold mt-2 flex items-center">
                         <span className="material-symbols-outlined mr-2">add</span>
                         Add New Category
                     </button>
-                   </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
