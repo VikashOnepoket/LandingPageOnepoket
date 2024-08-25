@@ -100,9 +100,26 @@ const EditProduct = () => {
     });
   };
   const handleSubmit = async () => {
+    const data = new FormData();
+    data.append('company_id', formData.company_id);
+    data.append('product_name', formData.product_name);
+    data.append('model_number', formData.model_number);
+    data.append('description', formData.description);
+    // data.append('category_title', formData.category_title);
+    data.append('warranty_years', formData.warranty_years);
+    data.append('warranty_months', formData.warranty_months);
+    data.append('product_desc_for_customer', formData.product_desc_for_customer);
+    data.append('product_video_link', formData.product_video_link);
+    // data.append('logo_id', formData.logo_id);
+    data.append('additionalInfo', JSON.stringify(formData.additionalInfo)); // Convert array to string
+    data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions)); // Convert array to string
     try {
       setLoading(true)
-      const { data } = await axios.put('/edit_product_by_id', formData);
+      const { data } = await axios.put('/edit_product_by_id', formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log(data, "data");
       if (data) {
         toast.success(data.message)
@@ -132,8 +149,9 @@ const EditProduct = () => {
               <AdditionalInfoEdit formData={formData} onAdditionalInfoChange={handleAdditionalInfoChange} />
               <PurchaseOptionEdit formData={formData} onPurchaseOptionChange={handlePurchaseOptionsChange} />
               <Warranty formData={formData} onInputChange={handleInputChange} />
-              <ProductCustsomerDescriptionEdit formData={formData} onInputChange={handleInputChange} />
               <ProductVideoEdit formData={formData} onInputChange={handleInputChange} />
+              <ProductCustsomerDescriptionEdit formData={formData} onInputChange={handleInputChange} />
+            
               {/*              
                 <BasicInformation formData={product} />
                 <AdditionalInfo  />

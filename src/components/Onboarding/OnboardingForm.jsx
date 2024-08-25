@@ -42,6 +42,7 @@ const OnboardingForm = () => {
         companyName: '',
         companyWebsite: '',
         industry: '',
+      
     });
 
     const handleContinue = () => {
@@ -129,7 +130,7 @@ const OnboardingForm = () => {
         // setIsPersonalDetailsCompleted(true);
         // setHideLogoText(true);
         const { data } = await axios.post("/user_register", {
-            name: user.name, email: user.email, password: user.password, phone: user.phoneNumber
+            name: user.name, email: user.email, password: user.password, phone: user.phoneNumber , credit_limit : "2000"
         });
         console.log(data, "data");
         if (data.message == "User already registered") {

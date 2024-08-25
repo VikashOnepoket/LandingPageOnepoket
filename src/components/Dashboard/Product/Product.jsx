@@ -247,7 +247,7 @@ const Product = () => {
                 /> */}
                                                     {prod?.product_name}
                                                 </td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">AC</td>
+                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.category_title}</td>
                                                 <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
                                                     {prod?.warranty_years && prod?.warranty_months
                                                         ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years ' : prod?.warranty_years + ' year '}${prod?.warranty_months > 1 ? prod?.warranty_months + ' months ' : prod?.warranty_months + ' month '}`
