@@ -1,89 +1,83 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
+import { useParams, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from '../../../../api/api';
-import { useNavigate } from 'react-router-dom';
 import SpinnerMain from '../../Spinner/SpinnerMain';
-import BasicInformation from '../AddProducts/BasicInformation/BasicInformation';
-import AdditionalInfo from '../AddProducts/Additional/Additional';
-import Purchase from '../AddProducts/PurchaseOption/Purchase';
-import Warranty from '../AddProducts/Warranty/Warranty';
-import ProductVideo from '../AddProducts/Video/ProductVideo';
-import CustsomerDescription from '../AddProducts/ProductDescCutomer/CustsomerDescription';
-import ProductImge from '../AddProducts/ProductImage/ProductImge';
-import Category from '../AddProducts/Category/Category';
-import Logo from '../AddProducts/Logo/Logo';
 import BasicInformationEdit from './BasicInformationEdit/BasicInformationEdit';
 import AdditionalInfoEdit from './AdditionalInfoEdit/AdditionalInfoEdit';
 import PurchaseOptionEdit from './PurchaseOptionEdit/PurchaseOptionEdit';
 import ProductCustsomerDescriptionEdit from './DescriptionCustomerEdit/ProductDescriptionCustomerEdit';
 import ProductVideoEdit from './VideoEdit/ProductVideoEdit';
+import Warranty from '../AddProducts/Warranty/Warranty';
+
 import { fetchUserDetails } from '../../slice/userDetailsSlice';
+import ProductImageEdit from './ProductImageEdit/ProductImageEdit';
+import CategoryEdit from './CategoryEdit/CategoryEdit';
+import LogoEdit from './LogoEdit/LogoEdit';
 
 const EditProduct = () => {
   const { id } = useParams();
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (token) {
-      dispatch(fetchUserDetails(token)).then((data) => {
-        // setFormData({
-        //   company_id: data?.payload?.id
-        // })
-      })
-
-    }
-  }, [dispatch, token]);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     product_id: id,
     product_name: '',
     model_number: '',
     description: '',
-    warranty_years: "",
-    warranty_months: "",
+    warranty_years: '',
+    warranty_months: '',
     additionalInfo: [],
     PurchaseOptions: [],
-    product_desc_for_customer: "",
-    product_video_link: ""
-    // Add other fields as necessary
+    product_desc_for_customer: '',
+    product_video_link: '',
+    product_image: null, // Add this line to manage the product image
+    category_title: "", // Add this line to manage the category title
+    logo_id: ""
   });
   const [error, setError] = useState(null);
-  const [product, setProduct] = useState(null);
-  const products = useSelector((state) => state.productDetails.products);
-
-
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const handleSubmit = async () => {
+    if (token) {
+      dispatch(fetchUserDetails(token));
+    }
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(`/get_product_by_id`, { params: { id: id } });
-        console.log(data, "in edit product");
+        const { data } = await axios.get(`/get_product_by_id`, { params: { id } });
         setLoading(false);
-        setFormData(data);
+        setFormData({
+          ...data,
+        
+          additionalInfo : data?.additional_info,
+          PurchaseOptions : data?.Purchase_options,
+        }); // Set the entire product data including image
       } catch (error) {
-        console.log(error, "error");
+        console.log(error, 'error');
         setLoading(false);
       }
     };
 
-    handleSubmit();
-
+    fetchProductDetails();
   }, [id]);
-
-
-
-
 
   const handleInputChange = (name, value) => {
     setFormData({
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleLogoChange = (selectedLogo) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      logo_id: selectedLogo?.value || "",
+    }));
   };
 
   const handleAdditionalInfoChange = (additionalInfo) => {
@@ -99,39 +93,69 @@ const EditProduct = () => {
       PurchaseOptions,
     });
   };
+
+  const handleCategoryChange = (category) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      category_title: category,
+    }));
+  };
+
+  const handleImageChange = (image) => {
+    setFormData({
+      ...formData,
+      product_image: image,
+    });
+  };
+
+  console.log(formData , "additional info")
+
   const handleSubmit = async () => {
     const data = new FormData();
-    data.append('company_id', formData.company_id);
+    data.append('product_id', formData.product_id);
     data.append('product_name', formData.product_name);
     data.append('model_number', formData.model_number);
     data.append('description', formData.description);
-    // data.append('category_title', formData.category_title);
     data.append('warranty_years', formData.warranty_years);
     data.append('warranty_months', formData.warranty_months);
     data.append('product_desc_for_customer', formData.product_desc_for_customer);
     data.append('product_video_link', formData.product_video_link);
-    // data.append('logo_id', formData.logo_id);
-    data.append('additionalInfo', JSON.stringify(formData.additionalInfo)); // Convert array to string
-    data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions)); // Convert array to string
+    data.append('additionalInfo', JSON.stringify(formData.additionalInfo));
+    data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions));
+    data.append('category_title', formData.category_title);
+    data.append('logo_id', formData.logo_id);
+  
+    // Check if the product_image is a buffer
+    if (formData.product_image && formData.product_image.type === "Buffer") {
+      // Convert buffer to Blob
+      const buffer = new Uint8Array(formData.product_image.data);
+      const blob = new Blob([buffer], { type: 'image/jpeg' });
+      data.append('image', blob, 'product_image.jpg');
+    } else if (formData.product_image) {
+      // If it's already a file object
+      data.append('image', formData.product_image);
+    }
+  
     try {
-      setLoading(true)
-      const { data } = await axios.put('/edit_product_by_id', formData,{
+      setLoading(true);
+      const { data: response } = await axios.put('/edit_product_by_id', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(data, "data");
-      if (data) {
-        toast.success(data.message)
-        navigate(`/products`)
+      if (response) {
+        toast.success(response.message);
+        navigate(`/products`);
       }
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
-      console.log(error, "error");
-      setLoading(false)
+      console.log(error, 'error');
+      setLoading(false);
     }
   };
-  console.log(formData, "formdata")
+  
+
+
   return (
     <>
       {loading ? (
@@ -143,7 +167,7 @@ const EditProduct = () => {
             <p className='text-[1.2rem] pt-5 leading-[1.5rem] font-semibold text-[#000000]'>Basic Information</p>
           </div>
 
-          <div className='mt-10 flex lg:flex-row flex-col gap-10 '>
+          <div className='mt-10 flex lg:flex-row flex-col gap-10'>
             <div className='lg:w-[70%] w-[100%]'>
               <BasicInformationEdit formData={formData} onInputChange={handleInputChange} />
               <AdditionalInfoEdit formData={formData} onAdditionalInfoChange={handleAdditionalInfoChange} />
@@ -151,19 +175,11 @@ const EditProduct = () => {
               <Warranty formData={formData} onInputChange={handleInputChange} />
               <ProductVideoEdit formData={formData} onInputChange={handleInputChange} />
               <ProductCustsomerDescriptionEdit formData={formData} onInputChange={handleInputChange} />
-            
-              {/*              
-                <BasicInformation formData={product} />
-                <AdditionalInfo  />
-                <Purchase  />
-                <Warranty  />
-                <ProductVideo />
-                <CustsomerDescription  /> */}
             </div>
             <div className='lg:w-[30%] w-[100%]'>
-              {/* <ProductImge  />
-                <Category  />
-                <Logo  /> */}
+              <ProductImageEdit formData={formData} onImageChange={handleImageChange} />
+              <CategoryEdit formData={formData} onCategoryChange={handleCategoryChange} />
+              <LogoEdit formData={formData} onLogoChange={handleLogoChange} />
             </div>
           </div>
 

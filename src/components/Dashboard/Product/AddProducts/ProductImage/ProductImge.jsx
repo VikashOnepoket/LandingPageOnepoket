@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const ProductImge = ({ onImageChange }) => {
+const ProductImgeEdit = ({ image, onImageChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
+
+  useEffect(() => {
+    if (image) {
+      setSelectedFile(image);
+    }
+  }, [image]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -33,7 +39,7 @@ const ProductImge = ({ onImageChange }) => {
         {selectedFile && (
           <div className="flex justify-center items-center">
             <img
-              src={URL.createObjectURL(selectedFile)}
+              src={selectedFile instanceof File ? URL.createObjectURL(selectedFile) : selectedFile}
               alt="Uploaded Image"
               className="w-64 h-64 object-cover"
             />
@@ -44,4 +50,4 @@ const ProductImge = ({ onImageChange }) => {
   );
 };
 
-export default ProductImge;
+export default ProductImgeEdit;
