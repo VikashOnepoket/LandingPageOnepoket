@@ -10,6 +10,8 @@ import SpinnerMain from '../Spinner/SpinnerMain';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../slice/productSlice';
 import { signOutSuccess } from '../slice/authSlice';
+import axios from '../../../api/api';
+import toast from 'react-hot-toast';
 
 
 const Product = () => {
@@ -111,6 +113,43 @@ const Product = () => {
 
     const handleEditNavigate = (id) => {
         navigate(`/products/edit_product/${id}`)
+    }
+
+    const handleDeleteProduct = async (id) => {
+
+        try {
+            setLoading(true)
+            const data = await axios.delete('delete_product_by_id', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }, params: { id }
+            }
+            )
+            console.log(data , "data")
+            toast.success(data?.data?.message)
+            dispatch(fetchProducts(token))
+                .unwrap() // Unwraps the result to either a fulfilled payload or throws a rejection error
+                .then((data) => {
+                    console.log(data, "data");
+                    setProduct(data);
+                })
+                .catch((error) => {
+                    console.log(error.response.status, "error"); // This should now catch the error
+                    // if (error.response.status === 403) {
+                    //     dispatch(signOutSuccess())
+                    //     localStorage.removeItem('token')
+                    // }
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+            setLoading(false)
+
+        }
+        catch (error) {
+            setLoading(false)
+        }
+
     }
 
     return (
@@ -262,7 +301,7 @@ const Product = () => {
                                                     <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
                                                         edit
                                                     </span>
-                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]">
+                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]" onClick={() => handleDeleteProduct(prod?.product_id)}>
                                                         delete
                                                     </span>
                                                 </td>
