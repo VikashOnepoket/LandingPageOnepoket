@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionsChange, formData }) => {
-    const [options, setOptions] = useState(formData?.Purchase_options || [{ title: '', link: '' }]);
+const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, formData }) => {
+    const [options, setOptions] = useState([{ title: '', link: '' }]);
 
-    //   useEffect(() => {
-    //     if (PurchaseOptions.length === 0) {
-    //       onPurchaseOptionsChange([{ title: '', link: '' }]);
-    //     }
-    //   }, []);
-
-    //   const [sections, setSections] = useState(formData?.additional_info || [{ title: '', description: '' }]);
-    //   console.log(formData?.additional_info , "additonal")
-
-    //   // Update sections state when formData.additionalInfo changes
     useEffect(() => {
-        if (formData && formData?.Purchase_options) {
-            setOptions(formData?.Purchase_options);
+        if (formData && formData.PurchaseOptions) {
+            setOptions(formData.PurchaseOptions.length ? formData.PurchaseOptions : [{ title: '', link: '' }]);
         }
     }, [formData]);
 
@@ -23,19 +13,19 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionsChange, for
         const newOptions = [...options];
         newOptions[index] = { ...newOptions[index], [name]: value };
         setOptions(newOptions);
-        onPurchaseOptionsChange(newOptions);
+        onPurchaseOptionChange(newOptions);
     };
 
     const addOption = () => {
         const newOptions = [...options, { title: '', link: '' }];
         setOptions(newOptions);
-        onPurchaseOptionsChange(newOptions);
+        onPurchaseOptionChange(newOptions);
     };
 
     const removeOption = (index) => {
         const newOptions = options.filter((_, i) => i !== index);
         setOptions(newOptions);
-        onPurchaseOptionsChange(newOptions);
+        onPurchaseOptionChange(newOptions);
     };
 
     return (

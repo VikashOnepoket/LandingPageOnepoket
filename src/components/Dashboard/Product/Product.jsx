@@ -125,7 +125,7 @@ const Product = () => {
                 }, params: { id }
             }
             )
-            console.log(data , "data")
+            console.log(data, "data")
             toast.success(data?.data?.message)
             dispatch(fetchProducts(token))
                 .unwrap() // Unwraps the result to either a fulfilled payload or throws a rejection error
@@ -273,41 +273,45 @@ const Product = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {product?.slice().reverse().map((prod) => (
-                                            <tr key={prod?.product_id}>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
-                                                    {prod?.created_at.split('T')[0]}
-                                                </td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A] hover:text-[#0052cc] hover:cursor-pointer hover:underline">
-                                                    {/* <img
-                    src="https://via.placeholder.com/50"
+    {product?.slice().reverse().map((prod) => (
+        <tr key={prod?.product_id} className="">
+            <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                {prod?.created_at.split('T')[0]}
+            </td>
+            <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A] flex items-center gap-5">
+                <img
+                    src={prod?.product_image}
                     alt="placeholder"
-                    className="rounded-md"
-                /> */}
-                                                    {prod?.product_name}
-                                                </td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">{prod?.category_title}</td>
-                                                <td className="py-2 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
-                                                    {prod?.warranty_years && prod?.warranty_months
-                                                        ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years ' : prod?.warranty_years + ' year '}${prod?.warranty_months > 1 ? prod?.warranty_months + ' months ' : prod?.warranty_months + ' month '}`
-                                                        : prod?.warranty_years
-                                                            ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years' : prod?.warranty_years + ' year'}`
-                                                            : prod?.warranty_months
-                                                                ? `${prod?.warranty_months > 1 ? prod?.warranty_months + ' months' : prod?.warranty_months + ' month'}`
-                                                                : 'N/A'
-                                                    }
-                                                </td>
-                                                <td className='py-2 px-4 border-b font-medium text-[#58595A] flex gap-5 items-center'>
-                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
-                                                        edit
-                                                    </span>
-                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]" onClick={() => handleDeleteProduct(prod?.product_id)}>
-                                                        delete
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
+                    className="rounded-md w-[50px] h-[50px]"
+                />
+                {prod?.product_name}
+            </td>
+            <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                {prod?.category_title}
+            </td>
+            <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                {prod?.warranty_years && prod?.warranty_months
+                    ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years ' : prod?.warranty_years + ' year '}${prod?.warranty_months > 1 ? prod?.warranty_months + ' months ' : prod?.warranty_months + ' month '}`
+                    : prod?.warranty_years
+                        ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years' : prod?.warranty_years + ' year'}`
+                        : prod?.warranty_months
+                            ? `${prod?.warranty_months > 1 ? prod?.warranty_months + ' months' : prod?.warranty_months + ' month'}`
+                            : 'N/A'
+                }
+            </td>
+            <td className="py-3 px-4 border-b font-medium text-[#58595A] space-x-3">
+                <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
+                    edit
+                </span>
+                <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]" onClick={() => handleDeleteProduct(prod?.product_id)}>
+                    delete
+                </span>
+            </td>
+        </tr>
+    ))}
+</tbody>
+
+
 
                                     {/* Add tbody with your data */}
                                 </table>
