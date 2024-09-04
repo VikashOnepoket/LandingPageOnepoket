@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from './components/Dashboard/Sidebar/Sidebar';
-import Header from './components/Dashboard/Header/Header';
+
+// Lazy load the Sidebar and Header components
+const Sidebar = lazy(() => import('./components/Dashboard/Sidebar/Sidebar'));
+const Header = lazy(() => import('./components/Dashboard/Header/Header'));
 
 const DashboardLayout = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
-            <Sidebar />
+            <Suspense fallback={<div>Loading Sidebar...</div>}>
+                <Sidebar />
+            </Suspense>
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 {/* Header */}
-                <Header />
+                <Suspense fallback={<div>Loading Header...</div>}>
+                    <Header />
+                </Suspense>
 
                 {/* Main Content Area */}
-                <div className="flex-1 overflow-y-auto ">
-
+                <div className="flex-1 overflow-y-auto">
                     {/* Outlet for rendering child routes */}
                     <Outlet />
-
                 </div>
             </div>
         </div>

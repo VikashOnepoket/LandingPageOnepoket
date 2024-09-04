@@ -57,7 +57,9 @@ function App() {
   return (
     <>
       <SidebarProvider>
-        <Suspense fallback={<SpinnerMain />}> {/* Suspense with Spinner fallback */}
+        <Suspense fallback={<div className='flex items-center justify-center h-[100vh]'>
+          <SpinnerMain />
+        </div>}> {/* Suspense with Spinner fallback */}
           <Routes>
             <Route
               path='/'
