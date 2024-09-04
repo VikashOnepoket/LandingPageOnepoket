@@ -85,7 +85,7 @@ const CategoryEdit = ({ formData, onCategoryChange }) => {
         <div className='mt-10'>
             <div className='flex justify-between gap-10'>
                 <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Category</p>
-                <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Select one category!</p>
+                {/* <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Select one category!</p> */}
             </div>
             <div className="bg-white rounded-md border p-6 mt-2 h-[220px] overflow-y-auto">
                 {categories.map((cat) => (

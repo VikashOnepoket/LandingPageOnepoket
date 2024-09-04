@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ProductImgeEdit = ({ image, onImageChange }) => {
+const ProductImge = ({ image, onImageChange }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
@@ -15,14 +15,19 @@ const ProductImgeEdit = ({ image, onImageChange }) => {
     onImageChange(file); // Notify parent component with the selected file
   };
 
+  const removeImage = ()=>{
+    setSelectedFile(null);
+    onImageChange(null); // Notify parent component with no image selected
+  }
+
   return (
     <>
       <div className='flex justify-between gap-10'>
         <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Product Image</p>
-        <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Required</p>
+        {/* <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Required</p> */}
       </div>
       <div className="bg-white rounded-md border p-6 mt-2">
-        <div className="flex justify-center items-center mb-4">
+        {!selectedFile && (<div className="flex justify-center items-center mb-4">
           <label htmlFor="imageUpload" className="cursor-pointer flex flex-col justify-center items-center w-full h-48">
             <span className="material-symbols-outlined text-gray-400 text-5xl">add_a_photo</span>
             <p className="text-gray-500 mt-4 text-sm font-light">Drop your image here, or browse</p>
@@ -35,19 +40,27 @@ const ProductImgeEdit = ({ image, onImageChange }) => {
             onChange={handleFileChange}
             className="hidden"
           />
-        </div>
+        </div>)}
         {selectedFile && (
-          <div className="flex justify-center items-center">
-            <img
-              src={selectedFile instanceof File ? URL.createObjectURL(selectedFile) : selectedFile}
-              alt="Uploaded Image"
-              className="w-64 h-64 object-cover"
-            />
-          </div>
+          <>
+            <div className="flex justify-center items-center flex-col">
+              <img
+                src={selectedFile instanceof File ? URL.createObjectURL(selectedFile) : selectedFile}
+                alt="Uploaded Image"
+                className="h-52 w-52"
+              />
+               <button className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2 mt-3' onClick={removeImage}>Remove Image</button>
+            </div>
+           
+          </>
+
         )}
+
+
+
       </div>
     </>
   );
 };
 
-export default ProductImgeEdit;
+export default ProductImge;
