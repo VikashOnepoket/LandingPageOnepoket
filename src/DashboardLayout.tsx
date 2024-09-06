@@ -9,16 +9,16 @@ const DashboardLayout = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
-            <Suspense fallback={<div>Loading Sidebar...</div>}>
-                <Sidebar />
-            </Suspense>
+
+            <Sidebar />
+
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 {/* Header */}
-                <Suspense fallback={<div>Loading Header...</div>}>
-                    <Header />
-                </Suspense>
+
+                <Header />
+
 
                 {/* Main Content Area */}
                 <div className="flex-1 overflow-y-auto">

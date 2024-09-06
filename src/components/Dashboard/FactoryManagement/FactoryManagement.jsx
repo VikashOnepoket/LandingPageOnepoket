@@ -117,14 +117,14 @@ const FactoryManagement = () => {
                         </div>
                         <button
                             onClick={handleSubmit}
-                            className='bg-[#0052CC] w-52 mt-5 text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mt-4 text-[14px] leading-[18px] font-bold rounded-md px-3 py-2'
+                            className='bg-[#0052CC] w-52 mt-5 text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc]  text-[14px] leading-[18px] font-bold rounded-md px-3 py-2'
                         >
                             Submit
                         </button>
                     </motion.div>
                 </div>
-                <div className='lg:w-1/2 w-full'>
-                    <img src={ComingSoon} alt='coming-soon' className='w-[100%] h-[100%]' />
+                <div className='lg:w-1/2 w-full items-center justify-center'>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%2040.png?alt=media&token=6528ab36-99eb-40e5-99dd-aa3022ea00d1" alt='coming-soon' className='w-[100%] h-[100%]' />
                 </div>
             </div>
         </div>
