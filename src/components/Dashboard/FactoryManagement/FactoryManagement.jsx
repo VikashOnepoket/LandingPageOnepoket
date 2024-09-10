@@ -110,7 +110,7 @@ const FactoryManagement = () => {
                         <div className='mt-8'>
                             {questions[currentQuestion].type === "rating" && (
                                 <div className='flex items-center justify-between w-[100%] p-4 border rounded-lg gap-4'>
-                                    <span className='text-[20px] leading-7 '>Poor</span>
+                                    <span className='text-[20px] leading-7 text-[#202123BF]'>Poor</span>
                                     {questions[currentQuestion].options.map((option, index) => (
                                         <label
                                             key={index}
@@ -129,7 +129,7 @@ const FactoryManagement = () => {
                                             {option}
                                         </label>
                                     ))}
-                                    <span>Excellent</span>
+                                    <span className='text-[20px] leading-7 text-[#202123BF]'>Excellent</span>
                                 </div>
                             )}
                             {questions[currentQuestion].type === "checkbox" && (
