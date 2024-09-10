@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import ComingSoon from '../../../assets/comingsoon.png';
 
 const FactoryManagement = () => {
     const dotVariants = {
@@ -23,25 +22,31 @@ const FactoryManagement = () => {
 
     const questions = [
         {
-            text: "Which platform do you prefer for managing customer communication?",
-            options: ["Platform A", "Platform B", "Platform C"]
+            text: "1. How satisfied are your customers with the Oepoket QR solution?",
+            rateText: "(Rate from 1 to 5)",
+            type: "rating",
+            options: [1, 2, 3, 4, 5],
         },
         {
-            text: "How satisfied are you with our current features?",
-            options: ["Very Satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very Dissatisfied"]
+            text: "2. Which platform do you prefer for managing customer communication?",
+            type: "checkbox",
+            options: ["WhatsApp", "Instagram", "Email", "Your own website"]
         },
         {
-            text: "What additional features would you like to see?",
-            options: ["Feature A", "Feature B", "Feature C"]
-        },
-        {
-            text: "How frequently do you use our platform?",
-            options: ["Daily", "Weekly", "Monthly", "Rarely"]
-        },
-        {
-            text: "Would you recommend our platform to others?",
+            text: "3. Do you use any chatbots to handle customer inquiries?",
+            type: "checkbox",
             options: ["Yes", "No"]
-        }
+        },
+        {
+            text: "4. Are you selling your products on any e-commerce platforms?",
+            type: "checkbox",
+            options: ["Amazon", "Flipkart", "Shopify", "Others"]
+        },
+        {
+            text: "5. Would you like to increase your product review ratings on e-commerce platforms?",
+            type: "checkbox",
+            options: ["Yes", "No"]
+        },
     ];
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -52,21 +57,20 @@ const FactoryManagement = () => {
         const { name, value } = event.target;
         setAnswers(prev => ({
             ...prev,
-            [name]: value
+            [name]: value // Update the answers using the question's key
         }));
     };
 
     const handleSubmit = async () => {
         if (currentQuestion < questions.length - 1) {
+            // Start the animation before updating the question
             setIsAnimating(true);
-            // Trigger the animation for the current question
             setTimeout(() => {
                 setCurrentQuestion(prev => prev + 1);
-                setIsAnimating(false);
-            }, 500); // Delay to match animation duration
+                setIsAnimating(false); // Reset animation state after changing the question
+            }, 500); // Delay to match the animation duration
         } else {
-            // Handle the end of the survey here, e.g., submit answers
-            console.log(answers);
+            console.log(answers); // Log the answers when the last question is reached
         }
     };
 
@@ -88,43 +92,72 @@ const FactoryManagement = () => {
                             </motion.span>
                         ))}
                     </h3>
-                    <p className='mt-3 text-[#20212399] text-[1rem] leading-5'>
+                    <p className='mt-3 text-[#20212399] text-[15px] leading-5'>
                         We're excited to bring you new features to enhance your business! To help us tailor these improvements to your needs, please take a moment to complete the survey below.
                     </p>
                     <motion.div
                         initial="hidden"
-                        animate={isAnimating ? "hidden" : "visible"}
+                        animate={isAnimating ? "hidden" : "visible"}  // Trigger animation on submit
                         variants={questionVariants}
                         transition={{ duration: 0.5, ease: "easeOut" }}
                     >
-                        <p className='mt-8 text-[#202123] text-[1.2rem] font-semibold'>
+                        <p className='mt-16 text-[#202123] text-[20px] leading-7 font-medium'>
                             {questions[currentQuestion].text}
                         </p>
-                        <div className='mt-4'>
-                            {questions[currentQuestion].options.map((option, index) => (
-                                <label key={index} className='block'>
-                                    <input
-                                        type='checkbox' // Change to 'radio' if you want single selection
-                                        name={currentQuestion} // Use the current question index as the name
-                                        value={option}
-                                        checked={answers[currentQuestion] === option}
-                                        onChange={handleOptionChange}
-                                        className='mr-2'
-                                    />
-                                    {option}
-                                </label>
-                            ))}
+                        <p className='text-[#202123BF] text-[16px] leading-5'>
+                            {questions[currentQuestion].rateText || ""}
+                        </p>
+                        <div className='mt-8'>
+                            {questions[currentQuestion].type === "rating" && (
+                                <div className='flex items-center justify-between w-[100%] p-4 border rounded-lg gap-4'>
+                                    <span className='text-[20px] leading-7 '>Poor</span>
+                                    {questions[currentQuestion].options.map((option, index) => (
+                                        <label
+                                            key={index}
+                                            className={`w-12 h-12 border rounded-lg flex items-center justify-center cursor-pointer ${
+                                                answers[`question-${currentQuestion}`] == option ? 'bg-blue-600 text-white' : 'bg-white'
+                                            }`}
+                                        >
+                                            <input
+                                                type='radio'
+                                                name={`question-${currentQuestion}`}
+                                                value={option}
+                                                checked={answers[`question-${currentQuestion}`] == option}
+                                                onChange={handleOptionChange}
+                                                className='hidden'
+                                            />
+                                            {option}
+                                        </label>
+                                    ))}
+                                    <span>Excellent</span>
+                                </div>
+                            )}
+                            {questions[currentQuestion].type === "checkbox" && (
+                                questions[currentQuestion].options.map((option, index) => (
+                                    <label key={index} className='block text-[20px] leading-7 font-normal text-[#000000]'>
+                                        <input
+                                            type='checkbox'
+                                            name={`question-${currentQuestion}`}
+                                            value={option}
+                                            checked={answers[`question-${currentQuestion}`] === option}
+                                            onChange={handleOptionChange}
+                                            className='mr-5'
+                                        />
+                                        {option}
+                                    </label>
+                                ))
+                            )}
                         </div>
                         <button
                             onClick={handleSubmit}
-                            className='bg-[#0052CC] w-52 mt-5 text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc]  text-[14px] leading-[18px] font-bold rounded-md px-3 py-2'
+                            className='bg-[#0052CC] w-52 mt-8 text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md px-3 py-2'
                         >
                             Submit
                         </button>
                     </motion.div>
                 </div>
                 <div className='lg:w-1/2 w-full items-center justify-center'>
-                    <img src="https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%2040.png?alt=media&token=6528ab36-99eb-40e5-99dd-aa3022ea00d1" alt='coming-soon' className='w-[100%] h-[100%]' />
+                    <img src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%2040.png?alt=media&token=6528ab36-99eb-40e5-99dd-aa3022ea00d1' alt='coming-soon' className='w-[100%] h-[100%]' />
                 </div>
             </div>
         </div>
