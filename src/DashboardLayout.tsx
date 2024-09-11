@@ -1,9 +1,11 @@
 import React, { Suspense, lazy } from 'react';
 import { Outlet } from 'react-router-dom';
+import Sidebar from './components/Dashboard/Sidebar/Sidebar';
+import Header from './components/Dashboard/Header/Header';
+import SpinnerMain from './components/Dashboard/Spinner/SpinnerMain';
 
 // Lazy load the Sidebar and Header components
-const Sidebar = lazy(() => import('./components/Dashboard/Sidebar/Sidebar'));
-const Header = lazy(() => import('./components/Dashboard/Header/Header'));
+
 
 const DashboardLayout = () => {
     return (
@@ -23,7 +25,9 @@ const DashboardLayout = () => {
                 {/* Main Content Area */}
                 <div className="flex-1 overflow-y-auto">
                     {/* Outlet for rendering child routes */}
-                    <Outlet />
+
+                    <Outlet /> {/* Render child routes here */}
+
                 </div>
             </div>
         </div>
