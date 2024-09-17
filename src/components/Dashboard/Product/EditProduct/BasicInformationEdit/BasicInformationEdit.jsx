@@ -59,13 +59,13 @@ const BasicInformationEdit = ({ formData, onInputChange }) => {
             <div className="mt-5 flex gap-10">
                 <Switch
                     label="Show Manufacture Date"
-                    value={formData?.showManufactureDate}
-                    onChange={(value) => onInputChange('showManufactureDate', value)}
+                    value={formData?.show_manufacture_date}
+                    onChange={(value) => onInputChange('show_manufacture_date', value)}
                 />
                 <Switch
                     label="Installation Details"
-                    value={formData?.installationDetails}
-                    onChange={(value) => onInputChange('installationDetails', value)}
+                    value={formData?.installation_details}
+                    onChange={(value) => onInputChange('installation_details', value)}
                 />
             </div>
         </div>

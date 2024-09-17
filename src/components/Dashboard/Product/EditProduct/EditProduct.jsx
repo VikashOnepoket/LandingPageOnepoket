@@ -34,7 +34,10 @@ const EditProduct = () => {
     product_video_link: '',
     product_image: null, // Add this line to manage the product image
     category_title: "", // Add this line to manage the category title
-    logo_id: ""
+    logo_id: "",
+    show_manufacture_date: "",
+    installation_details: "",
+
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
