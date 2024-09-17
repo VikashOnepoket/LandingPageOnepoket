@@ -22,7 +22,7 @@ const FactoryManagement = () => {
 
     const questions = [
         {
-            text: "1. How satisfied are your customers with the Oepoket QR solution?",
+            text: "1. How satisfied are your customers with the Onepoket QR solution?",
             rateText: "(Rate from 1 to 5)",
             type: "rating",
             options: [1, 2, 3, 4, 5],

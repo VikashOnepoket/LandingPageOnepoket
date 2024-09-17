@@ -2,23 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from '../../../../api/api';
+import axios from '../../../../api/api'; // Make sure axios is imported
 import toast from 'react-hot-toast';
 
 const QRBatchModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
+    const [template, setTemplate] = useState([]);
     const token = useSelector((state) => state.auth.token);
     const products = useSelector((state) => state.productDetails.products); // Fetch product data from Redux
-    
+
     const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         selectedProduct: null,
         serialNo: '',
         quantity: '',
-        qrCopies: ''
+        qrCopies: '',
+        selectedTemplate: null, // Corrected this key name
     });
 
+    // Fetch products only if needed
     // useEffect(() => {
     //     if (token && products.length === 0) {
     //         setLoading(true);
@@ -51,47 +54,79 @@ const QRBatchModal = ({ isOpen, onClose }) => {
         }));
     };
 
+    // const customStyles = {
+    //     control: (provided, state) => ({
+    //         ...provided,
+    //         borderColor: state.isFocused ? '#0052cc' : provided.borderColor,
+    //         boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : provided.boxShadow,
+    //         '&:hover': {
+    //             borderColor: state.isFocused ? '#0052cc' : provided.borderColor
+    //         }
+    //     })
+    // };
     const customStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isFocused ? '#f5f5f5' : 'white', // Change background on focus or hover
+            color: '#333', // Change the text color
+            cursor: 'pointer', // Show pointer on hover
+            '&:hover': {
+                backgroundColor: '#adc8ef', // Change hover background color
+            },
+        }),
         control: (provided, state) => ({
             ...provided,
-            borderColor: state.isFocused ? '#0052cc' : provided.borderColor,
-            boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : provided.boxShadow,
+            borderColor: state.isFocused ? '#0052cc' : '#ccc', // Custom border color
+            boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : 'none', // Custom shadow on focus
             '&:hover': {
-                borderColor: state.isFocused ? '#0052cc' : provided.borderColor
-            }
-        })
+                borderColor: '#0052cc',
+            },
+        }),
     };
+    
+   
+    
+
+    // const customStylesTemplate = {
+    //     control: (provided, state) => ({
+    //         ...provided,
+    //         borderColor: state.isFocused ? '#0052cc' : provided.borderColor,
+    //         boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : provided.boxShadow,
+    //         '&:hover': {
+    //             borderColor: state.isFocused ? '#0052cc' : provided.borderColor
+    //         }
+    //     })
+    // };
 
     const handleGenerateQR = async () => {
-        const { selectedProduct, serialNo, quantity, qrCopies } = formData;
+        const { selectedProduct, serialNo, quantity, qrCopies, selectedTemplate } = formData;
 
-        if (!selectedProduct || !serialNo || !quantity || !qrCopies) {
+        if (!selectedProduct || !serialNo || !quantity || !selectedTemplate) {
             toast.error("Please fill in all fields");
             return;
         }
-    
+
         const payload = {
             product_id: selectedProduct.value,
             quantity,
             QR_size: "",
             serial_no: serialNo,
-            QR_copies: qrCopies,
-            template_id: 7 // Assuming template_id is fixed
+            QR_copies: '1',
+            template_id: selectedTemplate.value // Use the selected template value
         };
-    
+
         try {
             setLoading(true);
             const response = await axios.post('/lp_print_QR', payload, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`, // Fixed string interpolation
                     'Content-Type': 'application/json'
                 }
             });
-    
+
             if (response.data) {
                 toast.success("QR Codes generated successfully");
-                // Open the response data (assumed to be a URL) in a new tab
-                window.open(response.data, "_blank");
+                window.open(response.data, "_blank"); // Open the response URL in a new tab
             }
         } catch (error) {
             console.error("Error generating QR codes:", error);
@@ -100,7 +135,34 @@ const QRBatchModal = ({ isOpen, onClose }) => {
             setLoading(false);
         }
     };
-    
+
+    const customOption = (props) => {
+        const { innerRef, innerProps, data } = props;
+        return (
+            <div ref={innerRef} {...innerProps} className="flex justify-between p-2 hover:bg-[#adc8ef] hover:cursor-pointer">
+                <span className='text-[14px] leading-7'>{data.label}</span>
+                {/* <span>View PDF</span> */}
+
+                <span className='hover:text-[#0052cc] hover:cursor-pointer text-[14px] leading-7'><a href={data.pdf} target="_blank" rel="noopener noreferrer" className='hover:underline ' >View PDF</a></span>
+            </div>
+        );
+    };
+
+    const fetchLabels = async () => {
+        try {
+            const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
+            const { data } = await axios.post('/getAllGlobalTemplates', { token }, config); // Fixed URL
+            console.log(data , "template")
+            setTemplate(data);
+        } catch (error) {
+            console.error("Error fetching templates:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchLabels();
+    }, []); // Ensure the token is available when fetching templates
+
     return (
         <>
             {isOpen && (
@@ -148,18 +210,6 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">QR Copies</label>
-                            <input
-                                type="number"
-                                name="qrCopies"
-                                value={formData.qrCopies}
-                                onChange={handleInputChange}
-                                className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                                placeholder="Enter number of QR copies"
-                            />
-                        </div>
-
-                        <div className="mb-4">
                             <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">Number Of QR</label>
                             <input
                                 type="number"
@@ -168,6 +218,24 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                 onChange={handleInputChange}
                                 className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
                                 placeholder="Enter number of QR codes"
+                            />
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">Select Template</label>
+                            <Select
+                                value={formData.selectedTemplate}
+                                onChange={(option) => handleSelectChange(option, 'selectedTemplate')}
+                                options={template?.map(template => ({
+                                    value: template?.template_id,
+                                    label: template?.template_name,
+                                    pdf:template?.pdf_url
+                                }))}
+                                components={{ Option: customOption }}
+                                styles={customStyles}
+                                className='mt-1'
+                                placeholder="Select a Template"
+                                isLoading={loading}
                             />
                         </div>
 

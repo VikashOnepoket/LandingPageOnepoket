@@ -33,6 +33,8 @@ const AddProduct = () => {
     product_desc_for_customer: "",
     product_video_link: "",
     logo_id: "",
+    show_manufacture_date: "",
+    installation_details: "",
     image: null // Initialize image
   });
 
@@ -48,12 +50,17 @@ const AddProduct = () => {
   }, [dispatch, token]);
 
   const handleInputChange = (name, value) => {
+    // Convert `show_manufacture_date` and `installation_details` to 0 or 1
+    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details') 
+      ? (value ? 1 : 0) 
+      : value; // For other fields, keep the original value
+  
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: formattedValue,
     }));
   };
-
+  
   const handleCategoryChange = (category) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -103,6 +110,8 @@ const AddProduct = () => {
     data.append('product_desc_for_customer', formData.product_desc_for_customer);
     data.append('product_video_link', formData.product_video_link);
     data.append('logo_id', formData.logo_id);
+    data.append('installation_details', formData?.installation_details)
+    data.append('show_manufacture_date', formData?.show_manufacture_date)
     data.append('additionalInfo', JSON.stringify(formData.additionalInfo)); // Convert array to string
     data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions)); // Convert array to string
     if (formData.image) {
