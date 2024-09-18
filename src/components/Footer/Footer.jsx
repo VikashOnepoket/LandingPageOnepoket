@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import logo from '../../assets/logoS.png';
 import { FaLinkedin } from 'react-icons/fa6';
 import { useInView, motion } from 'framer-motion';
+import footerBg from '../../assets/Dot.png'
 
 const Footer = () => {
     const containerRef = useRef(null);

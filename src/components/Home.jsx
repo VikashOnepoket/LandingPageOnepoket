@@ -9,11 +9,13 @@ import GifAnimation from './animation/GifAnimation'
 import Footer from './Footer/Footer'
 import line from '../assets/line.png'
 import HeroMain from './HeroMain'
+import NavTop from './Navbar/NavTop'
 
 const Home = () => {
   return (
 
     <>
+      <NavTop />
       <Navbar />
       <HeroMain />
       <Fold2card />

@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -13,11 +14,16 @@ html, body {
 body {
   font-family: 'Plus Jakarta Sans';
 }
-.inter{
+
+.inter {
   font-family: 'Inter';
 }
 
-.button-id{
+.nav-top-font {
+  font-family: 'Pontano Sans';
+}
+
+.button-id {
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
 
 }
@@ -30,6 +36,5 @@ body {
 .input:focus-within {
   outline: 1px solid #0052cc;
   border: 1px solid #0052cc;
-  
-}
 
+}
