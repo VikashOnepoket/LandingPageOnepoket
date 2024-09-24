@@ -80,7 +80,7 @@ const Login = () => {
 
           <div className='mt-5'>
             <input
-              type='text'
+              type='email'
               className='custom-input'
               placeholder='Email'
               value={user.email}

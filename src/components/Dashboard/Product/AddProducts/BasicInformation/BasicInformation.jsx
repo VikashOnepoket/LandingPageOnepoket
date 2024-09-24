@@ -27,7 +27,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Product Name</label>
         <input
           type="text"
-          className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+          className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  appearance-none transition duration-150 dark:text-white ease-in-out"
           placeholder="Enter Product name"
           value={formData?.product_name}
           onChange={(e) => onInputChange('product_name', e.target.value)}
@@ -38,7 +38,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Model Number</label>
         <input
           type="text"
-          className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+          className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-white ease-in-out"
           placeholder="Enter Model number"
           value={formData?.model_number}
           onChange={(e) => onInputChange('model_number', e.target.value)}
@@ -48,7 +48,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
       <div className="flex flex-col gap-2 mt-5">
         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Description</label>
         <textarea
-          className="input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+          className="input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-white ease-in-out"
           placeholder="Enter Description"
           value={formData?.description}
           onChange={(e) => onInputChange('description', e.target.value)}

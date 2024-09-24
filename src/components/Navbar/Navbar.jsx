@@ -65,7 +65,7 @@ const Navbar = () => {
 
 
     return (
-        <div className=' flex   w-[90%]  mx-auto text-white  mt-16   ' >
+        <div className=' flex   w-[100%]  mx-auto text-white  mt-16   sticky-nav top-0 bg-white z-50 border ' >
             <div className='flex justify-between items-center w-full nav-text-container'>
                 <Link to='/'>
                     <div className='sm:w-[185px] w-[131px]'>

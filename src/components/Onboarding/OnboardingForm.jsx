@@ -307,7 +307,7 @@ const OnboardingForm = () => {
                             </div>
                             <div>
                                 <input
-                                    type='text'
+                                    type='email'
                                     className='custom-input'
                                     placeholder='Email'
                                     value={user.email}

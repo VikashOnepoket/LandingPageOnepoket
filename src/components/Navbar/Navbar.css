@@ -116,9 +116,9 @@
     /* Optional: To ensure it has a background */
 }
 
-.sticky {
+ .sticky-nav {
     background: #fff !important;
-    position: fixed !important;
+    position: sticky;
     top: 0px;
     z-index: 999;
     margin: 0 auto !important;
@@ -148,7 +148,7 @@
     width: 100%;
     top: 0;
     position: relative;
-}
+} 
 
 
 @keyframes sticky-animation {
