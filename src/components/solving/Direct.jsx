@@ -28,7 +28,7 @@ const Direct = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className='mt-24 flex justify-between gap-10 ' style={{ backgroundImage: `url(${curve})`, backgroundSize: 'contain', backgroundPosition: 'center' }}>
+                <div className='mt-24 flex justify-between gap-10 ' >
                     {/* Left Side */}
                     <div className='w-[60%]'>
                         <img src={group} className='w-[216px]' alt="Illustration" />
@@ -63,7 +63,7 @@ const Direct = () => {
                 <div className='mt-96 flex justify-between gap-10 ' >
 
                     {/* Right Side with Overlapping Images */}
-                    <div className="relative w-[50%] flex" style={{ backgroundImage: `url(${curve})`, backgroundSize: 'contain', backgroundPosition: 'center' }}>
+                    <div className="relative w-[50%] flex" >
                         <img src={customer1} alt="Email Form" className="h-[235px] " />
                         <img src={customer2} alt="QR Code" className="absolute top-[-130px] left-[40px] w-[137px] " />
                         <img src={customer4} alt="QR Code" className="absolute top-[-180px] left-[180px] w-[200px] " />
@@ -96,7 +96,7 @@ const Direct = () => {
                 </div>
 
                 {/* .customer */}
-                <div className='mt-24 flex justify-between gap-10' style={{ backgroundImage: `url(${curve})`, backgroundSize: 'contain', backgroundPosition: 'center' }}>
+                <div className='mt-24 flex justify-between gap-10' >
                     {/* Left Side */}
                     <div className='w-[60%]'>
                         <img src={group} className='w-[216px]' alt="Illustration" />

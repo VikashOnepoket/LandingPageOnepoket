@@ -13,6 +13,7 @@ import NavTop from './Navbar/NavTop'
 import ScanMe from './scanMe/ScanMe'
 import Direct from './solving/Direct'
 
+
 const Home = () => {
   return (
 
@@ -35,6 +36,10 @@ const Home = () => {
       </div> */}
    
       <Footer />
+
+      {/* <button className="fixed bottom-0 left-0 w-full bg-blue-500 text-white p-4">
+        Fixed Button at the Bottom
+      </button> */}
     </>
 
 

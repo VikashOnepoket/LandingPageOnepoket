@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CustsomerDescription = ({formData,onInputChange}) => {
+const CustsomerDescription = ({ formData, onInputChange }) => {
     return (
         <div className='w-[100%] mt-10'>
             <div>
@@ -28,7 +28,7 @@ const CustsomerDescription = ({formData,onInputChange}) => {
             ease-in-out'
                     placeholder='Description'
                     value={formData?.product_desc_for_customer}
-                        onChange={(e) => onInputChange('product_desc_for_customer', e.target.value)}
+                    onChange={(e) => onInputChange('product_desc_for_customer', e.target.value)}
 
                 ></textarea>
             </div>

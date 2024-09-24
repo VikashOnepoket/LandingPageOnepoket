@@ -80,7 +80,7 @@ const HeroMain = () => {
                 <div className={`flex justify-end w-1/2 image-container-hero   ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''}`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}>
                     <div className=' image-ellipse-container'>
                         <img
-                            src={mouse}
+                            src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/mouse%20move.png?alt=media&token=89ab64b4-d72b-4777-a525-662ccced59f9'
                             alt="Macbook"
                             loading='lazy'
                             className='w-[100%] h-[100%] z-50'
