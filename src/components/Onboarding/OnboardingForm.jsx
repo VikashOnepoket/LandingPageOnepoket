@@ -197,7 +197,7 @@ const OnboardingForm = () => {
                             />
                         </div>
                         <div className='mt-8'>
-                            <h1 className='font-medium 2xl:text-[4rem] 2xl:leading-[4.5rem] text-[3rem] leading-[3.5rem] text-white abhaya'>“Where every scan gets you closer to your customers.”</h1>
+                            <h1 className='font-medium 2xl:text-[4rem] 2xl:leading-[4.5rem] text-[3rem] leading-[3.5rem] text-white abhaya'>Where every scan gets you closer to your customers.</h1>
                         </div>
                         <div className='mt-8'>
                             <p className='font-norma text[1.2rem] leading-[2rem] text-white'>We're the Future of Customer Engagement! Onepoket's QR technology lets you collect and leverage first-party data, gain customer understanding and create personalized experiences like never before.</p>

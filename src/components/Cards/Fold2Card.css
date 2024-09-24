@@ -15,15 +15,17 @@
 }
 
 .dotted-line {
-  border-top: 2px dashed white; /* Dashed white line */
+  border-top: 2px dashed white;
+  /* Dashed white line */
   height: 1px;
 }
+
 @media only screen and (max-width: 700px) {
   .bg-container {}
 }
 
 @media (min-width: 370px) and (max-width: 393px) {
-  #stream{
+  #stream {
     width: 340px;
   }
 }
@@ -47,9 +49,9 @@
 
 
 @media (min-width:768px) and (max-width: 824px) {
- .text-container{
-   width: 80% !important;
-   margin: auto  !important;
- 
- }
+  .text-container {
+    width: 80% !important;
+    margin: auto !important;
+
+  }
 }

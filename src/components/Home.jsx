@@ -10,6 +10,8 @@ import Footer from './Footer/Footer'
 import line from '../assets/line.png'
 import HeroMain from './HeroMain'
 import NavTop from './Navbar/NavTop'
+import ScanMe from './scanMe/ScanMe'
+import Direct from './solving/Direct'
 
 const Home = () => {
   return (
@@ -19,15 +21,19 @@ const Home = () => {
       <Navbar />
       <HeroMain />
       <Fold2card />
-      <GifAnimation />
+      {/* <GifAnimation /> */}
+      <Direct/>
+      <CustomerScan />
+      {/* <Direct/> */}
       {/* <div>
         <img src={line} />
       </div> */}
       <FaqSection />
+      {/* <ScanMe/> */}
       {/* <div>
         <img src={line} />
       </div> */}
-      <CustomerScan />
+   
       <Footer />
     </>
 

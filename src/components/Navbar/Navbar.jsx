@@ -51,36 +51,55 @@ const Navbar = () => {
         navigate(`/login`)
     }
 
+    
+
+    const boxShadowStyle = {
+        boxShadow: '0px 1px 4px 0px rgba(3, 83, 179, 1)',
+        // X-offset, Y-offset, blur, spread, color
+    };
+
+    const [isSticky, setIsSticky] = useState(false);
+      
+
+   
+
+
     return (
-        <div className='h-[65px] flex  border-[#004699] w-[100%] text-white relative mt-5'>
+        <div className=' flex   w-[90%]  mx-auto text-white  mt-16   ' >
             <div className='flex justify-between items-center w-full nav-text-container'>
                 <Link to='/'>
                     <div className='sm:w-[185px] w-[131px]'>
                         <img src={Logo} className='w-[100%] h-[100%]' alt='Logo' />
                     </div>
                 </Link>
+                <div className='flex gap-12'>
+                    <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold   rounded-[10px] text-[#6F7070]'>
+                        Support
+                    </a>
+                    <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold   rounded-[10px] text-[#6F7070]'>
+                        Support
+                    </a>
+                    <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold   rounded-[10px] text-[#6F7070]'>
+                        Support
+                    </a>
+                    <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold   rounded-[10px] text-[#6F7070]'>
+                        Support
+                    </a>
+                </div>
                 <div className='flex justify-end items-center gap-12'>
-                    <div className='support-button-container'>
-                        <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold   rounded-[10px] text-[#6F7070]'>
-                            Support
-                        </a>
-                    </div>
+                  
                     <div className='support-button-container' onClick={goToLogin}>
                         <button className='text-[14px] cursor-pointer leading-[18px] font-bold   rounded-[10px] text-[#6F7070]'>
                             Login
                         </button>
                     </div>
-                    {/* <div className='trial-button-container'>
-                        <button onClick={openModal} className='hover:bg-[#1971D8] hover:text-white border border-white rounded-lg text-[14px] leading-[23px] font-bold px-[22px] py-[12px] gap-2 flex items-center text-white hover:border-[#1971D8]'>
-                            Login
-                        </button>
-                    </div> */}
+                   
                     <div className='trial-button-container' onClick={openOnboardingForm}>
                         <button className='text-[#004699]  rounded-[10px] text-[14px] leading-[18px] font-bold px-[22px] py-[10px] gap-2 flex items-center  bg-[#E4EFFF] '>
                             Start free trial
                         </button>
                     </div>
-                    <div className='flex lg:hidden menu-container'>
+                    {/* <div className='flex lg:hidden menu-container'>
                         <motion.div whileTap={{ scale: 0.95 }} onClick={toggleMenu}>
                             <div className="menu-large-icon">
                                 {isMenuOpen ? "" : (<IoMdMenu size={36} />)}
@@ -89,11 +108,11 @@ const Navbar = () => {
                                 {isMenuOpen ? "" : (<IoMdMenu size={24} />)}
                             </div>
                         </motion.div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
-            <AnimatePresence>
+            {/* <AnimatePresence>
                 {isMenuOpen && (
                     <>
                         <motion.div
@@ -131,7 +150,7 @@ const Navbar = () => {
                         </motion.div>
                     </>
                 )}
-            </AnimatePresence>
+            </AnimatePresence> */}
 
             <AnimatePresence>
                 {isModalOpen && (

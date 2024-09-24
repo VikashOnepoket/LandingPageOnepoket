@@ -12,7 +12,7 @@
 }
 
 .nav-text-container {
-    padding: 10px 119px 10px 119px;
+    padding: 10px 31px 10px 31px;
 }
 
 /* Media query for small to medium screens */
@@ -40,11 +40,12 @@
     .nav-text-container {
         padding: 8px 30px 8px 30px;
     }
+
     .menu-text-box {
         width: 95%;
         margin-right: 25px;
         margin-left: 25px;
-    
+
 
     }
 }
@@ -54,7 +55,7 @@
         width: 90%;
         margin-right: 25px;
         margin-left: 25px;
-    
+
 
     }
 }
@@ -87,9 +88,9 @@
         width: 90% !important;
         margin-right: 13px !important;
         margin-left: 15px !important;
-     
-       
-      
+
+
+
 
     }
 }
@@ -103,3 +104,61 @@
       margin:  auto !important;
     }
   } */
+
+.fixed-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    /* Adjust this based on your layout */
+    background-color: white;
+    /* Optional: To ensure it has a background */
+}
+
+.sticky {
+    background: #fff !important;
+    position: fixed !important;
+    top: 0px;
+    z-index: 999;
+    margin: 0 auto !important;
+    padding: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-name: sticky-animation;
+    animation-name: sticky-animation;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+
+
+}
+
+
+
+.menu-sticky {
+    margin: 0;
+    z-index: 999;
+    width: 100%;
+    top: 0;
+    position: relative;
+}
+
+
+@keyframes sticky-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

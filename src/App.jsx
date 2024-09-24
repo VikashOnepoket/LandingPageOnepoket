@@ -9,6 +9,9 @@ import DashboardLayout from './DashboardLayout';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import SpinnerMain from './components/Dashboard/Spinner/SpinnerMain';
+import LearnMoreDirect from './components/LearnMore/LearnMoreDirect';
+import LearnMoreOnboarding from './components/LearnMore/LearnMoreOnboarding';
+import LearnMoreCustomer from './components/LearnMore/LearnMoreCustomer';
 
 
 // Lazy load components
@@ -66,6 +69,30 @@ function App() {
               element={
                 <PublicRoute>
                   <Home />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path='/learn_more_button_1'
+              element={
+                <PublicRoute>
+                  <LearnMoreDirect />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path='/learn_more_button_2'
+              element={
+                <PublicRoute>
+                  <LearnMoreOnboarding />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path='/learn_more_button_3'
+              element={
+                <PublicRoute>
+                  <LearnMoreCustomer />
                 </PublicRoute>
               }
             />

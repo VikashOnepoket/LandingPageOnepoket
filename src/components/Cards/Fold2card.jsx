@@ -3,6 +3,11 @@ import { motion, useInView } from 'framer-motion';
 import group from '../../assets/Dashed.png'
 import group1 from '../../assets/DashedMobile.png'
 import './Fold2Card.css'; // Make sure to import the CSS file
+import one from '../../assets/1.png'
+import two from '../../assets/2.png'
+import three from '../../assets/3.png'
+import four from '../../assets/4.png'
+import footerBg from '../../assets/Dot.png'
 
 
 
@@ -43,25 +48,26 @@ const Fold2Card = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="bg-container  w-[100%] lg:h-[827px] sm:h-[900px] h-[1000px] mx-auto "
+            className="bg-container  w-[100%] lg:h-[827px] sm:h-[900px] h-[1000px] mx-auto rounded-tl-[40px] rounded-tr-[40px]"
         >
             <motion.div
                 variants={containerVariants}
                 className=" mx-auto 2xl:pt-24 xl:pt-28 lg:pt-20 md:pt-16 pt-8 w-[95%] fold2-container"
             >
-                <motion.div className="lg:w-[441px] mx-auto md:w-1/2 w-[90%] text-center text-container" variants={containerVariants}>
-                    <p className="sm:text-[51px] sm:leading-[65px] font-semibold text-white text-[36px] leading-[42px] text-onepoket ">Why Onepoket?</p>
+                <motion.div className=" text-center text-container mt-24" variants={containerVariants}>
+                    <p className="sm:text-[50px] sm:leading-[65px] font-semibold text-white text-[36px] leading-[42px] text-onepoket ">With Single QR You Can Have</p>
                 </motion.div>
                 <motion.div className="lg:mt-40 xl:mt-24 md:mt-16 sm:mt-20 pt-8 relative" variants={containerVariants}>
-                    <div className='flex justify-between 2xl:w-[1170px] mx-auto lg:w-[95%] md:w-[55%] w-[90%]  gap-10 lg:flex-row flex-col lg:h-[200px] relative lg:text-start text-center fold2-text-container'>
+                    {/* <div className='flex justify-between 2xl:w-[1170px] mx-auto lg:w-[95%] md:w-[55%] w-[90%]  gap-10 lg:flex-row flex-col lg:h-[200px] relative lg:text-start text-center fold2-text-container'>
                         <motion.div variants={itemVariants} className="flex flex-col ">
                             <div className=''>
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Seamless</p>
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Customer Service</p>
                             </div>
-                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0 sm:hidden flex">
-                                <img src={group1} className='w-[100%] h-[100%]' />
+                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0  flex ">
+                                <img src={four} className='w-[90px] h-auto' />
                             </motion.div>
+
 
                         </motion.div>
 
@@ -70,8 +76,8 @@ const Fold2Card = () => {
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Streamline</p>
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Feedback Collection</p>
                             </div>
-                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0 sm:hidden flex">
-                                <img src={group1} className='w-[100%] h-[100%]' />
+                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0  flex">
+                                <img src={three} className='w-[80px] h-auto' />
                             </motion.div>
                         </motion.div>
 
@@ -80,8 +86,8 @@ const Fold2Card = () => {
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Reduce Overall</p>
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Post-Sales Costs</p>
                             </div>
-                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0 sm:hidden flex">
-                                <img src={group1} className='w-[100%] h-[100%]' />
+                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0  flex ">
+                                <img src={two} className='w-[90px] h-auto' />
                             </motion.div>
                         </motion.div>
 
@@ -90,18 +96,64 @@ const Fold2Card = () => {
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>Secure QR for</p>
                                 <p className='text-[26px]  font-medium leading-[40px] text-white sm:ml-4 ml-0'>User Onboarding</p>
                             </div>
-                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0 sm:hidden flex">
-                                <img src={group1} className='w-[100%] h-[100%]' />
+                            <motion.div variants={lineVariants} className=" mt-8 sm:ml-4 ml-0  flex ">
+                                <img src={one} className='w-[90px] h-auto' />
+                            </motion.div>
+                        </motion.div>
+                    </div> */}
+                    <div className='flex justify-between items-center 2xl:w-[1170px] mx-auto lg:w-[95%] md:w-[55%] w-[90%] gap-10 lg:flex-row flex-col lg:h-[200px] relative lg:text-start text-center fold2-text-container'>
+                        <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start">
+                            <div className=''>
+                                <p className='text-[26px] font-medium leading-[40px] text-white text-center'>Seamless</p>
+                                <p className='text-[26px] font-medium leading-[40px] text-white'>Customer Service</p>
+                            </div>
+                            <motion.div variants={lineVariants} className="mt-8 flex justify-center">
+                                <img src={four} className='w-[90px] h-auto' />
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start">
+                            <div className=''>
+                                <p className='text-[26px] font-medium leading-[40px] text-white text-center'>Streamline</p>
+                                <p className='text-[26px] font-medium leading-[40px] text-white'>Feedback Collection</p>
+                            </div>
+                            <motion.div variants={lineVariants} className="mt-8 flex justify-center">
+                                <img src={three} className='w-[90px] h-auto' />
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start">
+                            <div className=''>
+                                <p className='text-[26px] font-medium leading-[40px] text-white text-center'>Reduce Overall</p>
+                                <p className='text-[26px] font-medium leading-[40px] text-white'>Post-Sales Costs</p>
+                            </div>
+                            <motion.div variants={lineVariants} className="mt-8 flex justify-center">
+                                <img src={two} className='w-[90px] h-auto' />
+                            </motion.div>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start">
+                            <div className=''>
+                                <p className='text-[26px] font-medium leading-[40px] text-white text-center'>Secure QR for</p>
+                                <p className='text-[26px] font-medium leading-[40px] text-white'>User Onboarding</p>
+                            </div>
+                            <motion.div variants={lineVariants} className="mt-8 flex justify-center">
+                                <img src={one} className='w-[90px] h-auto' />
                             </motion.div>
                         </motion.div>
                     </div>
+
                 </motion.div>
-                <motion.div variants={containerVariants} className='2xl:w-[1170px] w-[95%] mx-auto lg:mt-0 mt-24 hidden sm:flex'>
-                    <img src={group} className='w-[100%] h-[100%]' />
-                </motion.div>
+              
             </motion.div>
 
-
+            <motion.div variants={containerVariants} className='mt-[-50px] flex'>
+                    <img src={footerBg} className='h-[260px]' />
+                    <img src={footerBg} className='h-[260px]' />
+                    {/* <img src={footerBg} className='h-[180px]' /> */}
+                   
+                    
+                </motion.div>
 
         </motion.div>
     );

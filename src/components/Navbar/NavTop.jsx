@@ -7,10 +7,11 @@ import left1 from '../../assets/left1.png'
 import left2 from '../../assets/left2.png'
 import left4 from '../../assets/left4.png'
 
+
 const NavTop = () => {
     return (
         <>
-            <nav className='h-[66px] bg-[#004699] flex justify-between items-center'>
+            <nav className=' bg-[#004699] flex justify-between items-center'>
                 <div className='h-[60px] flex gap-2'>
                     <img src={left} className='w-[100%] h-[100%]' />
                     <img src={left1} className='w-[100%] h-[100%]' />

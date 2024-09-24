@@ -112,7 +112,7 @@ const QRBatchModal = ({ isOpen, onClose }) => {
             QR_size: "",
             serial_no: serialNo,
             QR_copies: '1',
-            template_id: selectedTemplate.value // Use the selected template value
+            template_id: "7" // Use the selected template value
         };
 
         try {
