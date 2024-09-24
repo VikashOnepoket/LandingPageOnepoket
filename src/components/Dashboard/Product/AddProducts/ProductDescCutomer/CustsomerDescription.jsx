@@ -24,7 +24,7 @@ const CustsomerDescription = ({formData,onInputChange}) => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                     placeholder='Description'
                     value={formData?.product_desc_for_customer}

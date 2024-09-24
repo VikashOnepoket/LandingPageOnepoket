@@ -26,7 +26,7 @@ const WarrantyEdit = ({ formData, onInputChange }) => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                         placeholder='years'
                         value={formData?.warranty_years}
@@ -52,7 +52,7 @@ const WarrantyEdit = ({ formData, onInputChange }) => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                         placeholder='month'
                         value={formData?.warranty_months}

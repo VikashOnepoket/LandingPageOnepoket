@@ -10,7 +10,7 @@ const ProductVideo = ({ formData, onInputChange }) => {
                 <div className='flex flex-col gap-2 mt-5 '>
                     <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Link</label>
                     <input
-                        type='text' className='input  border  border-gray-300  dark:border-gray-600  dark:bg-transparent  rounded-md  w-full  py-2 px-3  focus:border-[#0052cc] focus:border focus-within:ring-1  appearance-none  transition   duration-150   dark:text-gray-100  ease-in-out'
+                        type='text' className='input  border  border-gray-300  dark:border-gray-600  dark:bg-transparent  rounded-md  w-full  py-2 px-3  focus:border-[#0052cc] focus:border focus-within:ring-1  appearance-none  transition   duration-150   text-black    ease-in-out'
                         placeholder='Link'
                         value={formData?.product_video_link}
                         onChange={(e) => onInputChange('product_video_link', e.target.value)}

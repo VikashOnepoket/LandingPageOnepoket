@@ -39,7 +39,7 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
                         <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Store Name</label>
                         <input
                             type='text'
-                            className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out'
+                            className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out'
                             placeholder='Store Name'
                             value={option.title}
                             onChange={(e) => handleOptionChange(index, 'title', e.target.value)}
@@ -49,7 +49,7 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
                         <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Product Review Link</label>
                         <input
                             type='text'
-                            className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out'
+                            className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out'
                             placeholder='Product Review URL'
                             value={option.link}
                             onChange={(e) => handleOptionChange(index, 'link', e.target.value)}

@@ -38,7 +38,7 @@ const CreateCampaign = () => {
                     <label className="text-[16px] leading-[21px] text-[#000000] font-semibold">Campaign Name</label>
                     <input
                         type="text"
-                        className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                        className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                         placeholder="Enter Campaign name"
                     />
                 </div>
@@ -48,7 +48,7 @@ const CreateCampaign = () => {
                     <label className="text-[16px] leading-[21px] text-[#000000] font-semibold">Headline Name</label>
                     <input
                         type="text"
-                        className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                        className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                         placeholder="Enter Headline "
                     />
                 </div>
@@ -72,7 +72,7 @@ const CreateCampaign = () => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                         placeholder='Message Content'
 

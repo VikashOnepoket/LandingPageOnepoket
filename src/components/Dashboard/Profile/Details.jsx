@@ -112,7 +112,7 @@ const Details = () => {
                         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Owner Name</label>
                         <input
                             type="text"
-                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                             placeholder="Enter Owner name"
                         />
                     </div>
@@ -121,7 +121,7 @@ const Details = () => {
                         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Mobile Number</label>
                         <input
                             type="text"
-                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                             placeholder="Enter Mobile Number"
                         />
                     </div>
@@ -131,7 +131,7 @@ const Details = () => {
                         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Address</label>
                         <input
                             type="text"
-                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                             placeholder="Enter Address"
                         />
                     </div>
@@ -146,7 +146,7 @@ const Details = () => {
                         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Brand Name</label>
                         <input
                             type="text"
-                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                             placeholder="Enter Brand Name"
                         />
                     </div>
@@ -200,7 +200,7 @@ const Details = () => {
                         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Helpline E-mail </label>
                         <input
                             type="text"
-                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                             placeholder="Enter Helpline E-mail"
                         />
                     </div>
@@ -210,7 +210,7 @@ const Details = () => {
                         <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Helpline Number</label>
                         <input
                             type="text"
-                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out"
+                            className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out"
                             placeholder="Enter Helpline number"
                         />
                     </div>

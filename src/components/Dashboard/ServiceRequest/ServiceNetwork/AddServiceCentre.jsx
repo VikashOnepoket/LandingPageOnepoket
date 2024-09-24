@@ -20,7 +20,7 @@ const AddServiceCentre = () => {
                             appearance-none 
                             transition 
                             duration-150 
-                            dark:text-gray-100
+                            text-black  
                             ease-in-out'
                             placeholder='Enter Centre Name '
 
@@ -45,7 +45,7 @@ const AddServiceCentre = () => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                             placeholder='Enter Phone Number'
 
@@ -71,7 +71,7 @@ const AddServiceCentre = () => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                             placeholder='Enter Email'
 
@@ -101,7 +101,7 @@ const AddServiceCentre = () => {
             appearance-none 
             transition 
             duration-150 
-            dark:text-gray-100
+            text-black  
             ease-in-out'
                             placeholder='Enter Address'
 

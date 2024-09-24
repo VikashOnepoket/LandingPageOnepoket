@@ -42,7 +42,7 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, formD
             <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Section Title</label>
             <input
               type='text'
-              className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out'
+              className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out'
               name='title'
               placeholder='Section Title'
               value={section.title}
@@ -52,7 +52,7 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, formD
           <div className='flex flex-col gap-2 mt-5'>
             <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Description</label>
             <textarea
-              className='input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 dark:text-gray-100 ease-in-out'
+              className='input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out'
               name='description'
               placeholder='Description'
               value={section.description}
