@@ -11,13 +11,13 @@ import left4 from '../../assets/left4.png'
 const NavTop = () => {
     return (
         <>
-            <nav className=' bg-[#004699] flex justify-between items-center'>
+            <nav className=' bg-[#004699] lg:flex justify-between items-center hidden'>
                 <div className='h-[60px] flex gap-2'>
                     <img src={left} className='w-[100%] h-[100%]' />
                     <img src={left1} className='w-[100%] h-[100%]' />
                     <img src={left2} className='w-[100%] h-[100%]' />
                 </div>
-                <div>
+                <div className=''>
                     <p className='text-[13px] leading-4 text-[#E4EFFF] font-medium tracking-wider nav-top-font'>Enjoy seamless onboarding and warranty management with our QR technology.</p>
                 </div>
                 <div className='h-[60px] flex gap-2'>

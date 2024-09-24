@@ -23,13 +23,13 @@ const Home = () => {
       <HeroMain />
       <Fold2card />
       {/* <GifAnimation /> */}
-      <Direct/>
+      {/* <Direct/> */}
       <CustomerScan />
       {/* <Direct/> */}
       {/* <div>
         <img src={line} />
       </div> */}
-      <FaqSection />
+      {/* <FaqSection /> */}
       {/* <ScanMe/> */}
       {/* <div>
         <img src={line} />

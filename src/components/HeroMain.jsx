@@ -57,11 +57,11 @@ const HeroMain = () => {
     return (
         <>
             <div className='w-full mx-auto flex items-center justify-between hero-container mt-24'>
-                <div className={`flex flex-col  w-1/2 gap-10 text-container-hero ${animateText ? 'animate-slide-in-left text-center sm:text-start' : ''}`}>
-                    <h1 className='text-[#004699] text-[3.8rem] leading-[4.8rem]  font-bold  text-center'>
+                <div className={`flex flex-col  w-1/2 gap-10 text-container-hero ${animateText ? 'animate-slide-in-left ' : ''}`}>
+                    <h1 className='text-[#004699] lg:text-[3.8rem] lg:leading-[4.8rem]  font-bold  text-center sm:text-[3rem] sm:leading-[4rem] text-h1-container  w-full '>
                         1 QR = 1 Loyal Customer
                     </h1>
-                    <div className='w-[70%] mx-auto text-center'>
+                    <div className='w-[90%] mx-auto text-center'>
                         <p className='text-[.9rem] leading-[1.9rem] font-normal'>
                             Onepoket’s QR technology not only gets you <span className='text-[.9rem] leading-[1.9rem] font-bold'>Customer Name, Number,</span> and <span className='text-[.9rem] leading-[1.9rem] font-bold'>Demographics</span>; it's your <span className='text-[.9rem] leading-[1.9rem] font-bold'>VIP pass</span> to the first-party data of your target market.
                         </p>
@@ -77,20 +77,15 @@ const HeroMain = () => {
                     </div>
 
                 </div>
-                <div className={`flex justify-end w-1/2 image-container-hero   ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''}`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}>
+                <div className={`flex justify-end 2xl:w-[30%] w-1/2 image-container-hero  ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''}`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}>
                     <div className=' image-ellipse-container'>
                         <img
-                            src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/mouse%20move.png?alt=media&token=89ab64b4-d72b-4777-a525-662ccced59f9'
+                            src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/mouse%20move.webp?alt=media&token=a4c45f2d-8714-4315-8fde-46e709941836'
                             alt="Macbook"
-                            loading='lazy'
+                           loading='lazy'
                             className='w-[100%] h-[100%] z-50'
                         />
-                        {/* <img
-                            src="https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Ellipse%20229%20(2).png?alt=media&token=ff458759-eb3b-44e3-b84e-b8c725c4a44b"
-                            alt="Ellipse"
-                            loading='lazy'
-                            className='lg:pt-8 md:flex hidden pt-0'
-                        /> */}
+                       
                     </div>
                 </div>
             </div>

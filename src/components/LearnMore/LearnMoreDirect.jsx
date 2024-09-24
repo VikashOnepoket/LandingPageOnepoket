@@ -6,6 +6,7 @@ import group from '../../assets/Group 92.png'
 import group1 from '../../assets/Group 88.png'
 import group2 from '../../assets/Group 89.png'
 import { useNavigate } from 'react-router-dom'
+import learn from '../../assets/learnmore.png'
 
 const LearnMoreDirect = () => {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ const LearnMoreDirect = () => {
             <NavTop />
             <Navbar />
             {/*  */}
-            <div className='mt-20'>
+            <div className='mt-20' >
                 {/* header content */}
 
                 <div className='text-center'>

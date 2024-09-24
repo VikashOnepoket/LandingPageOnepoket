@@ -144,16 +144,16 @@ const Fold2Card = () => {
                     </div>
 
                 </motion.div>
-              
+
             </motion.div>
 
-            <motion.div variants={containerVariants} className='mt-[-50px] flex'>
-                    <img src={footerBg} className='h-[260px]' />
-                    <img src={footerBg} className='h-[260px]' />
-                    {/* <img src={footerBg} className='h-[180px]' /> */}
-                   
-                    
-                </motion.div>
+            {/* <motion.div variants={containerVariants} className='mt-[-50px] flex'>
+                <img src={footerBg} className='h-[260px]' />
+                <img src={footerBg} className='h-[260px]' />
+
+
+
+            </motion.div> */}
 
         </motion.div>
     );

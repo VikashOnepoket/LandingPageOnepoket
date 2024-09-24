@@ -11,6 +11,8 @@ import arrow from '../../assets/arrow.png';
 import white from '../../assets/white.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../assets/LogoOne.png';
+import LoginBG from '../../assets/Login background.png';
 
 const industryOptions = [
     { value: 'software', label: 'Software' },
@@ -42,7 +44,7 @@ const OnboardingForm = () => {
         companyName: '',
         companyWebsite: '',
         industry: '',
-      
+
     });
 
     const handleContinue = () => {
@@ -130,7 +132,7 @@ const OnboardingForm = () => {
         // setIsPersonalDetailsCompleted(true);
         // setHideLogoText(true);
         const { data } = await axios.post("/user_register", {
-            name: user.name, email: user.email, password: user.password, phone: user.phoneNumber , credit_limit : "2000"
+            name: user.name, email: user.email, password: user.password, phone: user.phoneNumber, credit_limit: "2000"
         });
         console.log(data, "data");
         if (data.message == "User already registered") {
@@ -176,178 +178,201 @@ const OnboardingForm = () => {
 
         }
     };
-
+    const boxShadowStyle = {
+        boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.15)',
+        // X-offset, Y-offset, blur, spread, color
+    };
+    const [loading, setLoading] = useState(false)
     return (
-        <div className={`main-containerS xl:h-screen ${hideLogoText ? "" : "h-auto"}`}>
-            {/* <Toaster /> */}
-            <div className={`2xl:w-5/6 w-[90%] mx-auto flex justify-between lg:flex-row flex-col box-container ${hideLogoText ? '' : ''}`}>
-                {!hideLogoText && (
-                    <motion.div className='xl:w-1/2 mx-auto sm:flex hidden sm:flex-col ' initial={{ opacity: 0, y: -50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 50 }}
-                        transition={{ duration: 0.5 }}>
-                        <div className='w-[168px]'>
-                            {/* <img src={white} className='w-[100%] h-[100%]' /> */}
-                            <img
-                                src={white}
-                                alt="white"
-                                loading='lazy'
+        <>
+            <div className='flex h-screen'>
+                <div className='w-[70%] bg-[#004699] flex justify-center items-center ' style={{ backgroundImage: `url(${LoginBG})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                    <div className=' w-[80%] text-center'>
+                        <div>
+                            <h1 className='text-[40px] leading-[51px] text-[#E9F2FF]'>Where every scan gets you closer
+                                to your customers.</h1>
+                        </div>
 
-                                className='w-[100%] h-[100%]'
-                            />
+                        {/*  */}
+                        <div className='text-[24px] leading-[30px] text-[#E9F2FF] mt-12 '>
+                            <p>We're the Future of Customer Engagement! Onepoket's QR technology lets you collect and leverage first-party data, gain customer understanding and create personalized experiences like never before</p>
                         </div>
-                        <div className='mt-8'>
-                            <h1 className='font-medium 2xl:text-[4rem] 2xl:leading-[4.5rem] text-[3rem] leading-[3.5rem] text-white abhaya'>Where every scan gets you closer to your customers.</h1>
-                        </div>
-                        <div className='mt-8'>
-                            <p className='font-norma text[1.2rem] leading-[2rem] text-white'>We're the Future of Customer Engagement! Onepoket's QR technology lets you collect and leverage first-party data, gain customer understanding and create personalized experiences like never before.</p>
-                        </div>
-                        <div className='flex justify-between items-center mt-24'>
+
+                        {/*  */}
+                        <div className='flex gap-3 items-center mt-24'>
                             <div className='w-1/2'>
                                 <p className='font-medium text-[1.2rem] leading-[2rem] text-white'>Let’s get you started!</p>
                             </div>
-                            <div className='w-1/2'>
+                            <div className='w-[30%]'>
                                 <img src={arrow} className='w-[100%]' />
                             </div>
                         </div>
-                    </motion.div>
-                )}
-                <motion.div
-                    initial={{ opacity: 0, y: -50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 50 }}
-                    transition={{ duration: 0.5 }}
-                    className={`shadow-custom xl:w-[360px] w-[360px] xl:mx-auto sm-box-container ${hideLogoText ? 'w-5/6 mx-auto hide-container' : ''}`}
-                >
-                    {isPersonalDetailsCompleted ? (
-                        <div className='flex items-center w-5/6 mx-auto mt-6 space-x-3 text-[#454545] text-[12px] cursor-pointer' onClick={goBack}>
-                            <div>
-                                <IoIosArrowBack color='#454545' />
-                            </div>
-                            <div className='text-[#454545]'>
-                                <p>Back</p>
-                            </div>
+                    </div>
+                </div>
+                <div className='w-1/2 flex flex-col items-center justify-center '>
+
+                    {isPersonalDetailsCompleted ? (<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className='w-[60%] mx-auto '>
+                        <div className='sm:w-[215px] w-[131px]  '>
+                            <img src={Logo} className='w-[100%] h-[100%]' alt='Logo' />
                         </div>
-                    ) : null}
-                    <div className='w-5/6 mx-auto mt-6'>
-                        <div className='h-1 bg-gray-200 rounded-full'>
-                            <div
-                                className={`h-full bg-[#004699] rounded-full`}
-                                style={{ transition: 'width 0.5s ease', width: isNextFormCompleted ? '100%' : isPersonalDetailsCompleted ? '50%' : '0%' }}
+                        <div className='mt-5'>
+                            <p className='font-semibold text-[1.1rem] leading-[1.5rem] text-[#0052CC]'>Tell Us About Your Company</p>
+                        </div>
+                        <div className='mt-5'>
+                            <input
+                                type='text'
+                                className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black'
+                                placeholder='Company Name'
+                                onChange={handleInputChange}
+                                value={user.companyName}
+                                name='companyName'
                             />
                         </div>
-                    </div>
+                        <div className='mt-5'>
+                            <Select
+                                value={selectedCompanySize}
+                                onChange={handleCompanySizeChange}
+                                options={companySizeOptions}
+                                placeholder='Company Size'
+                                className=''
+                                
+                            />
+                        </div>
+                        <div className='mt-5'>
+                            <Select
+                                value={selectedIndustry}
+                                onChange={handleIndustryChange}
+                                options={industryOptions}
+                                placeholder='Select Industry'
+                                className=''
+                              
+                            />
+                        </div>
+                        <div className='mt-5'>
+                            <input
+                                type='text'
+                                className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black'
+                                placeholder='Website URL'
+                                onChange={handleInputChange}
+                                name='companyWebsite'
+                                value={user.companyWebsite}
+                            />
+                        </div>
+                        <div className='mt-5' onClick={updateUser}>
+                            <button className='text-[14px] leading-4 text-white font-bold bg-[#0052CC] border border-[#0052CC] p-3 rounded-md w-[200px]' onClick={handleNextFormContinue} disabled={loading} style={boxShadowStyle}>{loading ? (
+                                <div className='flex items-center justify-center'>
+                                    <Spinner />
+                                    <span className='ml-2'>Loading...</span>
+                                </div>
+                            ) : (
+                                'Continue'
+                            )}</button>
+                        </div>
+                    </motion.div>) : (<motion.div className='w-[60%] mx-auto' initial={{ opacity: 0, y: -50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 50 }}
+                        transition={{ duration: 0.5 }}>
+                        <div className='sm:w-[215px] w-[131px]  '>
+                            <img src={Logo} className='w-[100%] h-[100%]' alt='Logo' />
+                        </div>
+                        {/* name profile */}
+                        <div className='mt-5'>
+                            {/*  */}
+                            <div>
+                                <p className='font-semibold text-[1.2rem] leading-[1.6rem] text-[#004699]'>Tell us about You!</p>
+                            </div>
+                            {/* name */}
+                            <div className="flex flex-col gap-2 mt-5">
+                                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Name</label>
+                                <input
+                                    type="email"
+                                    className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black"
+                                    placeholder="Enter your name"
 
-                    {isPersonalDetailsCompleted ? (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className='w-5/6 mx-auto mt-8 flex flex-col gap-3'>
-                            <div>
-                                <p className='font-semibold text-[1.1rem] leading-[1.5rem] text-[#0052CC]'>“Tell Us About Your Company”</p>
-                            </div>
-                            <div>
-                                <input
-                                    type='text'
-                                    className='custom-input'
-                                    placeholder='Company Name'
-                                    onChange={handleInputChange}
-                                    value={user.companyName}
-                                    name='companyName'
-                                />
-                            </div>
-                            <div>
-                                <Select
-                                    value={selectedCompanySize}
-                                    onChange={handleCompanySizeChange}
-                                    options={companySizeOptions}
-                                    placeholder='Company Size'
-                                    className=''
-                                    styles={customStyles}
-                                />
-                            </div>
-                            <div>
-                                <Select
-                                    value={selectedIndustry}
-                                    onChange={handleIndustryChange}
-                                    options={industryOptions}
-                                    placeholder='Select Industry'
-                                    className=''
-                                    styles={customStyles}
-                                />
-                            </div>
-                            <div>
-                                <input
-                                    type='text'
-                                    className='custom-input'
-                                    placeholder='Website URL'
-                                    onChange={handleInputChange}
-                                    name='companyWebsite'
-                                    value={user.companyWebsite}
-                                />
-                            </div>
-                            <div className='mt-12 mb-12' onClick={updateUser}>
-                                <button onClick={handleNextFormContinue} className='w-[100%] bg-[#0052CC] border-[#0052CC] text-white px-[25px] py-[12px] rounded btn-container'>
-                                    Continue
-                                </button>
-                            </div>
-                        </motion.div>
-                    ) : (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className='w-5/6 mx-auto mt-8 flex flex-col gap-3'>
-                            <div>
-                                <p className='font-semibold text-[1.1rem] leading-[1.5rem] text-[#0052CC]'>“Tell Us About You!”</p>
-                            </div>
-                            <div>
-                                <input
-                                    type='text'
-                                    className='custom-input'
-                                    placeholder='Name'
                                     value={user.name}
                                     name="name"
                                     onChange={handleInputChange}
                                     required
+
+
                                 />
                             </div>
-                            <div>
+                            {/* email  */}
+                            <div className="flex flex-col gap-2 mt-5">
+                                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Email</label>
                                 <input
-                                    type='email'
-                                    className='custom-input'
-                                    placeholder='Email'
+                                    type="email"
+                                    className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black"
+                                    placeholder="Enter your email"
+
                                     value={user.email}
                                     name='email'
                                     onChange={handleInputChange}
                                     required
+
                                 />
                             </div>
-                            <div>
+
+                            {/* phone nummber */}
+                            <div className="flex flex-col gap-2 mt-5">
+                                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Phone Number</label>
                                 <input
-                                    type='text'
-                                    className='custom-input'
-                                    placeholder='Phone Number'
+                                    type="email"
+                                    className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-3 px-2 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black"
+                                    placeholder="Enter your phone number"
+
                                     value={user.phoneNumber}
                                     name='phoneNumber'
                                     onChange={handleInputChange}
                                     required
+
+
                                 />
                             </div>
-                            <div>
+                            {/* password */}
+                            <div className="flex flex-col gap-2 mt-5">
+                                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Password</label>
                                 <input
-                                    type='text'
-                                    className='custom-input'
-                                    placeholder='Password'
+                                    type="password"
+                                    className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black"
+                                    placeholder="Enter your password"
+
                                     value={user.password}
                                     name='password'
                                     onChange={handleInputChange}
                                     required
+
+
                                 />
                             </div>
-                            <div className='mt-12 mb-12' onClick={incompleteData}>
-                                <button className='w-[100%] bg-[#0052CC] border-[#0052CC] text-white px-[25px] py-[12px] rounded btn-container'>
-                                    Continue
-                                </button>
-                            </div>
-                        </motion.div>
-                    )}
-                </motion.div>
+                        </div>
+
+                        {/* company profile */}
+
+                        <div className='mt-5' onClick={incompleteData}>
+                            <button className='text-[14px] leading-4 text-white font-bold bg-[#0052CC] border border-[#0052CC] p-3 rounded-md w-[200px]' disabled={loading} style={boxShadowStyle}>{loading ? (
+                                <div className='flex items-center justify-center'>
+                                    <Spinner />
+                                    <span className='ml-2'>Loading...</span>
+                                </div>
+                            ) : (
+                                'Continue'
+                            )}</button>
+                        </div>
+
+                        <div className=' mt-3'>
+                            <p className='font-semibold text-[12px] leading-4'>
+                                Already have an account?
+                                <span className='cursor-pointer  text-[#004699]' >
+                                    Sign in
+                                </span>
+                            </p>
+                        </div>
+                    </motion.div>)}
+
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

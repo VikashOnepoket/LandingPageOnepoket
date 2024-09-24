@@ -85,10 +85,10 @@
     margin-top: 110px !important;
   }
 
-  .image-container-hero {
+  /* .image-container-hero {
     width: 70% !important;
     margin: auto !important;
-  }
+  } */
 }
 
 
@@ -140,4 +140,12 @@
 
 .slide_right:hover {
   box-shadow: inset 400px 0 0 0 #D8E8FF;
+}
+
+
+@media (min-width: 1280px) and (max-width: 1536px) {
+  .image-container-hero{
+   
+    width: 30%;
+  } 
 }

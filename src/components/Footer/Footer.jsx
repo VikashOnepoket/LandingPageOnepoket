@@ -89,7 +89,7 @@ const Footer = () => {
                         <a href='#'>Our Team</a>
                     </div>
                 </motion.div> */}
-                <div className='flex items-start justify-between gap-5 pt-24'>
+                <div className='flex items-start justify-between gap-5 pt-24 '>
                     {/* Logo Section */}
                     <div className='w-[215px] flex flex-col'>
                         <div>
@@ -165,13 +165,13 @@ const Footer = () => {
 
 
             </motion.div>
-            <motion.div variants={containerVariants} className='mt-[20px] flex'>
+            {/* <motion.div variants={containerVariants} className='mt-[20px] sm:flex hidden'>
                 <img src={footerBg} className='h-[230px] w-[100%]' />
                 <img src={footerBg} className='h-[230px]' />
-                {/* <img src={footerBg} className='h-[180px]' /> */}
+                <img src={footerBg} className='h-[180px]' />
 
 
-            </motion.div>
+            </motion.div> */}
 
 
         </motion.div >
