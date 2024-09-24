@@ -30,11 +30,11 @@ const Footer = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className='bg-[#004699] h-[590px] mt-32'
+            className='bg-[#004699] lg:h-[590px] h-auto pb-24 mt-32'
         >
             <motion.div
                 variants={containerVariants}
-                className=' mx-auto  container w-[90%] footer-bg'
+                className=' mx-auto   w-[90%] footer-bg'
             >
                 {/* <motion.div
                     variants={itemVariants}
@@ -89,7 +89,7 @@ const Footer = () => {
                         <a href='#'>Our Team</a>
                     </div>
                 </motion.div> */}
-                <div className='flex items-start justify-between gap-5 pt-24 '>
+                <div className='lg:flex lg:items-start lg:justify-between lg:gap-5 pt-24 md:grid md:grid-cols-3 sm:grid gap-10 sm:grid-cols-2 grid grid-cols-1'>
                     {/* Logo Section */}
                     <div className='w-[215px] flex flex-col'>
                         <div>
