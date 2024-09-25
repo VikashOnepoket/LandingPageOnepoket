@@ -83,7 +83,7 @@ const Navbar = () => {
                             <a onClick={goToLogin} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Login</a>
                         </div>
                         <div className='mb-5 mx-10' onClick={openTypeForm}>
-                            <button onClick={openOnboardingForm} className='bg-[#E4EFFF] text-[#004699] rounded-[10px] text-[14px] leading-[18px] font-bold px-[22px] py-[10px]'>Start free trial</button>
+                            <button  className='bg-[#E4EFFF] text-[#004699] rounded-[10px] text-[14px] leading-[18px] font-bold px-[22px] py-[10px]'>Start free trial</button>
                         </div>
                     </motion.div>
                 )}
