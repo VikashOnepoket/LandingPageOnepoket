@@ -5,6 +5,7 @@ import sec from '../../assets/20.png'
 import './Slider.css'
 const AutoPlay = () => {
     const settings = {
+        dots : true,
         infinite: true,
         slidesToShow: 1,
         slidesToScroll: 1,

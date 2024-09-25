@@ -63,10 +63,11 @@ const Direct = () => {
                     </div>
                 </div>
 
+
                 {/* onboarding */}
                 <div className='mt-32 flex justify-between gap-10 items-center lg:flex-row flex-col-reverse' >
                     {/* Right Side with Overlapping Images */}
-                    <div className=" lg:w-[40%] w-[100%]" >
+                    <div className=" lg:w-[30%] w-[100%]" >
                         {/* <img src={customer1} loading="lazy" alt="Email Form" className="h-[235px]" />
                         <img src={customer2} loading="lazy" alt="QR Code" className="absolute top-[-130px] left-[40px] w-[137px]" />
                         <img src={customer4} loading="lazy" alt="QR Code" className="absolute top-[-180px] left-[180px] w-[200px]" />
@@ -75,7 +76,7 @@ const Direct = () => {
                     </div>
 
                     {/* Left Side */}
-                    <div className='lg:w-[60%] w-[100%]'>
+                    <div className='lg:w-[50%] w-[100%]'>
                         <img src={direct5} loading="lazy" className='w-[216px]' alt="Illustration" />
                         <p className='text-[32px] leading-10 font-semibold mt-8'>
                             Onboarding simplified with a single scan.</p>
