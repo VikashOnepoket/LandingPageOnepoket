@@ -100,19 +100,19 @@ const QRBatchModal = ({ isOpen, onClose }) => {
 
     const handleGenerateQR = async () => {
         const { selectedProduct, serialNo, quantity, qrCopies, selectedTemplate } = formData;
-
+         console.log("form data" , formData);
         if (!selectedProduct || !serialNo || !quantity || !selectedTemplate) {
             toast.error("Please fill in all fields");
             return;
         }
-
+        console.log(selectedProduct , "selectedProduct", selectedProduct)
         const payload = {
             product_id: selectedProduct.value,
             quantity,
             QR_size: "",
             serial_no: serialNo,
             QR_copies: '1',
-            template_id: "7" // Use the selected template value
+            template_id: selectedTemplate.value // Use the selected template value
         };
 
         try {
@@ -162,7 +162,7 @@ const QRBatchModal = ({ isOpen, onClose }) => {
     useEffect(() => {
         fetchLabels();
     }, []); // Ensure the token is available when fetching templates
-
+     console.log(products , " products")
     return (
         <>
             {isOpen && (
@@ -187,8 +187,8 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                 value={formData.selectedProduct}
                                 onChange={(option) => handleSelectChange(option, 'selectedProduct')}
                                 options={products.map(product => ({
-                                    value: product?.id,
-                                    label: product.product_name,
+                                    value: product?.product_id,
+                                    label: product?.product_name,
                                 }))}
                                 styles={customStyles}
                                 className='mt-1'
