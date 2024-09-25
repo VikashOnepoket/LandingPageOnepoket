@@ -81,7 +81,7 @@ const Login = () => {
             <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Email</label>
             <input
               type='email'
-              className='border border-gray-300 rounded-md w-full py-3 px-3 focus:border-[#0052cc] focus:ring-1 transition duration-150 text-black'
+              className='border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:ring-1 transition duration-150 text-black input'
               placeholder='Enter your email'
               value={user.email}
               name='email'
@@ -94,7 +94,7 @@ const Login = () => {
             <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Password</label>
             <input
               type='password'
-              className='border border-gray-300 rounded-md w-full py-3 px-3 focus:border-[#0052cc] focus:ring-1 transition duration-150 text-black'
+              className='border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:ring-1 transition duration-150 text-black input'
               placeholder='Enter your password'
               value={user.password}
               name='password'
