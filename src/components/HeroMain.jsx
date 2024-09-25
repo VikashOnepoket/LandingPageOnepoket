@@ -15,20 +15,21 @@ const HeroMain = () => {
     const [startFloat, setStartFloat] = useState(false);
 
     useEffect(() => {
-        // Hide overflow during animation
+      
         document.body.style.overflowX = 'hidden';
         setAnimateText(true);
         setAnimateImage(true);
 
-        const animationDuration = 1000; // Duration of the animation in ms
+        const animationDuration = 1000; 
 
         const removeOverflowClass = setTimeout(() => {
-            // Restore overflow after animation
+          
             document.body.style.overflowX = 'visible';
+            
         }, animationDuration);
 
         const startFloatAnimation = setTimeout(() => {
-            // Start float animation after the initial animation completes
+           
             setStartFloat(true);
         }, animationDuration);
 
@@ -57,8 +58,8 @@ const HeroMain = () => {
     return (
         <>
             <div className='w-full mx-auto flex items-center justify-between hero-container mt-24'>
-                <div className={`flex flex-col  w-1/2 gap-10 text-container-hero ${animateText ? 'animate-slide-in-left ' : ''}`}>
-                    <h1 className='text-[#004699] lg:text-[3.8rem] lg:leading-[4.8rem]  font-bold  text-center sm:text-[3rem] sm:leading-[4rem] text-h1-container  w-full '>
+                <div className={`flex flex-col  w-1/2 gap-10 text-container-hero  ${animateText ? 'animate-slide-in-left ' : ''}`}>
+                    <h1 className='text-[#004699] lg:text-[3.8rem] lg:leading-[4.8rem]  font-bold  text-center text-[3rem] leading-[4rem] text-h1-container  w-full '>
                         1 QR = 1 Loyal Customer
                     </h1>
                     <div className='w-[90%] mx-auto text-center'>
@@ -77,7 +78,7 @@ const HeroMain = () => {
                     </div>
 
                 </div>
-                <div className={`flex justify-end 2xl:w-[30%] w-1/2 image-container-hero  ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''}`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}>
+                <div className={`flex justify-end 2xl:w-[30%] w-1/2 md:mt-0 pt-32 image-container-hero  ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''}`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}>
                     <div className=' image-ellipse-container'>
                         <img
                             src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/mouse%20move.webp?alt=media&token=a4c45f2d-8714-4315-8fde-46e709941836'

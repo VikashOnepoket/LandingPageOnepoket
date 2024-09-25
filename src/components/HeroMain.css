@@ -1,6 +1,8 @@
 .hero-container {
   margin-bottom: 100px !important;
   /* padding: 60px 30px 60px 30px; */
+  overflow-y: auto;
+ 
 }
 
 @keyframes float {
@@ -143,7 +145,7 @@
 }
 
 
-@media (min-width: 1280px) and (max-width: 1536px) {
+@media (min-width: 1285px) and (max-width: 1536px) {
   .image-container-hero{
    
     width: 30%;

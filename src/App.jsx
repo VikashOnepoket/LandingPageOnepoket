@@ -12,7 +12,8 @@ import SpinnerMain from './components/Dashboard/Spinner/SpinnerMain';
 import LearnMoreDirect from './components/LearnMore/LearnMoreDirect';
 import LearnMoreOnboarding from './components/LearnMore/LearnMoreOnboarding';
 import LearnMoreCustomer from './components/LearnMore/LearnMoreCustomer';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));

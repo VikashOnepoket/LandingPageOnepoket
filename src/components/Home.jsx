@@ -13,6 +13,8 @@ import NavTop from './Navbar/NavTop'
 import ScanMe from './scanMe/ScanMe'
 import Direct from './solving/Direct'
 
+import AutoPlay from './slider/Slider'
+
 
 const Home = () => {
   return (
@@ -23,8 +25,9 @@ const Home = () => {
       <HeroMain />
       <Fold2card />
       {/* <GifAnimation /> */}
-      {/* <Direct/> */}
+      <Direct/>
       <CustomerScan />
+      <AutoPlay/>
       {/* <Direct/> */}
       {/* <div>
         <img src={line} />
@@ -34,7 +37,7 @@ const Home = () => {
       {/* <div>
         <img src={line} />
       </div> */}
-   
+
       <Footer />
 
       {/* <button className="fixed bottom-0 left-0 w-full bg-blue-500 text-white p-4">
