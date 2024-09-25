@@ -1,0 +1,10 @@
+@media (min-width: 320px) and (max-width: 405px) {
+    .h1-twenty{
+      font-size: 55px;
+      line-height: 80px;
+    }
+    .span-seconds{
+      font-size: 40x;
+      line-height: 65px;
+    }
+  }

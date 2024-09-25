@@ -27,7 +27,7 @@ const Direct = () => {
             <div className='w-[90%] mx-auto mt-32 relative z-10'>
                 {/* Title */}
                 <div>
-                    <p className='text-[48px] leading-[61px] font-bold text-[#0353B3]'>What Are We Solving?</p>
+                    <p className='md:text-[48px] md:leading-[61px] font-bold text-[#0353B3] text-[38px] leading-[51px]'>What Are We Solving?</p>
                 </div>
 
                 {/* Content Section */}

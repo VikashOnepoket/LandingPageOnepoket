@@ -20,29 +20,18 @@ const Home = () => {
   return (
 
     <>
-      <NavTop />
-      <Navbar />
-      <HeroMain />
-      <Fold2card />
-      {/* <GifAnimation /> */}
-      <Direct/>
-      <CustomerScan />
-      <AutoPlay/>
-      {/* <Direct/> */}
-      {/* <div>
-        <img src={line} />
-      </div> */}
-      {/* <FaqSection /> */}
-      {/* <ScanMe/> */}
-      {/* <div>
-        <img src={line} />
-      </div> */}
+      <div className='h-screen overflow-y-auto'>
+        <NavTop />
+        <Navbar />
+        <HeroMain />
+        <Fold2card />
+        <Direct />
+        <CustomerScan />
+        <AutoPlay />
+        <Footer />
+      </div>
 
-      <Footer />
 
-      {/* <button className="fixed bottom-0 left-0 w-full bg-blue-500 text-white p-4">
-        Fixed Button at the Bottom
-      </button> */}
     </>
 
 

@@ -1,7 +1,7 @@
 .hero-container {
   margin-bottom: 100px !important;
   /* padding: 60px 30px 60px 30px; */
-  overflow-y: auto;
+ 
  
 }
 
@@ -117,7 +117,9 @@
     margin: auto !important;
   }
 }
-
+.hide-overflow {
+  overflow-x: hidden;
+}
 .btn2 span:first-child {
   transform: translateX(-101%);
   transition: transform .3s ease-in
@@ -151,3 +153,4 @@
     width: 30%;
   } 
 }
+
