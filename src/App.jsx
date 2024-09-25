@@ -14,6 +14,7 @@ import LearnMoreOnboarding from './components/LearnMore/LearnMoreOnboarding';
 import LearnMoreCustomer from './components/LearnMore/LearnMoreCustomer';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ComingSoon from './components/comingSoon/ComingSoon';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));
@@ -70,6 +71,15 @@ function App() {
               element={
                 <PublicRoute>
                   <Home />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path='/coming_soon'
+              element={
+                <PublicRoute>
+                  <ComingSoon />
                 </PublicRoute>
               }
             />

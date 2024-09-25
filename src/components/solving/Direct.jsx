@@ -1,15 +1,7 @@
-import React from 'react';
-import image from '../../assets/image 20.png';
-import image1 from '../../assets/image 21.png';
-import image2 from '../../assets/image 25.png';
-import image3 from '../../assets/image 26.png';
-import group from '../../assets/Group 43.png';
-import customer1 from '../../assets/customer1.png';
-import customer2 from '../../assets/customer2.png';
-import customer3 from '../../assets/customer3.png';
-import customer4 from '../../assets/customer4.png';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import group from '../../assets/Group 43.png';
 import direct1 from '../../assets/Direct1.png';
 import direct2 from '../../assets/Direct2.png';
 import direct3 from '../../assets/Direct3.png';
@@ -18,122 +10,144 @@ import direct5 from '../../assets/Direct5.png';
 import AnimatedButton from './AnimationButton';
 
 const Direct = () => {
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 1.5,
+                staggerChildren: 0.5,
+            },
+        },
+    };
+
     const navigate = useNavigate();
-   
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: -50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+    };
+
     return (
-        <div
-            className="w-[100%] py-16 relative" style={{ backgroundImage: `url(${''})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        <motion.div
+            ref={containerRef}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            variants={containerVariants}
+            className="w-full py-16 relative overflow-hidden"  // Changed to overflow-hidden
         >
-            <div className='w-[90%] mx-auto mt-32 relative z-10'>
+            <motion.div className='w-[90%] mx-auto mt-32 relative z-10' variants={containerVariants}>
                 {/* Title */}
-                <div>
-                    <p className='md:text-[48px] md:leading-[61px] font-bold text-[#0353B3] text-[38px] leading-[51px]'>What Are We Solving?</p>
-                </div>
+                <motion.div variants={itemVariants}>
+                    <p className='md:text-[48px] md:leading-[61px] font-bold text-[#0353B3] text-[38px] leading-[51px]'>
+                        What Are We Solving?
+                    </p>
+                </motion.div>
 
                 {/* Content Section */}
-                <div className='mt-24 flex lg:flex-row flex-col justify-between gap-10 items-center ' >
+                <motion.div className='mt-24 flex lg:flex-row flex-col justify-between gap-10 items-center'>
                     {/* Left Side */}
-                    <div className='lg:w-[60%] w-[90%]'>
-                        <img src={group} loading="lazy" className='w-[216px]' alt="Illustration" />
-                        <p className='text-[32px] leading-10 font-semibold mt-8'>Direct insights, better decisions.</p>
+                    <motion.div className='lg:w-[60%] w-[90%]' variants={itemVariants}>
+                        <img src={group} loading="lazy" className='w-[216px] max-w-full' alt="Illustration" />
+                        <motion.p className='text-[32px] leading-10 font-semibold mt-8' variants={itemVariants}>
+                            Direct insights, better decisions.
+                        </motion.p>
                         <ul className="mt-5">
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1'>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Collecting data without any cost.
-                            </li>
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1'>
+                            </motion.li>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Reducing your cost of acquiring customers.
-                            </li>
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 '>
+                            </motion.li>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
-                                Improving return on your ads spends
-                            </li>
+                                Improving return on your ads spends.
+                            </motion.li>
                         </ul>
                         <AnimatedButton onClick={() => navigate('/learn_more_button_1')}>
                             Learn more →
                         </AnimatedButton>
-
-                    </div>
+                    </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <div className='lg:w-[50%] w-[90%]'>
-                        <img src={direct2} loading="lazy" alt="Dashboard Image" />
-                        {/* <img src={image1} loading="lazy" alt="Popup Image" className='absolute w-[140px] top-[-60px] right-[-80px]' /> */}
-                    </div>
-                </div>
+                    <motion.div className='lg:w-[50%] w-[90%]' variants={itemVariants}>
+                        <img src={direct2} loading="lazy" className='max-w-full' alt="Dashboard Image" />
+                    </motion.div>
+                </motion.div>
 
-
-                {/* onboarding */}
-                <div className='mt-32 flex justify-between gap-10 items-center lg:flex-row flex-col-reverse' >
+                {/* Onboarding Section */}
+                <motion.div className='mt-32 flex justify-between gap-10 items-center lg:flex-row flex-col-reverse'>
                     {/* Right Side with Overlapping Images */}
-                    <div className=" lg:w-[30%] w-[100%]" >
-                        {/* <img src={customer1} loading="lazy" alt="Email Form" className="h-[235px]" />
-                        <img src={customer2} loading="lazy" alt="QR Code" className="absolute top-[-130px] left-[40px] w-[137px]" />
-                        <img src={customer4} loading="lazy" alt="QR Code" className="absolute top-[-180px] left-[180px] w-[200px]" />
-                        <img src={customer3} loading="lazy" alt="Confirmation Icon" className="absolute top-[25px] left-[250px] w-[150px]" /> */}
-                        <img src={direct3} loading="lazy" alt="Dashboard Image" />
-                    </div>
+                    <motion.div className="lg:w-[30%] w-[100%]" variants={itemVariants}>
+                        <img src={direct3} loading="lazy" className='max-w-full' alt="Dashboard Image" />
+                    </motion.div>
 
                     {/* Left Side */}
-                    <div className='lg:w-[50%] w-[100%]'>
-                        <img src={direct5} loading="lazy" className='w-[216px]' alt="Illustration" />
-                        <p className='text-[32px] leading-10 font-semibold mt-8'>
-                            Onboarding simplified with a single scan.</p>
-                        <ul className="mt-5 ">
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1'>
+                    <motion.div className='lg:w-[50%] w-[100%]' variants={itemVariants}>
+                        <img src={direct5} loading="lazy" className='w-[216px] max-w-full' alt="Illustration" />
+                        <motion.p className='text-[32px] leading-10 font-semibold mt-8' variants={itemVariants}>
+                            Onboarding simplified with a single scan.
+                        </motion.p>
+                        <ul className="mt-5">
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your after-sales service a 1 click step.
-                            </li>
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1'>
+                            </motion.li>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your warranty management process seamless.
-                            </li>
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap '>
+                            </motion.li>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
-                                Manage warranty & product installation from single dashboard.
-                            </li>
+                                Manage warranty & product installation from a single dashboard.
+                            </motion.li>
                         </ul>
                         <AnimatedButton onClick={() => navigate('/learn_more_button_2')}>
                             Learn more →
                         </AnimatedButton>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
-                {/* .customer */}
-                <div className='mt-24 flex justify-between gap-10 items-center lg:flex-row flex-col' >
+                {/* Customer Support Section */}
+                <motion.div className='mt-24 flex justify-between gap-10 items-center lg:flex-row flex-col'>
                     {/* Left Side */}
-                    <div className='lg:w-[60%] w-[100%]'>
-                        <img src={direct4} loading="lazy" className='w-[216px]' alt="Illustration" />
-                        <p className='text-[32px] leading-10 font-semibold mt-8'>
-                            Customer support, simplified.</p>
-                        <ul className="mt-5 ">
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1'>
+                    <motion.div className='lg:w-[60%] w-[100%]' variants={itemVariants}>
+                        <img src={direct4} loading="lazy" className='w-[216px] max-w-full' alt="Illustration" />
+                        <motion.p className='text-[32px] leading-10 font-semibold mt-8' variants={itemVariants}>
+                            Customer support, simplified.
+                        </motion.p>
+                        <ul className="mt-5">
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your after-sales service a 1 click step.
-                            </li>
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1'>
+                            </motion.li>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your warranty management process seamless.
-                            </li>
-                            <li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap '>
+                            </motion.li>
+                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
-                                Manage warranty & product installation from single dashboard.
-                            </li>
+                                Manage warranty & product installation from a single dashboard.
+                            </motion.li>
                         </ul>
                         <AnimatedButton onClick={() => navigate('/learn_more_button_3')}>
                             Learn more →
                         </AnimatedButton>
-                    </div>
+                    </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <div className='lg:w-[40%] w-[100%] mt-12'>
-                        <img src={direct1} loading="lazy" alt="Dashboard Image" />
-                        {/* <img src={image3} loading="lazy" alt="Popup Image" className='absolute top-[160px] right-[-80px] w-[300px]' /> */}
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <motion.div className='lg:w-[40%] w-[100%] mt-12' variants={itemVariants}>
+                        <img src={direct1} loading="lazy" className='max-w-full' alt="Dashboard Image" />
+                    </motion.div>
+                </motion.div>
+            </motion.div>
+        </motion.div>
     );
 };
 

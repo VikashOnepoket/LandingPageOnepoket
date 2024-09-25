@@ -16,7 +16,7 @@ const Navbar = () => {
         navigate('/login');
     };
 
-   
+
 
     const menuVariants = {
         hidden: { opacity: 0, y: '-100%', transition: { duration: 0.5 } },
@@ -41,7 +41,7 @@ const Navbar = () => {
                         </div>
                     </Link>
                     <div className='lg:flex hidden gap-12'>
-                        <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</a>
+                        <Link to="/coming_soon" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</Link>
                         <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</a>
                         <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</a>
                         <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</a>
@@ -63,10 +63,10 @@ const Navbar = () => {
 
             <AnimatePresence>
                 {isMenuOpen && (
-                    <motion.div 
-                        initial="hidden" 
-                        animate="visible" 
-                        exit="exit" 
+                    <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
                         variants={menuVariants}
                         className='fixed top-0 left-0 right-0 shadow-lg bg-white border h-auto z-50'
                     >

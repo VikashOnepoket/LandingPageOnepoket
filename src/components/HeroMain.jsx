@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { PopupModal } from 'react-calendly'; // Import Calendly modal
-import './HeroMain.css'; // Ensure this file includes the necessary CSS styles
+import Navbar from './Navbar/Navbar';
+import dash from "../assets/Macbook.png";
+import ellipse from '../assets/Ellipse2.png';
+import './HeroMain.css';
+import { motion } from 'framer-motion';
+import arrow from '../assets/arrownew.png';
+import mouse from '../assets/mouse move.png';
 import bgimage from '../assets/hero section vector.png';
 
 const HeroMain = () => {
@@ -8,30 +14,30 @@ const HeroMain = () => {
     const [animateText, setAnimateText] = useState(false);
     const [animateImage, setAnimateImage] = useState(false);
     const [startFloat, setStartFloat] = useState(false);
-    const [hideOverflow, setHideOverflow] = useState(true); // State to manage overflow
 
     useEffect(() => {
-        // Set overflow to hidden right away
-        document.body.style.overflowX = 'hidden'; 
+        // Add the overflow class
+        document.body.classList.add('hide-overflow');
         
         setAnimateText(true);
         setAnimateImage(true);
 
-        const animationDuration = 1000; // Adjust this as per your animation timing
+        const animationDuration = 1000; 
+
+        const removeOverflowClass = setTimeout(() => {
+            // Remove the overflow class after animation duration
+            document.body.classList.remove('hide-overflow');
+        }, animationDuration);
 
         const startFloatAnimation = setTimeout(() => {
             setStartFloat(true);
         }, animationDuration);
 
-        const allowOverflow = setTimeout(() => {
-            setHideOverflow(false); // Allow overflow after the animation
-            document.body.style.overflowX = 'visible'; // Restore overflow
-        }, animationDuration + 100); // Adding a buffer to ensure the animations complete
-
         return () => {
+            clearTimeout(removeOverflowClass);
             clearTimeout(startFloatAnimation);
-            clearTimeout(allowOverflow);
-            document.body.style.overflowX = 'visible'; // Ensure overflow is restored on cleanup
+            // Ensure overflow is removed when component unmounts
+            document.body.classList.remove('hide-overflow');
         };
     }, []);
 
@@ -40,10 +46,15 @@ const HeroMain = () => {
         setIsOpen(true);
     };
 
+    const openTypeForm = () => {
+        const url = 'https://3r83o6lof67.typeform.com/to/TldFF6Nb';
+        window.open(url, '_blank');
+    };
+
     return (
-        <div className={`hero-container mt-24 ${hideOverflow ? 'hide-overflow' : ''}`}>
-            <div className='w-full mx-auto flex items-center justify-between'>
-                <div className={`flex flex-col w-1/2 gap-10 text-container-hero ${animateText ? 'animate-slide-in-left' : ''}`}>
+        <>
+            <div className='w-full mx-auto flex items-center justify-between hero-container mt-24 overflow-hidden'> {/* Added overflow-hidden */}
+                <div className={`flex flex-col w-1/2 gap-10 text-container-hero ${animateText ? 'animate-slide-in-left' : ''} overflow-hidden`}> {/* Added overflow-hidden */}
                     <h1 className='text-[#004699] lg:text-[3.8rem] lg:leading-[4.8rem] font-bold text-center text-[3rem] leading-[4rem] text-h1-container w-full'>
                         1 QR = 1 Loyal Customer
                     </h1>
@@ -61,7 +72,7 @@ const HeroMain = () => {
                         </div>
                     </div>
                 </div>
-                <div className={`flex justify-end 2xl:w-[30%] w-1/2 md:mt-0 pt-32 image-container-hero ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''}`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}>
+                <div className={`flex justify-end 2xl:w-[30%] w-1/2 md:mt-0 pt-32 image-container-hero ${animateImage ? 'animate-slide-in-right' : ''} ${startFloat ? 'anim-hover' : ''} overflow-hidden`} style={{ backgroundImage: `url(${bgimage})`, backgroundSize: 'cover', backgroundPosition: "center" }}> {/* Added overflow-hidden */}
                     <div className='image-ellipse-container'>
                         <img
                             src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/mouse%20move.webp?alt=media&token=a4c45f2d-8714-4315-8fde-46e709941836'
@@ -82,7 +93,7 @@ const HeroMain = () => {
                     rootElement={document.getElementById("root")}
                 />
             )}
-        </div>
+        </>
     );
 };
 

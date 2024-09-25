@@ -1,0 +1,18 @@
+@keyframes fadeToWhite {
+    0% {
+      color: #FF7070; /* Initial color */
+    }
+   
+    100% {
+      color: #FF707080; /* Back to initial color */
+    }
+  }
+  
+  .text-animation {
+    font-size: 52px;
+    line-height: 70%;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    animation: fadeToWhite 10s linear infinite; /* Longer duration and linear easing for a smoother transition */
+  }
+  
