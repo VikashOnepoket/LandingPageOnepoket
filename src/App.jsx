@@ -76,7 +76,23 @@ function App() {
             />
 
             <Route
-              path='/coming_soon'
+              path='/pricing'
+              element={
+                <PublicRoute>
+                  <ComingSoon />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path='/features'
+              element={
+                <PublicRoute>
+                  <ComingSoon />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path='/use_Cases'
               element={
                 <PublicRoute>
                   <ComingSoon />

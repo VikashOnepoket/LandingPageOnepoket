@@ -5,8 +5,9 @@ import Navbar from '../Navbar/Navbar'
 import LoginBG from '../../assets/Login background.png';
 import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa6';
 import Logo from '../../assets/FullLogo.png';
-import {motion, useInView} from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import './ComingSoon.css'
+// import LoginBG from '../../assets/Login background.png';
 
 
 const ComingSoon = () => {
@@ -25,12 +26,27 @@ const ComingSoon = () => {
 
                 <NavTop />
                 <Navbar />
-                <div className='bg-[#004699] h-auto' >
-                    <div className='text-center pt-24'>
-                        <h1 className='text-[52px] leading-[70%] text-[#FF707080] font-extrabold tracking-wide text-animation'>Exciting Things Are Coming!</h1>
-                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 w-1/2 mx-auto'>We're working on something special for this section, and it'll be live soon!</p>
+                <div className='bg-[#004699] h-auto ' >
+                    <div className='md:text-center text-start pt-24 bg-contain bg-no-repeat bg-center md:w-full w-[90%] mx-auto'>
+                        <h1 className='text-[52px] leading-[70px] text-[#FF707080] font-extrabold tracking-wider text-animation'>Exciting Things Are Coming!</h1>
+                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 md:w-1/2 mx-auto'>We're working on something special for this section, and it'll be live soon!</p>
                         <p className='text-[32px] leading-10 font-medium mt-8 text-white text-center'>why wait?</p>
-                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 w-1/2 mx-auto'> <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8]  mt-8 text-center'> Talk to our team today to learn more about our exciting new features and how they can benefit your business</p></p>
+                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 md:w-1/2 mx-auto'> <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8]  mt-8 text-center'> Talk to our team today to learn more about our exciting new features and how they can benefit your business</p></p>
+
+                        <motion.div className='w-1/2 mx-auto '
+                           >
+                            <motion.img
+                                src="https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Coming%20Soon%20(1).png?alt=media&token=7b047535-24ac-4fbf-95e3-6d27e3465dfd"
+                                alt="Coming Soon"
+                                className='w-full cursor-pointer' // Add Tailwind styles if needed
+                                whileHover={{ scale: 1.1,  }} // Scale up and slightly rotate on hover
+                                transition={{ duration: 0.5, ease: 'easeInOut' }} // Smooth transition
+                            />
+
+                            {/* Animate the text on hover using Framer Motion */}
+
+                        </motion.div>
+
                     </div>
 
                     {/* footer */}

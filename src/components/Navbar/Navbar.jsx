@@ -41,10 +41,10 @@ const Navbar = () => {
                         </div>
                     </Link>
                     <div className='lg:flex hidden gap-12'>
-                        <Link to="/coming_soon" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</Link>
-                        <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</a>
-                        <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</a>
-                        <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</a>
+                        <Link to="/features" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</Link>
+                        <Link to="/pricing" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</Link>
+                        <Link to="/use_cases" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</Link>
+                        <Link to="/features" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</Link>
                     </div>
                     <div className='lg:flex hidden justify-end items-center gap-12'>
                         <button onClick={goToLogin} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Login</button>

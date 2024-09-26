@@ -8,6 +8,7 @@ import './onboarding.css';
 import logo from '../../assets/onepoket.png';
 import logo1 from '../../assets/Frame 108.png';
 import arrow from '../../assets/arrow.png';
+import arrowSignUP from '../../assets/arrow-signup.png';
 import white from '../../assets/white.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate } from 'react-router-dom';
@@ -196,9 +197,9 @@ const OnboardingForm = () => {
                     <div className='w-[80%] text-center'>
                         <h1 className='text-[40px] leading-[51px] text-[#E9F2FF]'>Where every scan gets you closer to your customers.</h1>
                         <p className='text-[24px] leading-[30px] text-[#E9F2FF] mt-12'>We're the Future of Customer Engagement! Onepoket's QR technology lets you collect and leverage first-party data, gain customer understanding, and create personalized experiences like never before</p>
-                        <div className='flex gap-3 items-center mt-24 w-[50%] mx-auto'>
+                        <div className='flex gap-5 items-center mt-24 w-[50%] mx-auto'>
                             <p className='font-medium text-[1.2rem] leading-[2rem] text-white'>Let’s get you started!</p>
-                            <img src={arrow} className='w-[30%]' alt='Arrow' />
+                            <img src={arrowSignUP} className='w-[15%]' alt='Arrow' />
                         </div>
                     </div>
                 </div>
