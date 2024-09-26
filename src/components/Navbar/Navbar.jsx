@@ -12,11 +12,14 @@ const Navbar = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const goToLogin = () => {
-        navigate('/login');
+    const closeMenuAndNavigate = (path) => {
+        setIsMenuOpen(false); // Close the menu
+        navigate(path); // Navigate to the specified path
     };
 
-
+    const goToLogin = () => {
+        closeMenuAndNavigate('/login');
+    };
 
     const menuVariants = {
         hidden: { opacity: 0, y: '-100%', transition: { duration: 0.5 } },
@@ -28,7 +31,6 @@ const Navbar = () => {
         const url = 'https://3r83o6lof67.typeform.com/to/TldFF6Nb';
         window.open(url, '_blank');
     };
-
 
     return (
         <>
@@ -42,9 +44,9 @@ const Navbar = () => {
                     </Link>
                     <div className='lg:flex hidden gap-12'>
                         <Link to="/features" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</Link>
-                        <Link to="/pricing" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</Link>
-                        <Link to="/use_cases" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</Link>
-                        <Link to="/features" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</Link>
+                        <Link to="/pricing"  className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</Link>
+                        <Link to="/use_cases"  className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</Link>
+                        <Link to="/features"  className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</Link>
                     </div>
                     <div className='lg:flex hidden justify-end items-center gap-12'>
                         <button onClick={goToLogin} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Login</button>
@@ -76,14 +78,14 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className='flex flex-col gap-5 p-10'>
-                            <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</a>
-                            <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</a>
-                            <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</a>
-                            <a href='mailto:support@onepoket.in' className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</a>
+                            <Link to='/features' onClick={() => closeMenuAndNavigate('/features')} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</Link>
+                            <Link to='/pricing' onClick={() => closeMenuAndNavigate('/pricing')} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</Link>
+                            <Link to="/use_cases" onClick={() => closeMenuAndNavigate('/use_cases')} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</Link>
+                            <Link to="/features" onClick={() => closeMenuAndNavigate('/features')} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</Link>
                             <a onClick={goToLogin} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Login</a>
                         </div>
                         <div className='mb-5 mx-10' onClick={openTypeForm}>
-                            <button  className='bg-[#E4EFFF] text-[#004699] rounded-[10px] text-[14px] leading-[18px] font-bold px-[22px] py-[10px]'>Start free trial</button>
+                            <button className='bg-[#E4EFFF] text-[#004699] rounded-[10px] text-[14px] leading-[18px] font-bold px-[22px] py-[10px]'>Start free trial</button>
                         </div>
                     </motion.div>
                 )}
