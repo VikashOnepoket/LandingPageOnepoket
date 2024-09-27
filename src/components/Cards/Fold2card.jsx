@@ -44,11 +44,13 @@ const Fold2Card = () => {
     };
 
     return (
+
+        // lg:h-[827px] sm:h-[900px]
         <motion.div ref={containerRef}
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="bg-container  w-[100%] lg:h-[827px] sm:h-[900px] h-auto pb-24 mx-auto rounded-tl-[40px] rounded-tr-[40px]"
+            className="bg-container  w-[100%]  h-auto sm:pb-0 pb-24 mx-auto rounded-tl-[40px] rounded-tr-[40px]"
         >
             <motion.div
                 variants={containerVariants}
@@ -147,13 +149,15 @@ const Fold2Card = () => {
 
             </motion.div>
 
-            {/* <motion.div variants={containerVariants} className='mt-[-50px] flex'>
-                <img src={footerBg} className='h-[260px]' />
-                <img src={footerBg} className='h-[260px]' />
+            <motion.div variants={containerVariants} className='mt-[-10px] sm:flex hidden'>
+                {/* <img src={footerBg} className='h-[260px]' />
+                <img src={footerBg} className='h-[260px]' /> */}
+
+                <img src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%20149.png?alt=media&token=17727ac5-b552-400c-bc2e-c97809032989'  />
 
 
 
-            </motion.div> */}
+            </motion.div>
 
         </motion.div>
     );

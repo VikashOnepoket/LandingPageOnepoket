@@ -34,12 +34,12 @@ const ComingSoon = () => {
                         <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 md:w-1/2 mx-auto'> <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8]  mt-8 text-center'> Talk to our team today to learn more about our exciting new features and how they can benefit your business</p></p>
 
                         <motion.div className='w-1/2 mx-auto '
-                           >
+                        >
                             <motion.img
                                 src="https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Coming%20Soon%20(1).png?alt=media&token=7b047535-24ac-4fbf-95e3-6d27e3465dfd"
                                 alt="Coming Soon"
                                 className='w-full cursor-pointer' // Add Tailwind styles if needed
-                                whileHover={{ scale: 1.1,  }} // Scale up and slightly rotate on hover
+                                whileHover={{ scale: 1.1, }} // Scale up and slightly rotate on hover
                                 transition={{ duration: 0.5, ease: 'easeInOut' }} // Smooth transition
                             />
 
@@ -128,9 +128,20 @@ const ComingSoon = () => {
                                 </div>
                             </div>
                         </div>
+                       
 
 
                     </motion.div>
+
+                    <motion.div variants={containerVariants} className='mt-[-30px] sm:flex hidden'>
+                            {/* <img src={footerBg} className='h-[230px] w-[100%]' />
+                <img src={footerBg} className='h-[230px]' />
+                <img src={footerBg} className='h-[180px]' /> */}
+
+                            <img src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%20149.png?alt=media&token=17727ac5-b552-400c-bc2e-c97809032989' />
+
+
+                        </motion.div>
                 </div>
             </div>
         </>

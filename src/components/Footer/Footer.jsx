@@ -30,7 +30,7 @@ const Footer = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className='bg-[#004699] lg:h-[590px] h-auto pb-24 mt-32'
+            className='bg-[#004699]  h-auto mt-32'
         >
             <motion.div
                 variants={containerVariants}
@@ -165,13 +165,15 @@ const Footer = () => {
 
 
             </motion.div>
-            {/* <motion.div variants={containerVariants} className='mt-[20px] sm:flex hidden'>
-                <img src={footerBg} className='h-[230px] w-[100%]' />
+            <motion.div variants={containerVariants} className='mt-[-30px] sm:flex hidden'>
+                {/* <img src={footerBg} className='h-[230px] w-[100%]' />
                 <img src={footerBg} className='h-[230px]' />
-                <img src={footerBg} className='h-[180px]' />
+                <img src={footerBg} className='h-[180px]' /> */}
+
+                <img src='https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Group%20149.png?alt=media&token=17727ac5-b552-400c-bc2e-c97809032989'  />
 
 
-            </motion.div> */}
+            </motion.div>
 
 
         </motion.div >

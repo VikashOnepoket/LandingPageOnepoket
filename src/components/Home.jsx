@@ -16,6 +16,7 @@ import Direct from './solving/Direct'
 import AutoPlay from './slider/Slider'
 
 
+
 const Home = () => {
   return (
 

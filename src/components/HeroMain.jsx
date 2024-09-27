@@ -53,16 +53,16 @@ const HeroMain = () => {
 
     return (
         <>
-            <div className='w-full mx-auto flex items-center justify-between hero-container mt-24 overflow-hidden'> {/* Added overflow-hidden */}
-                <div className={`flex flex-col w-1/2 gap-10 text-container-hero ${animateText ? 'animate-slide-in-left' : ''} overflow-hidden`}> {/* Added overflow-hidden */}
+            <div className='w-full mx-auto flex items-center justify-between  hero-container mt-24 overflow-hidden'> {/* Added overflow-hidden */}
+                <div className={`flex flex-col w-1/2 2xl:w-[60%] gap-10 text-container-hero ${animateText ? 'animate-slide-in-left' : ''} overflow-hidden`}> {/* Added overflow-hidden */}
                     <h1 className='text-[#004699] lg:text-[3.8rem] lg:leading-[4.8rem] font-bold text-center text-[3rem] leading-[4rem] text-h1-container w-full'>
                         1 QR = 1 Loyal Customer
                     </h1>
-                    <div className='w-[90%] mx-auto text-center'>
-                        <p className='text-[.9rem] leading-[1.9rem] font-normal'>
+                    <div className='w-[90%] 2xl:w-[60%] mx-auto text-center'>
+                        <p className='text-[.9rem] leading-[1.9rem] font-normal 2xl:text-[2rem] 2xl:leading-[4rem]'>
                             Onepoket’s QR technology not only gets you <span className='font-bold'>Customer Name, Number,</span> and <span className='font-bold'>Demographics</span>; it's your <span className='font-bold'>VIP pass</span> to the first-party data of your target market.
                         </p>
-                        <p className='text-[14px] leading-[35px] font-normal mt-8 para-container-text'>
+                        <p className='text-[14px] leading-[35px] font-normal mt-8 para-container-text 2xl:text-[28px] 2xl:leading-[40px]'>
                             Want to see it in action?
                         </p>
                     </div>

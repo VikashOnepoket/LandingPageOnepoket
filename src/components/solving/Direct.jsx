@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import group from '../../assets/Group 43.png';
@@ -12,6 +12,24 @@ import AnimatedButton from './AnimationButton';
 const Direct = () => {
     const containerRef = useRef(null);
     const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+    const navigate = useNavigate();
+
+    // State to track loading status of the background image
+    const [bgImageLoaded, setBgImageLoaded] = useState(false);
+    const bgImageSrc = 'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold.webp?alt=media&token=028afe7c-ba99-4911-8c80-e69d27198ef7';
+
+    // Preload the background image
+    useEffect(() => {
+        const img = new Image();
+        img.src = bgImageSrc;
+        img.onload = () => {
+            setBgImageLoaded(true); // Set loaded state to true
+        };
+
+        return () => {
+            img.onload = null; // Cleanup
+        };
+    }, [bgImageSrc]);
 
     const containerVariants = {
         hidden: { opacity: 0, y: 50 },
@@ -25,8 +43,6 @@ const Direct = () => {
         },
     };
 
-    const navigate = useNavigate();
-
     const itemVariants = {
         hidden: { opacity: 0, x: -50 },
         visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
@@ -38,9 +54,19 @@ const Direct = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="w-full py-16 relative overflow-hidden"  // Changed to overflow-hidden
+            className="w-full py-16 relative overflow-hidden"
+        // style={{
+        //     backgroundImage:  `url(${bgImageSrc})` , // Only show image if loaded
+        //     backgroundSize: "cover",
+        //     backgroundPosition: "center",
+        //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
+        // }}
         >
-            <motion.div className='w-[90%] mx-auto mt-32 relative z-10' variants={containerVariants}>
+            {/* Background loading content */}
+
+
+            {/* Main content rendering */}
+            <motion.div className='w-[90%] mx-auto mt-32 relative z-10'>
                 {/* Title */}
                 <motion.div variants={itemVariants}>
                     <p className='md:text-[48px] md:leading-[61px] font-bold text-[#0353B3] text-[38px] leading-[51px]'>
@@ -143,7 +169,7 @@ const Direct = () => {
 
                     {/* Right Side with Overlapping Images */}
                     <motion.div className='lg:w-[40%] w-[100%] mt-12' variants={itemVariants}>
-                        <img src={direct1} loading="lazy" className='max-w-full' alt="Dashboard Image" />
+                        <img src={direct1} loading="lazy" className='max-w-full' alt="Customer Support Image" />
                     </motion.div>
                 </motion.div>
             </motion.div>
