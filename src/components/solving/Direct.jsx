@@ -55,12 +55,12 @@ const Direct = () => {
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
             className="w-full py-16 relative overflow-hidden"
-        // style={{
-        //     backgroundImage:  `url(${bgImageSrc})` , // Only show image if loaded
-        //     backgroundSize: "cover",
-        //     backgroundPosition: "center",
-        //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
-        // }}
+            // style={{
+            //     backgroundImage: bgImageLoaded ? `url(${bgImageSrc})` : 'none', // Only show the image if loaded
+            //     backgroundSize: "cover",
+            //     backgroundPosition: "center",
+            //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
+            // }}
         >
             {/* Background loading content */}
 
@@ -75,7 +75,7 @@ const Direct = () => {
                 </motion.div>
 
                 {/* Content Section */}
-                <motion.div className='mt-24 flex lg:flex-row flex-col justify-between gap-10 items-center'>
+                <motion.div className='mt-24 flex lg:flex-row flex-col justify-between gap-10 items-center '>
                     {/* Left Side */}
                     <motion.div className='lg:w-[60%] w-[90%]' variants={itemVariants}>
                         <img src={group} loading="lazy" className='w-[216px] max-w-full' alt="Illustration" />

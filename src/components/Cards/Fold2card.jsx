@@ -149,7 +149,7 @@ const Fold2Card = () => {
 
             </motion.div>
 
-            <motion.div variants={containerVariants} className='mt-[-10px] sm:flex hidden'>
+            <motion.div  className='mt-[-10px] sm:flex hidden'>
                 {/* <img src={footerBg} className='h-[260px]' />
                 <img src={footerBg} className='h-[260px]' /> */}
 

@@ -165,7 +165,7 @@ const Footer = () => {
 
 
             </motion.div>
-            <motion.div variants={containerVariants} className='mt-[-30px] sm:flex hidden'>
+            <motion.div  className='mt-[-30px] sm:flex hidden'>
                 {/* <img src={footerBg} className='h-[230px] w-[100%]' />
                 <img src={footerBg} className='h-[230px]' />
                 <img src={footerBg} className='h-[180px]' /> */}
