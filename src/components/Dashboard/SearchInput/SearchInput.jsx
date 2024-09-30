@@ -1,14 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { motion } from "framer-motion";
 
 const SearchInput = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [searchText, setSearchText] = useState('');
-    const searchInput = useRef(null);
+    const searchInputRef = useRef(null);
 
-    const handleFocus = () => {
+    const handleIconClick = () => {
         setIsExpanded(true);
-        searchInput.current.focus();
+        searchInputRef.current.focus();
     };
 
     const handleBlur = () => {
@@ -22,15 +21,25 @@ const SearchInput = () => {
     };
 
     return (
-        <div className={`relative flex items-center  transition-all duration-300 ease-in-out ${isExpanded ? 'w-52 border-[#0052cc] border rounded-md ' : 'w-10'}`}>
-            <span className="material-symbols-outlined text-gray-400 cursor-pointer ml-2 " onClick={handleFocus}>search</span>
-            <motion.input
-                ref={searchInput}
+        <div className="flex items-center  px-2 transition-all duration-300 ease-in-out 
+            focus-within:ring-2 focus-within:ring-[#0052cc] rounded-md">
+            {/* Search Icon */}
+            <span
+                className="material-symbols-outlined text-gray-400 cursor-pointer"
+                onClick={handleIconClick}
+            >
+                search
+            </span>
+
+            {/* Search Input */}
+            <input
+                ref={searchInputRef}
                 type="text"
-                className={`focus:outline-none ml-2 px-1 transition-width duration-300 ease-in-out ${isExpanded ? 'w-full' : 'w-0'}`}
-                placeholder="Search product"
-                onChange={handleChange}
+                className={`ml-2  outline-none bg-transparent transition-all duration-300 ease-in-out 
+                    ${isExpanded ? 'w-52 rounded-md' : 'w-0'} px-1 focus:w-40`}
+                placeholder="Search..."
                 onBlur={handleBlur}
+                onChange={handleChange}
                 value={searchText}
             />
         </div>

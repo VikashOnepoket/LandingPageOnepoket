@@ -17,9 +17,9 @@ const CustomerScan = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
     const openTypeForm = () => {
-        const url = 'https://3r83o6lof67.typeform.com/to/TldFF6Nb'
-        window.open(url, '_blank')
-    }
+        navigate('/onboarding')
+      };
+  
 
     return (
         <motion.div

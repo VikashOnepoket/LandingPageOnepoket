@@ -174,7 +174,7 @@ const Product = () => {
                                 </button>
                                 <button className='text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openModal}>
                                     <span className="material-symbols-outlined mr-2">add</span>
-                                    QR Batch
+                                    Print QR
                                 </button>
                                 <button block className='text-[#58595A] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openDrawer}>
                                     <span className="material-symbols-outlined mr-2">filter_alt</span>

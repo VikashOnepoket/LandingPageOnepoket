@@ -105,8 +105,9 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                 saveAs(qrUrl, "qrPdf");
             }
         } catch (error) {
+            console.log(error , "error");
             console.error('Error generating QR codes:', error);
-            toast.error('Failed to generate QR codes');
+            toast.error(error);
         } finally {
             setLoading(false);
         }

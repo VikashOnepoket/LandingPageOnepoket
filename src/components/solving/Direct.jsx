@@ -16,6 +16,7 @@ const Direct = () => {
 
     // State to track loading status of the background image
     const [bgImageLoaded, setBgImageLoaded] = useState(false);
+    const lowQualityBg = 'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold%20(1).jpg?alt=media&token=76b38738-d981-45e5-adb9-4cbb22e4316a'; 
     const bgImageSrc = 'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold.webp?alt=media&token=028afe7c-ba99-4911-8c80-e69d27198ef7';
 
     // Preload the background image
@@ -62,9 +63,6 @@ const Direct = () => {
             //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
             // }}
         >
-            {/* Background loading content */}
-
-
             {/* Main content rendering */}
             <motion.div className='w-[90%] mx-auto mt-32 relative z-10'>
                 {/* Title */}
@@ -168,8 +166,8 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[40%] w-[100%] mt-12' variants={itemVariants}>
-                        <img src={direct1} loading="lazy" className='max-w-full' alt="Customer Support Image" />
+                    <motion.div className='lg:w-[40%] w-[100%]' variants={itemVariants}>
+                        <img src={direct1} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>
             </motion.div>
