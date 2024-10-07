@@ -46,7 +46,7 @@ const BasicInformation = ({ formData, onInputChange }) => {
       </div>
 
       <div className="flex flex-col gap-2 mt-5">
-        <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Description</label>
+        <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Product Description</label>
         <textarea
           className="input border h-28  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black"
           placeholder="Enter Description"

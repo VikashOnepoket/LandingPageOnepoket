@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiMessageSquare } from 'react-icons/fi'
 import { Drawer } from '@mui/material';
 import Select from 'react-select'
 import SearchInput from '../../SearchInput/SearchInput';
+import axios from '../../../../api/api'
+import { useSelector } from 'react-redux';
 const PendingInstallation = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const openDrawer = () => {
@@ -55,6 +57,22 @@ const PendingInstallation = () => {
             }
         })
     };
+
+    // calling api for  pending installation
+    const token = useSelector((state) => state.auth.token)
+    const pendingInstallationData = async () => {
+        try {
+            const { data } = await axios.post('/get-installation-data', { token: token })
+            console.log(data, "pending installation data")
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        pendingInstallationData()
+    }, [])
     return (
         <>
             <div className='mt-3 p-8'>

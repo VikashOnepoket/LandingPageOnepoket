@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './Card';
 import { Drawer } from '@mui/material';
 import Select from 'react-select'
 import TopCitiesBySales from './TopCitiesBySales';
 import ConversionChart from './BarChart';
+import axios from '../../../api/api'
+import { useSelector } from 'react-redux';
 
 const Analytics = () => {
+    const token = useSelector((state) => state.auth.token)
+
+    // const tokens = localStorage.getItem('token')
+    console.log(token, "token")
     const [drawerOpen, setDrawerOpen] = useState(false);
     const openDrawer = () => {
         setDrawerOpen(true);
@@ -58,6 +64,25 @@ const Analytics = () => {
         })
     };
 
+    const [scanData  ,setScanData] = useState([])
+
+    const fetchData = async () => {
+        try {
+            const { data } = await axios.get('/lp_analytics_count', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(data, "analytics")
+            setScanData(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
     return (
         <div className='p-8'>
             <div className='flex justify-between gap-10 '>
@@ -156,13 +181,13 @@ const Analytics = () => {
             <div className='flex gap-10 lg:flex-row flex-col'>
                 <div className='lg:w-[70%] w-[90%]'>
                     <div className='2xl:grid-cols-4 grid xl:grid-cols-3 md:grid-cols-2 gap-8 mt-6 '>
-                        <Card title="Total Scans" count="290" change="+40.35%" changeType="positive" />
-                        <Card title="Authorized Scans" count="210" change="+23.6%" changeType="positive" />
-                        <Card title="Unauthorized Scans" count="65" change="-15.34%" changeType="negative" />
-                        <Card title="Incomplete Scans" count="15" change="+9.54%" changeType="positive" />
+                        <Card title="Total Scans" count={scanData?.total_scan} change="+40.35%" changeType="positive" />
+                        <Card title="Authorized Scans" count={scanData?.complete_scan} change="+23.6%" changeType="positive" />
+                        <Card title="Unauthorized Scans" count={scanData?.red_scan} change="-15.34%" changeType="negative" />
+                        <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change="+9.54%" changeType="positive" />
                     </div>
                     <div className='mt-10  w-full'>
-                        <ConversionChart/>
+                        <ConversionChart />
                     </div>
                 </div>
                 {/* <div>

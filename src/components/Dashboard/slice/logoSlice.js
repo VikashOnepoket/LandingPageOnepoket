@@ -45,6 +45,7 @@ const logoSlice = createSlice({
             .addCase(fetchLogo.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.logo = action.payload;
+               
             })
             .addCase(fetchLogo.rejected, (state, action) => {
                 state.status = 'failed';

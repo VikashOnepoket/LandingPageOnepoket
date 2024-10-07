@@ -75,7 +75,7 @@ const Login = () => {
               Sign in to your account
             </p>
           </div>
-          
+
           {/* Email Input */}
           <div className='flex flex-col gap-2 mt-5'>
             <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Email</label>
@@ -137,6 +137,12 @@ const Login = () => {
       <div className='hidden md:flex w-1/2 justify-center items-center bg-[#004699] bg-cover bg-center' style={{ backgroundImage: `url(${LoginBG})` }}>
         <div className='w-[60%]'>
           <img src={loginNew} className='' alt='Login Illustration' />
+          <div className='mt-10'>
+            <p className="text-center text-[16px] leading-6 font-extrabold text-[#EAF0FD]">Be the Captain of your Customer
+              <p className="text-center text-[16px] leading-6 font-extrabold text-[#EAF0FD]"> Relationships in just in</p>
+              <p className='className="text-center text-[16px] leading-6 font-extrabold text-[#EAF0FD]"'>10 Seconds.</p>
+            </p>
+          </div>
         </div>
       </div>
     </div>
