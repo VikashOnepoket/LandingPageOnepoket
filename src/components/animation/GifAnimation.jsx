@@ -28,8 +28,9 @@ const GifAnimation = () => {
             ref={containerRef}
         >
             <motion.div
-                className='xl:w-[639px] xl:h-[748px] lg:w-[506px] lg:h-[557px] md:w-[390px] w-auto'
+                className='xl:w-[639px] xl:h-[748px] lg:w-[506px] lg:h-[557px] md:w-[390px] w-auto '
                 variants={containerVariants}
+                
             >
                 <h1 className='lg:text-[28px] text-[24px] font-medium text-[#0052CC] lg:leading-[60px] leading-[40px] md:text-start text-center sm:ml-[1.1rem] ml-0 lg:w-[80%] w-[100%]'>
                     Be the Captain of your Customer Relationships in just

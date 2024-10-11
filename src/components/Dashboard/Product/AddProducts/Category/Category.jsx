@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../../../api/api'; // Import Axios
 import { fetchCategory } from '../../../slice/categorySlice'; // Assuming this is correctly implemented
+import toast from 'react-hot-toast';
 
 const Category = ({ onCategoryChange }) => {
     const token = useSelector((state) => state.auth.token);
@@ -50,6 +51,10 @@ const Category = ({ onCategoryChange }) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                console.log(data, "category added successfully");
+                if (data?.message == "Duplicate Catecategoy") {
+                    toast.error("Duplicate Catecategoy")
+                }
 
                 dispatch(fetchCategory(token))
                     .unwrap()

@@ -135,16 +135,9 @@ const Analytics = () => {
                                 />
                             </div>
                             {/* by date */}
-                            <div className="mb-4 mt-5">
-                                <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Date</label>
-                                <input
-                                    type="date"
-                                    className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                                    placeholder="Enter Date"
-                                />
-                            </div>
+                           
                             {/* Checkbox list */}
-                            <div className="mb-4 mt-5">
+                            {/* <div className="mb-4 mt-5">
                                 <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Scan</label>
                                 <div className="flex flex-col gap-2 mt-2">
                                     {dateOptions.map((option) => (
@@ -160,7 +153,7 @@ const Analytics = () => {
                                         </label>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         {/* footee button */}
                         <div className='flex justify-end  mt-5 mb-5 gap-5'>
@@ -187,7 +180,7 @@ const Analytics = () => {
                         <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change="+9.54%" changeType="positive" />
                     </div>
                     <div className='mt-10  w-full'>
-                        <ConversionChart />
+                        <ConversionChart compltedScan = {scanData?.complete_scan_data}/>
                     </div>
                 </div>
                 {/* <div>

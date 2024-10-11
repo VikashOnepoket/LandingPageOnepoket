@@ -11,7 +11,7 @@ import left4 from '../../assets/left4.png'
 const NavTop = () => {
     return (
         <>
-            <nav className=' bg-[#004699] lg:flex justify-between items-center hidden'>
+            <nav className=' bg-[#004699] lg:flex justify-between items-center hidden h-[4.125rem]'>
                 <div className='h-[60px] flex gap-2'>
                     <img src={left} className='w-[100%] h-[100%]' />
                     <img src={left1} className='w-[100%] h-[100%]' />

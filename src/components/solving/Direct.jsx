@@ -55,7 +55,7 @@ const Direct = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="w-full py-16 relative overflow-hidden"
+            className="w-full py-16 relative overflow-hidden your-element"
             // style={{
             //     backgroundImage: bgImageLoaded ? `url(${bgImageSrc})` : 'none', // Only show the image if loaded
             //     backgroundSize: "cover",
@@ -73,9 +73,9 @@ const Direct = () => {
                 </motion.div>
 
                 {/* Content Section */}
-                <motion.div className='mt-24 flex lg:flex-row flex-col justify-between gap-10 items-center '>
+                <motion.div className='mt-24 flex lg:flex-row flex-col justify-between gap-10 items-center  '>
                     {/* Left Side */}
-                    <motion.div className='lg:w-[60%] w-[90%]' variants={itemVariants}>
+                    <motion.div className='lg:w-[60%] w-[90%] ' variants={itemVariants}>
                         <img src={group} loading="lazy" className='w-[216px] max-w-full' alt="Illustration" />
                         <motion.p className='text-[32px] leading-10 font-semibold mt-8' variants={itemVariants}>
                             Direct insights, better decisions.
@@ -100,15 +100,15 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[50%] w-[90%]' variants={itemVariants}>
+                    <motion.div className='lg:w-[50%] w-[90%]  ' variants={itemVariants}>
                         <img src={direct2} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>
 
                 {/* Onboarding Section */}
-                <motion.div className='mt-32 flex justify-between gap-10 items-center lg:flex-row flex-col-reverse'>
+                <motion.div className='mt-32 flex justify-between gap-10 items-center lg:flex-row flex-col-reverse '>
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className="lg:w-[30%] w-[100%]" variants={itemVariants}>
+                    <motion.div className="lg:w-[30%] w-[100%] your-element" variants={itemVariants}>
                         <img src={direct3} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
 
@@ -139,7 +139,7 @@ const Direct = () => {
                 </motion.div>
 
                 {/* Customer Support Section */}
-                <motion.div className='mt-24 flex justify-between gap-10 items-center lg:flex-row flex-col'>
+                <motion.div className='mt-24 flex justify-between gap-10 items-center lg:flex-row flex-col '>
                     {/* Left Side */}
                     <motion.div className='lg:w-[60%] w-[100%]' variants={itemVariants}>
                         <img src={direct4} loading="lazy" className='w-[216px] max-w-full' alt="Illustration" />
@@ -166,7 +166,7 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[40%] w-[100%]' variants={itemVariants}>
+                    <motion.div className='lg:w-[40%] w-[100%] ' variants={itemVariants}>
                         <img src={direct1} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>

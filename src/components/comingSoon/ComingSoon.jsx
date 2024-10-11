@@ -49,11 +49,11 @@ const ComingSoon = () => {
                         />
                     </div>
 
-                    <div className='relative md:text-center  text-start pt-24 bg-contain bg-no-repeat bg-center md:w-full w-[90%] mx-auto z-20'>
-                        <h1 className='md:text-[52px] md:leading-[70px] text-[32px] leading-[45px] text-[#FF707080] font-extrabold tracking-wider text-animation'>Exciting Things Are Coming!</h1>
-                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 md:w-1/2 mx-auto'>We're working on something special for this section, and it'll be live soon!</p>
-                        <p className='text-[32px] leading-10 font-medium mt-8 text-white text-center'>why wait?</p>
-                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-8 md:w-1/2 mx-auto'>
+                    <div className='relative md:text-center  text-start  bg-contain bg-no-repeat bg-center md:w-full w-[90%] mx-auto z-20'>
+                        <h1 className='md:text-[52px] md:leading-[70px] pt-[4.94rem] text-[32px] leading-[45px] text-[#FF707080] font-extrabold tracking-wider text-animation reddit'>Exciting Things Are Coming!</h1>
+                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-[1.87rem] md:w-1/2 mx-auto reddit'>We're working on something special for this section, and it'll be live soon!</p>
+                        <p className='text-[32px] leading-10 font-medium mt-[1.87rem] text-white text-center reddot'>why wait?</p>
+                        <p className='text-[24px] leading-[32px] font-medium text-[#BCCEE8] text-center mt-[1.88rem] md:w-1/2 mx-auto reddit'>
                             Talk to our team today to learn more about our exciting new features and how they can benefit your business
                         </p>
 
