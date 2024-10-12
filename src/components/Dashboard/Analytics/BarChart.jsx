@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
 import Select from 'react-select';
+import { MdOutlineFileDownload } from "react-icons/md";
 
 const ConversionChart = ({ compltedScan }) => {
     console.log(compltedScan, "scandata");
@@ -172,7 +173,7 @@ const ConversionChart = ({ compltedScan }) => {
                                     <td className="py-2 px-4 border-b">{scan.product_name}</td>
                                     <td className="py-2 px-4 border-b">
                                         <a href={scan.invoice} target="_blank" rel="noopener noreferrer">
-                                            <i className="fas fa-download" /> {/* Use react-icons for download icon */}
+                                            <MdOutlineFileDownload  /> {/* Use react-icons for download icon */}
                                         </a>
                                     </td>
                                     <td className="py-2 px-4 border-b">{scan.location}</td>
