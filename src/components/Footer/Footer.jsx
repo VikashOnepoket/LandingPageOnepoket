@@ -30,11 +30,11 @@ const Footer = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className='bg-[#004699]  h-auto mt-32'
+            className='bg-[#004699]  h-auto mt-32 '
         >
             <motion.div
                 variants={containerVariants}
-                className=' mx-auto   w-[90%] footer-bg'
+                className=' mx-auto   w-[90%] footer-bg py-8'
             >
                 {/* <motion.div
                     variants={itemVariants}
