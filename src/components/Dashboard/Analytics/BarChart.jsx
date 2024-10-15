@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
 import Select from 'react-select';
 import { MdOutlineFileDownload } from "react-icons/md";
+import './BarChart.css'
 
 const ConversionChart = ({ compltedScan }) => {
     console.log(compltedScan, "scandata");
@@ -120,7 +121,7 @@ const ConversionChart = ({ compltedScan }) => {
 
     return (
         <>
-            <div style={boxShadowStyle} className='rounded-lg p-5 '>
+            <div style={boxShadowStyle} className='rounded-lg p-5 w-full'>
                 <h2 className='text-[16px] leading-[21px] font-semibold'>Conversion</h2>
                 <div className="mb-4 mt-5">
                     <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Date</label>
@@ -145,45 +146,60 @@ const ConversionChart = ({ compltedScan }) => {
 
             </div>
             {selectedData && (
-                <div className='mt-5 p-4 bg-gray-100 rounded w-[70%] '>
+                <div className='mt-5 p-4  rounded'>
                     <h3 className='text-[14px] leading-[18px] font-semibold'>Selected Data</h3>
                     <p><strong>Series:</strong> {selectedData.series}</p>
                     <p><strong>Category:</strong> {selectedData.category}</p>
                     <p><strong>Value:</strong> {selectedData.value} %</p>
 
+
                     {/* Display the data from compltedScan in a table */}
-                    <table className="min-w-full bg-white border border-gray-300 mt-4 ">
-                        <thead>
-                            <tr>
-                                <th className="py-2 px-4 border-b">Name</th>
-                                <th className="py-2 px-4 border-b">E-mail</th>
-                                <th className="py-2 px-4 border-b">Ph. No.</th>
-                                <th className="py-2 px-4 border-b">Product Name</th>
-                                <th className="py-2 px-4 border-b">Invoice</th>
-                                <th className="py-2 px-4 border-b">Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* Map over the selectedData.scanData to render each data item */}
-                            {selectedData.scanData.map((scan, index) => (
-                                <tr key={index}>
-                                    <td className="py-2 px-4 border-b">{scan.name}</td>
-                                    <td className="py-2 px-4 border-b">{scan.email}</td>
-                                    <td className="py-2 px-4 border-b">{scan.phone_number}</td>
-                                    <td className="py-2 px-4 border-b">{scan.product_name}</td>
-                                    <td className="py-2 px-4 border-b">
-                                        <a href={scan.invoice} target="_blank" rel="noopener noreferrer">
-                                            <MdOutlineFileDownload  /> {/* Use react-icons for download icon */}
-                                        </a>
-                                    </td>
-                                    <td className="py-2 px-4 border-b">{scan.location}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+
+
+
 
                 </div>
             )}
+            {/* Scrollable Table Container */}
+
+            {/* Authorised customer */}
+            {selectedData?.scanData && (<div className="flex items-center space-x-4 p-4">
+                <h1 className="text-[18px] leading-6 font-medium text-[#000000]">Authorized Customers</h1>
+                <div className="w-5 h-5 bg-[#86EFAC] rounded"></div>
+            </div>)}
+
+            {selectedData?.scanData && (<div className="overflow-y-scroll  h-[300px] custom-scrollbar">
+                <table className="bg-white mt-4 ">
+                    <thead>
+                        <tr className='border-b border-gray-200'>
+                            <th className="py-2 px-4 text-left text-[12px] leading-4 text-[#202123] font-medium">Name</th>
+                            <th className="py-2 px-4 text-left text-[#202123] font-medium text-[12px] leading-4">E-mail</th>
+                            <th className="py-2 px-4 text-left  text-[#202123] font-medium text-[12px] leading-4">Ph. No.</th>
+                            <th className="py-2 px-4 text-left  text-[#202123] font-medium text-[12px] leading-4">Product Name</th>
+                            <th className="py-2 px-4 text-center  text-[#202123] font-medium text-[12px] leading-4">Invoice</th>
+                            <th className="py-2 px-4 text-left  text-[#202123] font-medium text-[12px] leading-4">Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {selectedData?.scanData?.map((scan, index) => (
+                            <tr key={index} className="border-b border-gray-200">
+                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan?.name}</td>
+                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan?.email}</td>
+                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan?.phone_number}</td>
+                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan.product_name}</td>
+                                <td className="py-4 px-4 text-center w-[100px]">
+                                    <a href={scan.invoice} target="_blank" rel="noopener noreferrer">
+                                        <MdOutlineFileDownload className=" text-[16px] leading-5 text-[#8F9091] " />
+                                    </a>
+                                </td>
+                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">Varansi</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>)}
+
+
         </>
     );
 };

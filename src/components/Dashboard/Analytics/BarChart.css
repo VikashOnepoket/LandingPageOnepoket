@@ -1,0 +1,21 @@
+/* Hide scrollbar arrows on WebKit browsers (like Chrome, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-button {
+    display: none; /* Removes the arrows */
+
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #C7C7C8; /* Custom thumb color */
+ 
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #E4EFFF; /* Track color */
+  }
+  
