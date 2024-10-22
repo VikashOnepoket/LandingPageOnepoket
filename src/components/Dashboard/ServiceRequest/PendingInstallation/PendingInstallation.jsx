@@ -59,11 +59,17 @@ const PendingInstallation = () => {
     };
 
     // calling api for  pending installation
+    const [pendingInstallationData, setPendingInstallationData] = useState([])
     const token = useSelector((state) => state.auth.token)
-    const pendingInstallationData = async () => {
+    const pendingInstallation = async () => {
         try {
-            const { data } = await axios.post('/get-installation-data', { token: token })
+            const { data } = await axios.get('/lp_pending_installation', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             console.log(data, "pending installation data")
+            setPendingInstallationData(data)
         }
         catch (err) {
             console.log(err)
@@ -71,8 +77,10 @@ const PendingInstallation = () => {
     }
 
     useEffect(() => {
-        pendingInstallationData()
+        pendingInstallation()
     }, [])
+
+    console.log(pendingInstallationData, "da")
     return (
         <>
             <div className='mt-3 p-8'>
@@ -197,7 +205,7 @@ const PendingInstallation = () => {
                             </thead>
                             <tbody className=''>
 
-                                <tr className="p-5">
+                                {/* <tr className="p-5">
                                     <td className="py-5 px-4 border-b  text-[#202123BF] text-[12px] leading-[17px] font-semibold">26-03-2024 13:04 PM</td>
                                     <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#0052cc] hover:underline"><a href="#">Vishesh Keshri</a></td>
                                     <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Lloyd AC</td>
@@ -238,7 +246,35 @@ const PendingInstallation = () => {
                                     <td className="py-5 px-4 border-b text-right text-[#FFB800]">
                                         <FiMessageSquare size={22} />
                                     </td>
-                                </tr>
+                                </tr> */}
+                                {
+                                    pendingInstallationData.map((installation, index) => (
+                                        <tr key={index}>
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">
+                                                {new Date(installation?.request_date_time).toLocaleDateString()},{new Date(installation?.request_date_time).toLocaleTimeString()}
+                                            </td>
+
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.contact_name}</td>
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.product_name}</td>
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.category_title}</td>
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">
+                                                {new Date(installation.installation_date).toLocaleDateString()},{installation.installation_time}
+                                            </td>
+
+                                            <td className="py-5 px-4 border-b  font-medium text-[#202123BF]">
+                                                <span className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  ">{installation?.installation_status}</span>
+                                            </td>
+                                            {/* <td className="py-2 px-4 border-b text-right">
+                                                <button className="bg-[#0052CC] text-white hover:bg-[#0041a8] px-3 py-2 rounded-md flex items-center">
+                                                    <FiMessageSquare className="mr-2" />
+                                                    Message
+                                                </button>
+                                            </td> */}
+                                            <td className="py-5 px-4 border-b text-right text-[#FFB800]">
+                                                <FiMessageSquare size={22} />
+                                            </td>
+                                        </tr>
+                                    ))}
 
 
                             </tbody>

@@ -60,7 +60,7 @@ const HeroMain = () => {
                         1 QR = 1 Loyal Customer
                     </h1>
                     <div className='w-[90%] md:w-[70%] 2xl:w-[60%] mx-auto text-center mt-[2.56rem]'>
-                        <p className='text-[0.875rem] leading-[1.875rem] font-normal 2xl:text-[2rem] 2xl:leading-[4rem]'>
+                        <p className='text-[0.875rem] leading-[1.875rem] font-normal'>
                             Onepoket’s QR technology not only gets you <span className='font-bold'>Customer Name, Number,</span> and <span className='font-bold'>Demographics</span>; it's your <span className='font-bold'>VIP pass</span> to the first-party data of your target market.
                         </p>
 

@@ -168,7 +168,7 @@ const ConversionChart = ({ compltedScan }) => {
                 <div className="w-5 h-5 bg-[#86EFAC] rounded"></div>
             </div>)}
 
-            {selectedData?.scanData && (<div className="overflow-y-scroll  h-[300px] custom-scrollbar">
+            {selectedData?.scanData && (<div className="overflow-y-scroll  h-[300px] custom-scrollbar w-[600px]">
                 <table className="bg-white mt-4 ">
                     <thead>
                         <tr className='border-b border-gray-200'>
