@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { FiMessageSquare } from 'react-icons/fi'
-import CompletedFilter from './CompletedFilter';
+import CompletedFilter from '../CompletedInstalltion/CompletedFilter';
 import { Drawer } from '@mui/material';
 import Select from 'react-select'
 import SearchInput from '../../SearchInput/SearchInput';
 import { useSelector } from 'react-redux';
 import axios from '../../../../api/api'
 
-const CompletedInstallation = () => {
+const RejectedInstallation = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const openDrawer = () => {
         setDrawerOpen(true);
@@ -61,19 +61,19 @@ const CompletedInstallation = () => {
             }
         })
     };
-    const [totalCompleted, setTotalCompleted] = useState("")
-    const [completedInstallationData, setCompletedInstallationData] = useState([])
+    const [totalRejected, setTotalRejected] = useState("")
+    const [rejectedInstallationData, setRejectedInstallationData] = useState([])
     const token = useSelector((state) => state.auth.token)
-    const completedInstallation = async () => {
+    const rejectedInstallation = async () => {
         try {
-            const { data } = await axios.get('/lp_completed_installation', {
+            const { data } = await axios.get('/lp_rejected_installation', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
             console.log(data, "pending installation data")
-            setCompletedInstallationData(data?.result)
-            setTotalCompleted(data?.count)
+            setRejectedInstallationData(data?.result)
+            setTotalRejected(data?.count)
         }
         catch (err) {
             console.log(err)
@@ -81,7 +81,7 @@ const CompletedInstallation = () => {
     }
 
     useEffect(() => {
-        completedInstallation()
+        rejectedInstallation()
     }, [])
     return (
         <>
@@ -101,11 +101,11 @@ const CompletedInstallation = () => {
                 </div>
                 <div className='mt-12'>
                     <div>
-                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{totalCompleted}</h3>
+                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{totalRejected}</h3>
                     </div>
                     <div className=' mt-5 '>
                         <div>
-                            <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Completed Installations</h3>
+                            <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Rejected Installations</h3>
                         </div>
 
 
@@ -208,7 +208,7 @@ const CompletedInstallation = () => {
                             </thead>
                             <tbody className=''>
                                 {
-                                    completedInstallationData?.map((installation, index) => (
+                                    rejectedInstallationData?.map((installation, index) => (
                                         <tr key={index}>
                                             <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">
                                                 {new Date(installation?.request_date_time).toLocaleDateString()},{new Date(installation?.request_date_time).toLocaleTimeString()}
@@ -221,7 +221,7 @@ const CompletedInstallation = () => {
                                                 {new Date(installation.installation_date).toLocaleDateString()},{installation.installation_time}
                                             </td>
 
-                                            <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]"> <span className="bg-[#BAFFD3] text-[#00742A] py-2 px-5 rounded text-xs font-semibold  ">{installation?.installation_status}</span> </td>
+                                            <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]"> <span className="bg-red-400 text-red-900 py-2 px-5 rounded text-xs font-semibold  ">{installation?.installation_status}</span> </td>
                                             <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.other_details}</td>
                                         </tr>
                                     ))
@@ -237,4 +237,4 @@ const CompletedInstallation = () => {
     )
 }
 
-export default CompletedInstallation
+export default RejectedInstallation

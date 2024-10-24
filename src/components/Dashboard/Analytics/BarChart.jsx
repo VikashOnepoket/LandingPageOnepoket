@@ -3,6 +3,8 @@ import Chart from 'react-apexcharts';
 import Select from 'react-select';
 import { MdOutlineFileDownload } from "react-icons/md";
 import './BarChart.css'
+import Table from './Table';
+import { Tab } from 'bootstrap';
 
 const ConversionChart = ({ compltedScan }) => {
     console.log(compltedScan, "scandata");
@@ -168,7 +170,7 @@ const ConversionChart = ({ compltedScan }) => {
                 <div className="w-5 h-5 bg-[#86EFAC] rounded"></div>
             </div>)}
 
-            {selectedData?.scanData && (<div className="overflow-y-scroll  h-[300px] custom-scrollbar w-[600px]">
+            {selectedData?.scanData && (<div className="overflow-y-scroll  h-[300px] custom-scrollbar">
                 <table className="bg-white mt-4 ">
                     <thead>
                         <tr className='border-b border-gray-200'>
@@ -181,23 +183,16 @@ const ConversionChart = ({ compltedScan }) => {
                         </tr>
                     </thead>
                     <tbody>
+
                         {selectedData?.scanData?.map((scan, index) => (
-                            <tr key={index} className="border-b border-gray-200">
-                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan?.name}</td>
-                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan?.email}</td>
-                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan?.phone_number}</td>
-                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">{scan.product_name}</td>
-                                <td className="py-4 px-4 text-center w-[100px]">
-                                    <a href={scan.invoice} target="_blank" rel="noopener noreferrer">
-                                        <MdOutlineFileDownload className=" text-[16px] leading-5 text-[#8F9091] " />
-                                    </a>
-                                </td>
-                                <td className="py-4 px-4 whitespace-nowrap text-[10px] leading-3 text-[#8F9091] font-medium ">Varansi</td>
-                            </tr>
+                            <Table key={index} scan={scan} />
                         ))}
                     </tbody>
                 </table>
             </div>)}
+
+
+
 
 
         </>

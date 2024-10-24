@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInSuccess } from './components/Dashboard/slice/authSlice';
 import Sidebar from './components/Dashboard/Sidebar/Sidebar';
 import { SidebarProvider } from './components/Dashboard/Sidebar/context/SidebarContext';
-import DashboardLayout from './DashboardLayout';
+
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import SpinnerMain from './components/Dashboard/Spinner/SpinnerMain';
@@ -15,6 +15,8 @@ import LearnMoreCustomer from './components/LearnMore/LearnMoreCustomer';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ComingSoon from './components/comingSoon/ComingSoon';
+import RejectedInstallation from './components/Dashboard/ServiceRequest/RejectedInstallation/RejectedInstallation';
+import DashboardLayout from './DashboardLayout';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));
@@ -151,6 +153,7 @@ function App() {
                 <Route path='/roles/add_roles_permission' element={<AddRolesAndPermission />} />
                 <Route path='/service_request/completed_installation' element={<CompletedInstallation />} />
                 <Route path='/service_request/pending_installation' element={<PendingInstallation />} />
+                <Route path='/service_request/reject_installation' element={<RejectedInstallation />} />
                 <Route path='/service_request/service_network' element={<ServiceNetwork />} />
                 <Route path='/service_request/service_network/add_service_centre' element={<AddServiceCentre />} />
                 <Route path='/service_request/service_network/service_centre_details/:id' element={<ServiceCentreDetails />} />

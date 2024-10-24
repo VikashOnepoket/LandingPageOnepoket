@@ -6,6 +6,13 @@ import SearchInput from '../../SearchInput/SearchInput';
 import axios from '../../../../api/api'
 import { useSelector } from 'react-redux';
 const PendingInstallation = () => {
+
+
+    const statusOptions = [
+        { value: 'pending', label: 'Pending' },
+        { value: 'completed', label: 'Completed' },
+        { value: 'rejected', label: 'Reject' },
+    ];
     const [drawerOpen, setDrawerOpen] = useState(false);
     const openDrawer = () => {
         setDrawerOpen(true);
@@ -59,6 +66,7 @@ const PendingInstallation = () => {
     };
 
     // calling api for  pending installation
+    const [totalPending, setTotalPneding] = useState("")
     const [pendingInstallationData, setPendingInstallationData] = useState([])
     const token = useSelector((state) => state.auth.token)
     const pendingInstallation = async () => {
@@ -69,7 +77,8 @@ const PendingInstallation = () => {
                 },
             });
             console.log(data, "pending installation data")
-            setPendingInstallationData(data)
+            setPendingInstallationData(data?.result)
+            setTotalPneding(data?.count)
         }
         catch (err) {
             console.log(err)
@@ -81,6 +90,24 @@ const PendingInstallation = () => {
     }, [])
 
     console.log(pendingInstallationData, "da")
+
+
+    // changes 
+    const handleStatusChange = async (selectedOption, installationId) => {
+        console.log(selectedOption, "selected option")
+        console.log(installationId, "id")
+        const value = selectedOption.value
+
+        try {
+            const { data } = await axios.put('/update_lp_pending_installation', { id: installationId, status: value, })
+            console.log(data)
+            pendingInstallation()
+
+
+        } catch (err) {
+            console.error('Error updating status:', err);
+        }
+    };
     return (
         <>
             <div className='mt-3 p-8'>
@@ -97,7 +124,7 @@ const PendingInstallation = () => {
                 </div>
                 <div className='mt-12'>
                     <div>
-                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>24</h3>
+                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{totalPending}</h3>
                     </div>
                     <div className=' mt-5'>
                         <div>
@@ -204,51 +231,8 @@ const PendingInstallation = () => {
                                 </tr>
                             </thead>
                             <tbody className=''>
-
-                                {/* <tr className="p-5">
-                                    <td className="py-5 px-4 border-b  text-[#202123BF] text-[12px] leading-[17px] font-semibold">26-03-2024 13:04 PM</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#0052cc] hover:underline"><a href="#">Vishesh Keshri</a></td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Lloyd AC</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Air Conditioner</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">28-03-2024 14:00 PM</td>
-
-                                    <td className="py-5 px-4 border-b  font-medium text-[#202123BF]">
-                                        <span className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  ">Pending</span>
-                                    </td>
-                                    <td className="py-5 px-4 border-b text-right text-[#FFB800]">
-                                        <FiMessageSquare size={22} />
-                                    </td>
-                                </tr>
-                                <tr className="p-5">
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">26-03-2024 13:04 PM</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold  text-[#0052cc] hover:underline"><a href="#">Vishesh Keshri</a></td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Lloyd AC</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Air Conditioner</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">28-03-2024 14:00 PM</td>
-
-                                    <td className="py-5 px-4 border-b  font-medium text-[#202123BF]">
-                                        <span className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  ">Pending</span>
-                                    </td>
-                                    <td className="py-5 px-4 border-b text-right text-[#FFB800]">
-                                        <FiMessageSquare size={22} />
-                                    </td>
-                                </tr>
-                                <tr className="p-5">
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">26-03-2024 13:04 PM</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold  text-[#0052cc] hover:underline"><a href="#">Vishesh Keshri</a></td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Lloyd AC</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">Air Conditioner</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">28-03-2024 14:00 PM</td>
-                                    <td className="py-5 px-4 border-b  font-medium text-[#202123BF]">
-                                        <span className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  ">Pending</span>
-                                    </td>
-
-                                    <td className="py-5 px-4 border-b text-right text-[#FFB800]">
-                                        <FiMessageSquare size={22} />
-                                    </td>
-                                </tr> */}
                                 {
-                                    pendingInstallationData.map((installation, index) => (
+                                    pendingInstallationData?.map((installation, index) => (
                                         <tr key={index}>
                                             <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">
                                                 {new Date(installation?.request_date_time).toLocaleDateString()},{new Date(installation?.request_date_time).toLocaleTimeString()}
@@ -261,8 +245,26 @@ const PendingInstallation = () => {
                                                 {new Date(installation.installation_date).toLocaleDateString()},{installation.installation_time}
                                             </td>
 
-                                            <td className="py-5 px-4 border-b  font-medium text-[#202123BF]">
-                                                <span className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  ">{installation?.installation_status}</span>
+                                            <td className="py-5 px-4 border-b font-medium text-[#202123BF]">
+                                                <Select
+                                                    value={statusOptions.find(option => option.value === 'pending')}
+                                                    onChange={(selectedOption) => handleStatusChange(selectedOption, installation?.id)}
+
+                                                    options={statusOptions}
+                                                    styles={{
+                                                        control: (provided) => ({
+                                                            ...provided,
+                                                            width: '150px',
+                                                            fontSize: '12px',
+                                                        }),
+                                                        menu: (provided) => ({
+                                                            ...provided,
+                                                            fontSize: '12px',
+                                                        })
+                                                    }}
+                                                    menuPortalTarget={null} // Dropdown will open within the modal
+                                                    menuPosition="fixed"
+                                                />
                                             </td>
                                             {/* <td className="py-2 px-4 border-b text-right">
                                                 <button className="bg-[#0052CC] text-white hover:bg-[#0041a8] px-3 py-2 rounded-md flex items-center">
@@ -270,11 +272,10 @@ const PendingInstallation = () => {
                                                     Message
                                                 </button>
                                             </td> */}
-                                            <td className="py-5 px-4 border-b text-right text-[#FFB800]">
-                                                <FiMessageSquare size={22} />
-                                            </td>
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.other_details}</td>
                                         </tr>
-                                    ))}
+                                    ))
+                                }
 
 
                             </tbody>
