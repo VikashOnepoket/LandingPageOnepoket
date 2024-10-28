@@ -21,6 +21,7 @@ const Switch = ({ label, value, onChange }) => {
 };
 
 const BasicInformationEdit = ({ formData, onInputChange }) => {
+    console.log(formData , "formData")
     return (
         <div className="w-full">
             <div className="flex flex-col gap-2">

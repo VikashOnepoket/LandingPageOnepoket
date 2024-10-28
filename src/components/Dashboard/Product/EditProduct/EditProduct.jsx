@@ -56,9 +56,9 @@ const EditProduct = () => {
         setLoading(false);
         setFormData({
           ...data,
-        
-          additionalInfo : data?.additional_info,
-          PurchaseOptions : data?.Purchase_options,
+          installation_details : data.installation_details == 0 ? false : true,
+          additionalInfo: data?.additional_info,
+          PurchaseOptions: data?.Purchase_options,
         }); // Set the entire product data including image
       } catch (error) {
         console.log(error, 'error');
@@ -70,10 +70,14 @@ const EditProduct = () => {
   }, [id]);
 
   const handleInputChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details')
+      ? (value ? 1 : 0)
+      : value; // For other fields, keep the original value
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: formattedValue,
+    }));
   };
 
   const handleLogoChange = (selectedLogo) => {
@@ -111,7 +115,7 @@ const EditProduct = () => {
     });
   };
 
-  console.log(formData , "edit product")
+  console.log(formData, "edit product")
 
   const handleSubmit = async () => {
     const data = new FormData();
@@ -126,8 +130,10 @@ const EditProduct = () => {
     data.append('additionalInfo', JSON.stringify(formData.additionalInfo));
     data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions));
     data.append('category_title', formData.category_title);
+    data.append('installation_details', formData?.installation_details);
+    // data.append('show_manufacture_date', formData?.show_manufacture_date)
     data.append('logo_id', formData.logo_id);
-  
+
     // Check if the product_image is a buffer
     if (formData.product_image && formData.product_image.type === "Buffer") {
       // Convert buffer to Blob
@@ -138,7 +144,7 @@ const EditProduct = () => {
       // If it's already a file object
       data.append('image', formData.product_image);
     }
-  
+
     try {
       setLoading(true);
       const { data: response } = await axios.put('/edit_product_by_id', data, {
@@ -156,7 +162,7 @@ const EditProduct = () => {
       setLoading(false);
     }
   };
-  
+
 
 
   return (
