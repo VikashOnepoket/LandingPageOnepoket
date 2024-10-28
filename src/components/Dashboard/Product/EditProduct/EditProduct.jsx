@@ -111,7 +111,7 @@ const EditProduct = () => {
     });
   };
 
-  console.log(formData , "additional info")
+  console.log(formData , "edit product")
 
   const handleSubmit = async () => {
     const data = new FormData();

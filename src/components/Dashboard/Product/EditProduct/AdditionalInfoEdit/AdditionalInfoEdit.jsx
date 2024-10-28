@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, formData }) => {
   // Initialize sections state with additionalInfo from formData if available
-  const [sections, setSections] = useState(formData?.additional_info || [{ title: '', description: '' }]);
-  console.log(formData?.additional_info , "additonal")
+  const [sections, setSections] = useState([{ title: '', description: '' }]);
+  console.log(formData?.additional_info, "additonal")
 
   // Update sections state when formData.additionalInfo changes
   useEffect(() => {
-    if (formData && formData?.additional_info) {
-      setSections(formData?.additional_info);
+    if (formData && formData.additional_info) {
+      setSections(formData.additional_info.length ? formData.additional_info : [{ title: '', description: '' }]);
     }
   }, [formData]);
+  
 
   const handleSectionChange = (index, name, value) => {
     const newSections = [...sections];
@@ -24,6 +25,8 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, formD
     setSections(newSections);
     onAdditionalInfoChange(newSections);
   };
+
+  console.log(sections, "sections")
 
   const removeSection = (index) => {
     const newSections = sections.filter((_, i) => i !== index);

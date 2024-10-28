@@ -81,30 +81,58 @@ const Header = () => {
 
 
     }
-
+    const [alertVisible, setAlertVisible] = useState(false);  // Controls alert visibility
+    const [blinkingActive, setBlinkingActive] = useState(false);
 
     const token = useSelector((state) => state.auth.token);
     const [name, setName] = useState("")
-
+    const [data, setData] = useState([])
+    // Fetch user details when the token is available
     useEffect(() => {
         if (token) {
             dispatch(fetchUserDetails(token)).unwrap().then((data) => {
-                console.log(data , "data")
-                setName(data?.name)
+                console.log(data, "data in header");
+                setName(data?.name);
+
+                const {
+                    address,
+                    email,
+                    phone_number,
+                    helpline_email,
+                    helpline_number,
+                    company_name,
+                } = data;
+
+                // Check if any required fields are empty or null
+                if (!address || !email || !phone_number || !helpline_email || !helpline_number || !company_name) {
+                    setAlertVisible(true);    // Show the alert
+                    setBlinkingActive(true);   // Start blinking
+                } else {
+                    setAlertVisible(false);    // Hide the alert
+                    setBlinkingActive(false);  // Stop blinking
+                }
             })
                 .catch((error) => {
-                    console.log(error.response.status, "error"); // This should now catch the error
-                    // if (error.response.status === 403) {
-                    //     dispatch(signOutSuccess())
-                    //     localStorage.removeItem('token')
-                    // }
-                })
-                .finally(() => {
-                    // setLoading(false);
+                    console.log(error?.response?.status, "error");
                 });
-
         }
-    }, [dispatch, , token]);
+    }, [dispatch, token]);
+
+    // Effect to handle blinking every 3 seconds when blinkingActive is true
+    useEffect(() => {
+        let timeout;
+        if (blinkingActive) {
+            timeout = setTimeout(() => {
+                setAlertVisible((prev) => !prev); // Toggle alert visibility
+            }, 3000);
+        }
+
+        return () => {
+            if (timeout) clearTimeout(timeout);  // Clear the timeout on unmount or when blinking stops
+        };
+    }, [blinkingActive, alertVisible]);
+
+
 
     return (
         <>
@@ -124,7 +152,26 @@ const Header = () => {
                     </span>)}
                 </div>
 
+
                 <div className='flex justify-between gap-5'>
+                    <AnimatePresence>
+                        {alertVisible && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.5 }}  // Animation speed
+                                className="absolute top-12 right-0 bg-[#FFAB7C] text-[12px] leading-4 font-medium text-[#A93D00] p-2 rounded-[4px] flex items-center gap-2"
+
+                            >
+                                <span className="material-symbols-outlined text-[16px] leading-5 font-medium">
+                                    error
+                                </span>
+                                Please complete your profile to have a better experience.
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                     <div>
                         <span className="material-symbols-outlined text-[22px] leading-[28px] text-[#7A7A7A]">
                             notifications

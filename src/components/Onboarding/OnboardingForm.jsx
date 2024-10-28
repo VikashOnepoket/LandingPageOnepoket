@@ -55,8 +55,9 @@ const OnboardingForm = () => {
     };
 
     const handleNextFormContinue = () => {
-        if (!validateCompanyDetails()) return;
-        setIsNextFormCompleted(true);
+        // if (!validateCompanyDetails()) return;
+        updateUser()
+
     };
 
     const handleBack = () => {
@@ -140,6 +141,7 @@ const OnboardingForm = () => {
             toast.success("User already registered")
         }
         // toast.success(data.message)
+        // updateUser()
 
         setShowMessage(data.message)
         if (data.message === "User already registered") {
@@ -214,7 +216,7 @@ const OnboardingForm = () => {
                             <Select className='mt-5' value={selectedCompanySize} onChange={handleCompanySizeChange} options={companySizeOptions} placeholder='Company Size' />
                             <Select className='mt-5' value={selectedIndustry} onChange={handleIndustryChange} options={industryOptions} placeholder='Select Industry' />
                             <input type='text' className='mt-5 input border border-gray-300 rounded-md w-full py-2 px-3' placeholder='Website URL' onChange={handleInputChange} name='companyWebsite' value={user.companyWebsite} />
-                            <button className='mt-5 text-[14px] font-bold bg-[#0052CC] text-white p-3 rounded-md w-[200px]' onClick={handleNextFormContinue} disabled={loading}>{loading ? <Spinner /> : 'Continue'}</button>
+                            <button className='mt-5 text-[14px] font-bold bg-[#0052CC] text-white p-3 rounded-md w-[200px]' onClick={handleNextFormContinue} >Continue</button>
                         </div>
                     ) : (
                         <motion.div className='md:w-[60%] w-[90%] mx-auto' initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 50 }} transition={{ duration: 0.5 }}>

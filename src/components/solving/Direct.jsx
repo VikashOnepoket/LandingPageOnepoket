@@ -55,7 +55,7 @@ const Direct = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="w-full py-16 relative overflow-hidden your-element"
+            className="w-full py-16 relative overflow-hidden "
             // style={{
             //     backgroundImage: bgImageLoaded ? `url(${bgImageSrc})` : 'none', // Only show the image if loaded
             //     backgroundSize: "cover",
@@ -100,7 +100,7 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[50%] w-[90%]  ' variants={itemVariants}>
+                    <motion.div className='lg:w-[50%] w-[90%] your-element' variants={itemVariants} >
                         <img src={direct2} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>
@@ -166,7 +166,7 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[40%] w-[100%] ' variants={itemVariants}>
+                    <motion.div className='lg:w-[40%] w-[100%] your-element' variants={itemVariants}>
                         <img src={direct1} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>

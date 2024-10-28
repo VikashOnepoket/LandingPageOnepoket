@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, formData }) => {
+const PurchaseOptionEdit = ({ PurchaseOptions = [], onAdditionalInfoChange, formData }) => {
     const [options, setOptions] = useState([{ title: '', link: '' }]);
 
     useEffect(() => {
@@ -8,10 +8,12 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
             setOptions(formData.PurchaseOptions.length ? formData.PurchaseOptions : [{ title: '', link: '' }]);
         }
     }, [formData]);
+    console.log(formData.PurchaseOptions, "options")
 
-    const handleOptionChange = (index, name, value) => {
-        const newOptions = [...options];
-        newOptions[index] = { ...newOptions[index], [name]: value };
+    const handleOptionChange = (id, name, value) => {
+        const newOptions = options.map(option =>
+            option.id === id ? { ...option, [name]: value } : option
+        );
         setOptions(newOptions);
         onPurchaseOptionChange(newOptions);
     };
@@ -28,13 +30,15 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
         onPurchaseOptionChange(newOptions);
     };
 
+
+
     return (
         <div className='w-[100%] mt-10'>
             <div>
                 <h1 className='text-[18px] leading-[23px] font-semibold'>Purchase Options</h1>
             </div>
-            {options.map((option, index) => (
-                <div key={index} className='mt-2 border rounded-md p-5'>
+            {options.map((option) => (
+                <div key={option?.id} className='mt-2 border rounded-md p-5'>
                     <div className='flex flex-col gap-2 mt-5'>
                         <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Store Name</label>
                         <input
@@ -42,7 +46,7 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
                             className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out'
                             placeholder='Store Name'
                             value={option.title}
-                            onChange={(e) => handleOptionChange(index, 'title', e.target.value)}
+                            onChange={(e) => handleOptionChange(option?.id, 'title', e.target.value)}
                         />
                     </div>
                     <div className='flex flex-col gap-2 mt-5'>
@@ -52,7 +56,7 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
                             className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out'
                             placeholder='Product Review URL'
                             value={option.link}
-                            onChange={(e) => handleOptionChange(index, 'link', e.target.value)}
+                            onChange={(e) => handleOptionChange(option?.id, 'link', e.target.value)}
                         />
                     </div>
                     <div className='flex justify-end'>
