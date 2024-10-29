@@ -138,12 +138,12 @@ const ServiceNetwork = () => {
                     </div>
                     <div className=' mt-5 flex lg:justify-between lg:items-center lg:flex-row flex-col gap-10'>
                         <div>
-                            <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Service Network Details</h3>
+                            <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Technical Executive Details</h3>
                         </div>
                         <div className='flex gap-5'>
                             <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' onClick={() => navigate(`/service_request/service_network/add_service_centre`)}>
                                 <span className="material-symbols-outlined mr-2">add</span>
-                                Add Service Centre
+                                Add Technical Executive Details
                             </button>
 
                         </div>
@@ -159,7 +159,7 @@ const ServiceNetwork = () => {
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Name</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Phone Number</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Email</th>
-                                    <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Location</th>
+                                    <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Rating</th>
 
                                 </tr>
                             </thead>

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { fetchLogo } from '../slice/logoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import SpinnerMain from '../Spinner/SpinnerMain';
+import axios from '../../../api/api'
+import toast from 'react-hot-toast';
 
 const Logo = () => {
   const [loading, setLoading] = useState(false)
@@ -30,7 +32,29 @@ const Logo = () => {
           setLoading(false);
         });
     }
-  }, [dispatch, token]);
+  }, [token]);
+
+  const deleteLogo = async (id) => {
+    console.log(id, "id")
+    try {
+      setLoading(true);
+      const { data } = await axios.delete('/delete_logo', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: { id }, // Add id in the request body
+      });
+      toast.success(data?.message)
+      dispatch(fetchLogo(token))
+      console.log(data, "logo deleted successfully");
+      setLoading(false);
+
+    }
+    catch (error) {
+      setLoading(false);
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -72,9 +96,8 @@ const Logo = () => {
                       </div>
                     </td>
                     <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">{logo?.title}</td>
-                    <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">
-                      <span className="material-symbols-outlined mr-2 text-[20px] leading-[28px]">edit</span>
-                      <span className="material-symbols-outlined mr-2 text-[20px] leading-[28px]">delete</span>
+                    <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px] cursor-pointer" >
+                      <span className="material-symbols-outlined mr-2 text-[20px] leading-[28px]cursor-pointer" onClick={() => deleteLogo(logo?.id)}>delete</span>
                     </td>
                   </tr>
                 ))}

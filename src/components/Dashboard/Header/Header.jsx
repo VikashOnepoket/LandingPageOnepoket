@@ -82,7 +82,6 @@ const Header = () => {
 
     }
     const [alertVisible, setAlertVisible] = useState(false);  // Controls alert visibility
-    const [blinkingActive, setBlinkingActive] = useState(false);
 
     const token = useSelector((state) => state.auth.token);
     const [name, setName] = useState("")
@@ -106,10 +105,10 @@ const Header = () => {
                 // Check if any required fields are empty or null
                 if (!address || !email || !phone_number || !helpline_email || !helpline_number || !company_name) {
                     setAlertVisible(true);    // Show the alert
-                    setBlinkingActive(true);   // Start blinking
+                    // Start blinking
                 } else {
                     setAlertVisible(false);    // Hide the alert
-                    setBlinkingActive(false);  // Stop blinking
+                    // Stop blinking
                 }
             })
                 .catch((error) => {
@@ -118,20 +117,21 @@ const Header = () => {
         }
     }, [token]);
 
-    // Effect to handle blinking every 3 seconds when blinkingActive is true
-    useEffect(() => {
-        let timeout;
-        if (blinkingActive) {
-            timeout = setTimeout(() => {
-                setAlertVisible((prev) => !prev); // Toggle alert visibility
-            }, 3000);
+
+
+
+
+    const handleAccountHover = () => {
+        if (alertVisible) {
+            setAlertVisible(true);
         }
+    };
 
-        return () => {
-            if (timeout) clearTimeout(timeout);  // Clear the timeout on unmount or when blinking stops
-        };
-    }, [blinkingActive, alertVisible]);
-
+    const handleAccountLeave = () => {
+        if (alertVisible) {
+            setAlertVisible(false);
+        }
+    };
 
 
     return (
@@ -154,7 +154,7 @@ const Header = () => {
 
 
                 <div className='flex justify-between gap-5'>
-                    <AnimatePresence>
+                    {/* <AnimatePresence>
                         {alertVisible && (
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -170,24 +170,23 @@ const Header = () => {
                                 Please complete your profile to have a better experience.
                             </motion.div>
                         )}
-                    </AnimatePresence>
+                    </AnimatePresence> */}
 
                     <div>
                         <span className="material-symbols-outlined text-[22px] leading-[28px] text-[#7A7A7A]">
                             notifications
                         </span>
                     </div>
-                    <div className='relative' ref={dropdownRef}>
-                        <div className='flex justify-between gap-5'>
-                            <div>
-                                <span
-                                    className="material-symbols-outlined text-[22px] leading-[28px] text-[#7A7A7A] cursor-pointer"
-                                    onClick={toggleDropdown}
-                                >
-                                    account_circle
-                                </span>
-                            </div>
-                        </div>
+                    <div className='relative'
+                    onMouseEnter={handleAccountHover}
+                    onMouseLeave={handleAccountLeave}
+                    >
+                        <span
+                            className="material-symbols-outlined text-[22px] leading-[28px] text-[#7A7A7A] cursor-pointer"
+                            onClick={toggleDropdown}
+                        >
+                            account_circle
+                        </span>
                         <AnimatePresence>
                             {isOpen && (
                                 <motion.div
@@ -196,7 +195,6 @@ const Header = () => {
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.3 }}
                                     className="absolute right-0 mt-1 w-72 bg-white rounded-md shadow-lg z-50 border"
-                                    sty
                                 >
                                     <div className="p-4">
                                         <div className="flex items-center gap-3 mb-4">
@@ -216,10 +214,6 @@ const Header = () => {
                                                 <span className="material-symbols-outlined text-[#58595A]">logout</span>
                                                 <span className='text-[12px] leading-[16px] font-semibold text-[#58595A]'>Logout</span>
                                             </div>
-                                            {/* <div className="flex items-center gap-3 cursor-pointer text-blue-500 hover:bg-gray-100 p-2 rounded-md mt-2 justify-center">
-                                                <span className="material-symbols-outlined text-[#0052cc] ">add</span>
-                                                <span className='text-[12px] leading-[16px] font-semibold text-[#0052CC]'>Add Account</span>
-                                            </div> */}
                                         </div>
                                     </div>
                                 </motion.div>
