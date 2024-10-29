@@ -116,7 +116,7 @@ const Header = () => {
                     console.log(error?.response?.status, "error");
                 });
         }
-    }, [dispatch, token]);
+    }, [token]);
 
     // Effect to handle blinking every 3 seconds when blinkingActive is true
     useEffect(() => {
