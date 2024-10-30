@@ -6,8 +6,10 @@ import Select from 'react-select'
 import SearchInput from '../../SearchInput/SearchInput';
 import { useSelector } from 'react-redux';
 import axios from '../../../../api/api'
+import SpinnerMain from '../../Spinner/SpinnerMain';
 
 const CompletedInstallation = () => {
+    const [loading, setLoading] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const openDrawer = () => {
         setDrawerOpen(true);
@@ -66,6 +68,7 @@ const CompletedInstallation = () => {
     const token = useSelector((state) => state.auth.token)
     const completedInstallation = async () => {
         try {
+            setLoading(true)
             const { data } = await axios.get('/lp_completed_installation', {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -74,8 +77,10 @@ const CompletedInstallation = () => {
             console.log(data, "pending installation data")
             setCompletedInstallationData(data?.result)
             setTotalCompleted(data?.count)
+            setLoading(false)
         }
         catch (err) {
+            setLoading(false)
             console.log(err)
         }
     }
@@ -85,7 +90,7 @@ const CompletedInstallation = () => {
     }, [])
     return (
         <>
-            <div className='mt-3 p-8'>
+            {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Requests</h3>
                     {/* <FilterCompletion/> */}
@@ -232,7 +237,7 @@ const CompletedInstallation = () => {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>)}
         </>
     )
 }

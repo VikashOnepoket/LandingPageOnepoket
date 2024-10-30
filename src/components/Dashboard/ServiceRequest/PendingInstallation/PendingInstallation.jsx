@@ -5,11 +5,14 @@ import Select from 'react-select'
 import SearchInput from '../../SearchInput/SearchInput';
 import axios from '../../../../api/api'
 import { useSelector } from 'react-redux';
+import ModalOTP from './ModalOTP';
+import SpinnerMain from '../../Spinner/SpinnerMain';
 const PendingInstallation = () => {
-
-
+    const [loading, setLoading] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [selectedInstallationId, setSelectedInstallationId] = useState(null);
     const statusOptions = [
-        { value: 'pending', label: 'Pending' },
+        { value: 'pending', label: 'Pending', isDisabled: true },
         { value: 'completed', label: 'Completed' },
         { value: 'rejected', label: 'Reject' },
     ];
@@ -21,6 +24,8 @@ const PendingInstallation = () => {
     const closeDrawer = () => {
         setDrawerOpen(false);
     };
+
+    const closeModal = () => setShowModal(false);
 
     // filter
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -68,9 +73,11 @@ const PendingInstallation = () => {
     // calling api for  pending installation
     const [totalPending, setTotalPneding] = useState("")
     const [pendingInstallationData, setPendingInstallationData] = useState([])
+
     const token = useSelector((state) => state.auth.token)
     const pendingInstallation = async () => {
         try {
+            setLoading(true)
             const { data } = await axios.get('/lp_pending_installation', {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -78,10 +85,13 @@ const PendingInstallation = () => {
             });
             console.log(data, "pending installation data")
             setPendingInstallationData(data?.result)
+
             setTotalPneding(data?.count)
+            setLoading(false)
         }
         catch (err) {
             console.log(err)
+            setLoading(false)
         }
     }
 
@@ -93,24 +103,54 @@ const PendingInstallation = () => {
 
 
     // changes 
-    const handleStatusChange = async (selectedOption, installationId) => {
-        console.log(selectedOption, "selected option")
-        console.log(installationId, "id")
-        const value = selectedOption.value
+    // const handleStatusChange = async (selectedOption, installationId) => {
+    //     console.log(selectedOption, "selected option")
+    //     console.log(installationId, "id")
+    //     const value = selectedOption.value
 
+    //     try {
+    //         const { data } = await axios.put('/update_lp_pending_installation', { id: installationId, status: value, })
+    //         console.log(data)
+    //         pendingInstallation()
+
+
+    //     } catch (err) {
+    //         console.error('Error updating status:', err);
+    //     }
+    // };
+
+    const handleStatusChange = (selectedOption, installationId) => {
+        if (selectedOption.value !== 'pending') {
+            setSelectedInstallationId(installationId);
+            setShowModal(true);
+        }
+    };
+
+    const handleModalSubmit = async () => {
         try {
-            const { data } = await axios.put('/update_lp_pending_installation', { id: installationId, status: value, })
-            console.log(data)
-            pendingInstallation()
-
-
+            const { data } = await axios.put('/update_lp_pending_installation', {
+                id: selectedInstallationId,
+                status: 'completed', // Assuming status is set to 'completed' on submit
+            });
+            pendingInstallation(); // Refresh data
         } catch (err) {
             console.error('Error updating status:', err);
         }
     };
+
+
+    // storing the contact number
+    const [storedContact, setStoredContact] = useState(null);
+
+    const handleStoreContact = (contactNumber) => {
+        setStoredContact(contactNumber); // Store contact securely without displaying it
+        console.log("Contact stored securely:", contactNumber); // Optional: for testing, can be removed
+    };
     return (
         <>
-            <div className='mt-3 p-8'>
+            {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
+                <ModalOTP isOpen={showModal} onClose={closeModal} onSubmit={handleModalSubmit} number={storedContact} loading={loading} />
+
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Requests</h3>
                     {/* <FilterCompletion/> */}
@@ -233,7 +273,7 @@ const PendingInstallation = () => {
                             <tbody className=''>
                                 {
                                     pendingInstallationData?.map((installation, index) => (
-                                        <tr key={index}>
+                                        <tr key={index} onClick={() => handleStoreContact(installation?.contact_number)}>
                                             <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">
                                                 {new Date(installation?.request_date_time).toLocaleDateString()},{new Date(installation?.request_date_time).toLocaleTimeString()}
                                             </td>
@@ -256,11 +296,18 @@ const PendingInstallation = () => {
                                                             ...provided,
                                                             width: '150px',
                                                             fontSize: '12px',
+                                                            cursor: 'pointer'
                                                         }),
                                                         menu: (provided) => ({
                                                             ...provided,
                                                             fontSize: '12px',
-                                                        })
+                                                            cursor: 'pointer'
+                                                        }),
+                                                        option: (provided, state) => ({
+                                                            ...provided,
+                                                            cursor: state.isDisabled ? 'not-allowed' : 'pointer', // Disabled cursor for "Pending"
+                                                            color: state.isDisabled ? '#ccc' : provided.color,
+                                                        }),
                                                     }}
                                                     menuPortalTarget={null} // Dropdown will open within the modal
                                                     menuPosition="fixed"
@@ -282,7 +329,7 @@ const PendingInstallation = () => {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>)}
         </>
     )
 }

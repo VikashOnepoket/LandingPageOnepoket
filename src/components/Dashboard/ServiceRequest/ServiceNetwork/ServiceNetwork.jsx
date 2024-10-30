@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Drawer } from '@mui/material';
 import Select from 'react-select'
 import SearchInput from '../../SearchInput/SearchInput';
+import axios from '../../../../api/api'
+import { useSelector } from 'react-redux';
+import TechnicalExecutiveDetailsTable from './TechnicalExecutiveDetailsTable';
+import SpinnerMain from '../../Spinner/SpinnerMain';
 const ServiceNetwork = () => {
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const openDrawer = () => {
@@ -56,9 +61,36 @@ const ServiceNetwork = () => {
             }
         })
     };
+    const token = useSelector((state) => state.auth.token)
+    const [count, setCount] = useState('')
+    const [technicalExecutiveDetails, setTechnicalExecutiveDetails] = useState([])
+    const fetchTechnicalExecutiveDetails = async () => {
+
+        try {
+
+            setLoading(true)
+            const { data } = await axios.get('/technical_executive_details', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(data, "data")
+            setTechnicalExecutiveDetails(data?.result)
+            setCount(data?.count)
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+
+    }
+
+    useEffect(() => {
+        fetchTechnicalExecutiveDetails()
+    }, [token])
     return (
         <>
-            <div className='mt-3 p-8'>
+            {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Request</h3>
                     {/* <FilterServiceNetwork /> */}
@@ -134,7 +166,7 @@ const ServiceNetwork = () => {
                 </Drawer>
                 <div className='mt-12'>
                     <div>
-                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>24</h3>
+                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{count}</h3>
                     </div>
                     <div className=' mt-5 flex lg:justify-between lg:items-center lg:flex-row flex-col gap-10'>
                         <div>
@@ -159,35 +191,17 @@ const ServiceNetwork = () => {
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Name</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Phone Number</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Email</th>
-                                    <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Rating</th>
+                                    {/* <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Rating</th> */}
 
                                 </tr>
                             </thead>
-                            <tbody className=''>
-                                <tr className="p-5">
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold  text-[#0052cc] hover:underline"><a href="#">LG Service Centre</a></td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">1234567899</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">xyz123@gmail.com</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">CIT Road, Kolkata-700010, W.B</td>
-                                </tr>
-                                <tr className="p-5">
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold  text-[#0052cc] hover:underline"><a href="#">LG Service Centre</a></td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">1234567899</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">xyz123@gmail.com</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">CIT Road, Kolkata-700010, W.B</td>
-                                </tr>
-                                <tr className="p-5">
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold  text-[#0052cc] hover:underline"><a href="#">LG Service Centre</a></td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">1234567899</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">xyz123@gmail.com</td>
-                                    <td className="py-5 px-4 border-b  text-[12px] leading-[17px] font-semibold text-[#202123BF]">CIT Road, Kolkata-700010, W.B</td>
-                                </tr>
-
-                            </tbody>
+                            {technicalExecutiveDetails?.map((data) => {
+                                return <TechnicalExecutiveDetailsTable data={data} key={data?.id} />
+                            })}
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>)}
         </>
     )
 }
