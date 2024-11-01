@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const PurchaseOptionEdit = ({ PurchaseOptions = [], onAdditionalInfoChange, formData }) => {
+const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, formData }) => {
     const [options, setOptions] = useState([{ title: '', link: '' }]);
 
     useEffect(() => {
         if (formData && formData.PurchaseOptions) {
             setOptions(formData.PurchaseOptions.length ? formData.PurchaseOptions : [{ title: '', link: '' }]);
         }
-    }, [formData]);
+    }, []);
     console.log(formData.PurchaseOptions, "options")
 
     const handleOptionChange = (id, name, value) => {

@@ -56,7 +56,8 @@ const EditProduct = () => {
         setLoading(false);
         setFormData({
           ...data,
-          installation_details : data.installation_details == 0 ? false : true,
+          installation_details: data.installation_details == 0 ? false : true,
+          show_manufacture_date: data.show_manufacture_date == 0 ? false : true,
           additionalInfo: data?.additional_info,
           PurchaseOptions: data?.Purchase_options,
         }); // Set the entire product data including image
@@ -70,10 +71,11 @@ const EditProduct = () => {
   }, [id]);
 
   const handleInputChange = (name, value) => {
-    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details')
-      ? (value ? 1 : 0)
-      : value; // For other fields, keep the original value
 
+    let formattedValue = value; // Start with the provided value
+    if (name === 'show_manufacture_date' || name === 'installation_details') {
+      formattedValue = value ? 1 : 0; // Convert boolean to 1 or 0
+    }
     setFormData((prevData) => ({
       ...prevData,
       [name]: formattedValue,
@@ -130,7 +132,7 @@ const EditProduct = () => {
     data.append('additionalInfo', JSON.stringify(formData.additionalInfo));
     data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions));
     data.append('category_title', formData.category_title);
-    data.append('installation_details', formData?.installation_details);
+    data.append('installation_details', formData?.installation_details == true ? 1 : 0);
     // data.append('show_manufacture_date', formData?.show_manufacture_date)
     data.append('logo_id', formData.logo_id);
 

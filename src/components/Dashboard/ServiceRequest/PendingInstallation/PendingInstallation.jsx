@@ -11,6 +11,7 @@ const PendingInstallation = () => {
     const [loading, setLoading] = useState(false)
     const [showModal, setShowModal] = useState(false);
     const [selectedInstallationId, setSelectedInstallationId] = useState(null);
+    const [selectedInstallationOption, setSelectedInstallationOPtion] = useState(null);
     const statusOptions = [
         { value: 'pending', label: 'Pending', isDisabled: true },
         { value: 'completed', label: 'Completed' },
@@ -85,7 +86,6 @@ const PendingInstallation = () => {
             });
             console.log(data, "pending installation data")
             setPendingInstallationData(data?.result)
-
             setTotalPneding(data?.count)
             setLoading(false)
         }
@@ -99,57 +99,42 @@ const PendingInstallation = () => {
         pendingInstallation()
     }, [])
 
-    console.log(pendingInstallationData, "da")
-
-
-    // changes 
-    // const handleStatusChange = async (selectedOption, installationId) => {
-    //     console.log(selectedOption, "selected option")
-    //     console.log(installationId, "id")
-    //     const value = selectedOption.value
-
-    //     try {
-    //         const { data } = await axios.put('/update_lp_pending_installation', { id: installationId, status: value, })
-    //         console.log(data)
-    //         pendingInstallation()
-
-
-    //     } catch (err) {
-    //         console.error('Error updating status:', err);
-    //     }
-    // };
-
     const handleStatusChange = (selectedOption, installationId) => {
-        if (selectedOption.value !== 'pending') {
-            setSelectedInstallationId(installationId);
+        setSelectedInstallationOPtion(selectedOption?.value);
+        setSelectedInstallationId(installationId);
+
+        if (selectedOption.value === "completed") {
             setShowModal(true);
+        } else {
+            handleModalSubmit(selectedOption.value, installationId);
         }
     };
 
-    const handleModalSubmit = async () => {
+    const handleModalSubmit = async (status, id) => {
         try {
             const { data } = await axios.put('/update_lp_pending_installation', {
-                id: selectedInstallationId,
-                status: 'completed', // Assuming status is set to 'completed' on submit
+                id : id,
+                status : status
             });
-            pendingInstallation(); // Refresh data
+            pendingInstallation();
         } catch (err) {
             console.error('Error updating status:', err);
         }
     };
 
 
+
     // storing the contact number
     const [storedContact, setStoredContact] = useState(null);
 
     const handleStoreContact = (contactNumber) => {
-        setStoredContact(contactNumber); // Store contact securely without displaying it
-        console.log("Contact stored securely:", contactNumber); // Optional: for testing, can be removed
+        setStoredContact(contactNumber); 
     };
+
     return (
         <>
             {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
-                <ModalOTP isOpen={showModal} onClose={closeModal} onSubmit={handleModalSubmit} number={storedContact} loading={loading} />
+                <ModalOTP isOpen={showModal} onClose={closeModal} number={storedContact} loading={loading} selectedOption={selectedInstallationOption} selectedInstallationId={selectedInstallationId} pendingFunction={pendingInstallation} />
 
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Requests</h3>
