@@ -85,6 +85,7 @@ const Product = () => {
     console.log("hello")
     const token = useSelector((state) => state.auth.token);
     const [product, setProduct] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
         if (token) {
@@ -94,6 +95,7 @@ const Product = () => {
                 .then((data) => {
                     console.log(data, "data");
                     setProduct(data);
+                    setFilteredProducts(data);
                 })
                 .catch((error) => {
                     console.log(error.response.status, "error"); // This should now catch the error
@@ -152,6 +154,17 @@ const Product = () => {
 
     }
 
+    const handleSearchChange = (value) => {
+        setLoading(true);
+        const lowerCaseValue = value.toLowerCase();
+        const filtered = product?.filter((item) => {
+            const lowerCaseProductName = item?.product_name?.toLowerCase() || '';
+            const lowerCaseCategoryTitle = item?.category_title?.toLowerCase() || '';
+            return lowerCaseProductName.includes(lowerCaseValue) || lowerCaseCategoryTitle.includes(lowerCaseValue);
+        });
+        setFilteredProducts(filtered); 
+        setLoading(false); 
+    };
     return (
         <>
             {loading ? (<SpinnerMain />) : (
@@ -163,7 +176,12 @@ const Product = () => {
                                 <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] text-[#0052CC] font-semibold">Products</h3>
                             </div>
                             <div className='flex gap-3 sm:flex-row flex-col'>
-                                <SearchInput />
+                                <SearchInput
+                                    placeholder="Search for items..."
+                                    onSearchChange={handleSearchChange}
+                                    initialValue=""
+                                    className="my-custom-class"
+                                />
                                 <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={() => navigate(`/products/add_product`)}>
                                     <span className="material-symbols-outlined mr-2">add</span>
                                     Add Product
@@ -273,43 +291,52 @@ const Product = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {product?.slice().reverse().map((prod) => (
-                                            <tr key={prod?.product_id} className="">
-                                                <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
-                                                    {prod?.created_at.split('T')[0]}
-                                                </td>
-                                                <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A] flex items-center gap-5">
-                                                    <img
-                                                        src={prod?.product_image}
-                                                        alt="placeholder"
-                                                        className="rounded-md w-[50px] h-[50px]"
-                                                    />
-                                                    {prod?.product_name}
-                                                </td>
-                                                <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
-                                                    {prod?.category_title}
-                                                </td>
-                                                <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
-                                                    {prod?.warranty_years && prod?.warranty_months
-                                                        ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years ' : prod?.warranty_years + ' year '}${prod?.warranty_months > 1 ? prod?.warranty_months + ' months ' : prod?.warranty_months + ' month '}`
-                                                        : prod?.warranty_years
-                                                            ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years' : prod?.warranty_years + ' year'}`
-                                                            : prod?.warranty_months
-                                                                ? `${prod?.warranty_months > 1 ? prod?.warranty_months + ' months' : prod?.warranty_months + ' month'}`
-                                                                : 'N/A'
-                                                    }
-                                                </td>
-                                                <td className="py-3 px-4 border-b font-medium text-[#58595A] space-x-3">
-                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
-                                                        edit
-                                                    </span>
-                                                    <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]" onClick={() => handleDeleteProduct(prod?.product_id)}>
-                                                        delete
-                                                    </span>
+                                        {filteredProducts.length > 0 ? (
+                                            filteredProducts.slice().reverse().map((prod) => (
+                                                <tr key={prod?.product_id}>
+                                                    <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                        {prod?.created_at.split('T')[0]}
+                                                    </td>
+                                                    <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A] flex items-center gap-5">
+                                                        <img
+                                                            src={prod?.product_image}
+                                                            alt="Product"
+                                                            className="rounded-md w-[50px] h-[50px]"
+                                                        />
+                                                        {prod?.product_name}
+                                                    </td>
+                                                    <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                        {prod?.category_title}
+                                                    </td>
+                                                    <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                        {prod?.warranty_years && prod?.warranty_months
+                                                            ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years ' : prod?.warranty_years + ' year '}${prod?.warranty_months > 1 ? prod?.warranty_months + ' months ' : prod?.warranty_months + ' month '}`
+                                                            : prod?.warranty_years
+                                                                ? `${prod?.warranty_years > 1 ? prod?.warranty_years + ' years' : prod?.warranty_years + ' year'}`
+                                                                : prod?.warranty_months
+                                                                    ? `${prod?.warranty_months > 1 ? prod?.warranty_months + ' months' : prod?.warranty_months + ' month'}`
+                                                                    : 'N/A'
+                                                        }
+                                                    </td>
+                                                    <td className="py-3 px-4 border-b font-medium text-[#58595A] space-x-3">
+                                                        <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
+                                                            edit
+                                                        </span>
+                                                        <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#FF4040]" onClick={() => handleDeleteProduct(prod?.product_id)}>
+                                                            delete
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="5" className="py-3 px-4 border-b text-center text-[12px] leading-4 font-medium text-[#58595A]">
+                                                    No products found.
                                                 </td>
                                             </tr>
-                                        ))}
+                                        )}
                                     </tbody>
+
 
 
 
