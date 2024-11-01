@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from '../../../../api/api'
+import toast from 'react-hot-toast';
 
 const ModalOTP = ({ isOpen, onClose, number, loading, selectedOption, selectedInstallationId, pendingFunction }) => {
     if (!isOpen) return null;
@@ -44,17 +45,19 @@ const ModalOTP = ({ isOpen, onClose, number, loading, selectedOption, selectedIn
 
     const handleModalSubmit = async () => {
         try {
-            const { data } = await axios.put('/update_lp_pending_installation', {
+            const { data } = await axios.post('/update_lp_pending_installation', {
                 id: selectedInstallationId,
                 status: selectedOption,
                 otp: otpValue,
                 phone_number: number
                 // Assuming status is set to 'completed' on submit
             });
+            console.log(data , "data update dmodal");
             pendingFunction(); // Refresh data
         } catch (err) {
             console.error('Error updating status:', err);
-            
+            toast.error(err?.response?.data?.message)
+
         }
     };
 

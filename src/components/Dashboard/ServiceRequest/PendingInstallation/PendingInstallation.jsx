@@ -112,10 +112,11 @@ const PendingInstallation = () => {
 
     const handleModalSubmit = async (status, id) => {
         try {
-            const { data } = await axios.put('/update_lp_pending_installation', {
-                id : id,
-                status : status
+            const { data } = await axios.post('/update_lp_pending_installation', {
+                id: id,
+                status: status
             });
+            console.log(data ,"data updated");
             pendingInstallation();
         } catch (err) {
             console.error('Error updating status:', err);
@@ -128,7 +129,7 @@ const PendingInstallation = () => {
     const [storedContact, setStoredContact] = useState(null);
 
     const handleStoreContact = (contactNumber) => {
-        setStoredContact(contactNumber); 
+        setStoredContact(contactNumber);
     };
 
     return (
