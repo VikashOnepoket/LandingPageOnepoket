@@ -10,8 +10,6 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState(() => {
     return location.pathname.split('/')[2] || 'details';
   });
-  console.log(activeTab , "activeTab", activeTab)
-
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
     navigate(`/profile/${tabName}`);
