@@ -25,6 +25,9 @@ const AddLogo = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!addLogoData.title || !addLogoData.image) {
+            return toast.error("All fields are required")
+        }
         const formData = new FormData();
         formData.append('title', addLogoData.title);
         formData.append('image', addLogoData.image);
@@ -46,6 +49,12 @@ const AddLogo = () => {
             setLoading(false);
         }
     };
+    const removeImage = () => {
+        setAddLogoData((prevData) => ({
+            ...prevData,
+            image: null
+        }));
+    }
 
     return (
         <>
@@ -55,7 +64,10 @@ const AddLogo = () => {
                 </div>
                 {/* Title */}
                 <div className="flex flex-col gap-2 mt-5">
-                    <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Title</label>
+                    <label className='ml-2 text-[16px] leading-4 inter font-semibold text-[#202123BF]'>
+                        <span className='text-[#EE4444] mr-1'> *</span>
+                        Title
+                    </label>
                     <input
                         type="text"
                         name="title"
@@ -67,17 +79,17 @@ const AddLogo = () => {
                 </div>
                 {/* Logo */}
                 <div className='mt-5'>
-                    <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Company Logo</label>
+                    <label className='ml-2 text-[16px] leading-4 inter font-semibold text-[#202123BF]'>
+                        <span className='text-[#EE4444] mr-1'> *</span>
+                        Company Logo
+                    </label>
                 </div>
                 <div className="bg-white rounded-md border p-6 mt-2">
                     <form onSubmit={handleSubmit}>
                         <div className="flex justify-center items-center mb-4">
                             <label htmlFor="imageUpload" className="cursor-pointer flex flex-col justify-center items-center w-full h-48">
                                 <span className="material-symbols-outlined text-gray-400 text-5xl">add_a_photo</span>
-                                <button type="button" className='text-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2'>
-                                    <span className="material-symbols-outlined mr-2">add</span>
-                                    Upload Image
-                                </button>
+                                <p className="text-gray-500 mt-4 text-sm font-light">Drop your image here, or browse</p>
                                 <p className="text-center text-sm text-gray-500 mt-4">
                                     Support: jpeg, png
                                 </p>
@@ -92,12 +104,13 @@ const AddLogo = () => {
                             />
                         </div>
                         {addLogoData.image && (
-                            <div className="flex justify-center items-center">
+                            <div className="flex justify-center items-center flex-col">
                                 <img
                                     src={URL.createObjectURL(addLogoData.image)}
                                     alt="Uploaded Image"
                                     className="w-64 h-64 object-cover"
                                 />
+                                <button className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2 mt-3' onClick={removeImage}>Remove Image</button>
                             </div>
                         )}
                     </form>

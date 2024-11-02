@@ -16,7 +16,6 @@ const SearchInput = ({ placeholder = "Search...", onSearchChange, initialValue =
     };
 
     const handleBlur = () => {
-        // Collapse input only if there's no text in it
         if (!searchText) {
             setIsExpanded(false);
         }
@@ -26,7 +25,7 @@ const SearchInput = ({ placeholder = "Search...", onSearchChange, initialValue =
         const value = e.target.value;
         setSearchText(value);
         if (onSearchChange) {
-            onSearchChange(value); // Call the onChange handler passed as a prop
+            onSearchChange(value);
         }
     };
 

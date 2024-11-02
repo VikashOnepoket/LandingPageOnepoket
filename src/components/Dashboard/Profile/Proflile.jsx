@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Details from './Details';
 import QRUsage from './QRUsage';
 import Logo from './Logo';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(() => {
+    return location.pathname.split('/')[2] || 'details';
+  });
+  console.log(activeTab , "activeTab", activeTab)
 
-  const [activeTab, setActiveTab] = useState('details');
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
     navigate(`/profile/${tabName}`);
   };
+
+  useEffect(() => {
+    const tabName = location.pathname.split('/')[2];
+    if (tabName) setActiveTab(tabName);
+  }, [location.pathname]);
 
   const renderActiveTabContent = () => {
     switch (activeTab) {

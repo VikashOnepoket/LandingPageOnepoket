@@ -136,6 +136,8 @@ const AddProduct = () => {
     }
   };
 
+  
+
   return (
     <>
       {loading ? (

@@ -154,8 +154,7 @@ const Product = () => {
 
     }
 
-    const handleSearchChange = (value) => {
-        setLoading(true);
+    const handleSearchChange = async(value) => {
         const lowerCaseValue = value.toLowerCase();
         const filtered = product?.filter((item) => {
             const lowerCaseProductName = item?.product_name?.toLowerCase() || '';
@@ -163,7 +162,6 @@ const Product = () => {
             return lowerCaseProductName.includes(lowerCaseValue) || lowerCaseCategoryTitle.includes(lowerCaseValue);
         });
         setFilteredProducts(filtered); 
-        setLoading(false); 
     };
     return (
         <>
@@ -177,7 +175,7 @@ const Product = () => {
                             </div>
                             <div className='flex gap-3 sm:flex-row flex-col'>
                                 <SearchInput
-                                    placeholder="Search for items..."
+                                    placeholder="Search for product..."
                                     onSearchChange={handleSearchChange}
                                     initialValue=""
                                     className="my-custom-class"
