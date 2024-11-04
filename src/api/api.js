@@ -36,7 +36,7 @@ instance.interceptors.response.use(
             // console.log(error.response.status, "error in interceptor response");
 
             // Call the logout handler
-            // handleLogout();
+            handleLogout();
             
         }
 

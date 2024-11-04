@@ -58,7 +58,7 @@ const Product = () => {
     const handleCheckboxChange = (value) => {
         console.log(value, "valuesss")
         setSelectedCheckboxes((prevSelected) =>
-            prevSelected.includes(value) ? [] : [value] 
+            prevSelected.includes(value) ? [] : [value]
         );
     };
 
@@ -180,10 +180,17 @@ const Product = () => {
     });
     const applyFilter = () => {
         setLoading(true);
+        const category_filter = selectedCategories.map((item) => {
+            return {
+                value: item.value,
+            }
+
+        })
+        console.log(category_filter, "filter")
         dispatch(fetchProducts({
             token,
-            filter_by_category: selectedCategories,
-            filter_by_date: selectedCheckboxes[0] || "custom_date",
+            filter_by_category: filterCategory,
+            filter_by_date:selectedCheckboxes[0] || "custom_date",
             start_date: startDate,
             end_date: endDate,
         })).then((data) => {
@@ -218,7 +225,7 @@ const Product = () => {
     };
 
 
-    const resetAllValues = ()=>{
+    const resetAllValues = () => {
         setStartDate(null)
         setEndDate(null)
         setSelectedCategories([])
