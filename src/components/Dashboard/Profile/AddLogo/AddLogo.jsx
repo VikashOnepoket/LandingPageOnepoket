@@ -32,7 +32,7 @@ const AddLogo = () => {
         formData.append('title', addLogoData.title);
         formData.append('image', addLogoData.image);
         formData.append('token', addLogoData.token);
-
+    
         try {
             setLoading(true);
             const response = await axios.post('/upload_logo', formData, {

@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import earbud from '../../../../assets/image 6.png'
+import { useParams } from 'react-router-dom'
+import axios from '../../../../api/api'
 
 const WarrantyClaimDetails = () => {
+    const [loading, setLoading] = useState(false)
+    const { id } = useParams()
+    const fetchDetails = async () => {
+        try {
+            const { data } = await axios.get('/get_warranty_claim_by_id', { params: { id } })
+            console.log(data, 'details')
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+        }
+
+    }
+    useEffect(() => {
+        fetchDetails()
+    }, [id])
     return (
         <>
             <div className='mt-3 p-8'>

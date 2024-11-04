@@ -10,21 +10,24 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
-    async (token, {rejectWithValue}) => {
+    async ({ token, filter_by_category, filter_by_date, start_date, end_date }, { rejectWithValue }) => {
         try {
-            const response = await axios.get('/all_product_lp', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await axios.post(
+                '/all_product_lp',
+                { filter_by_category, filter_by_date, start_date, end_date }, // Body payload
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Bearer token in headers
+                    },
+                }
+            );
             return response.data;
         } catch (error) {
-            return rejectWithValue(error);
-            // return Promise.reject(error);
-        
+            return rejectWithValue(error.response?.data || error.message);
         }
     }
 );
+
 
 const productsSlice = createSlice({
     name: 'products',

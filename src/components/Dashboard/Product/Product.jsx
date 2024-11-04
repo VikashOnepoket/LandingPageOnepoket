@@ -12,6 +12,9 @@ import { fetchProducts } from '../slice/productSlice';
 import { signOutSuccess } from '../slice/authSlice';
 import axios from '../../../api/api';
 import toast from 'react-hot-toast';
+import { fetchCategory, setCategory } from '../slice/categorySlice';
+import { DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
 
 
 const Product = () => {
@@ -38,35 +41,24 @@ const Product = () => {
 
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState('');
 
     const products = [
         { value: 'product1', label: 'Product 1' },
         { value: 'product2', label: 'Product 2' },
         { value: 'product3', label: 'Product 3' }
     ];
-
-    const categories = [
-        { value: 'category1', label: 'Category 1' },
-        { value: 'category2', label: 'Category 2' },
-        { value: 'category3', label: 'Category 3' }
-    ];
-
     const dateOptions = [
         { value: 'today', label: 'Today' },
         { value: 'yesterday', label: 'Yesterday' },
-        { value: 'last7days', label: 'Last 7 days' },
-        { value: 'last30days', label: 'Last 30 Days' },
-        { value: 'last90days', label: 'Last 90 days' },
-        { value: 'thisMonth', label: 'This Month' },
-        { value: 'lastMonth', label: 'Last Month' }
+        { value: 'this_week', label: 'Last 7 days' },
+        { value: 'this_month', label: 'This Month' },
     ];
 
     const handleCheckboxChange = (value) => {
+        console.log(value, "valuesss")
         setSelectedCheckboxes((prevSelected) =>
-            prevSelected.includes(value)
-                ? prevSelected.filter((v) => v !== value)
-                : [...prevSelected, value]
+            prevSelected.includes(value) ? [] : [value] 
         );
     };
 
@@ -82,7 +74,6 @@ const Product = () => {
     };
 
     const [loading, setLoading] = useState(false)
-    console.log("hello")
     const token = useSelector((state) => state.auth.token);
     const [product, setProduct] = useState([])
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -90,8 +81,8 @@ const Product = () => {
     useEffect(() => {
         if (token) {
             setLoading(true);
-            dispatch(fetchProducts(token))
-                .unwrap() // Unwraps the result to either a fulfilled payload or throws a rejection error
+            dispatch(fetchProducts({ token }))
+                .unwrap()
                 .then((data) => {
                     console.log(data, "data");
                     setProduct(data);
@@ -99,19 +90,13 @@ const Product = () => {
                 })
                 .catch((error) => {
                     console.log(error.response.status, "error"); // This should now catch the error
-                    // if (error.response.status === 403) {
-                    //     dispatch(signOutSuccess())
-                    //     localStorage.removeItem('token')
-                    // }
+
                 })
                 .finally(() => {
                     setLoading(false);
                 });
         }
-    }, [dispatch, token]);
-
-
-
+    }, []);
 
     const handleEditNavigate = (id) => {
         navigate(`/products/edit_product/${id}`)
@@ -129,18 +114,14 @@ const Product = () => {
             )
             console.log(data, "data")
             toast.success(data?.data?.message)
-            dispatch(fetchProducts(token))
-                .unwrap() // Unwraps the result to either a fulfilled payload or throws a rejection error
+            dispatch(fetchProducts({ token }))
+                .unwrap()
                 .then((data) => {
                     console.log(data, "data");
                     setProduct(data);
                 })
                 .catch((error) => {
                     console.log(error.response.status, "error"); // This should now catch the error
-                    // if (error.response.status === 403) {
-                    //     dispatch(signOutSuccess())
-                    //     localStorage.removeItem('token')
-                    // }
                 })
                 .finally(() => {
                     setLoading(false);
@@ -154,15 +135,97 @@ const Product = () => {
 
     }
 
-    const handleSearchChange = async(value) => {
+    const handleSearchChange = async (value) => {
         const lowerCaseValue = value.toLowerCase();
         const filtered = product?.filter((item) => {
             const lowerCaseProductName = item?.product_name?.toLowerCase() || '';
             const lowerCaseCategoryTitle = item?.category_title?.toLowerCase() || '';
             return lowerCaseProductName.includes(lowerCaseValue) || lowerCaseCategoryTitle.includes(lowerCaseValue);
         });
-        setFilteredProducts(filtered); 
+        setFilteredProducts(filtered);
     };
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [filterCategory, setFilterCategory] = useState([])
+    const handleCategoryChange = (value) => {
+        const categoryValue = value?.map((category) => {
+            return category?.value
+        })
+        setFilterCategory(categoryValue)
+        setSelectedCategories(value)
+    }
+
+    useEffect(() => {
+        if (token) {
+            setLoading(true);
+            dispatch(fetchCategory(token))
+                .unwrap()
+                .then((data) => {
+                    setSelectedCategory(data)
+                })
+                .catch((error) => {
+                    console.error(error.response?.status, "error");
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    }, []);
+
+
+    const optionsCategory = selectedCategory?.map((category) => {
+        return {
+            value: category?.title,
+            label: category?.title,
+        };
+    });
+    const applyFilter = () => {
+        setLoading(true);
+        dispatch(fetchProducts({
+            token,
+            filter_by_category: selectedCategories,
+            filter_by_date: selectedCheckboxes[0] || "custom_date",
+            start_date: startDate,
+            end_date: endDate,
+        })).then((data) => {
+            setProduct(data?.payload)
+            setFilteredProducts(data?.payload)
+            setLoading(false);
+            closeDrawer()
+        }).catch((err) => {
+            console.error(err);
+            setLoading(false);
+        })
+    };
+
+
+    // date picker
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+        setEndDate(null);
+    };
+
+    const handleEndDateChange = (date) => {
+        setEndDate(date);
+    };
+
+    console.log(startDate, "start date", endDate, "end date")
+
+    const disabledEndDate = (current) => {
+        return current && startDate && current.isBefore(startDate, 'day');
+    };
+
+
+    const resetAllValues = ()=>{
+        setStartDate(null)
+        setEndDate(null)
+        setSelectedCategories([])
+        setSelectedCheckboxes('')
+
+    }
+
     return (
         <>
             {loading ? (<SpinnerMain />) : (
@@ -212,38 +275,47 @@ const Product = () => {
                                 </div>
                                 <div className='border-t'></div>
                                 <div style={{ padding: "20px" }}>
-                                    {/* by product */}
-                                    <div className="mb-4">
-                                        <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Product</label>
-                                        <Select
-                                            value={selectedProduct}
-                                            onChange={setSelectedProduct}
-                                            options={products}
-                                            styles={customStyles}
-                                            className='mt-1'
-                                            placeholder="Please Select Product..."
-                                        />
-                                    </div>
                                     {/* byCategory */}
-                                    <div className="mb-4 mt-5">
+                                    <div className=" mb-4">
                                         <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Categories</label>
                                         <Select
-                                            value={selectedCategory}
-                                            onChange={setSelectedCategory}
-                                            options={categories}
+                                            // value={selectedCategory}
+                                            value={selectedCategories}
+                                            onChange={handleCategoryChange}
+                                            options={optionsCategory}
                                             styles={customStyles}
                                             className='mt-1'
                                             placeholder="Please Select Categories..."
+                                            isMulti
                                         />
                                     </div>
                                     {/* by date */}
                                     <div className="mb-4 mt-5">
                                         <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Date</label>
-                                        <input
-                                            type="date"
-                                            className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                                            placeholder="Enter Date"
-                                        />
+                                        <div className='mt-1'>
+                                            {/* Start Date Picker */}
+                                            <DatePicker
+                                                value={startDate}
+                                                onChange={handleStartDateChange}
+                                                format="YYYY-MM-DD"
+                                                placeholder="Select Start Date"
+                                                getPopupContainer={(trigger) => trigger.parentNode}
+                                                popupPlacement="bottomLeft"
+                                                disabled={selectedCheckboxes.length > 0}
+                                            />
+
+                                            {/* End Date Picker, enabled only when start date is selected */}
+                                            <DatePicker
+                                                value={endDate}
+                                                onChange={handleEndDateChange}
+                                                format="YYYY-MM-DD"
+                                                placeholder="Select End Date"
+                                                disabled={!startDate}
+                                                getPopupContainer={(trigger) => trigger.parentNode}
+                                                disabledDate={disabledEndDate}
+                                                popupPlacement="bottomLeft"
+                                            />
+                                        </div>
                                     </div>
                                     {/* Checkbox list */}
                                     <div className="mb-4 mt-5">
@@ -257,6 +329,8 @@ const Product = () => {
                                                         checked={selectedCheckboxes.includes(option.value)}
                                                         onChange={() => handleCheckboxChange(option.value)}
                                                         style={{ borderColor: selectedCheckboxes.includes(option.value) ? '#0052cc' : '#8F9091', backgroundColor: selectedCheckboxes.includes(option.value) ? '#0052cc' : 'transparent' }}
+                                                        disabled={startDate}
+
                                                     />
                                                     <span className="ml-4 text-[14px] leading-[18px] text-[#58595A] font-semibold">{option.label}</span>
                                                 </label>
@@ -266,10 +340,10 @@ const Product = () => {
                                 </div>
                                 {/* footee button */}
                                 <div className='flex justify-end  mt-5 mb-5 gap-5'>
-                                    <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2'>
+                                    <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' onClick={resetAllValues}>
                                         Discard
                                     </button>
-                                    <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' >
+                                    <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' onClick={applyFilter}>
                                         Apply
                                     </button>
                                 </div>
