@@ -5,6 +5,7 @@ import InvoiceDownload from './InvoiceUrl'
 import Select from 'react-select'
 import axios from '../../../../api/api'
 import { useSelector } from 'react-redux'
+import SpinnerMain from '../../Spinner/SpinnerMain'
 
 const WarrantyClaimDetails = () => {
     const token = useSelector((state) => state.auth.token)
@@ -17,20 +18,24 @@ const WarrantyClaimDetails = () => {
 
     const [selectedInstallationId, setSelectedInstallationId] = useState(null);
     const [selectedInstallationOption, setSelectedInstallationOPtion] = useState(null);
-  
+
     const handleStatusChange = async (selectedOption) => {
         setSelectedInstallationOPtion(selectedOption);
         try {
+            // setLoading(true)
             const { data } = await axios.post(
                 '/update_warranty_claim_status_by_id',
                 { id, status: selectedOption.value },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             console.log(data, "data updated");
+            fetchDetails()
+            // setLoading(false);
         } catch (error) {
             console.error("Error updating status:", error);
         }
     };
+
     const [loading, setLoading] = useState(false)
     const [details, setDetails] = useState([])
     const { id } = useParams()
@@ -41,12 +46,15 @@ const WarrantyClaimDetails = () => {
     };
     const fetchDetails = async () => {
         try {
+            setLoading(true);
             const { data } = await axios.post('/get_warranty_claim_by_id', { id: id })
             console.log(data, 'details')
+
             setDetails(data[0])
             setSelectedInstallationOPtion(
-                statusOptions.find(option => option.value === data[0]?.status) || statusOptions[0]
+                statusOptions.find(option => option.value === data[0]?.warranty_status) || statusOptions[0]
             );
+
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -86,7 +94,7 @@ const WarrantyClaimDetails = () => {
 
     return (
         <>
-            <div className='mt-3 p-8'>
+            {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Request</h3>
                     {/* <ProductTableTools /> */}
@@ -215,7 +223,7 @@ const WarrantyClaimDetails = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>)}
         </>
     )
 }

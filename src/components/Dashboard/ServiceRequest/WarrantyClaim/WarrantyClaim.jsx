@@ -7,6 +7,7 @@ import axios from '../../../../api/api';
 import SearchInput from '../../SearchInput/SearchInput';
 import { useSelector } from 'react-redux';
 import WarrantyClaimTable from './WarrantyClaimTable';
+import SpinnerMain from '../../Spinner/SpinnerMain';
 
 const WarrantyClaim = () => {
     const [loading, setLoading] = useState(false);
@@ -65,9 +66,9 @@ const WarrantyClaim = () => {
             }
         })
     };
-    
-    console.log(token, "tokne")
 
+    console.log(token, "tokne")
+    const [warrantyCount, setWarrantyCount] = useState('')
     const [warrantyClaimData, setWarrantyClaimData] = useState([])
     const fetchSubmitRequest = async () => {
         try {
@@ -79,6 +80,7 @@ const WarrantyClaim = () => {
             })
 
             console.log(data, "data received")
+            setWarrantyCount(data?.count)
             setWarrantyClaimData(data?.result)
             setLoading(false)
         } catch (error) {
@@ -91,7 +93,7 @@ const WarrantyClaim = () => {
     }, [])
     return (
         <>
-            <div className='mt-3 p-8'>
+            {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
                 <div className="lg:flex items-center justify-between mb-4">
                     <h3 className="mb-4 lg:mb-0 text-[1.5rem] leading-[2.5rem] font-semibold text-[#0052CC]">Service Request</h3>
                     {/* <FilterWarranty /> */}
@@ -185,7 +187,7 @@ const WarrantyClaim = () => {
                 </Drawer>
                 <div className='mt-12'>
                     <div>
-                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>24</h3>
+                        <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{warrantyCount}</h3>
                     </div>
                     <div className=' mt-5 flex justify-between items-center'>
                         <div>
@@ -206,15 +208,15 @@ const WarrantyClaim = () => {
                             </div>
                         </div>
                         <div className="p-4">
-                            {warrantyClaimData?.map((warrantyData)=>{
-                                return <WarrantyClaimTable warrantyData = {warrantyData} key={warrantyData?.id}/>
+                            {warrantyClaimData?.map((warrantyData) => {
+                                return <WarrantyClaimTable warrantyData={warrantyData} key={warrantyData?.id} />
                             })}
                         </div>
 
                     </div>
 
                 </div>
-            </div>
+            </div>)}
         </>
     )
 }

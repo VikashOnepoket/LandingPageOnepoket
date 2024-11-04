@@ -114,6 +114,29 @@ const ServiceRequest = () => {
         fetchTechnicalExecutiveDetails()
     }, [])
 
+    // warranty claim
+    const [warrantyCount, setWarrantyCount] = useState('')
+    const fetchSubmitRequest = async () => {
+        try {
+            setLoading(true)
+            const { data } = await axios.get('/company_submit_warranty_claim_form', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+
+            console.log(data, "data received")
+            setWarrantyCount(data?.count)
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
+    }
+    useEffect(() => {
+        fetchSubmitRequest()
+    }, [])
+
     return (
         <>
             {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
@@ -185,7 +208,7 @@ const ServiceRequest = () => {
                     {/* warranty claims */}
                     <div style={boxShadowStyle} className='px-5 pt-5 pb-[110px] rounded-xl w-[300px] cursor-pointer' onClick={() => navigate(`/service_request/warranty_claims`)}>
                         <div>
-                            <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>12</h3>
+                            <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{warrantyCount > 0 ? warrantyCount : 0}</h3>
                         </div>
                         <div className='flex items-center text-[#0052cc] gap-2 mt-5'>
                             <div>

@@ -44,7 +44,7 @@ const WarrantyClaimTable = ({ warrantyData }) => {
                     {/* status */}
                     <div>
                         <h3 className='text-xs font-semibold text-[#20212380]'>Status</h3>
-                        <p className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  mt-1">Pending</p>
+                        <p className="bg-[#FFAB7C] text-[#A93D00] py-2 px-5 rounded text-xs font-semibold  mt-1">{warrantyData?.warranty_status}</p>
                     </div>
 
                 </div>
