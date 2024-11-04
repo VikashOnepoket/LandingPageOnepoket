@@ -8,7 +8,7 @@ const WarrantyClaimDetails = () => {
     const { id } = useParams()
     const fetchDetails = async () => {
         try {
-            const { data } = await axios.get('/get_warranty_claim_by_id', { params: { id } })
+            const { data } = await axios.post('/get_warranty_claim_by_id', {id:id})
             console.log(data, 'details')
             setLoading(false)
         } catch (error) {
