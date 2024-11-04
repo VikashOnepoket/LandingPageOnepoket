@@ -17,33 +17,20 @@ const WarrantyClaimDetails = () => {
 
     const [selectedInstallationId, setSelectedInstallationId] = useState(null);
     const [selectedInstallationOption, setSelectedInstallationOPtion] = useState(null);
-    const handleStatusChange = async (selectedOption
-    ) => {
-        console.log(selectedOption , "options")
-        setSelectedInstallationOPtion(selectedOption?.value)
+  
+    const handleStatusChange = async (selectedOption) => {
+        setSelectedInstallationOPtion(selectedOption);
         try {
-            const { data } = await axios.post('/update_warranty_claim_status_by_id', {
-                id: id,
-                status: selectedOption.value,
-            }
-                ,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    }
-                }
-            )
-            console.log(data, "data updated")
+            const { data } = await axios.post(
+                '/update_warranty_claim_status_by_id',
+                { id, status: selectedOption.value },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            console.log(data, "data updated");
         } catch (error) {
-
+            console.error("Error updating status:", error);
         }
-
     };
-
-
-
-
-
     const [loading, setLoading] = useState(false)
     const [details, setDetails] = useState([])
     const { id } = useParams()
@@ -57,6 +44,9 @@ const WarrantyClaimDetails = () => {
             const { data } = await axios.post('/get_warranty_claim_by_id', { id: id })
             console.log(data, 'details')
             setDetails(data[0])
+            setSelectedInstallationOPtion(
+                statusOptions.find(option => option.value === data[0]?.status) || statusOptions[0]
+            );
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -133,9 +123,8 @@ const WarrantyClaimDetails = () => {
                                     <div>
                                         <h3 className='text-xs font-semibold text-[#20212380]'>Warranty Registered</h3>
                                         <Select
-                                            value={statusOptions.find(option => option.value === 'pending')}
-                                            onChange={(selectedOption) => handleStatusChange(selectedOption)}
-
+                                            value={selectedInstallationOption}
+                                            onChange={handleStatusChange}
                                             options={statusOptions}
                                             styles={{
                                                 control: (provided) => ({

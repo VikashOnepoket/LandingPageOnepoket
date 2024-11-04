@@ -190,7 +190,7 @@ const Product = () => {
         dispatch(fetchProducts({
             token,
             filter_by_category: filterCategory,
-            filter_by_date:selectedCheckboxes[0] || "custom_date",
+            filter_by_date: selectedCheckboxes[0] || customeDate,
             start_date: startDate,
             end_date: endDate,
         })).then((data) => {
@@ -208,8 +208,9 @@ const Product = () => {
     // date picker
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-
+    const [customeDate, setCustomeDate] = useState("");
     const handleStartDateChange = (date) => {
+        setCustomeDate("custom_date")
         setStartDate(date);
         setEndDate(null);
     };
