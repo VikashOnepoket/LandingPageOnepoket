@@ -188,8 +188,18 @@ const CompletedInstallation = () => {
                             <span className="material-symbols-outlined mr-2">filter_alt</span>
                             Filter
                         </button>
+
+
                     </div>
 
+                </div>
+                <div className='flex justify-end mt-3'>
+                    {selectedCategories.map((item) => {
+                        return <div className='bg-[#CFCFCF80] text-[#58595A] text-[12px] leading-4 font-semibold border rounded px-[10px] py-[5px]'>
+                            <h1>{item?.value}</h1>
+
+                        </div>
+                    })}
                 </div>
                 <div className='mt-12'>
                     <div>
@@ -237,7 +247,7 @@ const CompletedInstallation = () => {
                                         <DatePicker
                                             value={startDate}
                                             onChange={handleStartDateChange}
-                                            format="YYYY-MM-DD"
+                                            format="DD-MM-YYYY"
                                             placeholder="Select Start Date"
                                             getPopupContainer={(trigger) => trigger.parentNode}
                                             popupPlacement="bottomLeft"
@@ -248,7 +258,7 @@ const CompletedInstallation = () => {
                                         <DatePicker
                                             value={endDate}
                                             onChange={handleEndDateChange}
-                                            format="YYYY-MM-DD"
+                                            format="DD-MM-YYYY"
                                             placeholder="Select End Date"
                                             disabled={!startDate}
                                             getPopupContainer={(trigger) => trigger.parentNode}

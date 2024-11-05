@@ -96,11 +96,11 @@ const RejectedInstallation = () => {
                     {/* <FilterCompletion/> */}
 
                     <div className='flex gap-3 '>
-                        <SearchInput />
-                        <button block className='text-[#58595A] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openDrawer}>
+
+                        {/* <button block className='text-[#58595A] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openDrawer}>
                             <span className="material-symbols-outlined mr-2">filter_alt</span>
                             Filter
-                        </button>
+                        </button> */}
                     </div>
 
                 </div>
@@ -115,84 +115,7 @@ const RejectedInstallation = () => {
 
 
                     </div>
-                    <Drawer anchor="right" open={drawerOpen} onClose={closeDrawer}>
-                        <div style={{ width: '350px' }}>
-                            {/* Content of your filter drawer */}
-                            <div style={{ padding: '20px' }}>
-                                <div className='flex justify-between gap-5 items-center'>
-                                    <h2 className='text-[22px] leading-[28px] font-semibold text-[#0052cc]'>Filter</h2>
-                                    <span className="material-symbols-outlined text-[#8F9091] text-[20px] cursor-pointer" onClick={closeDrawer}>
-                                        close
-                                    </span>
-                                </div>
-                            </div>
-                            <div className='border-t'></div>
-                            <div style={{ padding: "20px" }}>
-                                {/* by product */}
-                                <div className="mb-4">
-                                    <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Product</label>
-                                    <Select
-                                        value={selectedProduct}
-                                        onChange={setSelectedProduct}
-                                        options={products}
-                                        styles={customStyles}
-                                        className='mt-1'
-                                        placeholder="Please Select Product..."
-                                    />
-                                </div>
-                                {/* byCategory */}
-                                <div className="mb-4 mt-5">
-                                    <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Categories</label>
-                                    <Select
-                                        value={selectedCategory}
-                                        onChange={setSelectedCategory}
-                                        options={categories}
-                                        styles={customStyles}
-                                        className='mt-1'
-                                        placeholder="Please Select Categories..."
-                                    />
-                                </div>
-                                {/* by date */}
-                                <div className="mb-4 mt-5">
-                                    <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Date</label>
-                                    <input
-                                        type="date"
-                                        className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                                        placeholder="Enter Date"
-                                    />
-                                </div>
-                                {/* Checkbox list */}
-                                <div className="mb-4 mt-5">
-                                    <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Rating</label>
-                                    <div className="flex flex-col gap-2 mt-2">
-                                        {dateOptions.map((option) => (
-                                            <label key={option.value} className="flex items-center">
-                                                <input
-                                                    type="checkbox"
-                                                    className="form-checkbox"
-                                                    checked={selectedCheckboxes.includes(option.value)}
-                                                    onChange={() => handleCheckboxChange(option.value)}
-                                                    style={{ borderColor: selectedCheckboxes.includes(option.value) ? '#0052cc' : '#8F9091', backgroundColor: selectedCheckboxes.includes(option.value) ? '#0052cc' : 'transparent' }}
-                                                />
-                                                <span className="ml-4 text-[14px] leading-[18px] text-[#58595A] font-semibold">{option.label}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                            {/* footee button */}
-                            <div className='flex justify-end  mt-5 mb-5 gap-5'>
-                                <button className='text-[#58595A]  border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2'>
-                                    Discard
-                                </button>
-                                <button block className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] mr-5 text-[14px] leading-[18px] font-bold rounded-md flex  items-center px-3 py-2' >
-                                    Apply
-                                </button>
-                            </div>
 
-
-                        </div>
-                    </Drawer>
                 </div>
                 {/* table */}
                 <div className="container mx-auto mt-8">
