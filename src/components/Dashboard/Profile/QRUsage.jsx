@@ -18,20 +18,12 @@ const QRUsage = () => {
   const boxShadowStyle = {
     boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.15)', // X-offset, Y-offset, blur, spread, color
   };
-
+  const user = useSelector((state) => state.userDetails.user)
   useEffect(() => {
-    setLoading(true)
-    dispatch(fetchUserDetails(token)).then((data) => {
-      console.log(data)
-      setCreditLimit(data?.payload?.credit_limit)
-      setLoading(false)
-    }).catch((error) => {
-      console.log(error)
-      setLoading(false)
-    })
-  }, [])
-
-
+    if (user) {
+      setCreditLimit(user?.credit_limit)
+    }
+  }, [user])
 
 
   const [qrTransactionList, setQrTransactionList] = useState([])
@@ -46,7 +38,8 @@ const QRUsage = () => {
       setLoading(true)
 
       const { data } = await axios.post(
-        '/lp_get-credits-transactions-details',
+        'lp_get_credits_transactions_details',
+      
         {
           ...tableData,
           filter_by_category: filterCategory,
@@ -60,9 +53,9 @@ const QRUsage = () => {
           },
         }
       );
-      console.log(data, "tran")
+      console.log(data, "transaction completed")
       setTotalPage(data?.total_page)
-      setQrTransactionList(data?.transactions_list)
+      setQrTransactionList(data?.results)
       setLoading(false)
     } catch (e) {
       console.log(e)
@@ -70,20 +63,16 @@ const QRUsage = () => {
     }
   }
 
-  useEffect(() => {
-    fetchQrTransactionDetails()
-  }, [token])
-
-
   const handlePageChange = (event, value) => {
     console.log(value, "value")
     setTableData(prevState => ({
       ...prevState,
-      page_number: value, // Set the new page number directly
+      page_number: value,
     }));
   };
-  // Adding useEffect to trigger fetchQrTransactionDetails when page_number changes
+
   useEffect(() => {
+
     fetchQrTransactionDetails();
   }, [tableData.page_number]);
 
@@ -167,7 +156,7 @@ const QRUsage = () => {
 
     try {
       setLoading(true);
-      const { data } = await axios.post('/lp_get-credits-transactions-details',
+      const { data } = await axios.post('/lp_get_credits_transactions_details',
         {
           ...tableData,
           filter_by_category: filterCategory,
@@ -181,7 +170,7 @@ const QRUsage = () => {
           },
         });
       setTotalPage(data?.total_page)
-      setQrTransactionList(data?.transactions_list)
+      setQrTransactionList(data?.results)
       setLoading(false)
       closeDrawer()
     } catch (error) {
@@ -206,8 +195,6 @@ const QRUsage = () => {
     setEndDate(date);
   };
 
-  console.log(startDate, "start date", endDate, "end date")
-
   const disabledEndDate = (current) => {
     return current && startDate && current.isBefore(startDate, 'day');
   };
@@ -220,6 +207,7 @@ const QRUsage = () => {
     setSelectedCheckboxes('')
 
   }
+
   return (
     <>
       {loading ? (<SpinnerMain />) : (<div className='mt-10'>
