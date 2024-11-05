@@ -129,7 +129,7 @@ const WarrantyClaimDetails = () => {
                                 {/* 2nd box */}
                                 <div className=''>
                                     <div>
-                                        <h3 className='text-xs font-semibold text-[#20212380]'>Warranty Registered</h3>
+                                        <h3 className='text-xs font-semibold text-[#20212380]'>Status</h3>
                                         <Select
                                             value={selectedInstallationOption}
                                             onChange={handleStatusChange}

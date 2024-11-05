@@ -43,7 +43,9 @@ const ServiceRequest = () => {
     const completedInstallation = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get('/lp_completed_installation', {
+            const { data } = await axios.post('/lp_completed_installation',
+                {}, 
+                {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -68,11 +70,13 @@ const ServiceRequest = () => {
     const pendingInstallation = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get('/lp_pending_installation', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const { data } = await axios.post('/lp_pending_installation',
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
             console.log(data, "pending installation data")
             setTotalPneding(data?.count)
             setLoading(false)
@@ -119,11 +123,14 @@ const ServiceRequest = () => {
     const fetchSubmitRequest = async () => {
         try {
             setLoading(true)
-            const { data } = await axios.get('/company_submit_warranty_claim_form', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            const { data } = await axios.post('/company_submit_warranty_claim_form',
+                {},
+
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
 
             console.log(data, "data received")
             setWarrantyCount(data?.count)

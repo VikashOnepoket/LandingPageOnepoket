@@ -64,7 +64,7 @@ const Analytics = () => {
         })
     };
 
-    const [scanData  ,setScanData] = useState([])
+    const [scanData, setScanData] = useState([])
 
     const fetchData = async () => {
         try {
@@ -83,11 +83,24 @@ const Analytics = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
+
+    const [name, setName] = useState("")
+    const user = useSelector((state) => state?.userDetails?.user)
+
+    useEffect(() => {
+        if (user) {
+
+            setName(user?.name)
+        }
+    }, [user])
+
+    console.log(scanData , "scandata")
     return (
         <div className='p-8'>
             <div className='flex justify-between gap-10 '>
                 <div>
-                    <h1 className='text-[24px] leading-[31px] font-semibold text-[#202123]'>Welcome Ujjwal!</h1>
+                    <h1 className='text-[24px] leading-[31px] font-semibold text-[#202123]'>Welcome {name}!</h1>
                     <p className='text-[10px] leading-[12px] text-[#8F9091] font-medium mt-2'>View your Products Analytics</p>
                 </div>
                 <div>
@@ -135,7 +148,7 @@ const Analytics = () => {
                                 />
                             </div>
                             {/* by date */}
-                           
+
                             {/* Checkbox list */}
                             {/* <div className="mb-4 mt-5">
                                 <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Scan</label>
@@ -180,7 +193,7 @@ const Analytics = () => {
                         <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change="+9.54%" changeType="positive" />
                     </div>
                     <div className='mt-10  w-full'>
-                        <ConversionChart compltedScan = {scanData?.complete_scan_data}/>
+                        <ConversionChart compltedScan={scanData?.complete_scan_data} />
                     </div>
                 </div>
                 {/* <div>
