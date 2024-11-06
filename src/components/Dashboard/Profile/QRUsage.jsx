@@ -30,7 +30,7 @@ const QRUsage = () => {
   const [totalPage, setTotalPage] = useState('')
   const [tableData, setTableData] = useState({
     page_number: 1,
-    items_per_page: 10,
+    items_per_page: 20,
   })
   const fetchQrTransactionDetails = async () => {
     // API call to fetch QR transaction details
@@ -340,7 +340,7 @@ const QRUsage = () => {
                 </tr>
               </thead>
 
-              {qrTransactionList?.map((qrTransaction) => {
+              {qrTransactionList?.slice()?.reverse()?.map((qrTransaction) => {
                 return <QRUsageTable qrTransaction={qrTransaction} />
               })}
 

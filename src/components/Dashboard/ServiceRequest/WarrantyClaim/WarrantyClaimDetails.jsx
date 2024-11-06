@@ -111,7 +111,7 @@ const WarrantyClaimDetails = () => {
                                     </div>
                                     <div className='mt-5'>
                                         <h3 className='text-xs font-semibold text-[#20212380]'>Date of Claim</h3>
-                                        <p className='text-[#202123] text-base mt-1'>{formatDate(details?.created_on)}</p>
+                                        <p className='text-[#202123] text-base mt-1'>{details?.created_on?.slice(0, 10)}</p>
                                     </div>
                                     <div className='mt-5'>
                                         <h3 className='text-xs font-semibold text-[#20212380]'>Owner Name</h3>

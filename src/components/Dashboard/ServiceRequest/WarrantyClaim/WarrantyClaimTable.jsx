@@ -28,7 +28,7 @@ const WarrantyClaimTable = ({ warrantyData }) => {
                     {/* date of claim */}
                     <div>
                         <h3 className='text-xs font-semibold text-[#20212380]'>Date of Claim</h3>
-                        <p className='text-[#202123] text-base mt-1'>{formatDate(warrantyData?.created_on)}</p>
+                        <p className='text-[#202123] text-base mt-1'>{warrantyData?.created_on?.slice(0, 10)}</p>
                     </div>
                     {/* owner name */}
                     <div>
