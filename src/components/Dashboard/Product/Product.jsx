@@ -84,7 +84,6 @@ const Product = () => {
             dispatch(fetchProducts({ token }))
                 .unwrap()
                 .then((data) => {
-                    console.log(data, "data");
                     setProduct(data);
                     setFilteredProducts(data);
                 })
@@ -117,7 +116,6 @@ const Product = () => {
             dispatch(fetchProducts({ token }))
                 .unwrap()
                 .then((data) => {
-                    console.log(data, "data");
                     setProduct(data);
                 })
                 .catch((error) => {
@@ -186,7 +184,6 @@ const Product = () => {
             }
 
         })
-        console.log(category_filter, "filter")
         dispatch(fetchProducts({
             token,
             filter_by_category: filterCategory,
@@ -218,9 +215,6 @@ const Product = () => {
     const handleEndDateChange = (date) => {
         setEndDate(date);
     };
-
-    console.log(startDate, "start date", endDate, "end date")
-
     const disabledEndDate = (current) => {
         return current && startDate && current.isBefore(startDate, 'day');
     };

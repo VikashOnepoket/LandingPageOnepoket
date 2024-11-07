@@ -81,15 +81,15 @@ const Direct = () => {
                             Direct insights, better decisions.
                         </motion.p>
                         <ul className="mt-5">
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Collecting data without any cost.
                             </motion.li>
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Reducing your cost of acquiring customers.
                             </motion.li>
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Improving return on your ads spends.
                             </motion.li>
@@ -119,15 +119,15 @@ const Direct = () => {
                             Onboarding simplified with a single scan.
                         </motion.p>
                         <ul className="mt-5">
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your after-sales service a 1 click step.
                             </motion.li>
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your warranty management process seamless.
                             </motion.li>
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Manage warranty & product installation from a single dashboard.
                             </motion.li>
@@ -147,15 +147,15 @@ const Direct = () => {
                             Customer support, simplified.
                         </motion.p>
                         <ul className="mt-5">
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your after-sales service a 1 click step.
                             </motion.li>
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Make your warranty management process seamless.
                             </motion.li>
-                            <motion.li className='text-[20px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap' variants={itemVariants}>
+                            <motion.li className='text-[18px] leading-[40px] font-normal text-[#202123BF] flex items-center gap-1 lg:whitespace-nowrap' variants={itemVariants}>
                                 <span className="material-symbols-outlined text-[#004699]">check</span>
                                 Manage warranty & product installation from a single dashboard.
                             </motion.li>

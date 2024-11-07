@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import Select from 'react-select';
 import { MdOutlineFileDownload } from "react-icons/md";
@@ -6,14 +6,18 @@ import './BarChart.css';
 import Table from './Table';
 
 const ConversionChart = ({ compltedScan }) => {
+    console.log(compltedScan, "completedScan in Barchart")
     const [selectedData, setSelectedData] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
 
+    useEffect(() => {
+        if (compltedScan) {
+            console.log("Data in compltedScan:", compltedScan);
+        }
+    }, [compltedScan]);
     const boxShadowStyle = {
         boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.15)',
     };
-
-    // Convert `options` and `series` into state to depend on `compltedScan`
     const [chartOptions, setChartOptions] = useState({
         chart: {
             type: 'bar',
@@ -24,17 +28,22 @@ const ConversionChart = ({ compltedScan }) => {
             },
             events: {
                 dataPointSelection: (event, chartContext, config) => {
-                    const seriesIndex = config.seriesIndex;
-                    const dataPointIndex = config.dataPointIndex;
-                    const selectedSeries = chartSeries[seriesIndex];
-                    const selectedValue = selectedSeries.data[dataPointIndex];
-                    
-                    setSelectedData({
-                        series: selectedSeries.name,
-                        category: chartOptions.xaxis.categories[dataPointIndex],
-                        value: selectedValue,
-                        scanData: compltedScan,
-                    });
+                    if (compltedScan) {
+                        const seriesIndex = config.seriesIndex;
+                        const dataPointIndex = config.dataPointIndex;
+                        const selectedSeries = chartSeries[seriesIndex];
+                        const selectedValue = selectedSeries.data[dataPointIndex];
+                        console.log("Data Point selected:", selectedValue);
+
+                        setSelectedData({
+                            series: selectedSeries.name,
+                            category: chartOptions.xaxis.categories[dataPointIndex],
+                            value: selectedValue,
+                            scanData: compltedScan,
+                        });
+                    } else {
+                        console.log("compltedScan is undefined at the time of selection");
+                    }
                 },
             },
         },
@@ -86,45 +95,10 @@ const ConversionChart = ({ compltedScan }) => {
         },
     ];
 
-    const customStyles = {
-        control: (provided, state) => ({
-            ...provided,
-            borderColor: state.isFocused ? '#0052cc' : provided.borderColor,
-            boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : provided.boxShadow,
-            '&:hover': {
-                borderColor: state.isFocused ? '#0052cc' : provided.borderColor,
-            },
-        }),
-    };
-
-    const categories = [
-        { value: 'monthly', label: 'Monthly' },
-        { value: 'weekly', label: 'Weekly' },
-        { value: 'yearly', label: 'Yearly' },
-    ];
-
     return (
         <>
             <div style={boxShadowStyle} className='rounded-lg p-5 w-full'>
                 <h2 className='text-[16px] leading-[21px] font-semibold'>Conversion</h2>
-                <div className="mb-4 mt-5">
-                    <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Date</label>
-                    <input
-                        type="date"
-                        className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                        placeholder="Enter Date"
-                    />
-                </div>
-                <div className="mb-4 mt-5">
-                    <Select
-                        value={selectedCategory}
-                        onChange={setSelectedCategory}
-                        options={categories}
-                        styles={customStyles}
-                        className='mt-1'
-                        placeholder="Monthly"
-                    />
-                </div>
                 <Chart options={chartOptions} series={chartSeries} type="bar" height={350} />
             </div>
             {selectedData && (

@@ -90,9 +90,7 @@ const Header = () => {
     useEffect(() => {
         if (token) {
             dispatch(fetchUserDetails(token)).unwrap().then((data) => {
-                console.log(data, "data in header");
                 setName(data?.name);
-
                 const {
                     address,
                     email,
@@ -116,10 +114,6 @@ const Header = () => {
                 });
         }
     }, [token]);
-
-
-
-
 
     const handleAccountHover = () => {
         if (alertVisible) {
@@ -177,9 +171,9 @@ const Header = () => {
                             notifications
                         </span>
                     </div>
-                    <div className='relative'
-                    onMouseEnter={handleAccountHover}
-                    onMouseLeave={handleAccountLeave}
+                    <div className='relative' ref={dropdownRef}
+                    // onMouseEnter={handleAccountHover}
+                    // onMouseLeave={handleAccountLeave}
                     >
                         <span
                             className="material-symbols-outlined text-[22px] leading-[28px] text-[#7A7A7A] cursor-pointer"
