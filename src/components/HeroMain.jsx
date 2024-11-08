@@ -16,7 +16,7 @@ const HeroMain = () => {
             <li
               key={index}
               className="text-center text-[4rem] leading-[6rem] font-bold text-[#0052CC] sintony animation-item"
-              style={{ animationDelay: `${index * 2}s` }}
+              style={{ animationDelay: `${index * 1}s` }}
             >
               {item}
             </li>

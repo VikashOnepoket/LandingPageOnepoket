@@ -10,24 +10,44 @@
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  animation: loop 6s infinite;
-  /* Added 2s delay */
+  animation: loop 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  /* Added cubic-bezier for smooth motion */
 }
 
 @keyframes loop {
-
-  0%,
-  100% {
+  0% {
     transform: translateY(100%);
+    /* Start below the container */
   }
 
-  25%,
-  75% {
+  20% {
     transform: translateY(0);
+    /* Move to normal position */
+  }
+
+  40% {
+    transform: translateY(0);
+    /* Hold the position for a moment */
   }
 
   50% {
     transform: translateY(-100%);
+    /* Move up */
+  }
+
+  60% {
+    transform: translateY(-100%);
+    /* Hold the position */
+  }
+
+  80% {
+    transform: translateY(100%);
+    /* Start moving down again */
+  }
+
+  100% {
+    transform: translateY(100%);
+    /* End below the container */
   }
 }
 
@@ -35,13 +55,12 @@
   box-shadow: 0px 3.284px 3.284px 0px rgba(0, 0, 0, 0.25);
 }
 
-
 svg {
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .button-shadow:hover svg {
-  transform: translatex(2px)
+  transform: translateX(2px);
 }
 
 .text-color {
