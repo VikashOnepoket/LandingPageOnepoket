@@ -13,7 +13,7 @@ const AutoPlay = () => {
         slidesToScroll: 1,
         autoplay: true,
         speed: 2000,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
         cssEase: "linear",
         responsive: [
             {
@@ -49,19 +49,12 @@ const AutoPlay = () => {
     return (
         <motion.div className="slider-container w-[90%] mx-auto md:flex justify-between mt-32 md:flex-row flex-col"
             ref={containerRef}
-            
+
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}>
-                
+
             <motion.div
-                // style={{
-                //     backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/Vector%20(5).png?alt=media&token=7514d096-b57a-4c39-91c4-7fa594f2b393)', // Only show image if loaded
-                //     backgroundSize: "cover",
-                //     backgroundPosition: "center",
-                //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
-                // }}
-                // style={{ backgroundImage: `url(${'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold.png?alt=media&token=a944b11d-89ae-4e5f-82bf-499ccd8f5634'})` }}
                 variants={itemVariants}
                 className="md:w-1/2 w-[90%] mx-auto " >
                 <p className="text-[26px] leading-[33px] text-[#0052CC] font-medium">Be the Captain of your

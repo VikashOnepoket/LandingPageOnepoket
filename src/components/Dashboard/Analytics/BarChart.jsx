@@ -1,24 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'react-apexcharts';
-import Select from 'react-select';
 import { MdOutlineFileDownload } from "react-icons/md";
 import './BarChart.css';
 import Table from './Table';
 
 const ConversionChart = ({ compltedScan }) => {
-    console.log(compltedScan, "completedScan in Barchart")
-    const [selectedData, setSelectedData] = useState(null);
+    console.log(compltedScan, "completedScan in Barchart");
+    const compltedScanRef = useRef(compltedScan);
+
+    useEffect(() => {
+        compltedScanRef.current = compltedScan;  // Keep the latest value
+    }, [compltedScan]);
+
+    const [selectedData, setSelectedData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
-        if (compltedScan) {
+        console.log("Completed Scan inside useEffect:", compltedScan);
+        if (compltedScan && compltedScan.length > 0) {
             console.log("Data in compltedScan:", compltedScan);
+        } else {
+            console.log("compltedScan is either undefined or empty");
         }
     }, [compltedScan]);
+
     const boxShadowStyle = {
         boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.15)',
     };
-    const [chartOptions, setChartOptions] = useState({
+
+    const chartOptions = {
         chart: {
             type: 'bar',
             height: 350,
@@ -28,23 +38,24 @@ const ConversionChart = ({ compltedScan }) => {
             },
             events: {
                 dataPointSelection: (event, chartContext, config) => {
-                    if (compltedScan) {
+                    console.log(compltedScanRef.current, "scan in dataPointSelection"); // Use ref
+                    if (compltedScanRef.current && compltedScanRef.current.length > 0) {
                         const seriesIndex = config.seriesIndex;
                         const dataPointIndex = config.dataPointIndex;
                         const selectedSeries = chartSeries[seriesIndex];
                         const selectedValue = selectedSeries.data[dataPointIndex];
-                        console.log("Data Point selected:", selectedValue);
 
                         setSelectedData({
                             series: selectedSeries.name,
                             category: chartOptions.xaxis.categories[dataPointIndex],
                             value: selectedValue,
-                            scanData: compltedScan,
+                            scanData: compltedScanRef.current, // Access latest value from ref
                         });
                     } else {
-                        console.log("compltedScan is undefined at the time of selection");
+                        console.log("No data available in compltedScan");
                     }
                 },
+
             },
         },
         colors: ['#86EFAC', '#FFAB7C', '#FF7070'],
@@ -78,7 +89,7 @@ const ConversionChart = ({ compltedScan }) => {
             horizontalAlign: 'right',
         },
         grid: { show: false },
-    });
+    };
 
     const chartSeries = [
         {
@@ -95,6 +106,16 @@ const ConversionChart = ({ compltedScan }) => {
         },
     ];
 
+    console.log('Completed Scan:', compltedScan);
+
+    useEffect(() => {
+        if (selectedData) {
+            console.log("Selected Data updated:", selectedData);
+        }
+    }, [selectedData]);
+
+    console.log('Chart series:', chartSeries);
+
     return (
         <>
             <div style={boxShadowStyle} className='rounded-lg p-5 w-full'>
@@ -102,7 +123,7 @@ const ConversionChart = ({ compltedScan }) => {
                 <Chart options={chartOptions} series={chartSeries} type="bar" height={350} />
             </div>
             {selectedData && (
-                <div className='mt-5 p-4  rounded'>
+                <div className='mt-5 p-4 rounded'>
                     <h3 className='text-[14px] leading-[18px] font-semibold'>Selected Data</h3>
                     <p><strong>Series:</strong> {selectedData.series}</p>
                     <p><strong>Category:</strong> {selectedData.category}</p>
@@ -119,12 +140,12 @@ const ConversionChart = ({ compltedScan }) => {
                         <table className="bg-white mt-4">
                             <thead>
                                 <tr className='border-b border-gray-200'>
-                                    <th className="py-2 px-4 text-left text-[12px] leading-4 text-[#202123] font-medium">Name</th>
-                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[12px] leading-4">E-mail</th>
-                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[12px] leading-4">Ph. No.</th>
-                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[12px] leading-4">Product Name</th>
-                                    <th className="py-2 px-4 text-center text-[#202123] font-medium text-[12px] leading-4">Invoice</th>
-                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[12px] leading-4">Location</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium">Name</th>
+                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5">E-mail</th>
+                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5">Ph. No.</th>
+                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-4">Product Name</th>
+                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5">Invoice</th>
+                                    <th className="py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5">Location</th>
                                 </tr>
                             </thead>
                             <tbody>

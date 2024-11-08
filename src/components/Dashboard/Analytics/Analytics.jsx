@@ -364,7 +364,7 @@ const Analytics = () => {
 
             {/* cards */}
             <div className='flex gap-10 lg:flex-row flex-col'>
-                <div className='lg:w-[70%] w-[90%]'>
+                <div className='lg:w-[100%] w-[90%]'>
                     <div className='2xl:grid-cols-4 grid xl:grid-cols-3 md:grid-cols-2 gap-8 mt-6 '>
                         <Card title="Total Scans" count={scanData?.total_scan} change="+40.35%" changeType="positive" />
                         <Card title="Authorized Scans" count={scanData?.complete_scan} change="+23.6%" changeType="positive" />
@@ -372,16 +372,17 @@ const Analytics = () => {
                         <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change="+9.54%" changeType="positive" />
                     </div>
                     <div className='mt-10  w-full'>
-                        <ConversionChart compltedScan={scanData?.complete_scan_data} />
+                    <ConversionChart compltedScan={scanData?.complete_scan_data || []} />
+
                     </div>
                 </div>
                 {/* <div>
                     <ConversionChart />
                 </div> */}
 
-                <div className='lg:w-[30%] w-[90%] mt-6'>
+                {/* <div className='lg:w-[30%] w-[90%] mt-6'>
                     <TopCitiesBySales />
-                </div>
+                </div> */}
             </div>
         </div>
     );

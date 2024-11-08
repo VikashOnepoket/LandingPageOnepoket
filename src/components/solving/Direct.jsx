@@ -8,6 +8,7 @@ import direct3 from '../../assets/Direct3.png';
 import direct4 from '../../assets/Direct6.png';
 import direct5 from '../../assets/Direct5.png';
 import AnimatedButton from './AnimationButton';
+import blur from '../../assets/blur.svg'
 
 const Direct = () => {
     const containerRef = useRef(null);
@@ -16,7 +17,7 @@ const Direct = () => {
 
     // State to track loading status of the background image
     const [bgImageLoaded, setBgImageLoaded] = useState(false);
-    const lowQualityBg = 'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold%20(1).jpg?alt=media&token=76b38738-d981-45e5-adb9-4cbb22e4316a'; 
+    const lowQualityBg = 'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold%20(1).jpg?alt=media&token=76b38738-d981-45e5-adb9-4cbb22e4316a';
     const bgImageSrc = 'https://firebasestorage.googleapis.com/v0/b/onepoketstage.appspot.com/o/blur%20effect%203rd%20fold.webp?alt=media&token=028afe7c-ba99-4911-8c80-e69d27198ef7';
 
     // Preload the background image
@@ -55,13 +56,13 @@ const Direct = () => {
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
             variants={containerVariants}
-            className="w-full py-16 relative overflow-hidden "
-            // style={{
-            //     backgroundImage: bgImageLoaded ? `url(${bgImageSrc})` : 'none', // Only show the image if loaded
-            //     backgroundSize: "cover",
-            //     backgroundPosition: "center",
-            //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
-            // }}
+            className="w-full py-16 relative overflow-hidden your-element"
+        // style={{
+        //     backgroundImage: bgImageLoaded ? `url(${bgImageSrc})` : 'none', // Only show the image if loaded
+        //     backgroundSize: "cover",
+        //     backgroundPosition: "center",
+        //     transition: 'background-image 0.5s ease-in-out' // Smooth transition when the image loads
+        // }}
         >
             {/* Main content rendering */}
             <motion.div className='w-[90%] mx-auto mt-32 relative z-10'>
@@ -100,15 +101,16 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[50%] w-[90%] your-element' variants={itemVariants} >
-                        <img src={direct2} loading="lazy" className='max-w-full' alt="Dashboard Image" />
+                    <motion.div className='lg:w-[50%] w-[90%]  your-element ' variants={itemVariants} >
+
+                        <img src={direct2} loading="lazy" className='max-w-full z-[9999px]' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>
 
                 {/* Onboarding Section */}
                 <motion.div className='mt-32 flex justify-between gap-10 items-center lg:flex-row flex-col-reverse '>
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className="lg:w-[30%] w-[100%] your-element" variants={itemVariants}>
+                    <motion.div className="lg:w-[30%] w-[100%]  " variants={itemVariants}>
                         <img src={direct3} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
 
@@ -166,7 +168,7 @@ const Direct = () => {
                     </motion.div>
 
                     {/* Right Side with Overlapping Images */}
-                    <motion.div className='lg:w-[40%] w-[100%] your-element' variants={itemVariants}>
+                    <motion.div className='lg:w-[40%] w-[100%] ' variants={itemVariants}>
                         <img src={direct1} loading="lazy" className='max-w-full' alt="Dashboard Image" />
                     </motion.div>
                 </motion.div>
