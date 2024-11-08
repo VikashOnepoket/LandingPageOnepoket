@@ -15,7 +15,7 @@ const HeroMain = () => {
           {items.map((item, index) => (
             <li
               key={index}
-              className="text-center text-[4rem] leading-[6rem] font-bold text-[#0052CC] sintony animation-item"
+              className="text-center md:text-[4rem] md:leading-[6rem] text-[2rem] leading-[3rem] font-bold text-[#0052CC] sintony animation-item"
               style={{ animationDelay: `${index * 1}s` }}
             >
               {item}
@@ -23,7 +23,7 @@ const HeroMain = () => {
           ))}
         </ul>
       </div>
-      <h1 className='text-center text-[4rem] leading-[6rem] font-bold text-[#282828] sintony mt-[1rem]'>
+      <h1 className='text-center md:text-[4rem] md:leading-[6rem] text-[2rem] leading-[3rem] font-bold text-[#282828] sintony mt-[1rem]'>
         With One QR
       </h1>
       <div className='flex justify-center items-center mt-[3.81rem]'>
@@ -33,7 +33,7 @@ const HeroMain = () => {
           </span>
         </button>
       </div>
-      <div className='mt-[4.5rem] text-center w-[65%] mx-auto'>
+      <div className='mt-[4.5rem] text-center md:w-[65%] mx-auto w-[90%]'>
         <p className='text-[18px] leading-[30px] font-normal text-color'>
           Onepoket’s QR technology not only gets you <span className='text-[18px] leading-[30px] font-bold'>Customer Name, Number,</span> and <span className='text-[18px] leading-[30px] font-bold'>Demographics</span>; it's your <span className='text-[18px] leading-[30px] font-bold'>VIP pass</span> to the first-party data of your target market.
         </p>
