@@ -19,8 +19,8 @@ const Card = ({ title, count, change, changeType }) => {
             <div className={`text-[14px] font-semibold px-2 py-1 mt-1 rounded leading-6 ${currentTitleClass.text} ${currentTitleClass.bg}`}>
                 {title}
             </div>
-            <div className='flex justify-between items-center mt-3'>
-                <div className='text-[10px] text-[#58595A] font-semibold mt-1 leading-3'>This Month</div>
+            <div className='flex justify-end items-center mt-3'>
+                {/* <div className='text-[10px] text-[#58595A] font-semibold mt-1 leading-3'>This Month</div> */}
                 <div className={`text-[10px] leading-3 font-semibold mt-2`} style={{ color: currentTitleClass.color }}>
                     {change}
                 </div>

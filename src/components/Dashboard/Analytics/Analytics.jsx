@@ -55,13 +55,17 @@ const Analytics = () => {
 
     const [scanData, setScanData] = useState([])
     const [redScan, setRedScan] = useState([])
+    const [totalPercent, setTotalPercent] = useState("")
+    const [authPercent, setAuthPercent] = useState("")
+    const [incompletePercent, setIncompletePercent] = useState("")
+    const [redScanPercent, setRedScanPercent] = useState("")
 
     const fetchData = async () => {
         try {
             const { data } = await axios.post('/lp_analytics_count',
                 {
                     filter_by_category: filterCategory,
-                    filter_by_product : filterProducts,
+                    filter_by_product: filterProducts,
                     filter_by_date: selectedCheckboxes[0] || customeDate,
                     start_date: startDate,
                     end_date: endDate,
@@ -73,6 +77,9 @@ const Analytics = () => {
                 })
 
             console.log(data, "data in analytics")
+            setAuthPercent(data?.completeScanPercentage)
+            setRedScanPercent(data?.redScanPercentage)
+            setIncompletePercent(data?.incompleteScanPercentage)
             setScanData(data)
             setRedScan(data?.red_scan_data)
         } catch (err) {
@@ -102,6 +109,7 @@ const Analytics = () => {
     const [filterCategory, setFilterCategory] = useState([])
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [filterProducts, setFilterProducts] = useState([])
+
 
     const handleCategoryChange = (value) => {
         const categoryValue = value?.map((category) => {
@@ -142,7 +150,7 @@ const Analytics = () => {
             dispatch(fetchProducts({ token }))
                 .unwrap()
                 .then((data) => {
-                    console.log(data , "data")
+                    console.log(data, "data")
                     setSelectedProduct(data);
                 })
                 .catch((error) => {
@@ -175,7 +183,7 @@ const Analytics = () => {
             const { data } = await axios.post('/lp_analytics_count',
                 {
                     filter_by_category: filterCategory,
-                    filter_by_product : filterProducts,
+                    filter_by_product: filterProducts,
                     filter_by_date: selectedCheckboxes[0] || customeDate,
                     start_date: startDate,
                     end_date: endDate,
@@ -186,6 +194,9 @@ const Analytics = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+            setAuthPercent(data?.completeScanPercentage)
+            setRedScanPercent(data?.redScanPercentage)
+            setIncompletePercent(data?.incompleteScanPercentage)
             setScanData(data)
             setRedScan(data?.red_scan_data)
             closeDrawer()
@@ -348,10 +359,10 @@ const Analytics = () => {
             <div className='flex gap-10 lg:flex-row flex-col'>
                 <div className='lg:w-[100%] w-[90%]'>
                     <div className='2xl:grid-cols-4 grid xl:grid-cols-3 md:grid-cols-2 gap-8 mt-6 '>
-                        <Card title="Total Scans" count={scanData?.total_scan} change="+40.35%" changeType="positive" />
-                        <Card title="Authorized Scans" count={scanData?.complete_scan} change="+23.6%" changeType="positive" />
-                        <Card title="Unauthorized Scans" count={scanData?.red_scan} change="-15.34%" changeType="negative" />
-                        <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change="+9.54%" changeType="positive" />
+                        <Card title="Total Scans" count={scanData?.total_scan} change={"100%"}  />
+                        <Card title="Authorized Scans" count={scanData?.complete_scan} change={`${authPercent}%`}  />
+                        <Card title="Unauthorized Scans" count={scanData?.red_scan} change={`${redScanPercent}%`}  />
+                        <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change={`${incompletePercent}%`}  />
                     </div>
                     <div className='mt-10  w-full'>
                         <ConversionChart compltedScan={scanData?.complete_scan_data || []}
