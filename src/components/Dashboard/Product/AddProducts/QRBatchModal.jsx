@@ -5,77 +5,47 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../../api/api';
 import toast from 'react-hot-toast';
 import { saveAs } from 'file-saver';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 const QRBatchModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
     const [template, setTemplate] = useState([]);
     const token = useSelector((state) => state.auth.token);
     const products = useSelector((state) => state.productDetails.products);
-
     const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState({
-        selectedProduct: null,
-        serialNo: '',
-        quantity: '',
-        qrCopies: '',
-        selectedTemplate: null,
+    // Fetch Templates
+    const fetchLabels = async () => {
+        try {
+            const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
+            const { data } = await axios.post('/getAllGlobalTemplates', { token }, config);
+            setTemplate(data);
+        } catch (error) {
+            console.error('Error fetching templates:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchLabels();
+    }, []);
+
+    // Yup Validation Schema
+    const validationSchema = Yup.object().shape({
+        selectedProduct: Yup.object()
+            .required('Please select a product'),
+        serialNo: Yup.string()
+            .required('Serial Number is required'),
+        quantity: Yup.number()
+            .required('Quantity is required')
+            .positive('Quantity must be positive')
+            .integer('Quantity must be an integer')
+            .min(1, 'Quantity must be at least 1'),
+        selectedTemplate: Yup.object()
+            .required('Please select a template'),
     });
 
-    const handleBackdropClick = (e) => {
-        if (e.target.classList.contains('modal-backdrop')) {
-            onClose();
-        }
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
-
-    const handleSelectChange = (selectedOption, name) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: selectedOption,
-        }));
-    };
-
-    const customStyles = {
-        option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? '#f5f5f5' : 'white',
-            color: '#333',
-            cursor: 'pointer',
-            '&:hover': {
-                backgroundColor: '#adc8ef',
-            },
-        }),
-        control: (provided, state) => ({
-            ...provided,
-            borderColor: state.isFocused ? '#0052cc' : '#ccc',
-            boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : 'none',
-            '&:hover': {
-                borderColor: '#0052cc',
-            },
-        }),
-        menuPortal: (provided) => ({
-            ...provided,
-            zIndex: 9999, // Ensure dropdown renders above other elements
-        }),
-        menu: (provided) => ({
-            ...provided,
-            zIndex: 9999, // Ensure dropdown renders above the modal
-        }),
-    };
-
-    const handleGenerateQR = async () => {
-        const { selectedProduct, serialNo, quantity, selectedTemplate } = formData;
-        if (!selectedProduct || !serialNo || !quantity || !selectedTemplate) {
-            toast.error('Please fill in all fields');
-            return;
-        }
+    const handleGenerateQR = async (values) => {
+        const { selectedProduct, serialNo, quantity, selectedTemplate } = values;
 
         const payload = {
             product_id: selectedProduct.value,
@@ -96,23 +66,52 @@ const QRBatchModal = ({ isOpen, onClose }) => {
             });
 
             if (response.data) {
-                console.log(response.data, "response data");
                 toast.success('QR Codes generated successfully');
-
                 window.open(response.data, '_blank');
 
                 const qrUrl = response.data;
-                saveAs(qrUrl, "qrPdf");
+                saveAs(qrUrl, 'qrPdf');
             }
         } catch (error) {
-            console.log(error , "error");
             console.error('Error generating QR codes:', error);
-            toast.error(error);
+            toast.error('Failed to generate QR Codes');
         } finally {
             setLoading(false);
         }
     };
 
+    // Custom styles for Select component
+    const customStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isFocused ? '#f5f5f5' : 'white',
+            color: '#333',
+            cursor: 'pointer',
+            '&:hover': {
+                backgroundColor: '#adc8ef',
+            },
+        }),
+        control: (provided, state) => ({
+            ...provided,
+            borderColor: state.isFocused ? '#0052cc' : '#ccc',
+            boxShadow: state.isFocused ? '0 0 0 1px #0052cc' : 'none',
+            '&:hover': {
+                borderColor: '#0052cc',
+            },
+        }),
+        menuPortal: (provided) => ({
+            ...provided,
+            zIndex: 9999,
+        }),
+        menu: (provided) => ({
+            ...provided,
+            zIndex: 9999,
+        }),
+    };
+
+
+
+    // cutomer options
     const customOption = (props) => {
         const { innerRef, innerProps, data } = props;
         return (
@@ -131,19 +130,6 @@ const QRBatchModal = ({ isOpen, onClose }) => {
         );
     };
 
-    const fetchLabels = async () => {
-        try {
-            const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
-            const { data } = await axios.post('/getAllGlobalTemplates', { token }, config);
-            setTemplate(data);
-        } catch (error) {
-            console.error('Error fetching templates:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchLabels();
-    }, []);
 
     return (
         <>
@@ -153,95 +139,104 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                     className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 modal-backdrop"
-                    onClick={handleBackdropClick}
+                    onClick={(e) => e.target.classList.contains('modal-backdrop') && onClose()}
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ duration: 0.3 }}
                         className="bg-white p-8 rounded-lg shadow-lg"
                         style={{ minWidth: 300, maxWidth: 600 }}
                     >
-                        <div className="mb-4">
-                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">
-                                Select Product
-                            </label>
-                            <Select
-                                value={formData.selectedProduct}
-                                onChange={(option) => handleSelectChange(option, 'selectedProduct')}
-                                options={products.map((product) => ({
-                                    value: product?.product_id,
-                                    label: product?.product_name,
-                                }))}
-                                styles={customStyles}
-                                className="mt-1"
-                                placeholder="Select a product"
-                                isLoading={loading}
-                                menuPortalTarget={null} // Dropdown will open within the modal
-                                menuPosition="fixed"
-                            />
-                        </div>
+                        <Formik
+                            initialValues={{
+                                selectedProduct: null,
+                                serialNo: '',
+                                quantity: '',
+                                selectedTemplate: null,
+                            }}
+                            validationSchema={validationSchema}
+                            onSubmit={handleGenerateQR}
+                        >
+                            {({ setFieldValue, values }) => (
+                                <Form>
+                                    <div className="mb-4">
+                                        <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
+                                            Select Product
+                                        </label>
+                                        <Select
+                                            value={values.selectedProduct}
+                                            onChange={(option) => setFieldValue('selectedProduct', option)}
+                                            options={products.map((product) => ({
+                                                value: product.product_id,
+                                                label: product.product_name,
+                                            }))}
+                                            styles={customStyles}
+                                            placeholder="Select a product"
+                                            isLoading={loading}
+                                            menuPortalTarget={null}
+                                            menuPosition="fixed"
+                                        />
+                                        <ErrorMessage name="selectedProduct" component="div" className="text-red-500 text-sm" />
+                                    </div>
 
-                        <div className="mb-4">
-                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">
-                                Serial Number
-                            </label>
-                            <input
-                                type="text"
-                                name="serialNo"
-                                value={formData.serialNo}
-                                onChange={handleInputChange}
-                                className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                                placeholder="Enter serial number"
-                            />
-                        </div>
+                                    <div className="mb-4">
+                                        <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
+                                            Serial Number
+                                        </label>
+                                        <Field
+                                            type="text"
+                                            name="serialNo"
+                                            className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] mt-1"
+                                            placeholder="Enter serial number"
+                                        />
+                                        <ErrorMessage name="serialNo" component="div" className="text-red-500 text-sm" />
+                                    </div>
 
-                        <div className="mb-4">
-                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">
-                                Number Of QR
-                            </label>
-                            <input
-                                type="number"
-                                name="quantity"
-                                value={formData.quantity}
-                                onChange={handleInputChange}
-                                className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 ease-in-out mt-1"
-                                placeholder="Enter number of QR codes"
-                            />
-                        </div>
+                                    <div className="mb-4">
+                                        <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
+                                            Number Of QR
+                                        </label>
+                                        <Field
+                                            type="number"
+                                            name="quantity"
+                                            className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] mt-1"
+                                            placeholder="Enter number of QR codes"
+                                        />
+                                        <ErrorMessage name="quantity" component="div" className="text-red-500 text-sm" />
+                                    </div>
 
-                        <div className="mb-4">
-                            <label className="text-[14px] leading-[18px] font-semibold mb-2 text-[#58595A]">
-                                Select Template
-                            </label>
-                            <Select
-                                value={formData.selectedTemplate}
-                                onChange={(option) => handleSelectChange(option, 'selectedTemplate')}
-                                options={template?.map((template) => ({
-                                    value: template?.template_id,
-                                    label: template?.template_name,
-                                    pdf: template?.pdf_url,
-                                }))}
-                                components={{ Option: customOption }}
-                                styles={customStyles}
-                                className="mt-1"
-                                placeholder="Select a Template"
-                                isLoading={loading}
-                                menuPortalTarget={null} // Dropdown will open within the modal
-                                menuPosition="fixed"
-                            />
-                        </div>
+                                    <div className="mb-4">
+                                        <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
+                                            Select Template
+                                        </label>
+                                        <Select
+                                            value={values.selectedTemplate}
+                                            onChange={(option) => setFieldValue('selectedTemplate', option)}
+                                            options={template.map((template) => ({
+                                                value: template.template_id,
+                                                label: template.template_name,
+                                            }))}
+                                            components={{ Option: customOption }}
+                                            styles={customStyles}
+                                            placeholder="Select a Template"
+                                            isLoading={loading} menuPortalTarget={null} menuPosition="fixed"
+                                        />
+                                        <ErrorMessage name="selectedTemplate" component="div" className="text-red-500 text-sm" />
+                                    </div>
 
-                        <div className="flex justify-center mt-8">
-                            <button
-                                className="py-2 px-5 rounded-md hover:bg-[#0052cc] bg-[#0052CC] text-white border border-[#0052CC] max-w-md w-48"
-                                onClick={handleGenerateQR}
-                                disabled={loading}
-                            >
-                                {loading ? 'Generating...' : 'Generate'}
-                            </button>
-                        </div>
+                                    <div className="flex justify-center mt-8">
+                                        <button
+                                            type="submit"
+                                            className="py-2 px-5 rounded-md bg-[#0052CC] text-white w-48"
+                                            disabled={loading}
+                                        >
+                                            {loading ? 'Generating...' : 'Generate'}
+                                        </button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </motion.div>
                 </motion.div>
             )}

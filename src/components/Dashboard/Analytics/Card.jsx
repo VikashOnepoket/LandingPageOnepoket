@@ -14,7 +14,7 @@ const Card = ({ title, count, change, changeType }) => {
     const currentTitleClass = titleClass[title];
 
     return (
-        <div className='p-4 bg-white  rounded-xl flex flex-col w-full' style={boxShadowStyle}>
+        <div className='p-4 bg-white  rounded-xl flex flex-col w-full' style={boxShadowStyle} >
             <div className='text-[30px] font-bold'>{count}</div>
             <div className={`text-[14px] font-semibold px-2 py-1 mt-1 rounded leading-6 ${currentTitleClass.text} ${currentTitleClass.bg}`}>
                 {title}

@@ -27,8 +27,6 @@ const ModalOTP = ({ isOpen, onClose, number, loading, selectedOption, selectedIn
     };
 
     const otpSent = useRef(false);
-    console.log(otpSent.current, "useref")
-
     useEffect(() => {
         if (isOpen && number && !otpSent.current) {
             sendOtpToPhone();

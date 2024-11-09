@@ -25,7 +25,7 @@ const Analytics = () => {
     // filter
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState([])
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState(["this_month"])
     const [selectedScans, setSelectedScans] = useState([])
 
     const dateOptions = [
@@ -35,28 +35,11 @@ const Analytics = () => {
         { value: 'this_month', label: 'This Month' },
     ];
 
-    const scanOptions = [
-
-        { value: 'today', label: 'All' },
-        { value: 'yesterday', label: 'Total Scans' },
-        { value: 'this_week', label: 'Authorized Scans' },
-        { value: 'this_month', label: 'Unauthorized Scans' },
-        { value: 'this_month', label: 'Incomplete Scans' },
-
-    ]
-
     const handleCheckboxChange = (value) => {
         setSelectedCheckboxes((prevSelected) =>
             prevSelected.includes(value) ? [] : [value]
         );
     };
-
-    const handleScansChange = (value) => {
-        setSelectedScans((prevSelected) =>
-            prevSelected.includes(value) ? [] : [value]
-        );
-    }
-
 
 
     const customStyles = {
@@ -71,15 +54,27 @@ const Analytics = () => {
     };
 
     const [scanData, setScanData] = useState([])
+    const [redScan, setRedScan] = useState([])
 
     const fetchData = async () => {
         try {
-            const { data } = await axios.get('/lp_analytics_count', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
+            const { data } = await axios.post('/lp_analytics_count',
+                {
+                    filter_by_category: filterCategory,
+                    filter_by_product : filterProducts,
+                    filter_by_date: selectedCheckboxes[0] || customeDate,
+                    start_date: startDate,
+                    end_date: endDate,
                 },
-            })
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+
+            console.log(data, "data in analytics")
             setScanData(data)
+            setRedScan(data?.red_scan_data)
         } catch (err) {
             console.log(err)
         }
@@ -88,6 +83,7 @@ const Analytics = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
 
 
     const [name, setName] = useState("")
@@ -146,6 +142,7 @@ const Analytics = () => {
             dispatch(fetchProducts({ token }))
                 .unwrap()
                 .then((data) => {
+                    console.log(data , "data")
                     setSelectedProduct(data);
                 })
                 .catch((error) => {
@@ -175,21 +172,22 @@ const Analytics = () => {
 
         try {
             setLoading(true);
-            const { data } = await axios.post('/lp_completed_installation',
+            const { data } = await axios.post('/lp_analytics_count',
                 {
                     filter_by_category: filterCategory,
+                    filter_by_product : filterProducts,
                     filter_by_date: selectedCheckboxes[0] || customeDate,
                     start_date: startDate,
                     end_date: endDate,
+
                 },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-            setCompletedInstallationData(data?.result)
-            setTotalCompleted(data?.count)
-            setLoading(false)
+            setScanData(data)
+            setRedScan(data?.red_scan_data)
             closeDrawer()
         } catch (error) {
             setLoading(false)
@@ -223,8 +221,10 @@ const Analytics = () => {
         setEndDate(null)
         setSelectedCategories([])
         setSelectedCheckboxes('')
+        setSelectedProducts([])
 
     }
+
     return (
         <div className='p-8'>
             <div className='flex justify-between gap-10 '>
@@ -276,7 +276,7 @@ const Analytics = () => {
                                     options={optionsProduct}
                                     styles={customStyles}
                                     className='mt-1'
-                                    placeholder="Please Select Categories..."
+                                    placeholder="Please Select Product..."
                                     isMulti
                                 />
                             </div>
@@ -322,25 +322,6 @@ const Analytics = () => {
                                                 style={{ borderColor: selectedCheckboxes.includes(option.value) ? '#0052cc' : '#8F9091', backgroundColor: selectedCheckboxes.includes(option.value) ? '#0052cc' : 'transparent' }}
                                                 disabled={startDate}
 
-                                            />
-                                            <span className="ml-4 text-[14px] leading-[18px] text-[#58595A] font-semibold">{option.label}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                            {/* by scan */}
-                            <div className=" mb-4">
-                                <label className="text-[16px] leading-[21px] font-semibold mb-2 text-[#000000]">By Scan</label>
-                                <div className="flex flex-col gap-2 mt-2">
-                                    {scanOptions.map((option) => (
-                                        <label key={option.value} className="flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                className="form-checkbox"
-                                                checked={selectedScans.includes(option.value)}
-                                                onChange={() => handleScansChange(option.value)}
-                                                style={{ borderColor: selectedScans.includes(option.value) ? '#0052cc' : '#8F9091', backgroundColor: selectedScans.includes(option.value) ? '#0052cc' : 'transparent' }}
-                                            // disabled={startDate}
 
                                             />
                                             <span className="ml-4 text-[14px] leading-[18px] text-[#58595A] font-semibold">{option.label}</span>
@@ -348,6 +329,7 @@ const Analytics = () => {
                                     ))}
                                 </div>
                             </div>
+                            {/* by scan */}
                         </div>
                         {/* footee button */}
                         <div className='flex justify-end  mt-5 mb-5 gap-5'>
@@ -372,8 +354,12 @@ const Analytics = () => {
                         <Card title="Incomplete Scans" count={scanData?.incomplete_scan} change="+9.54%" changeType="positive" />
                     </div>
                     <div className='mt-10  w-full'>
-                    <ConversionChart compltedScan={scanData?.complete_scan_data || []} />
-
+                        <ConversionChart compltedScan={scanData?.complete_scan_data || []}
+                            redScan={redScan}
+                            authorizedScanCount={scanData?.complete_scan}
+                            inCompleteScanCount={scanData?.incomplete_scan}
+                            unauthorizedScanCount={scanData?.red_scan}
+                        />
                     </div>
                 </div>
                 {/* <div>
