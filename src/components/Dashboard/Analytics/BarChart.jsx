@@ -107,40 +107,57 @@ const ConversionChart = ({
         plotOptions: {
             bar: {
                 horizontal: true,
-                barHeight: '10px',
-               
+                barHeight: '14px',
+
             },
         },
         dataLabels: {
             enabled: false,
-            // formatter: (val, { seriesIndex, dataPointIndex }) => {
-            //     return seriesIndex === 0
-            //         ? `${completedScanData[dataPointIndex]}`
-            //         : `${redScanData[dataPointIndex]}`;
-            // },
         },
         xaxis: {
             categories: allDates,
-            axisBorder: { show: true  },
+            axisBorder: { show: false },
             axisTicks: { show: false },
             tickAmount: 4, // This will ensure only 0, 25, 50, 75, and 100% are shown
             labels: {
                 formatter: (val) => `${Math.round(val)}%`,
+                style: {
+                    fontSize: '0.85rem', // Increase this value as needed
+                    fontWeight: '600',
+                    colors: '#58595A',
+                    lineHeight: '1.2rem',
+                    fontFamily:'Plus Jakarta Sans'
+
+
+                },
+                offsetX: -12,
+                offsetY: 4,
+
             },
             min: 0,
             max: 100,
+           
         },
         yaxis: {
             labels: {
                 show: true,
+                style: {
+                    fontSize: '0.85rem', // Increase this value as needed
+                    fontWeight: '600',
+                    colors: '#58595A',
+                    lineHeight: '1.2rem',
+                    fontFamily:'Plus Jakarta Sans'
+                },
+                offsetX: -10, // Adds margin to the right (positive values move labels right)
+                offsetY: 4,
             },
         },
         tooltip: {
             y: {
                 formatter: (val, { seriesIndex, dataPointIndex }) => {
                     return seriesIndex === 0
-                        ? `${completedScanData[dataPointIndex]} Authorized`
-                        : `${redScanData[dataPointIndex]} Unauthorized`;
+                        ? `${completedScanData[dataPointIndex]} `
+                        : `${redScanData[dataPointIndex]}`;
                 },
             },
         },
@@ -149,7 +166,7 @@ const ConversionChart = ({
             horizontalAlign: 'right',
         },
         grid: {
-            show: true,
+            show: false,
         },
     };
 
@@ -164,7 +181,7 @@ const ConversionChart = ({
         },
     ];
 
-    const dynamicChartHeight = Math.max(allDates.length * 50, 350);
+    const dynamicChartHeight = Math.max(allDates.length * 50, 150);
 
     return (
         <>
