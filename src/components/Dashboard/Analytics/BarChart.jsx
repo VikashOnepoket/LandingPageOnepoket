@@ -108,6 +108,7 @@ const ConversionChart = ({
             bar: {
                 horizontal: true,
                 barHeight: '10px',
+               
             },
         },
         dataLabels: {
@@ -120,9 +121,9 @@ const ConversionChart = ({
         },
         xaxis: {
             categories: allDates,
-            axisBorder: { show: true },
+            axisBorder: { show: true  },
             axisTicks: { show: false },
-            // tickAmount: 4, // This will ensure only 0, 25, 50, 75, and 100% are shown
+            tickAmount: 4, // This will ensure only 0, 25, 50, 75, and 100% are shown
             labels: {
                 formatter: (val) => `${Math.round(val)}%`,
             },
