@@ -231,7 +231,7 @@ const ConversionChart = ({
                                                 Product Name
                                             </th>
                                             <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
-                                                Serial Number
+                                                Invoice
                                             </th>
                                             <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
                                                 Location
