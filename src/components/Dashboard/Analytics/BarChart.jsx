@@ -80,6 +80,8 @@ const ConversionChart = ({
 
     const chartOptions = {
         chart: {
+
+            fontFamily: 'Plus Jakarta Sans',
             type: 'bar',
             stacked: true,
             toolbar: {
@@ -118,7 +120,7 @@ const ConversionChart = ({
             categories: allDates,
             axisBorder: { show: false },
             axisTicks: { show: false },
-            tickAmount: 4, // This will ensure only 0, 25, 50, 75, and 100% are shown
+            tickAmount: 4,
             labels: {
                 formatter: (val) => `${Math.round(val)}%`,
                 style: {
@@ -126,17 +128,18 @@ const ConversionChart = ({
                     fontWeight: '600',
                     colors: '#58595A',
                     lineHeight: '1.2rem',
-                    fontFamily:'Plus Jakarta Sans'
+                    fontFamily: 'Plus Jakarta Sans'
 
 
                 },
                 offsetX: -12,
                 offsetY: 4,
 
+
             },
             min: 0,
             max: 100,
-           
+
         },
         yaxis: {
             labels: {
@@ -146,7 +149,7 @@ const ConversionChart = ({
                     fontWeight: '600',
                     colors: '#58595A',
                     lineHeight: '1.2rem',
-                    fontFamily:'Plus Jakarta Sans'
+                    fontFamily: 'Plus Jakarta Sans'
                 },
                 offsetX: -10, // Adds margin to the right (positive values move labels right)
                 offsetY: 4,
@@ -167,6 +170,7 @@ const ConversionChart = ({
         },
         grid: {
             show: false,
+
         },
     };
 
@@ -190,12 +194,14 @@ const ConversionChart = ({
                 style={{ boxShadow: '0px 1px 4px 0px rgba(0, 0, 0, 0.15)' }}
             >
                 <h2 className='text-[16px] leading-[21px] font-semibold'>Conversion</h2>
-                <Chart
-                    options={chartOptions}
-                    series={chartSeries}
-                    type='bar'
-                    height={dynamicChartHeight}
-                />
+                {allDates.length > 0 && (
+                    <Chart
+                        options={chartOptions}
+                        series={chartSeries}
+                        type='bar'
+                        height={dynamicChartHeight}
+                    />
+                )}
             </div>
 
             {selectedData?.scanData && (
@@ -242,6 +248,12 @@ const ConversionChart = ({
                         </div>
                     ) : (
                         <div className='mt-10'>
+                            <div className='flex items-center space-x-4 p-4'>
+                                <h1 className='text-[18px] leading-6 font-medium text-[#000000]'>
+                                    Unauthorized Scans
+                                </h1>
+                                <div className='w-5 h-5 bg-[#FF7070] rounded'></div>
+                            </div>
                             <div className='overflow-y-scroll h-[300px] custom-scrollbar'>
                                 <table className='bg-white mt-4 w-full'>
                                     <thead>
