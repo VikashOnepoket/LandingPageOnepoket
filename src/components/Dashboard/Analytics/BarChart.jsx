@@ -13,18 +13,22 @@ const ConversionChart = ({
     authorizedScanCount,
     inCompleteScanCount,
     unauthorizedScanCount,
+    pendingWarranty,
+    updateWarranty,
+
 }) => {
     const redScanRef = useRef(redScan);
     const compltedScanRef = useRef(compltedScan);
+    const pendingWarrantyRef = useRef(pendingWarranty);
 
     useEffect(() => {
         redScanRef.current = redScan;
         compltedScanRef.current = compltedScan;
-    }, [redScan, compltedScan]);
+        pendingWarrantyRef.current = pendingWarranty;
+    }, [redScan, compltedScan, pendingWarranty]);
 
     const [selectedData, setSelectedData] = useState(null);
 
-    // Function to group scans by date
     const groupScansByDate = (scans) => {
         const groupedData = scans.reduce((acc, scan) => {
             const date = scan.availed_on
@@ -43,18 +47,16 @@ const ConversionChart = ({
 
     const groupedCompletedScans = groupScansByDate(compltedScan);
     const groupedRedScans = groupScansByDate(redScan);
+    const groupedPendingWarranty = groupScansByDate(pendingWarranty);
 
-    // Combine the dates from both completed and red scans
     const allDates = Array.from(
-        new Set([...Object.keys(groupedCompletedScans), ...Object.keys(groupedRedScans)])
+        new Set([...Object.keys(groupedCompletedScans), ...Object.keys(groupedRedScans), ...Object.keys(groupedPendingWarranty)])
     );
 
-    // Function to calculate percentage based on total scans
     const calculatePercentage = (count, total) => {
         return total > 0 ? (count / total) * 100 : 0;
     };
 
-    // Generate the data for both series
     const generateSeriesData = (groupedScans, dates) => {
         return dates.map((date) => {
             const scans = groupedScans[date] || [];
@@ -64,23 +66,24 @@ const ConversionChart = ({
 
     const completedScanData = generateSeriesData(groupedCompletedScans, allDates);
     const redScanData = generateSeriesData(groupedRedScans, allDates);
+    const pendingWarrantyData = generateSeriesData(groupedPendingWarranty, allDates);
 
-    // Calculate total scans for each date
     const totalScansPerDate = allDates.map(
-        (date, index) => completedScanData[index] + redScanData[index]
+        (date, index) => completedScanData[index] + redScanData[index] + pendingWarrantyData[index]
     );
 
-    // Convert data to percentages
     const completedScanPercentage = completedScanData.map((count, index) =>
         calculatePercentage(count, totalScansPerDate[index])
     );
     const redScanPercentage = redScanData.map((count, index) =>
         calculatePercentage(count, totalScansPerDate[index])
     );
+    const pendingScanPercentage = pendingWarrantyData.map((count, index) =>
+        calculatePercentage(count, totalScansPerDate[index])
+    );
 
     const chartOptions = {
         chart: {
-
             fontFamily: 'Plus Jakarta Sans',
             type: 'bar',
             stacked: true,
@@ -95,7 +98,9 @@ const ConversionChart = ({
                     const scanData =
                         seriesIndex === 0
                             ? groupedCompletedScans[selectedCategory] || []
-                            : groupedRedScans[selectedCategory] || [];
+                            : seriesIndex === 1
+                                ? groupedPendingWarranty[selectedCategory] || []
+                                : groupedRedScans[selectedCategory] || [];
 
                     setSelectedData({
                         seriesIndex,
@@ -105,12 +110,11 @@ const ConversionChart = ({
                 },
             },
         },
-        colors: ['#86EFAC', '#FF7070'],
+        colors: ['#86EFAC', '#B2B2FF', '#FF7070'],
         plotOptions: {
             bar: {
                 horizontal: true,
                 barHeight: '14px',
-
             },
         },
         dataLabels: {
@@ -124,43 +128,39 @@ const ConversionChart = ({
             labels: {
                 formatter: (val) => `${Math.round(val)}%`,
                 style: {
-                    fontSize: '0.85rem', // Increase this value as needed
+                    fontSize: '0.85rem',
                     fontWeight: '600',
                     colors: '#58595A',
                     lineHeight: '1.2rem',
                     fontFamily: 'Plus Jakarta Sans'
-
-
                 },
                 offsetX: -12,
                 offsetY: 4,
-
-
             },
             min: 0,
             max: 100,
-
         },
         yaxis: {
             labels: {
                 show: true,
                 style: {
-                    fontSize: '0.85rem', // Increase this value as needed
+                    fontSize: '0.85rem',
                     fontWeight: '600',
                     colors: '#58595A',
                     lineHeight: '1.2rem',
                     fontFamily: 'Plus Jakarta Sans'
                 },
-                offsetX: -10, // Adds margin to the right (positive values move labels right)
+                offsetX: -5,
                 offsetY: 4,
             },
         },
         tooltip: {
+            followCursor: true,
             y: {
                 formatter: (val, { seriesIndex, dataPointIndex }) => {
-                    return seriesIndex === 0
-                        ? `${completedScanData[dataPointIndex]} `
-                        : `${redScanData[dataPointIndex]}`;
+                    if (seriesIndex === 0) return `${completedScanData[dataPointIndex]}`;
+                    if (seriesIndex === 1) return `${pendingWarrantyData[dataPointIndex]}`;
+                    return `${redScanData[dataPointIndex]}`;
                 },
             },
         },
@@ -170,7 +170,6 @@ const ConversionChart = ({
         },
         grid: {
             show: false,
-
         },
     };
 
@@ -180,12 +179,18 @@ const ConversionChart = ({
             data: completedScanPercentage,
         },
         {
+            name: 'Pending Warranty',
+            data: pendingScanPercentage,
+        },
+        {
             name: 'Unauthorized Scans',
             data: redScanPercentage,
         },
     ];
 
     const dynamicChartHeight = Math.max(allDates.length * 50, 150);
+
+
 
     return (
         <>
@@ -241,6 +246,49 @@ const ConversionChart = ({
                                     <tbody>
                                         {selectedData.scanData.map((scan, index) => (
                                             <Table key={index} scan={scan} />
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ) : selectedData.seriesIndex === 1 ? (
+                        <div className='mt-10'>
+                            <div className='flex items-center space-x-4 p-4'>
+                                <h1 className='text-[18px] leading-6 font-medium text-[#000000]'>
+                                    Pending Warranty
+                                </h1>
+                                <div className='w-5 h-5 bg-[#B2B2FF] rounded'></div>
+                            </div>
+                            <div className='overflow-y-scroll h-[300px] custom-scrollbar'>
+                                <table className='bg-white mt-4 w-full'>
+                                    <thead>
+                                        <tr className='border-b border-gray-200'>
+                                            <th className='py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium'>
+                                                Name
+                                            </th>
+                                            <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
+                                                E-mail
+                                            </th>
+                                            <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
+                                                Ph. No.
+                                            </th>
+                                            <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-4'>
+                                                Product Name
+                                            </th>
+                                            <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
+                                                Invoice
+                                            </th>
+                                            <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
+                                                Location
+                                            </th>
+                                            <th className='py-2 px-4 text-left text-[#202123] font-medium text-[16px] leading-5'>
+                                                Status
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {selectedData.scanData.map((scan, index) => (
+                                            <IncompleteTable key={index} scan={scan} updateWarranty={updateWarranty} />
                                         ))}
                                     </tbody>
                                 </table>

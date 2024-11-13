@@ -9,6 +9,7 @@ const Card = ({ title, count, change, changeType }) => {
         'Authorized Scans': { text: 'text-[#00742A]', bg: 'bg-[#BAFFD3]', color: '#00742A' },
         'Unauthorized Scans': { text: 'text-[#870000]', bg: 'bg-[#FF7070]', color: '#870000' },
         'Incomplete Scans': { text: 'text-[#A93D00]', bg: 'bg-[#FFAB7C]', color: '#A93D00' },
+        'Pending Warranty': { text: 'text-[#4040A0]', bg: 'bg-[#B2B2FF]', color: '#4040A0' }
     };
 
     const currentTitleClass = titleClass[title];

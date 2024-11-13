@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { signOutSuccess } from '../slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from '../slice/userDetailsSlice';
+import { fetchLogo } from '../slice/logoSlice';
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -126,8 +127,7 @@ const Header = () => {
             setAlertVisible(false);
         }
     };
-
-
+    
     return (
         <>
             <div className='flex justify-between gap-10 items-center h-[54px] p-8 border-b sticky top-0 z-50 '>
