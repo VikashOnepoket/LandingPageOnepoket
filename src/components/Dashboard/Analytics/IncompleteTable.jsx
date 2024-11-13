@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineFileDownload, MdInfoOutline } from 'react-icons/md';
 
 
-const IncompleteTable = ({ scan , updateWarranty }) => {
+const IncompleteTable = ({ scan, updateWarranty }) => {
     const handleApproveClick = () => {
-        updateWarranty(scan?.customer_id); // Only triggers on click
+        updateWarranty(scan?.customer_id, scan?.id); // Only triggers on click
     };
     return (
         <tr className="border-b border-gray-200 w-full">

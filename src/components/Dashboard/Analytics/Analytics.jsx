@@ -211,6 +211,7 @@ const Analytics = () => {
             setPendingWarranty(data?.pending_scan_data)
             setPendingPercent(data?.pendingScanPercentage)
             closeDrawer()
+            setLoading(false)
         } catch (error) {
             setLoading(false)
 
@@ -247,10 +248,10 @@ const Analytics = () => {
 
     }
 
-    const updateWarranty = async (id) => {
+    const updateWarranty = async (custId, id) => {
         try {
             setLoading(true)
-            const { data } = await axios.post('/update_pending_warranty', { customer_id: id, status: "approved" }
+            const { data } = await axios.post('/update_pending_warranty', { customer_id: custId, w_id: id, status: "approved" }
                 , {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -403,7 +404,7 @@ const Analytics = () => {
                                 inCompleteScanCount={scanData?.incomplete_scan}
                                 unauthorizedScanCount={scanData?.red_scan}
                                 pendingWarranty={pendingWarranty}
-                                updateWarranty={updateWarranty} 
+                                updateWarranty={updateWarranty}
                             />
                         </div>
                     </div>
