@@ -14,6 +14,9 @@ import axios from '../../../api/api';
 import toast from 'react-hot-toast';
 import { fetchCategory, setCategory } from '../slice/categorySlice';
 import { DatePicker } from 'antd';
+import SingleQR from './AddProducts/SingleQRBatchModal';
+
+
 const { RangePicker } = DatePicker;
 
 
@@ -21,6 +24,7 @@ const Product = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false); // State to manage modal visibility
+    const [showSingleModal, setShowSingleModal] = useState(false); // State to manage single modal visibility
 
     const openModal = () => {
         setShowModal(true);
@@ -28,6 +32,13 @@ const Product = () => {
 
     const closeModal = () => {
         setShowModal(false);
+    };
+    const openSingleModal = () => {
+        setShowSingleModal(true);
+    };
+
+    const closeSingleModal = () => {
+        setShowSingleModal(false);
     };
 
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -227,7 +238,68 @@ const Product = () => {
         setSelectedCheckboxes('')
 
     }
+    const options = [
+        { value: "singleQR", label: "Single QR" },
+        { value: "dynamicQR", label: "Dynamic QR" },
+    ];
 
+    const handleSelectChange = (selectedOption) => {
+        if (selectedOption.value === "dynamicQR") {
+            if (dynamicValue === "1") {
+                openModal();
+            } else {
+                toast.error("You need to upgrade to use the Dynamic QR option"); // Show warning if 
+            }
+        } else {
+            openSingleModal();
+        }
+    };
+
+    const customStyles1 = {
+        control: (provided) => ({
+            ...provided,
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid #8F9091",
+            borderRadius: "0.375rem",
+            padding: "0.375rem 0.75rem",
+            backgroundColor: "white",
+            color: "#58595A",
+            fontSize: "14px",
+            fontWeight: "bold",
+            minHeight: "40px",
+            cursor: "pointer",
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isSelected ? "#f0f0f0" : "white",
+            color: "#58595A",
+            padding: "10px 15px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            cursor: "pointer",
+            "&:hover": {
+                backgroundColor: "#0052cc",
+                color: "white",
+            },
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            color: "#58595A",  // Customize placeholder text color
+            fontSize: "14px",
+            fontWeight: "bold",
+        }),
+    };
+    const user = useSelector((state) => state.userDetails.user)
+    const [dynamicValue, setDynamicValue] = useState('')
+
+    useEffect(() => {
+        if (user?.is_upgraded === "1") {
+            setDynamicValue(user?.is_upgraded)
+
+        }
+
+    }, [user])
     return (
         <>
             {loading ? (<SpinnerMain />) : (
@@ -253,10 +325,19 @@ const Product = () => {
                                     <span className="material-symbols-outlined mr-2">add</span>
                                     Multiple Product
                                 </button>
-                                <button className='text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openModal}>
+                                {/* <button className='text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openModal}>
                                     <span className="material-symbols-outlined mr-2">add</span>
                                     Print QR
-                                </button>
+                                </button> */}
+                                <div className="text-[#58595A] font-bold flex items-center">
+                                    {/* <span className="material-symbols-outlined mr-2">add</span> */}
+                                    <Select
+                                        options={options}
+                                        onChange={handleSelectChange}
+                                        placeholder="Print QR"
+                                        styles={customStyles1}
+                                    />
+                                </div>
                                 <button block className='text-[#58595A] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2' onClick={openDrawer}>
                                     <span className="material-symbols-outlined mr-2">filter_alt</span>
                                     Filter
@@ -419,6 +500,7 @@ const Product = () => {
                             </div>
                         </div>
                         <QRBatchModal isOpen={showModal} onClose={closeModal} />
+                        <SingleQR isOpenSingle={showSingleModal} onCloseSingle={closeSingleModal} />
                     </div>
                 </div>)}
 

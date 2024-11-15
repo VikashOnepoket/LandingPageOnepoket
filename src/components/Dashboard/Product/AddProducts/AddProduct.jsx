@@ -35,7 +35,8 @@ const AddProduct = () => {
     logo_id: "",
     show_manufacture_date: "",
     installation_details: "",
-    image: null // Initialize image
+    image: null,
+    dynamic_qr: "", //
   });
 
   useEffect(() => {
@@ -51,16 +52,16 @@ const AddProduct = () => {
 
   const handleInputChange = (name, value) => {
     // Convert `show_manufacture_date` and `installation_details` to 0 or 1
-    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details') 
-      ? (value ? 1 : 0) 
+    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details' || name ==='dynamic_qr')
+      ? (value ? 1 : 0)
       : value; // For other fields, keep the original value
-  
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: formattedValue,
     }));
   };
-  
+
   const handleCategoryChange = (category) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -114,6 +115,7 @@ const AddProduct = () => {
     data.append('show_manufacture_date', formData?.show_manufacture_date)
     data.append('additionalInfo', JSON.stringify(formData.additionalInfo)); // Convert array to string
     data.append('PurchaseOptions', JSON.stringify(formData.PurchaseOptions)); // Convert array to string
+    data.append('dynamic_qr', formData?.dynamic_qr); // Append the dynamic QR code
     if (formData.image) {
       data.append('image', formData.image); // Append the selected image
     }
@@ -136,7 +138,7 @@ const AddProduct = () => {
     }
   };
 
-  
+
 
   return (
     <>

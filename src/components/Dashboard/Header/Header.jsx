@@ -47,6 +47,7 @@ const Header = () => {
     const menuItems = [
         { name: 'Products', icon: 'category', path: '/products' },
         { name: 'Analytics', icon: 'analytics', path: '/analytics' },
+        { name: 'Single QR Acquired Customer', icon: 'transfer_within_a_station', path: '/single_qr_acquired_customer' },
         { name: 'Campaign', icon: 'campaign', path: '/campaign' },
         // { name: 'Inventory', icon: 'inventory_2', path: '/inventory' },
         { name: 'Factory Management', icon: 'factory', path: '/factory' },
@@ -69,6 +70,9 @@ const Header = () => {
         }
         else if (itemPath === '/campaign') {
             return location.pathname.startsWith('/campaign');
+        }
+        else if (itemPath === '/single_qr_acquired_customer') {
+            return location.pathname.startsWith('/single_qr_acquired_customer');
         }
         return location.pathname === itemPath;
     };
@@ -127,7 +131,7 @@ const Header = () => {
             setAlertVisible(false);
         }
     };
-    
+
     return (
         <>
             <div className='flex justify-between gap-10 items-center h-[54px] p-8 border-b sticky top-0 z-50 '>

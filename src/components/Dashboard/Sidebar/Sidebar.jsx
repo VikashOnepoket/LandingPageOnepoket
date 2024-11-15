@@ -24,6 +24,7 @@ const Sidebar = () => {
 
     const menuItems = [
         { name: 'Products', icon: 'category', path: '/products' },
+        { name: 'Acquired Customer', icon: 'transfer_within_a_station', path: '/single_qr_acquired_customer' },
         { name: 'Analytics', icon: 'analytics', path: '/analytics' },
         { name: 'Campaign', icon: 'campaign', path: '/campaign' },
         // { name: 'Inventory', icon: 'inventory_2', path: '/inventory' },
@@ -47,6 +48,9 @@ const Sidebar = () => {
         }
         else if (itemPath === '/campaign') {
             return location.pathname.startsWith('/campaign');
+        }
+        else if (itemPath === '/single_qr_acquired_customer') {
+            return location.pathname.startsWith('/single_qr_acquired_customer');
         }
         return location.pathname === itemPath;
     };

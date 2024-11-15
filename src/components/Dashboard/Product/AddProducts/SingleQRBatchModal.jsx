@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { saveAs } from 'file-saver';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-const QRBatchModal = ({ isOpen, onClose }) => {
+const SingleQR = ({ isOpenSingle, onCloseSingle }) => {
     const dispatch = useDispatch();
     const [template, setTemplate] = useState([]);
     const token = useSelector((state) => state.auth.token);
@@ -33,13 +33,13 @@ const QRBatchModal = ({ isOpen, onClose }) => {
     const validationSchema = Yup.object().shape({
         selectedProduct: Yup.object()
             .required('Please select a product'),
-        serialNo: Yup.string()
-            .required('Serial Number is required'),
-        quantity: Yup.number()
-            .required('Quantity is required')
-            .positive('Quantity must be positive')
-            .integer('Quantity must be an integer')
-            .min(1, 'Quantity must be at least 1'),
+        // serialNo: Yup.string()
+        //     .required('Serial Number is required'),
+        // quantity: Yup.number()
+        //     .required('Quantity is required')
+        //     .positive('Quantity must be positive')
+        //     .integer('Quantity must be an integer')
+        //     .min(1, 'Quantity must be at least 1'),
         selectedTemplate: Yup.object()
             .required('Please select a template'),
     });
@@ -54,7 +54,7 @@ const QRBatchModal = ({ isOpen, onClose }) => {
             serial_no: serialNo,
             QR_copies: '1',
             template_id: selectedTemplate.value,
-            dynamic_qr: '1'
+            dynamic_qr : '0'
         };
 
         try {
@@ -110,8 +110,6 @@ const QRBatchModal = ({ isOpen, onClose }) => {
         }),
     };
 
-
-
     // cutomer options
     const customOption = (props) => {
         const { innerRef, innerProps, data } = props;
@@ -134,13 +132,13 @@ const QRBatchModal = ({ isOpen, onClose }) => {
 
     return (
         <>
-            {isOpen && (
+            {isOpenSingle && (
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
                     className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 modal-backdrop"
-                    onClick={(e) => e.target.classList.contains('modal-backdrop') && onClose()}
+                    onClick={(e) => e.target.classList.contains('modal-backdrop') && onCloseSingle()}
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -152,8 +150,8 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                         <Formik
                             initialValues={{
                                 selectedProduct: null,
-                                serialNo: '',
-                                quantity: '',
+                                serialNo: 'ABC_123',
+                                quantity: '1',
                                 selectedTemplate: null,
                             }}
                             validationSchema={validationSchema}
@@ -163,14 +161,14 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                 <Form>
                                     <div className="mb-4">
                                         <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
-                                            Select Product
+                                            Select Product 
                                         </label>
                                         <Select
                                             value={values.selectedProduct}
                                             onChange={(option) => setFieldValue('selectedProduct', option)}
                                             options={products
                                                 .filter((product) => {
-                                                    return product?.dynamic_qr === "1";
+                                                    return product?.dynamic_qr === "";
                                                 })
                                                 .map((product) => ({
                                                     value: product.product_id,
@@ -183,16 +181,18 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                             menuPortalTarget={null}
                                             menuPosition="fixed"
                                         />
+
                                         <ErrorMessage name="selectedProduct" component="div" className="text-red-500 text-sm" />
                                     </div>
 
                                     <div className="mb-4">
                                         <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
-                                            Serial Number
+                                            Serial Number 
                                         </label>
                                         <Field
                                             type="text"
                                             name="serialNo"
+                                            disabled
                                             className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] mt-1"
                                             placeholder="Enter serial number"
                                         />
@@ -206,6 +206,8 @@ const QRBatchModal = ({ isOpen, onClose }) => {
                                         <Field
                                             type="number"
                                             name="quantity"
+                                            disabled
+                                            
                                             className="input border border-gray-300 rounded-md w-full py-2 px-3 focus:border-[#0052cc] mt-1"
                                             placeholder="Enter number of QR codes"
                                         />
@@ -250,4 +252,4 @@ const QRBatchModal = ({ isOpen, onClose }) => {
     );
 };
 
-export default QRBatchModal;
+export default SingleQR;

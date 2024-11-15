@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Switch = ({ label, value, onChange }) => {
+
+
   const toggleSwitch = () => {
     onChange(!value);
   };
+
+
 
   return (
     <div className="flex gap-5 mt-5 flex-col">
@@ -21,6 +26,14 @@ const Switch = ({ label, value, onChange }) => {
 };
 
 const BasicInformation = ({ formData, onInputChange }) => {
+  const user = useSelector((state) => state.userDetails.user)
+  const [isUpgraded, setIsUpgraded] = useState(0)
+
+  useEffect(() => {
+    if (user) {
+      setIsUpgraded(user?.is_upgraded)
+    }
+  }, [user])
   return (
     <div className="w-full">
       <div className="flex flex-col gap-2">
@@ -66,6 +79,15 @@ const BasicInformation = ({ formData, onInputChange }) => {
           value={formData?.installation_details}
           onChange={(value) => onInputChange('installation_details', value)}
         />
+
+        {
+          isUpgraded == 1 ? (<Switch
+            label="Dynamic QR"
+            value={formData?.dynamic_qr}
+            onChange={(value) => onInputChange('dynamic_qr', value)}
+          />) : (null)
+        }
+
       </div>
     </div>
   );

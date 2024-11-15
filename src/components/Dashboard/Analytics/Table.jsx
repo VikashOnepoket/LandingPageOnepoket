@@ -15,7 +15,7 @@ const Table = ({ scan }) => {
                     <MdOutlineFileDownload className="text-[16px] leading-5 text-[#8F9091]" />
                 </a>
             </td>
-            <td className="py-4 px-4 w-[15%] whitespace-nowrap text-[14px] leading-4 text-[#8F9091] font-medium">Varansi</td>
+            <td className="py-4 px-4 w-[15%] whitespace-nowrap text-[14px] leading-4 text-[#8F9091] font-medium">{scan?.IP_city}</td>
         </tr>
 
 

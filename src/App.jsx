@@ -45,6 +45,7 @@ const Campaign = lazy(() => import('./components/Dashboard/Campaign/Campaign'));
 const CreateCampaign = lazy(() => import('./components/Dashboard/Campaign/CreateCampaign/CreateCampaign'));
 const Analytics = lazy(() => import('./components/Dashboard/Analytics/Analytics'));
 const FactoryManagement = lazy(() => import('./components/Dashboard/FactoryManagement/FactoryManagement'));
+const SingleQRAcquiredCustomer = lazy(() => import('./components/Dashboard/SinglQRAcquired/SingleQRAcquiredCustomer'));
 
 function App() {
   const dispatch = useDispatch();
@@ -145,6 +146,7 @@ function App() {
               <Route element={<DashboardLayout />}>
                 <Route path='/sidebar' element={<Sidebar />} />
                 <Route path='/factory' element={<FactoryManagement />} />
+                <Route path='/single_qr_acquired_customer' element={<SingleQRAcquiredCustomer />} />
                 <Route path='/products' element={<Product />} />
                 <Route path='/products/add_product' element={<AddProduct />} />
                 <Route path='/products/edit_product/:id' element={<EditProduct />} />
