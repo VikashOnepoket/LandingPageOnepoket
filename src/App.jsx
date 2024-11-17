@@ -146,7 +146,7 @@ function App() {
               <Route element={<DashboardLayout />}>
                 <Route path='/sidebar' element={<Sidebar />} />
                 <Route path='/factory' element={<FactoryManagement />} />
-                <Route path='/single_qr_acquired_customer' element={<SingleQRAcquiredCustomer />} />
+                <Route path='/analytics/single_qr' element={<SingleQRAcquiredCustomer />} />
                 <Route path='/products' element={<Product />} />
                 <Route path='/products/add_product' element={<AddProduct />} />
                 <Route path='/products/edit_product/:id' element={<EditProduct />} />
@@ -169,7 +169,7 @@ function App() {
                 <Route path='/profile/logo/add_logo' element={<AddLogo />} />
                 <Route path='/campaign' element={<Campaign />} />
                 <Route path='/campaign/create_campaign' element={<CreateCampaign />} />
-                <Route path='/analytics' element={<Analytics />} />
+                <Route path='/analytics/dynamic_qr' element={<Analytics />} />
                 <Route path='/factory' element={<FactoryManagement />} />
               </Route>
             </Route>
