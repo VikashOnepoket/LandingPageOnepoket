@@ -168,7 +168,7 @@ const SingleQR = ({ isOpenSingle, onCloseSingle }) => {
                                             onChange={(option) => setFieldValue('selectedProduct', option)}
                                             options={products
                                                 .filter((product) => {
-                                                    return product?.dynamic_qr === "";
+                                                    return product?.dynamic_qr === "" || product?.dynamic_qr === "0";
                                                 })
                                                 .map((product) => ({
                                                     value: product.product_id,
