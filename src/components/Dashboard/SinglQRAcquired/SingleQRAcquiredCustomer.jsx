@@ -41,12 +41,12 @@ const SingleQRAcquiredCustomer = () => {
                         <table className="min-w-full border-gray-200">
                             <thead className="">
                                 <tr>
-                                    <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Date</th>
-                                    <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Name</th>
-                                    <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Email</th>
-                                    <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Phone Number</th>
-                                    <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Invoice</th>
-                                    <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Location</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Date</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Name</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Email</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Ph. No.</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Invoice</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Location</th>
                                 </tr>
                             </thead>
 

@@ -185,7 +185,7 @@ const SingleQR = ({ isOpenSingle, onCloseSingle }) => {
                                         <ErrorMessage name="selectedProduct" component="div" className="text-red-500 text-sm" />
                                     </div>
 
-                                    <div className="mb-4">
+                                    {/* <div className="mb-4">
                                         <label className="text-[14px] font-semibold mb-2 text-[#58595A]">
                                             Serial Number 
                                         </label>
@@ -197,7 +197,7 @@ const SingleQR = ({ isOpenSingle, onCloseSingle }) => {
                                             placeholder="Enter serial number"
                                         />
                                         <ErrorMessage name="serialNo" component="div" className="text-red-500 text-sm" />
-                                    </div>
+                                    </div> */}
 
                                     <div className="mb-4">
                                         <label className="text-[14px] font-semibold mb-2 text-[#58595A]">

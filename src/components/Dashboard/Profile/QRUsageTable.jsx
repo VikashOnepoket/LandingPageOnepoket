@@ -10,6 +10,7 @@ const QRUsageTable = ({ qrTransaction }) => {
           <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">{qrTransaction?.category_title}</td>
           <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">{qrTransaction?.debit}</td>
           <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]">{qrTransaction?.running_balance}</td>
+          <td className="py-5 px-4 border-b font-medium text-[#202123BF] text-[12px] leading-[16px]"> <a className="" dangerouslySetInnerHTML={{ __html: qrTransaction?.remarks }} /></td>
         </tr>
       </tbody>
     </>
