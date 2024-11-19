@@ -45,6 +45,7 @@ const SingleQRAcquiredCustomer = () => {
                                     <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Name</th>
                                     <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Email</th>
                                     <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Ph. No.</th>
+                                    <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Product Name</th>
                                     <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Invoice</th>
                                     <th className="py-2 px-4 text-left text-[16px] leading-5 text-[#202123] font-medium border-b">Location</th>
                                 </tr>

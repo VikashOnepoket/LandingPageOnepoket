@@ -18,6 +18,9 @@ const AcquireCustomerTable = ({ acquiredData }) => {
                     {acquiredData?.phone_number}
                 </td>
                 <td className="py-4 px-4 border-b  text-[14px] leading-4 text-[#8F9091] font-medium">
+                    {acquiredData?.product_name}
+                </td>
+                <td className="py-4 px-4 border-b  text-[14px] leading-4 text-[#8F9091] font-medium">
                     <a href={acquiredData?.invoice} target="_blank" rel="noopener noreferrer">
                         <MdOutlineFileDownload className="text-[16px] leading-5 text-[#8F9091]" />
                     </a>
