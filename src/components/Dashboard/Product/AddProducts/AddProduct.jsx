@@ -52,7 +52,7 @@ const AddProduct = () => {
 
   const handleInputChange = (name, value) => {
     // Convert `show_manufacture_date` and `installation_details` to 0 or 1
-    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details' || name ==='dynamic_qr')
+    const formattedValue = (name === 'show_manufacture_date' || name === 'installation_details' || name === 'dynamic_qr')
       ? (value ? 1 : 0)
       : value; // For other fields, keep the original value
 
@@ -106,8 +106,8 @@ const AddProduct = () => {
     data.append('model_number', formData.model_number);
     data.append('description', formData.description);
     data.append('category_title', formData.category_title);
-    data.append('warranty_years', formData.warranty_years);
-    data.append('warranty_months', formData.warranty_months);
+    data.append('warranty_years', formData.warranty_years || 0);
+    data.append('warranty_months', formData.warranty_months || 0);
     data.append('product_desc_for_customer', formData.product_desc_for_customer);
     data.append('product_video_link', formData.product_video_link);
     data.append('logo_id', formData.logo_id);

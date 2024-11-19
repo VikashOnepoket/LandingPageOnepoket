@@ -39,7 +39,7 @@ const QRUsage = () => {
 
       const { data } = await axios.post(
         'lp_get_credits_transactions_details',
-      
+
         {
           ...tableData,
           filter_by_category: filterCategory,
@@ -337,6 +337,8 @@ const QRUsage = () => {
                   <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Category</th>
                   <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">No. of QR Generated</th>
                   <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold ">No. of QR Left</th>
+                  {/* <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold ">Remarks</th> */}
+
                 </tr>
               </thead>
 
