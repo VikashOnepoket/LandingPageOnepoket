@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchLogo } from '../../../slice/logoSlice';
 
-const Logo = ({ onLogoChange }) => {
+const Logo = ({ onLogoChange, err }) => {
     const [loading, setLoading] = useState(false);
     const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
@@ -52,6 +52,7 @@ const Logo = ({ onLogoChange }) => {
             <div className='flex justify-between gap-10'>
                 <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Logo</p>
             </div>
+            {err && <p className='text-red-500 text-[14px] leading-[18px]  font-semibold'>{err}</p>}
             <div className="bg-white rounded-md border p-6 mt-2 h-[220px]">
                 <Select
                     options={options}

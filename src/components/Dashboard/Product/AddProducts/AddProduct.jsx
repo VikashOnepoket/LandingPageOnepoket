@@ -98,8 +98,12 @@ const AddProduct = () => {
   };
 
   const [loading, setLoading] = useState(false);
-
+  const [err, setErr] = useState("")
   const handleSubmit = async () => {
+
+    if (!formData?.logo_id) {
+      return setErr("Logo is required")
+    }
     const data = new FormData();
     data.append('company_id', formData.company_id);
     data.append('product_name', formData.product_name);
@@ -163,7 +167,7 @@ const AddProduct = () => {
             <div className='lg:w-[30%] w-[100%]'>
               <ProductImge onImageChange={handleImageChange} />
               <Category onCategoryChange={handleCategoryChange} />
-              <Logo onLogoChange={handleLogoChange} />
+              <Logo onLogoChange={handleLogoChange} err = {err}/>
             </div>
           </div>
 
