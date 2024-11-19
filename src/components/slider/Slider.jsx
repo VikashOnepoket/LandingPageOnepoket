@@ -64,21 +64,7 @@ const AutoPlay = () => {
             </motion.div>
             <Slider {...settings} className="custom-slider md:w-1/2 w-[90%]  md:mt-0 mt-12">
                 <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
-                    <div className=" flex justify-center items-center gap-10 ">
-                        <div className="p-10 w-full">
-                            <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
-                                the convenience of
-                            </p>
-                            <p className="text-[32px] leading-10 font-bold text-[#0052CC]">one-click warranty registration.</p>
-                        </div>
-                        <div className="w-[30%]">
-                            <img src={sliderBG} alt="slider-bg" className="w-[100%] items-center" />
-                        </div>
-                    </div>
-
-                </div>
-                <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
-                    <div className=" flex justify-center items-center gap-10 ">
+                    <div className=" flex justify-center  gap-10 ">
                         <div className="p-10">
                             <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
                                 the convenience of
@@ -92,7 +78,21 @@ const AutoPlay = () => {
 
                 </div>
                 <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
-                    <div className=" flex justify-center items-center gap-10 ">
+                    <div className=" flex justify-center  gap-10 ">
+                        <div className="p-10">
+                            <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
+                                the convenience of
+                            </p>
+                            <p className="text-[32px] leading-10 font-bold text-[#0052CC]">one-click warranty registration.</p>
+                        </div>
+                        <div className="w-[30%]">
+                            <img src={sliderBG} alt="slider-bg" className="w-[100%] items-center" />
+                        </div>
+                    </div>
+
+                </div>
+                <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
+                    <div className=" flex justify-center  gap-10 ">
                         <div className="p-10">
                             <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
                                 the convenience of
