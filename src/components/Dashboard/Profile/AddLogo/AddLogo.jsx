@@ -24,7 +24,6 @@ const AddLogo = () => {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required('Please enter logo title!'),
         image: Yup.mixed().required('Please upload your logo!'),
-
     });
 
     // function to call the api
