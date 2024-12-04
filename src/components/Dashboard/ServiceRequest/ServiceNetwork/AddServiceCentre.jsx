@@ -9,9 +9,15 @@ import FormTechnicalExecutiveDetails from './FormTechnicalExecutiveDetails';
 
 const AddServiceCentre = () => {
     const navigate = useNavigate();
+
+    // state
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState([{ name: "", phone_number: "", email: "" }]);
+    
+    // token
     const token = useSelector((state) => state.auth.token);
+
+    // function to add the addExecutiveDetails
     const addTechnicalExecutiveDetails = async (executiveDetails) => {
         try {
             setLoading(true);
@@ -28,7 +34,7 @@ const AddServiceCentre = () => {
         }
     };
 
-    // Validation Schema
+    // Validation Schema for add technical exective details 
     const validationSchema = Yup.array().of(
         Yup.object().shape({
             name: Yup.string().required('Name is required !'),

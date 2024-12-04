@@ -60,12 +60,43 @@ const AddProduct = () => {
       ...prevData,
       [name]: formattedValue,
     }));
+
+    // get erro
+    setError((prevError) => ({
+      ...prevError,
+      [getErrorKey(name)]: formattedValue ? "" : prevError[getErrorKey(name)],
+    }));
+  };
+  // Helper function to map form field names to error keys
+  const getErrorKey = (name) => {
+    switch (name) {
+      case 'logo_id':
+        return 'errLogo';
+      case 'product_name':
+        return 'errProductName';
+      case 'model_number':
+        return 'errModelNumber';
+      case 'description':
+        return 'errProductDescription';
+      case 'product_desc_for_customer':
+        return 'errCustomerDescription';
+      case 'warranty_years':
+        return 'errWarranty'
+      case 'warranty_months':
+        return 'errWarranty'
+      default:
+        return '';
+    }
   };
 
   const handleCategoryChange = (category) => {
     setFormData((prevData) => ({
       ...prevData,
       category_title: category,
+    }));
+    setError((prevError) => ({
+      ...prevError,
+      errCategory: category ? "" : prevError.errCategory,
     }));
   };
 
@@ -74,6 +105,10 @@ const AddProduct = () => {
       ...prevData,
       additionalInfo,
     }));
+    setError((prevError) => ({
+      ...prevError,
+      errAdditionalInfo: additionalInfo ? "" : prevError.errAdditionalInfo,
+    }));
   };
 
   const handlePurchaseOptionsChange = (PurchaseOptions) => {
@@ -81,28 +116,88 @@ const AddProduct = () => {
       ...prevData,
       PurchaseOptions,
     }));
+    setError((prevError) => ({
+      ...prevError,
+      errPurchaseOption: PurchaseOptions ? "" : prevError.errPurchaseOption,
+    }));
   };
 
   const handleLogoChange = (selectedLogo) => {
+    const logoValue = selectedLogo?.value || "";
+
     setFormData((prevData) => ({
       ...prevData,
-      logo_id: selectedLogo?.value || "",
+      logo_id: logoValue,
+    }));
+
+    // Clear error if a valid logo is selected
+    setError((prevError) => ({
+      ...prevError,
+      errLogo: logoValue ? "" : prevError.errLogo,
     }));
   };
+
 
   const handleImageChange = (file) => {
     setFormData((prevData) => ({
       ...prevData,
       image: file,
     }));
+    setError((prevError) => ({
+      ...prevError,
+      errProductImage: file ? "" : prevError.errProductImage,
+    }));
   };
 
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("")
+  const [error, setError] = useState({
+    errLogo: "",
+    errProductName: "",
+    errModelNumber: "",
+    errProductDescription: "",
+    errCustomerDescription: "",
+    errVideoLink: "",
+    errProductImage: "",
+    errWarranty: "",
+    errCategory: "",
+    errAdditionalInfo: "",
+    errPurchaseOption: ""
+  })
+  console.log(error , "error")
+
   const handleSubmit = async () => {
 
-    if (!formData?.logo_id) {
-      return setErr("Logo is required")
+    const newErrors = {
+      errLogo: !formData?.logo_id ? "Logo is required" : "",
+      errProductName: !formData?.product_name ? "Product Name is required" : "",
+      errModelNumber: !formData?.model_number ? "Model Number is required" : "",
+      errProductDescription: !formData?.description ? "Product Description is required" : "",
+      errCustomerDescription: !formData?.product_desc_for_customer
+        ? "Customer Description is required"
+        : "",
+      errVideoLink: !formData?.product_video_link
+        ? "Video Link is required"
+        : "",
+      errProductImage: !formData?.image ? "Product Image is required" : "",
+      errWarranty:
+        (!formData?.warranty_years && !formData?.warranty_months)
+          ? "Warranty information is required"
+          : "",
+      errCategory: !formData?.category_title ? "Category is required" : "",
+      errAdditionalInfo:
+        !formData?.additionalInfo || formData.additionalInfo.length === 0
+          ? "Additional Info is required"
+          : "",
+      errPurchaseOption:
+        !formData?.PurchaseOptions || formData.PurchaseOptions.length === 0
+          ? "Purchase Option is required"
+          : "",
+    };
+
+    // Check if any errors exist
+    if (Object.values(newErrors).some((err) => err !== "")) {
+      setError(newErrors); // Set errors in state
+      return; // Exit early if there are validation errors
     }
     const data = new FormData();
     data.append('company_id', formData.company_id);
@@ -157,17 +252,17 @@ const AddProduct = () => {
 
           <div className='mt-10 flex lg:flex-row flex-col gap-10 '>
             <div className='lg:w-[70%] w-[100%]'>
-              <BasicInformation formData={formData} onInputChange={handleInputChange} />
-              <AdditionalInfo additionalInfo={formData?.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} />
-              <Purchase purchaseOptions={formData?.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} />
-              <Warranty formData={formData} onInputChange={handleInputChange} />
-              <ProductVideo formData={formData} onInputChange={handleInputChange} />
-              <CustsomerDescription formData={formData} onInputChange={handleInputChange} />
+              <BasicInformation formData={formData} onInputChange={handleInputChange} error={error} />
+              <AdditionalInfo additionalInfo={formData?.additionalInfo} onAdditionalInfoChange={handleAdditionalInfoChange} error={error} />
+              <Purchase purchaseOptions={formData?.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} error={error} />
+              <Warranty formData={formData} onInputChange={handleInputChange} error={error} />
+              <ProductVideo formData={formData} onInputChange={handleInputChange} error={error} />
+              <CustsomerDescription formData={formData} onInputChange={handleInputChange} error={error} />
             </div>
             <div className='lg:w-[30%] w-[100%]'>
-              <ProductImge onImageChange={handleImageChange} />
-              <Category onCategoryChange={handleCategoryChange} />
-              <Logo onLogoChange={handleLogoChange} err = {err}/>
+              <ProductImge onImageChange={handleImageChange} error={error} />
+              <Category onCategoryChange={handleCategoryChange} error={error} />
+              <Logo onLogoChange={handleLogoChange} error={error} />
             </div>
           </div>
 

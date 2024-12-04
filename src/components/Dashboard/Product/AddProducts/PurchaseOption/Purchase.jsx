@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
   const [options, setOptions] = useState(PurchaseOptions.length > 0 ? PurchaseOptions : [{ title: '', link: '' }]);
@@ -23,6 +24,10 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
   };
 
   const removeOption = (index) => {
+    if (index === 0) {
+      // Prevent deletion of the first option
+      return toast.error("At least one required")
+    }
     const newOptions = options.filter((_, i) => i !== index);
     setOptions(newOptions);
     onPurchaseOptionsChange(newOptions);
@@ -36,7 +41,9 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
       {options.map((option, index) => (
         <div key={index} className='mt-2 border rounded-md p-5'>
           <div className='flex flex-col gap-2 mt-5'>
-            <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Store Name</label>
+            <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+            <span className="text-[#EE4444] mr-1"> *</span>
+              Store Name</label>
             <input
               type='text'
               className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out'
@@ -46,7 +53,9 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
             />
           </div>
           <div className='flex flex-col gap-2 mt-5'>
-            <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Product Review Link</label>
+            <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+            <span className="text-[#EE4444] mr-1"> *</span>
+              Product Review Link</label>
             <input
               type='text'
               className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out'

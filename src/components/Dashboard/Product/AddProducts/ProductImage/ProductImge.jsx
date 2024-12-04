@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ProductImge = ({ image, onImageChange }) => {
+const ProductImge = ({ image, onImageChange,error }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
@@ -23,9 +23,13 @@ const ProductImge = ({ image, onImageChange }) => {
   return (
     <>
       <div className='flex justify-between gap-10'>
-        <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Product Image</p>
+        <p className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+        <span className="text-[#EE4444] mr-1"> *</span>
+          Product Image</p>
         {/* <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Required</p> */}
+       
       </div>
+      {error?.errProductImage && <span className="text-red-500 text-xs">{error.errProductImage}</span>}
       <div className="bg-white rounded-md border p-6 mt-2">
         {!selectedFile && (<div className="flex justify-center items-center mb-4">
           <label htmlFor="imageUpload" className="cursor-pointer flex flex-col justify-center items-center w-full h-48">

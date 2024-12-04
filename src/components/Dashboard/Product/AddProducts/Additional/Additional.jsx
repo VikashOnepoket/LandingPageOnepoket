@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
-const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange }) => {
+const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, error }) => {
   const [sections, setSections] = useState(additionalInfo.length > 0 ? additionalInfo : [{ title: '', description: '' }]);
 
   useEffect(() => {
@@ -23,6 +24,10 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange }) => 
   };
 
   const removeSection = (index) => {
+    if (index === 0) {
+      // Prevent deletion of the first option
+      return toast.error("At least one required")
+    }
     const newSections = sections.filter((_, i) => i !== index);
     setSections(newSections);
     onAdditionalInfoChange(newSections);
@@ -30,13 +35,16 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange }) => 
 
   return (
     <div className='w-[100%] mt-10'>
-      <div>
+      <div className='flex justify-between'>
         <h1 className='text-[18px] leading-[23px] font-semibold'>Additional Info</h1>
+        {error?.errAdditionalInfo && <span className="text-red-500 text-xs">{error.errAdditionalInfo}</span>}
       </div>
       {sections.map((section, index) => (
         <div key={index} className='mt-2 border rounded-md p-5'>
           <div className='flex flex-col gap-2 mt-5'>
-            <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Section Title</label>
+            <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+              <span className="text-[#EE4444] mr-1"> *</span>
+              Section Title</label>
             <input
               type='text'
               className='input border  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black  ease-in-out'
@@ -46,7 +54,9 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange }) => 
             />
           </div>
           <div className='flex flex-col gap-2 mt-5'>
-            <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Description</label>
+            <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+              <span className="text-[#EE4444] mr-1"> *</span>
+              Description</label>
             <textarea
               className='input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black  ease-in-out'
               placeholder='Description'

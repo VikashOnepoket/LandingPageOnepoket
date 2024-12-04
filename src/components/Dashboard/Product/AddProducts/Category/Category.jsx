@@ -4,7 +4,7 @@ import axios from '../../../../../api/api'; // Import Axios
 import { fetchCategory } from '../../../slice/categorySlice'; // Assuming this is correctly implemented
 import toast from 'react-hot-toast';
 
-const Category = ({ onCategoryChange }) => {
+const Category = ({ onCategoryChange, error }) => {
     const token = useSelector((state) => state.auth.token);
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -85,9 +85,12 @@ const Category = ({ onCategoryChange }) => {
     return (
         <div className='mt-10'>
             <div className='flex justify-between gap-10'>
-                <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Category</p>
+                <p className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+                    <span className="text-[#EE4444] mr-1"> *</span>
+                    Category</p>
                 {/* <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Select one category!</p> */}
             </div>
+            {error?.errCategory && <span className="text-red-500 text-xs">{error.errCategory}</span>}
             <div className="bg-white rounded-md border p-6 mt-2 h-[220px] overflow-y-auto">
                 {categories.map((cat) => (
                     <div key={cat.id} className="flex items-center mb-3">
