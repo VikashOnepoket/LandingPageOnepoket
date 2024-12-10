@@ -127,7 +127,9 @@ const Product = () => {
             dispatch(fetchProducts({ token }))
                 .unwrap()
                 .then((data) => {
+                    console.log(data, "products delete data")
                     setProduct(data);
+                    setFilteredProducts(data);
                 })
                 .catch((error) => {
                     console.log(error.response.status, "error"); // This should now catch the error
