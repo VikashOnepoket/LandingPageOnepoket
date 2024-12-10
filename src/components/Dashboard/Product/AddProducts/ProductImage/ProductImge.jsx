@@ -30,7 +30,7 @@ const ProductImge = ({ image, onImageChange,error }) => {
        
       </div>
       {error?.errProductImage && <span className="text-red-500 text-xs">{error.errProductImage}</span>}
-      <div className="bg-white rounded-md border p-6 mt-2">
+      <div className="bg-[#F7F7F7] rounded-md border p-6 mt-2">
         {!selectedFile && (<div className="flex justify-center items-center mb-4">
           <label htmlFor="imageUpload" className="cursor-pointer flex flex-col justify-center items-center w-full h-48">
             <span className="material-symbols-outlined text-gray-400 text-5xl">add_a_photo</span>

@@ -65,6 +65,7 @@ const Logo = ({ onLogoChange, error }) => {
                     styles={{
                         control: (base, state) => ({
                             ...base,
+                            backgroundColor : "#F7F7F7",
                             borderColor: state.isFocused ? '#0052cc' : base.borderColor,
                             '&:hover': {
                                 borderColor: state.isFocused ? '#0052cc' : base.borderColor,

@@ -46,31 +46,33 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, error
             <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
               <span className="text-[#EE4444] mr-1"> *</span>
               Section Title</label>
-            {error?.errAddInfo?.[index]?.title && (
-              <span className="text-red-500 text-xs">{error.errAddInfo[index].title}</span>
-            )}
+           
 
             <input
               type='text'
-              className='input border  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black  ease-in-out'
+              className='input border  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black  ease-in-out bg-[#F7F7F7]'
               placeholder='Section Title'
               value={section.title}
               onChange={(e) => handleSectionChange(index, 'title', e.target.value)}
             />
+             {error?.errAddInfo?.[index]?.title && (
+              <span className="text-red-500 text-xs">{error.errAddInfo[index].title}</span>
+            )}
           </div>
           <div className='flex flex-col gap-2 mt-5'>
             <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
               <span className="text-[#EE4444] mr-1"> *</span>
               Description</label>
-            {error?.errAddInfo?.[index]?.description && (
-              <span className="text-red-500 text-xs">{error.errAddInfo[index].description}</span>
-            )}
+           
             <textarea
-              className='input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black  ease-in-out'
+              className='input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black  ease-in-out bg-[#F7F7F7]'
               placeholder='Description'
               value={section.description}
               onChange={(e) => handleSectionChange(index, 'description', e.target.value)}
             ></textarea>
+             {error?.errAddInfo?.[index]?.description && (
+              <span className="text-red-500 text-xs">{error.errAddInfo[index].description}</span>
+            )}
           </div>
           <div className='flex justify-end'>
             <button

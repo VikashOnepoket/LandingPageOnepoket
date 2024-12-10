@@ -12,7 +12,7 @@ const ProductVideo = ({ formData, onInputChange  }) => {
                   
                         Link</label>
                     <input
-                        type='text' className='input  border  border-gray-300  dark:border-gray-600  dark:bg-transparent  rounded-md  w-full  py-2 px-3  focus:border-[#0052cc] focus:border focus-within:ring-1  appearance-none  transition   duration-150   text-black    ease-in-out'
+                        type='text' className='input  border  border-gray-300  dark:border-gray-600  dark:bg-transparent  rounded-md  w-full  py-2 px-3  focus:border-[#0052cc] focus:border focus-within:ring-1  appearance-none  transition   duration-150   text-black    ease-in-out bg-[#F7F7F7]'
                         placeholder='Link'
                         value={formData?.product_video_link}
                         onChange={(e) => onInputChange('product_video_link', e.target.value)}

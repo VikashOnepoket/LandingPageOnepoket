@@ -43,7 +43,7 @@ const BasicInformation = ({ formData, onInputChange, error }) => {
         </label>
         <input
           type="text"
-          className="input border  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1   transition duration-150 text-black"
+          className="input border  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1   transition duration-150 text-black bg-[#F7F7F7]"
           placeholder="Enter Product name"
           value={formData?.product_name}
           onChange={(e) => onInputChange('product_name', e.target.value)}
@@ -57,7 +57,7 @@ const BasicInformation = ({ formData, onInputChange, error }) => {
           Model Number</label>
         <input
           type="text"
-          className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black"
+          className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black bg-[#F7F7F7]"
           placeholder="Enter Model number"
           value={formData?.model_number}
           onChange={(e) => onInputChange('model_number', e.target.value)}
@@ -70,7 +70,7 @@ const BasicInformation = ({ formData, onInputChange, error }) => {
           <span className="text-[#EE4444] mr-1"> *</span>
           Product Description</label>
         <textarea
-          className="input border h-28  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black"
+          className="input border h-28  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black bg-[#F7F7F7]"
           placeholder="Enter Description"
           value={formData?.description}
           onChange={(e) => onInputChange('description', e.target.value)}

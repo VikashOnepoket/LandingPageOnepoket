@@ -100,8 +100,8 @@ const Category = ({ onCategoryChange, error }) => {
                             value={cat.title}
                             checked={selectedCategory === cat.title}
                             onChange={handleCheckboxChange}
-                            className="mr-5 cursor-pointer"
-                            style={{ accentColor: selectedCategory === cat.title ? '#0052cc' : 'initial' }}
+                            className="mr-5 cursor-pointer bg-[#F7F7F7]"
+                            style={{ accentColor: selectedCategory === cat.title ? '#0052cc' : 'initial' , backgroundColor : "#F7F7F7"}}
                         />
                         <label htmlFor={`category-${cat.id}`} className="text-[12px] leading-[16px] text-[#58595A]">
                             {cat.title}

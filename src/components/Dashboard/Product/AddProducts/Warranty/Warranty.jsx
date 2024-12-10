@@ -6,8 +6,8 @@ const Warranty = ({ formData, onInputChange, error }) => {
         <div className='w-[100%] mt-10'>
             <div>
                 <h1 className='ml-2 text-[18px] leading-[23px] font-semibold'>
-                <span className="text-[#EE4444] mr-1"> *</span>
-                Warranty</h1>
+                    <span className="text-[#EE4444] mr-1"> *</span>
+                    Warranty</h1>
             </div>
             {error?.errWarranty && <span className="text-red-500 text-xs">{error.errWarranty}</span>}
             <div className='flex gap-5'>
@@ -25,6 +25,7 @@ const Warranty = ({ formData, onInputChange, error }) => {
                         py-2 px-3 
                         focus:border-[#0052cc]
                         focus:border
+                        bg-[#F7F7F7]
                     
                         focus-within:ring-1 
                         appearance-none 
@@ -53,7 +54,7 @@ const Warranty = ({ formData, onInputChange, error }) => {
                         py-2 px-3 
                         focus:border-[#0052cc]
                         focus:border
-                    
+                    bg-[#F7F7F7]
                         focus-within:ring-1 
                         appearance-none 
                         transition 

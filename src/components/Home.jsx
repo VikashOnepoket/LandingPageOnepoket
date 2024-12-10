@@ -23,6 +23,7 @@ const Home = () => {
     <>
       <div className='h-screen overflow-y-auto'>
         <NavTop />
+
         <Navbar />
         <HeroMain />
         <Fold2card />
@@ -30,6 +31,7 @@ const Home = () => {
         <CustomerScan />
         <AutoPlay />
         <Footer />
+
       </div>
 
 

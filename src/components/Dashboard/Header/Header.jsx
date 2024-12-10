@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from '../slice/userDetailsSlice';
 import { fetchLogo } from '../slice/logoSlice';
 
+
 const Header = () => {
     const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false);
@@ -176,8 +177,6 @@ const Header = () => {
                         </span>
                     </div>
                     <div className='relative' ref={dropdownRef}
-                    // onMouseEnter={handleAccountHover}
-                    // onMouseLeave={handleAccountLeave}
                     >
                         <span
                             className="material-symbols-outlined text-[22px] leading-[28px] text-[#7A7A7A] cursor-pointer"
@@ -185,6 +184,11 @@ const Header = () => {
                         >
                             account_circle
                         </span>
+
+                        {alertVisible && (<span class="material-symbols-outlined top-0 absolute text-[#FF0000] text-[17px] -right-3">
+                            info
+                        </span>)}
+
                         <AnimatePresence>
                             {isOpen && (
                                 <motion.div
