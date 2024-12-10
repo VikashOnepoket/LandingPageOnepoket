@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductVideo = ({ formData, onInputChange , error }) => {
+const ProductVideo = ({ formData, onInputChange  }) => {
     return (
         <div className='w-[100%] mt-10'>
             <div>
@@ -8,8 +8,8 @@ const ProductVideo = ({ formData, onInputChange , error }) => {
             </div>
             <div className='mt-2 border rounded-md p-5'>
                 <div className='flex flex-col gap-2 mt-5 '>
-                    <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
-                    <span className="text-[#EE4444] mr-1"> *</span>
+                    <label className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+                  
                         Link</label>
                     <input
                         type='text' className='input  border  border-gray-300  dark:border-gray-600  dark:bg-transparent  rounded-md  w-full  py-2 px-3  focus:border-[#0052cc] focus:border focus-within:ring-1  appearance-none  transition   duration-150   text-black    ease-in-out'
@@ -18,7 +18,7 @@ const ProductVideo = ({ formData, onInputChange , error }) => {
                         onChange={(e) => onInputChange('product_video_link', e.target.value)}
 
                     />
-                     {error?.errVideoLink && <span className="text-red-500 text-xs">{error.errVideoLink}</span>}
+                     {/* {error?.errVideoLink && <span className="text-red-500 text-xs">{error.errVideoLink}</span>} */}
                 </div>
 
                 {/* <div className='flex justify-end'>

@@ -81,7 +81,7 @@ const LogoForm = ({ initialValues, validationSchema, onSubmit }) => {
                                             <img
                                                 src={URL.createObjectURL(values.image)}
                                                 alt="Uploaded"
-                                                className="w-64 h-64 object-cover"
+                                                className="w-64 h-64"
                                             />
                                             <button
                                                 type="button"

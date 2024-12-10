@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
+const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange, error }) => {
   const [options, setOptions] = useState(PurchaseOptions.length > 0 ? PurchaseOptions : [{ title: '', link: '' }]);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
     setOptions(newOptions);
     onPurchaseOptionsChange(newOptions);
   };
-
+  console.log(error , "error purchase options")
   return (
     <div className='w-[100%] mt-10'>
       <div>
@@ -42,8 +42,12 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
         <div key={index} className='mt-2 border rounded-md p-5'>
           <div className='flex flex-col gap-2 mt-5'>
             <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
-            <span className="text-[#EE4444] mr-1"> *</span>
+              <span className="text-[#EE4444] mr-1"> *</span>
               Store Name</label>
+            {error?.errPurchase?.[index]?.title && (
+              <span className="text-red-500 text-xs">{error.errPurchase[index].title}</span>
+            )}
+
             <input
               type='text'
               className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out'
@@ -54,8 +58,11 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange }) => {
           </div>
           <div className='flex flex-col gap-2 mt-5'>
             <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
-            <span className="text-[#EE4444] mr-1"> *</span>
+              <span className="text-[#EE4444] mr-1"> *</span>
               Product Review Link</label>
+            {error?.errPurchase?.[index]?.link && (
+              <span className="text-red-500 text-xs">{error.errPurchase[index].link}</span>
+            )}
             <input
               type='text'
               className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out'

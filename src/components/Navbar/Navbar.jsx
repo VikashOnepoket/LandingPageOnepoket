@@ -6,6 +6,7 @@ import './Navbar.css';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
     const navigate = useNavigate();
 
     const toggleMenu = () => {
@@ -28,28 +29,28 @@ const Navbar = () => {
     };
 
     const openTypeForm = () => {
-      navigate('/onboarding')
+        navigate('/onboarding')
     };
 
     return (
         <>
             {/* Navbar */}
-            <div className='flex w-full mx-auto text-white mt-16 sticky-nav z-50 h-[5rem]'>
-                <div className='flex justify-between items-center w-full nav-text-container'>
+            <div className='flex w-[42.4375rem] rounded-[2.5rem] mx-auto text-white mt-[4rem] h-[4.25rem] nav-box '>
+                <div className='flex  items-center justify-between w-full p-5 '>
                     <Link to='/'>
-                        <div className='sm:w-[185px] w-[131px]'>
+                        <div className='sm:w-[12rem] w-[131px]'>
                             <img src={Logo} className='w-full h-full' alt='Logo' />
                         </div>
                     </Link>
-                    <div className='lg:flex hidden gap-12'>
-                        <Link to="/features" className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Features</Link>
-                        <Link to="/pricing"  className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Pricing</Link>
-                        <Link to="/use_cases"  className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Use Cases</Link>
-                        <Link to="/features"  className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>FAQs</Link>
+                    <div className='lg:flex hidden gap-[1.19rem]'>
+                        <Link to="/features" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>Features</Link>
+                        <Link to="/pricing" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>Pricing</Link>
+                        <Link to="/features" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>FAQs</Link>
+                        <Link to="/login" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>Login</Link>
+
                     </div>
-                    <div className='lg:flex hidden justify-end items-center gap-12'>
-                        <button onClick={goToLogin} className='text-[14px] cursor-pointer leading-[18px] font-bold rounded-[10px] text-[#6F7070]'>Login</button>
-                        <button onClick={openTypeForm} className='bg-[#E4EFFF] text-[#004699] rounded-[10px] text-[14px] leading-[18px] font-bold px-[22px] py-[10px]'>Start free trial</button>
+                    <div className=''>
+                        <button onClick={openTypeForm} className='experience-btn'>Experience Now</button>
                     </div>
                     <div className='flex lg:hidden'>
                         <div onClick={toggleMenu} className="cursor-pointer text-[34px] text-[#6F7070]">

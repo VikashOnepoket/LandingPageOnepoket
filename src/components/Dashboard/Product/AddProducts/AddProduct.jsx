@@ -19,6 +19,8 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
 
   const [formData, setFormData] = useState({
     company_id: "",
@@ -30,7 +32,6 @@ const AddProduct = () => {
     warranty_months: "",
     additionalInfo: [],
     PurchaseOptions: [],
-    product_desc_for_customer: "",
     product_video_link: "",
     logo_id: "",
     show_manufacture_date: "",
@@ -39,13 +40,26 @@ const AddProduct = () => {
     dynamic_qr: "", //
   });
 
+  const [helplineData, setHelplineData] = useState({
+    helplineEmail: "",
+    helplineNumber: ""
+
+  })
+
   useEffect(() => {
     if (token) {
       dispatch(fetchUserDetails(token)).then((data) => {
+        console.log(data, "in add product")
         setFormData((prevData) => ({
           ...prevData,
           company_id: data?.payload?.id,
         }));
+        setHelplineData((prevData) => ({
+          ...prevData,
+          helplineEmail: data?.payload?.helpline_email,
+          helplineNumber: data?.payload?.helpline_number
+        }));
+
       });
     }
   }, [dispatch, token]);
@@ -62,10 +76,12 @@ const AddProduct = () => {
     }));
 
     // get erro
-    setError((prevError) => ({
-      ...prevError,
-      [getErrorKey(name)]: formattedValue ? "" : prevError[getErrorKey(name)],
-    }));
+    if (isSubmitted) {
+      setError((prevError) => ({
+        ...prevError,
+        [getErrorKey(name)]: formattedValue ? "" : prevError[getErrorKey(name)],
+      }));
+    }
   };
   // Helper function to map form field names to error keys
   const getErrorKey = (name) => {
@@ -100,15 +116,45 @@ const AddProduct = () => {
     }));
   };
 
+  // const handleAdditionalInfoChange = (additionalInfo) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     additionalInfo,
+  //   }));
+  //   setError((prevError) => ({
+  //     ...prevError,
+  //     errAddInfo: additionalInfo ? "" : prevError.errAddInfo,
+  //   }));
+  // };
+
+  // const handlePurchaseOptionsChange = (PurchaseOptions) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     PurchaseOptions,
+  //   }));
+  //   setError((prevError) => ({
+  //     ...prevError,
+  //     errPurchase: PurchaseOptions ? "" : prevError.errPurchase,
+  //   }));
+  // };
+
+
+
   const handleAdditionalInfoChange = (additionalInfo) => {
     setFormData((prevData) => ({
       ...prevData,
       additionalInfo,
     }));
-    setError((prevError) => ({
-      ...prevError,
-      errAdditionalInfo: additionalInfo ? "" : prevError.errAdditionalInfo,
-    }));
+
+    if (isSubmitted) {
+      setError((prevError) => ({
+        ...prevError,
+        errAddInfo: additionalInfo.map((item) => ({
+          title: !item?.title ? "Title is required" : "",
+          description: !item?.description ? "Description is required" : "",
+        })),
+      }));
+    }
   };
 
   const handlePurchaseOptionsChange = (PurchaseOptions) => {
@@ -116,10 +162,16 @@ const AddProduct = () => {
       ...prevData,
       PurchaseOptions,
     }));
-    setError((prevError) => ({
-      ...prevError,
-      errPurchaseOption: PurchaseOptions ? "" : prevError.errPurchaseOption,
-    }));
+
+    if (isSubmitted) {
+      setError((prevError) => ({
+        ...prevError,
+        errPurchase: PurchaseOptions.map((item) => ({
+          title: !item?.title ? "Store Name is required" : "",
+          link: !item?.link ? "Link is required" : "",
+        })),
+      }));
+    }
   };
 
   const handleLogoChange = (selectedLogo) => {
@@ -155,49 +207,58 @@ const AddProduct = () => {
     errProductName: "",
     errModelNumber: "",
     errProductDescription: "",
-    errCustomerDescription: "",
-    errVideoLink: "",
     errProductImage: "",
     errWarranty: "",
     errCategory: "",
-    errAdditionalInfo: "",
-    errPurchaseOption: ""
+    errAddInfo: [],
+    errPurchaseOption: []
   })
-  console.log(error , "error")
+  console.log(error, "error")
 
   const handleSubmit = async () => {
+    setIsSubmitted(true);
+
+    if(!helplineData?.helplineEmail || !helplineData?.helplineNumber){
+      return toast.error("Please update your  helpline email and number from the Profile section.")
+    }
 
     const newErrors = {
       errLogo: !formData?.logo_id ? "Logo is required" : "",
       errProductName: !formData?.product_name ? "Product Name is required" : "",
       errModelNumber: !formData?.model_number ? "Model Number is required" : "",
       errProductDescription: !formData?.description ? "Product Description is required" : "",
-      errCustomerDescription: !formData?.product_desc_for_customer
-        ? "Customer Description is required"
-        : "",
-      errVideoLink: !formData?.product_video_link
-        ? "Video Link is required"
-        : "",
       errProductImage: !formData?.image ? "Product Image is required" : "",
       errWarranty:
         (!formData?.warranty_years && !formData?.warranty_months)
           ? "Warranty information is required"
           : "",
       errCategory: !formData?.category_title ? "Category is required" : "",
-      errAdditionalInfo:
-        !formData?.additionalInfo || formData.additionalInfo.length === 0
-          ? "Additional Info is required"
-          : "",
-      errPurchaseOption:
-        !formData?.PurchaseOptions || formData.PurchaseOptions.length === 0
-          ? "Purchase Option is required"
-          : "",
+      errAddInfo: Array.isArray(formData.additionalInfo)
+        ? formData.additionalInfo.map((item, index) => ({
+          title: !item?.title ? `Title is required` : "",
+          description: !item?.description ? `Description is required` : "",
+        }))
+        : [],
+      errPurchase: Array.isArray(formData?.PurchaseOptions)
+        ? formData?.PurchaseOptions.map((item, index) => ({
+          title: !item?.title ? `Store Name is required` : "",
+          link: !item?.link ? `Link is required` : "",
+        }))
+        : [],
     };
 
     // Check if any errors exist
-    if (Object.values(newErrors).some((err) => err !== "")) {
+    const hasErrors = Object.values(newErrors).some((err) => {
+      if (Array.isArray(err)) {
+        // Check for errors in additionalInfo array
+        return err.some((item) => item.title || item.description);
+      }
+      return err !== "";
+    });
+
+    if (hasErrors) {
       setError(newErrors); // Set errors in state
-      return; // Exit early if there are validation errors
+      return; // Exit early if validation fails
     }
     const data = new FormData();
     data.append('company_id', formData.company_id);
@@ -257,7 +318,7 @@ const AddProduct = () => {
               <Purchase purchaseOptions={formData?.PurchaseOptions} onPurchaseOptionsChange={handlePurchaseOptionsChange} error={error} />
               <Warranty formData={formData} onInputChange={handleInputChange} error={error} />
               <ProductVideo formData={formData} onInputChange={handleInputChange} error={error} />
-              <CustsomerDescription formData={formData} onInputChange={handleInputChange} error={error} />
+              {/* <CustsomerDescription formData={formData} onInputChange={handleInputChange} error={error} /> */}
             </div>
             <div className='lg:w-[30%] w-[100%]'>
               <ProductImge onImageChange={handleImageChange} error={error} />

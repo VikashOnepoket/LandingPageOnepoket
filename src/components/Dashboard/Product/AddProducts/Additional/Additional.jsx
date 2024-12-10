@@ -33,11 +33,12 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, error
     onAdditionalInfoChange(newSections);
   };
 
+
   return (
     <div className='w-[100%] mt-10'>
       <div className='flex justify-between'>
-        <h1 className='text-[18px] leading-[23px] font-semibold'>Additional Info</h1>
-        {error?.errAdditionalInfo && <span className="text-red-500 text-xs">{error.errAdditionalInfo}</span>}
+        <h1 className='text-[18px] leading-[23px] font-semibold'>Product Highlights</h1>
+        {/* {error?.errAddInfo && <span className="text-red-500 text-xs">{error.errAddInfo}</span>} */}
       </div>
       {sections.map((section, index) => (
         <div key={index} className='mt-2 border rounded-md p-5'>
@@ -45,6 +46,10 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, error
             <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
               <span className="text-[#EE4444] mr-1"> *</span>
               Section Title</label>
+            {error?.errAddInfo?.[index]?.title && (
+              <span className="text-red-500 text-xs">{error.errAddInfo[index].title}</span>
+            )}
+
             <input
               type='text'
               className='input border  rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1  transition duration-150 text-black  ease-in-out'
@@ -57,6 +62,9 @@ const AdditionalInfoEdit = ({ additionalInfo = [], onAdditionalInfoChange, error
             <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
               <span className="text-[#EE4444] mr-1"> *</span>
               Description</label>
+            {error?.errAddInfo?.[index]?.description && (
+              <span className="text-red-500 text-xs">{error.errAddInfo[index].description}</span>
+            )}
             <textarea
               className='input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black  ease-in-out'
               placeholder='Description'

@@ -8,7 +8,6 @@ const PurchaseOptionEdit = ({ PurchaseOptions = [], onPurchaseOptionChange, form
             setOptions(formData.PurchaseOptions.length ? formData.PurchaseOptions : [{ title: '', link: '' }]);
         }
     }, []);
-    console.log(formData.PurchaseOptions, "options")
 
     const handleOptionChange = (id, name, value) => {
         const newOptions = options.map(option =>
