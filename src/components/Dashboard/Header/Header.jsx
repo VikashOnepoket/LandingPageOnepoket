@@ -128,7 +128,14 @@ const Header = () => {
             setAlertVisible(false);
         }
     };
-
+    useEffect(() => {
+        if (token) {
+          dispatch(fetchLogo(token))
+        }
+      }, [token]);
+      const logo = useSelector((state)=>state.logoDetails.logo)
+      console.log(logo)
+    
     const navigate = useNavigate()
 
     return (
@@ -199,7 +206,7 @@ const Header = () => {
                                     <div className="p-4">
                                         <div className="flex items-center gap-3 mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md" onClick={() => navigate(`/profile`)}>
                                             <img
-                                                src="https://via.placeholder.com/40"
+                                                src={logo?.[0]?.image}
                                                 alt="Profile"
                                                 className="w-8 h-8 rounded-full"
                                             />
