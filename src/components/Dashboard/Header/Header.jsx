@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSidebar } from '../Sidebar/context/SidebarContext';
 import { Drawer } from '@mui/material';
 import SidebarContent from '../Sidebar/SidebarContent';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { signOutSuccess } from '../slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -96,24 +96,6 @@ const Header = () => {
     useEffect(() => {
         if (token) {
             dispatch(fetchUserDetails(token)).unwrap().then((data) => {
-                setName(data?.name);
-                const {
-                    address,
-                    email,
-                    phone_number,
-                    helpline_email,
-                    helpline_number,
-                    company_name,
-                } = data;
-
-                // Check if any required fields are empty or null
-                if (!address || !email || !phone_number || !helpline_email || !helpline_number || !company_name) {
-                    setAlertVisible(true);    // Show the alert
-                    // Start blinking
-                } else {
-                    setAlertVisible(false);    // Hide the alert
-                    // Stop blinking
-                }
             })
                 .catch((error) => {
                     console.log(error?.response?.status, "error");
@@ -127,11 +109,27 @@ const Header = () => {
         }
     };
 
+    const user = useSelector((state) => state.userDetails.user)
+    useEffect(() => {
+        if (user) {
+            setName(user?.name);
+            if (!user?.address || !user?.email || !user?.phone_number || !user?.helpline_email || !user?.helpline_number || !user?.company_name) {
+                setAlertVisible(true);    // Show the alert
+                // Start blinking
+            } else {
+                setAlertVisible(false);    // Hide the alert
+                // Stop blinking
+            }
+        }
+    }, [user])
+
     const handleAccountLeave = () => {
         if (alertVisible) {
             setAlertVisible(false);
         }
     };
+
+    const navigate = useNavigate()
 
     return (
         <>
@@ -199,7 +197,7 @@ const Header = () => {
                                     className="absolute right-0 mt-1 w-72 bg-white rounded-md shadow-lg z-50 border"
                                 >
                                     <div className="p-4">
-                                        <div className="flex items-center gap-3 mb-4">
+                                        <div className="flex items-center gap-3 mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md" onClick={() => navigate(`/profile`)}>
                                             <img
                                                 src="https://via.placeholder.com/40"
                                                 alt="Profile"

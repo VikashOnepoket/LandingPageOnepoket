@@ -4,6 +4,7 @@ import { HiOutlineEye, HiOutlineEyeOff, HiOutlinePencil, HiOutlinePlus } from 'r
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from '../slice/userDetailsSlice';
 import SpinnerMain from '../Spinner/SpinnerMain';
+import toast from 'react-hot-toast';
 
 const Details = () => {
     const dispatch = useDispatch();
@@ -149,9 +150,11 @@ const Details = () => {
             const result = await axios.put("/user_update", {
                 name: data?.name, phone: data?.phone_number, company_name: data?.company_name, industry: data?.industry, company_size: data?.company_size, address: data?.address, helpline_email: data?.helpline_email, helpline_number: data?.helpline_number
             });
+
             console.log(result)
             setLoading(false);
             setShow(!show)
+            toast.success("Profile updated successfully")
             dispatch(fetchUserDetails(token));
 
         } catch (error) {

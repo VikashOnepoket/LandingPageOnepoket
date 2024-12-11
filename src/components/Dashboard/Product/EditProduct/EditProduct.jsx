@@ -185,7 +185,7 @@ const EditProduct = () => {
               <PurchaseOptionEdit formData={formData} onPurchaseOptionChange={handlePurchaseOptionsChange} />
               <Warranty formData={formData} onInputChange={handleInputChange} />
               <ProductVideoEdit formData={formData} onInputChange={handleInputChange} />
-              <ProductCustsomerDescriptionEdit formData={formData} onInputChange={handleInputChange} />
+              {/* <ProductCustsomerDescriptionEdit formData={formData} onInputChange={handleInputChange} /> */}
             </div>
             <div className='lg:w-[30%] w-[100%]'>
               <ProductImageEdit formData={formData} onImageChange={handleImageChange} />
