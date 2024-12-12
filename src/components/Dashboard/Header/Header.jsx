@@ -8,6 +8,7 @@ import { signOutSuccess } from '../slice/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDetails } from '../slice/userDetailsSlice';
 import { fetchLogo } from '../slice/logoSlice';
+import question from '../../../assets/question.png'
 
 
 const Header = () => {
@@ -190,8 +191,8 @@ const Header = () => {
                             account_circle
                         </span>
 
-                        {alertVisible && (<span class="material-symbols-outlined top-0 absolute text-[#FF0000] text-[17px] -right-3">
-                            info
+                        {alertVisible && (<span class="material-symbols-outlined top-0 absolute text-[#FF0000] text-[17px] -right-1">
+                            <img src={question} className='w-[12px]'/>
                         </span>)}
 
                         <AnimatePresence>
