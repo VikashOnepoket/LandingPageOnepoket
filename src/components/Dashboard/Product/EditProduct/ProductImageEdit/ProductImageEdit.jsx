@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ProductImageEdit = ({ onImageChange, formData }) => {
+const ProductImageEdit = ({ onImageChange, formData, error }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imageSrc, setImageSrc] = useState('');
 
@@ -34,7 +34,7 @@ const ProductImageEdit = ({ onImageChange, formData }) => {
   };
 
 
-  const removeImage = ()=>{
+  const removeImage = () => {
     setSelectedFile(null);
     setImageSrc(null);  // Clear the preview image
     onImageChange(null); // Notify parent component with no image selected
@@ -46,7 +46,8 @@ const ProductImageEdit = ({ onImageChange, formData }) => {
         <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Product Image</p>
         {/* <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Required</p> */}
       </div>
-      <div className="bg-white rounded-md border p-6 mt-2">
+      {error?.errProductImage && <span className="text-red-500 text-xs">{error.errProductImage}</span>}
+      <div className="bg-[#F7F7F7] rounded-md border p-6 mt-2">
         {!imageSrc && (<div className="flex justify-center items-center mb-4">
           <label htmlFor="imageUpload" className="cursor-pointer flex flex-col justify-center items-center w-full h-48">
             <span className="material-symbols-outlined text-gray-400 text-5xl">add_a_photo</span>
@@ -68,7 +69,7 @@ const ProductImageEdit = ({ onImageChange, formData }) => {
               alt="Uploaded Image"
               className="w-52 h-52"
             />
-             <button className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2 mt-3' onClick={removeImage}>Remove Image</button>
+            <button className='bg-[#0052CC] text-white hover:bg-[#0052cc] hover:text-white border border-[#0052cc] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2 mt-3' onClick={removeImage}>Remove Image</button>
           </div>
         )}
       </div>

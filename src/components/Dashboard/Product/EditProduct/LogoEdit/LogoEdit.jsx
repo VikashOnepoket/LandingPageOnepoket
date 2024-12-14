@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { fetchLogo } from '../../../slice/logoSlice';
 
-const LogoEdit = ({ formData, onLogoChange }) => {
+const LogoEdit = ({ formData, onLogoChange ,error}) => {
     console.log(formData.logo_id, "form")
     const [loading, setLoading] = useState(false);
     const token = useSelector((state) => state.auth.token);
@@ -68,6 +68,7 @@ const LogoEdit = ({ formData, onLogoChange }) => {
             <div className='flex justify-between gap-10'>
                 <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Logo</p>
             </div>
+            {error?.errLogo && <span className="text-red-500 text-xs">{error.errLogo}</span>}
             <div className="bg-white rounded-md border p-6 mt-2 h-[220px]">
                 <Select
                     options={options}
@@ -78,6 +79,7 @@ const LogoEdit = ({ formData, onLogoChange }) => {
                     styles={{
                         control: (base, state) => ({
                             ...base,
+                            backgroundColor : "#F7F7F7",
                             borderColor: state.isFocused ? '#0052cc' : base.borderColor,
                             '&:hover': {
                                 borderColor: state.isFocused ? '#0052cc' : base.borderColor,

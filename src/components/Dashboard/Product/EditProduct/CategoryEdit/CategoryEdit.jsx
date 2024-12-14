@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from '../../../../../api/api'; // Import Axios
 import { fetchCategory } from '../../../slice/categorySlice'; // Assuming this is correctly implemented
 
-const CategoryEdit = ({ formData, onCategoryChange }) => {
+const CategoryEdit = ({ formData, onCategoryChange,error }) => {
     const token = useSelector((state) => state.auth.token);
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -87,6 +87,7 @@ const CategoryEdit = ({ formData, onCategoryChange }) => {
                 <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Category</p>
                 {/* <p className='text-[12px] leading-[16px] text-[#FF0000BF] font-normal'>Select one category!</p> */}
             </div>
+            {error?.errCategory && <span className="text-red-500 text-xs">{error.errCategory}</span>}
             <div className="bg-white rounded-md border p-6 mt-2 h-[220px] overflow-y-auto">
                 {categories.map((cat) => (
                     <div key={cat.id} className="flex items-center mb-3">

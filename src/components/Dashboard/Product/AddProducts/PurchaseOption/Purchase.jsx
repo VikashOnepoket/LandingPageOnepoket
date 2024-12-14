@@ -55,11 +55,6 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange, error }) => {
         {options.map((option, index) => (
           <div key={index} className='mt-3 flex gap-5 '>
             <div className='flex flex-col gap-2  w-[40%]'>
-              {/* <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
-                <span className="text-[#EE4444] mr-1"> *</span>
-                Store Name</label> */}
-              
-
               <input
                 type='text'
                 className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out bg-[#F7F7F7]'
@@ -71,11 +66,7 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange, error }) => {
                 <span className="text-red-500 text-xs">{error.errPurchase[index].title}</span>
               )}
             </div>
-            <div className='flex flex-col gap-2  w-[50%]'>
-              {/* <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
-                <span className="text-[#EE4444] mr-1"> *</span>
-                Product Review Link</label> */}
-             
+            <div className='flex flex-col gap-2  w-[50%]'>  
               <input
                 type='text'
                 className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out bg-[#F7F7F7]'
@@ -87,19 +78,7 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange, error }) => {
                 <span className="text-red-500 text-xs">{error.errPurchase[index].link}</span>
               )}
             </div>
-            {/* <div className=''>
-            <button
-              className='mt-2 text-[#FF4040] text-[12px] leading-[16px] font-semibold flex items-center px-3 py-2'
-              onClick={() => removeOption(index)}
-            >
-              <span className="material-symbols-outlined mr-2">delete</span>
-
-            </button>
-          </div> */}
             <div className='flex flex-col gap-2  items-center w-[5%]'>
-              {/* <label className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
-              </label> */}
-
               <button
                 className=' text-[#FF4040] text-[1.125rem] leading-[16px] font-semibold flex items-center px-3 py-1'
                 onClick={() => removeOption(index)}

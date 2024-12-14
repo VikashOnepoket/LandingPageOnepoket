@@ -17,6 +17,7 @@ import CategoryEdit from './CategoryEdit/CategoryEdit';
 import LogoEdit from './LogoEdit/LogoEdit';
 
 const EditProduct = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const { id } = useParams();
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const EditProduct = () => {
     installation_details: "",
 
   });
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -80,12 +81,22 @@ const EditProduct = () => {
       ...prevData,
       [name]: formattedValue,
     }));
+    if (isSubmitted) {
+      setError((prevError) => ({
+        ...prevError,
+        [getErrorKey(name)]: formattedValue ? "" : prevError[getErrorKey(name)],
+      }));
+    }
   };
 
   const handleLogoChange = (selectedLogo) => {
     setFormData((prevData) => ({
       ...prevData,
       logo_id: selectedLogo?.value || "",
+    }));
+    setError((prevError) => ({
+      ...prevError,
+      errLogo: selectedLogo?.value ? "" : prevError.errLogo,
     }));
   };
 
@@ -94,6 +105,15 @@ const EditProduct = () => {
       ...formData,
       additionalInfo,
     });
+    if (isSubmitted) {
+      setError((prevError) => ({
+        ...prevError,
+        errAddInfo: additionalInfo.map((item) => ({
+          title: !item?.title ? "Title is required" : "",
+          description: !item?.description ? "Description is required" : "",
+        })),
+      }));
+    }
   };
 
   const handlePurchaseOptionsChange = (PurchaseOptions) => {
@@ -101,12 +121,25 @@ const EditProduct = () => {
       ...formData,
       PurchaseOptions,
     });
+    // if (isSubmitted) {
+    //   setError((prevError) => ({
+    //     ...prevError,
+    //     errPurchase: PurchaseOptions.map((item) => ({
+    //       title: !item?.title ? "Store Name is required" : "",
+    //       link: !item?.link ? "Link is required" : "",
+    //     })),
+    //   }));
+    // }
   };
 
   const handleCategoryChange = (category) => {
     setFormData((prevData) => ({
       ...prevData,
       category_title: category,
+    }));
+    setError((prevError) => ({
+      ...prevError,
+      errCategory: category ? "" : prevError.errCategory,
     }));
   };
 
@@ -115,11 +148,87 @@ const EditProduct = () => {
       ...formData,
       product_image: image,
     });
+    setError((prevError) => ({
+      ...prevError,
+      errProductImage: image ? "" : prevError.errProductImage,
+    }));
   };
+  const [error, setError] = useState({
+    errLogo: "",
+    errProductName: "",
+    errModelNumber: "",
+    errProductDescription: "",
+    errProductImage: "",
+    errWarranty: "",
+    errCategory: "",
+    errAddInfo: [],
+    errPurchaseOption: []
+  })
 
-  console.log(formData, "edit product")
-
+  // Helper function to map form field names to error keys
+  const getErrorKey = (name) => {
+    switch (name) {
+      case 'logo_id':
+        return 'errLogo';
+      case 'product_name':
+        return 'errProductName';
+      case 'model_number':
+        return 'errModelNumber';
+      case 'description':
+        return 'errProductDescription';
+      case 'product_desc_for_customer':
+        return 'errCustomerDescription';
+      case 'warranty_years':
+        return 'errWarranty'
+      case 'warranty_months':
+        return 'errWarranty'
+      default:
+        return '';
+    }
+  };
+  console.log(error, "error")
   const handleSubmit = async () => {
+    setIsSubmitted(true);
+    const newErrors = {
+      errLogo: !formData?.logo_id ? "Logo is required" : "",
+      errProductName: !formData?.product_name ? "Product Name is required" : "",
+      errModelNumber: !formData?.model_number ? "Model Number is required" : "",
+      errProductDescription: !formData?.description ? "Product Description is required" : "",
+      errProductImage: !formData?.image ? "Product Image is required" : "",
+      errWarranty:
+        (!formData?.warranty_years && !formData?.warranty_months)
+          ? "Warranty information is required"
+          : "",
+      errCategory: !formData?.category_title ? "Category is required" : "",
+      errAddInfo: Array.isArray(formData.additionalInfo)
+        ? formData.additionalInfo.map((item, index) => ({
+          title: !item?.title ? `Title is required` : "",
+          description: !item?.description ? `Description is required` : "",
+        }))
+        : [],
+      errPurchase: Array.isArray(formData?.PurchaseOptions)
+        ? formData?.PurchaseOptions.map((item, index) => ({
+          title: !item?.title ? `Store Name is required` : "",
+          link: !item?.link ? `Link is required` : "",
+        }))
+        : [],
+    };
+
+    // Check if any errors exist
+    const hasErrors = Object.values(newErrors).some((err) => {
+      if (Array.isArray(err)) {
+        // Check for errors in additionalInfo array
+        return err.some((item) => item.title || item.description);
+      }
+      return err !== "";
+    });
+
+    if (hasErrors) {
+      setError(newErrors); // Set errors in state
+      return; // Exit early if validation fails
+    }
+
+    // 
     const data = new FormData();
     data.append('product_id', formData.product_id);
     data.append('product_name', formData.product_name);
@@ -180,17 +289,17 @@ const EditProduct = () => {
 
           <div className='mt-10 flex lg:flex-row flex-col gap-10'>
             <div className='lg:w-[70%] w-[100%]'>
-              <BasicInformationEdit formData={formData} onInputChange={handleInputChange} />
-              <AdditionalInfoEdit formData={formData} onAdditionalInfoChange={handleAdditionalInfoChange} />
-              <PurchaseOptionEdit formData={formData} onPurchaseOptionChange={handlePurchaseOptionsChange} />
-              <Warranty formData={formData} onInputChange={handleInputChange} />
-              <ProductVideoEdit formData={formData} onInputChange={handleInputChange} />
+              <BasicInformationEdit formData={formData} onInputChange={handleInputChange} error={error} />
+              <AdditionalInfoEdit formData={formData} onAdditionalInfoChange={handleAdditionalInfoChange} error={error} />
+              <PurchaseOptionEdit formData={formData} onPurchaseOptionChange={handlePurchaseOptionsChange} error={error} />
+              <Warranty formData={formData} onInputChange={handleInputChange} error={error} />
+              <ProductVideoEdit formData={formData} onInputChange={handleInputChange} error={error} />
               {/* <ProductCustsomerDescriptionEdit formData={formData} onInputChange={handleInputChange} /> */}
             </div>
             <div className='lg:w-[30%] w-[100%]'>
-              <ProductImageEdit formData={formData} onImageChange={handleImageChange} />
-              <CategoryEdit formData={formData} onCategoryChange={handleCategoryChange} />
-              <LogoEdit formData={formData} onLogoChange={handleLogoChange} />
+              <ProductImageEdit formData={formData} onImageChange={handleImageChange} error={error} />
+              <CategoryEdit formData={formData} onCategoryChange={handleCategoryChange} error={error} />
+              <LogoEdit formData={formData} onLogoChange={handleLogoChange} error={error} />
             </div>
           </div>
 
