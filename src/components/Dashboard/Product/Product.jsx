@@ -444,6 +444,7 @@ const Product = () => {
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Name</th>
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Category</th>
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Warranty</th>
+                                            <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">QR Type</th>
                                             <th className="py-2 px-4 border-b text-left text-[#202123BF] text-[12px] leading-[17px] font-semibold">Action</th>
                                         </tr>
                                     </thead>
@@ -475,6 +476,10 @@ const Product = () => {
                                                                     : 'N/A'
                                                         }
                                                     </td>
+                                                    <td className="py-3 px-4 border-b text-[12px] leading-4 font-medium text-[#58595A]">
+                                                        {prod?.dynamic_qr === "" || prod?.dynamic_qr === "0" ? "Single QR" : "Dynamic QR"}
+                                                    </td>
+
                                                     <td className="py-3 px-4 border-b font-medium text-[#58595A] space-x-3">
                                                         <span className="material-symbols-outlined text-[16px] leading-5 font-medium text-[#58595A] cursor-pointer hover:text-[#1B6CE3]" onClick={() => handleEditNavigate(prod?.product_id)}>
                                                             edit
