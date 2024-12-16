@@ -66,7 +66,9 @@ const LogoEdit = ({ formData, onLogoChange ,error}) => {
     return (
         <div className='mt-10'>
             <div className='flex justify-between gap-10'>
-                <p className='text-[14px] leading-[18px] text-[#58595A] font-semibold'>Logo</p>
+            <p className='ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold'>
+                <span className="text-[#EE4444] mr-1"> *</span>
+                    Logo</p>
             </div>
             {error?.errLogo && <span className="text-red-500 text-xs">{error.errLogo}</span>}
             <div className="bg-white rounded-md border p-6 mt-2 h-[220px]">

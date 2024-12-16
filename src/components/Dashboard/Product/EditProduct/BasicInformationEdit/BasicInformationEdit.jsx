@@ -20,26 +20,31 @@ const Switch = ({ label, value, onChange }) => {
     );
 };
 
-const BasicInformationEdit = ({ formData, onInputChange ,error}) => {
-    console.log(formData , "formData")
+const BasicInformationEdit = ({ formData, onInputChange, error }) => {
+    console.log(formData, "formData")
     return (
         <div className="w-full">
             <div className="flex flex-col gap-2">
-                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Product Name</label>
-                
+                <label className="ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold">
+                    <span className="text-[#EE4444] mr-1"> *</span>
+                    Product Name
+                </label>
+
                 <input
                     type="text"
                     className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out bg-[#F7F7F7]"
                     placeholder="Enter Product name"
-                 
+
                     value={formData?.product_name}
                     onChange={(e) => onInputChange('product_name', e.target.value)}
                 />
-                  {error?.errProductName && <span className="text-red-500 text-xs">{error.errProductName}</span>}
+                {error?.errProductName && <span className="text-red-500 text-xs">{error.errProductName}</span>}
             </div>
 
             <div className="flex flex-col gap-2 mt-5">
-                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Model Number</label>
+                <label className="ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold">
+                    <span className="text-[#EE4444] mr-1"> *</span>
+                    Model Number</label>
                 <input
                     type="text"
                     className="input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out bg-[#F7F7F7]"
@@ -47,24 +52,26 @@ const BasicInformationEdit = ({ formData, onInputChange ,error}) => {
                     value={formData?.model_number}
                     onChange={(e) => onInputChange('model_number', e.target.value)}
                 />
-                 {error?.errModelNumber && <span className="text-red-500 text-xs">{error.errModelNumber}</span>}
+                {error?.errModelNumber && <span className="text-red-500 text-xs">{error.errModelNumber}</span>}
             </div>
 
             <div className="flex flex-col gap-2 mt-5">
-                <label className="text-[14px] leading-[18px] text-[#58595A] font-semibold">Product Description</label>
+                <label className="ml-2 text-[14px] leading-[18px] text-[#58595A] font-semibold">
+                    <span className="text-[#EE4444] mr-1"> *</span>
+                    Product Description</label>
                 <textarea
                     className="input border h-28 border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black   ease-in-out bg-[#F7F7F7]"
                     placeholder="Enter Description"
                     value={formData?.description}
                     onChange={(e) => onInputChange('description', e.target.value)}
                 ></textarea>
-                 {error?.errProductDescription && <span className="text-red-500 text-xs">{error.errProductDescription}</span>}
+                {error?.errProductDescription && <span className="text-red-500 text-xs">{error.errProductDescription}</span>}
             </div>
 
             <div className="mt-5 flex gap-10">
                 <Switch
                     label="Show Manufacture Date"
-                    value={formData?.show_manufacture_date }
+                    value={formData?.show_manufacture_date}
                     onChange={(value) => onInputChange('show_manufacture_date', value)}
                 />
                 <Switch

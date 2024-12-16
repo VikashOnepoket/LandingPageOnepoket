@@ -194,7 +194,7 @@ const EditProduct = () => {
       errProductName: !formData?.product_name ? "Product Name is required" : "",
       errModelNumber: !formData?.model_number ? "Model Number is required" : "",
       errProductDescription: !formData?.description ? "Product Description is required" : "",
-      errProductImage: !formData?.image ? "Product Image is required" : "",
+      errProductImage: !formData?.product_image ? "Product Image is required" : "",
       errWarranty:
         (!formData?.warranty_years && !formData?.warranty_months)
           ? "Warranty information is required"
