@@ -20,7 +20,7 @@ const LogoForm = ({ initialValues, validationSchema, onSubmit }) => {
                     };
 
                     return (
-                        <Form className="flex flex-col gap-4 mt-6">
+                        <Form className="flex flex-col gap-4 mt-6 w-[100%]">
                             {/* Name Field */}
                             <div className="flex flex-col gap-1">
                                 <label className="ml-2 text-[16px] leading-4 inter font-semibold text-[#202123BF]">

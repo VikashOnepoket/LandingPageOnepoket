@@ -213,6 +213,7 @@ const EditProduct = () => {
         }))
         : [],
     };
+    
 
     // Check if any errors exist
     const hasErrors = Object.values(newErrors).some((err) => {

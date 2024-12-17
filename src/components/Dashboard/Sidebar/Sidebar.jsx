@@ -36,7 +36,7 @@ const Sidebar = () => {
         },
         { name: 'Campaign', icon: 'campaign', path: '/campaign' },
         // { name: 'Inventory', icon: 'inventory_2', path: '/inventory' },
-        { name: 'Factory Management', icon: 'factory', path: '/factory' },
+        { name: 'Inventory Management', icon: 'factory', path: '/factory' },
         { name: 'Roles & Permissions', icon: 'contacts_product', path: '/roles' },
         { name: 'Service Request', icon: 'settings', path: '/service_request' },
         { name: 'Profile', icon: 'account_circle', path: '/profile' },
