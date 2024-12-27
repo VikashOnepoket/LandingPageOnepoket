@@ -17,6 +17,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ComingSoon from './components/comingSoon/ComingSoon';
 import RejectedInstallation from './components/Dashboard/ServiceRequest/RejectedInstallation/RejectedInstallation';
 import DashboardLayout from './DashboardLayout';
+import Ocr from './components/Navbar/ocr';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));
@@ -74,6 +75,14 @@ function App() {
               element={
                 <PublicRoute>
                   <Home />
+                </PublicRoute>
+              }
+            />
+              <Route
+              path='/ocr'
+              element={
+                <PublicRoute>
+                  <Ocr />
                 </PublicRoute>
               }
             />

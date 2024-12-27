@@ -9,7 +9,7 @@ const items = [
 
 const HeroMain = () => {
   return (
-    <div className='md:mt-[9rem] mb-[6rem] text-center mt-[4.62rem]'>
+    <div className='md:mt-[9rem] mb-[6rem] text-center mt-[4.62rem] '>
       <div className="overflow-hidden h-[100px] flex justify-center items-center relative ">
         <ul className="flex flex-col items-center justify-center h-full absolute animation-loop">
           {items.map((item, index) => (

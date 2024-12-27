@@ -1,0 +1,17 @@
+.text-containerS {
+    color: #FFF;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 129.068%; /* 2.42rem */
+  }
+  .text-service {
+    color: #FFF;
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 129.068%; /* 1.61338rem */
+  }
+  

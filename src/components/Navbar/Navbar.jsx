@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Logo from '../../assets/LogoOne.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,7 +6,7 @@ import './Navbar.css';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+    const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
 
     const toggleMenu = () => {
@@ -32,10 +32,39 @@ const Navbar = () => {
         navigate('/onboarding')
     };
 
+
+
+    const navRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // Toggle isScrolled based on whether the navbar intersects the top
+                setIsScrolled(!entry.isIntersecting);
+            },
+            {
+                root: null, // Observe scrolling in the viewport
+                threshold: 1.0, // Trigger only when the element is fully visible
+            }
+        );
+
+        if (navRef.current) {
+            observer.observe(navRef.current);
+        }
+
+        return () => {
+            if (navRef.current) {
+                observer.unobserve(navRef.current);
+            }
+        };
+    }, []);
     return (
         <>
+            {/* Spacer for Intersection Observation */}
+            <div ref={navRef} className="spacer"></div>
             {/* Navbar */}
             <div className='flex w-[42.4375rem] rounded-[2.5rem] mx-auto text-white mt-[4rem] h-[4.25rem] nav-box '>
+
                 <div className='flex  items-center justify-between w-full p-5 '>
                     <Link to='/'>
                         <div className='sm:w-[12rem] w-[131px]'>
@@ -43,14 +72,17 @@ const Navbar = () => {
                         </div>
                     </Link>
                     <div className='lg:flex hidden gap-[1.19rem]'>
-                        <Link to="/features" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>Features</Link>
+                        <Link to="/features" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070] '>Features</Link>
                         <Link to="/pricing" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>Pricing</Link>
                         <Link to="/features" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>FAQs</Link>
                         <Link to="/login" className='text-[1rem] cursor-pointer leading-[18px] font-medium  text-[#6F7070]'>Login</Link>
 
                     </div>
                     <div className=''>
-                        <button onClick={openTypeForm} className='experience-btn'>Experience Now</button>
+                        <button className={`experience-btn ${isScrolled ? 'scrolled-btn' : ''}`}>
+                            Experience Now
+                        </button>
+
                     </div>
                     <div className='flex lg:hidden'>
                         <div onClick={toggleMenu} className="cursor-pointer text-[34px] text-[#6F7070]">

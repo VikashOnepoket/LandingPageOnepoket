@@ -2,6 +2,9 @@ import React, { useRef } from "react";
 import Slider from "react-slick";
 import sliderBG from '../../assets/slider-bg.png';
 import sec from '../../assets/20.png'
+import slider1 from '../../assets/slider1.png'
+import slider2 from '../../assets/slider2.png'
+import slider3 from '../../assets/slider3.png'
 import './Slider.css'
 import { useInView } from "framer-motion";
 import { motion } from "framer-motion"
@@ -15,6 +18,7 @@ const AutoPlay = () => {
         speed: 2000,
         autoplaySpeed: 4000,
         cssEase: "linear",
+        
         responsive: [
             {
                 breakpoint: 1024,
@@ -47,7 +51,7 @@ const AutoPlay = () => {
     };
 
     return (
-        <motion.div className="slider-container w-[90%] mx-auto md:flex justify-between mt-32 md:flex-row flex-col"
+        <motion.div className="slider-container w-[90%] mx-auto md:flex gap-10 mt-32 md:flex-row flex-col justify-between items-center"
             ref={containerRef}
 
             initial="hidden"
@@ -56,14 +60,14 @@ const AutoPlay = () => {
 
             <motion.div
                 variants={itemVariants}
-                className="md:w-1/2 w-[90%] mx-auto " >
-                <p className="text-[26px] leading-[33px] text-[#0052CC] font-medium">Be the Captain of your
+                className="md:w-[50%] w-[90%] mx-auto " >
+                <p className="text-[1.47681rem] leading-[1.90606rem] text-[#0052CC] font-medium">Be the Captain of your<br/>
                     Customer Relationships in just
                 </p>
-                <h1 className="inter md:text-[120px] md:leading-[160px] text-[80px] leading-[100px] font-bold text-[#0052CC] h1-twenty">20<span className="text-[51px] leading-[66px] font-bold text-[#0052CC] span-seconds">Seconds!</span></h1>
+                <h1 className="inter md:text-[120px] md:leading-[160px] text-[80px] leading-[100px] font-bold text-[#0052CC] h1-twenty">10<span className="text-[51px] leading-[66px] font-bold text-[#0052CC] span-seconds">Seconds!</span></h1>
             </motion.div>
-            <Slider {...settings} className="custom-slider md:w-1/2 w-[90%]  md:mt-0 mt-12">
-                <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
+            <Slider {...settings} className="custom-slider md:w-[50%] w-[90%]  md:mt-0 mt-12">
+                {/* <div className="md:h-[15.7905rem] h-auto bg-[#D8E8FF] rounded-[20px]"> 
                     <div className=" flex justify-center  gap-10 ">
                         <div className="p-10">
                             <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
@@ -76,8 +80,20 @@ const AutoPlay = () => {
                         </div>
                     </div>
 
+                </div> */}
+                 <div className="h-[15.7905rem]">
+                    <img src = {slider1} className="h-full"/>
+
                 </div>
-                <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
+                <div className="h-[15.7905rem]">
+                    <img src = {slider2} className="h-full"/>
+
+                </div>
+                <div className="h-[15.7905rem]">
+                    <img src = {slider3} className="h-full"/>
+
+                </div>
+                {/* <div className="md:h-[15.7905rem] h-auto bg-[#D8E8FF] rounded-[20px]"> 
                     <div className=" flex justify-center  gap-10 ">
                         <div className="p-10">
                             <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
@@ -90,8 +106,8 @@ const AutoPlay = () => {
                         </div>
                     </div>
 
-                </div>
-                <div className="md:h-[230px] h-auto bg-[#D8E8FF] rounded-[20px]"> {/* Removed mx-2 */}
+                </div> */}
+                {/* <div className="md:h-[15.7905rem] h-auto bg-[#D8E8FF] rounded-[20px]"> 
                     <div className=" flex justify-center  gap-10 ">
                         <div className="p-10">
                             <p className="text-[18px] leading-6 text-[#202123]">Let your customers enjoy
@@ -104,7 +120,7 @@ const AutoPlay = () => {
                         </div>
                     </div>
 
-                </div>
+                </div> */}
 
             </Slider>
         </motion.div>

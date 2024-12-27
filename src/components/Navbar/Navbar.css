@@ -188,7 +188,7 @@
     transform: translateZ(0); /* Creates a new stacking context */
 }
 
-.experience-btn{
+/* .experience-btn{
     padding: 0.5625rem 0.6875rem 0.625rem 0.625rem;
     border-radius: 1.875rem;
     border: 1px solid var(--Black-25, rgba(32, 33, 35, 0.25));
@@ -197,4 +197,21 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+} */
+.experience-btn {
+    padding: 0.5625rem 0.6875rem 0.625rem 0.625rem;
+    border-radius: 1.875rem;
+    border: 1px solid var(--Black-25, rgba(32, 33, 35, 0.25));
+    color: #004699;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.experience-btn.scrolled-btn {
+    background-color: #004699;
+    color: #fff;
 }

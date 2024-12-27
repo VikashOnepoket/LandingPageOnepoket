@@ -18,7 +18,7 @@ const NavTop = () => {
                     <img src={left2} className='w-[100%] h-[100%]' />
                 </div>
                 <div className=''>
-                    <p className='text-[13px] leading-4 text-[#E4EFFF] font-medium tracking-wider nav-top-font'>Enjoy seamless onboarding and warranty management with our QR technology.</p>
+                    <p className='text-[13px] leading-4 text-[#E4EFFF] font-medium tracking-wider nav-top-font'>Enjoy seamless customer onboarding and warranty management with our QR technology.</p>
                 </div>
                 <div className='h-[60px] flex gap-2'>
                     <img src={qr} className='w-[100%] h-[100%]' />
