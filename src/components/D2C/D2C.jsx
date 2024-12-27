@@ -54,7 +54,7 @@ const D2C = () => {
                  <div className="flex justify-end">
                     <img src={plane} className="h-[4.5rem] w-[11rem]"/>
                  </div>
-                <span className="card-text">Built for Growing  </span><br />
+                <span className="card-text">Built for Growing </span><br />
                 <span className="card-text2">D2C Brands</span>
                 <p className="para-text1 mt-[3.12rem]">
                     Onepoket is designed exclusively for direct-to-consumer <br/> brands who want to elevate their post-purchase <br/> experience. If you’re focused on transforming first-time <br/>buyers into loyal brand advocates, our platform is crafted <br/> with your needs in mind.
