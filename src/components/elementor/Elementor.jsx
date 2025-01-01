@@ -1,14 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './Elementor.css';
+import element from '../../assets/element.png'
 
 const Elementor = () => {
     // Image URLs array
     const images = [
-        'https://servify.com/wp-content/uploads/2024/06/Ind-1-home.webp',
-        'https://servify.com/wp-content/uploads/2024/06/Ind-2-home.webp',
-        'https://servify.com/wp-content/uploads/2024/06/Ind-1-home.webp',
-        'https://servify.com/wp-content/uploads/2024/06/Ind-2-home.webp',
+        // 'https://servify.com/wp-content/uploads/2024/06/Ind-1-home.webp',
+        // 'https://servify.com/wp-content/uploads/2024/06/Ind-2-home.webp',
+        // 'https://servify.com/wp-content/uploads/2024/06/Ind-1-home.webp',
+        // 'https://servify.com/wp-content/uploads/2024/06/Ind-2-home.webp',
+        element
     ];
 
     // Duplicate the images for seamless infinite scrolling

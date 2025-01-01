@@ -50,7 +50,7 @@ const Card2 = () => {
       >
         <span className="text-span">Increase Customer Retention <br /> with Frictionless Support</span>
         <p className="para-text1 mt-[3.12rem]">
-          Ensure customers receive immediate, accessible <br/> support through quick QR-based interactions. Happy, <br/> supported customers are more likely to return and <br/> recommend your brand
+          Ensure customers receive immediate, accessible <br /> support through quick QR-based interactions. Happy, <br /> supported customers are more likely to return and <br /> recommend your brand
         </p>
       </motion.div>
 

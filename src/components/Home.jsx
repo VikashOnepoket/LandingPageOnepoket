@@ -22,6 +22,8 @@ import Card2 from './Card2/Card2';
 import Card3 from './Card3/Card3';
 import Card4 from './Card4/Card4';
 import D2C from './D2C/D2C';
+import CustomerSupportAnimation from './Card4/GifImage';
+import ChatUI from './Card4/GifImage';
 
 const Home = () => {
   const [showButton, setShowButton] = useState(false);
@@ -79,36 +81,21 @@ const Home = () => {
           <CustomerScan />
           <AutoPlay />
           <Footer />
+
         </div>
 
         {/* Fixed Button */}
         {showButton && (
-          <div className="fixed bottom-5 left-0 right-5 flex justify-end z-50">
-            <button
-              className="flex items-center justify-center py-3 px-8 rounded-full bg-[#0052CC] text-white shadow-md text-lg font-bold"
-              onClick={() =>
-                window.location.href = 'https://calendly.com/ujjwal-onepoket'
-              }
-            >
-              Request a free demo
-              <span className="ml-5">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="12"
-                  viewBox="0 0 14 12"
-                  fill="none"
-                >
-                  <path
-                    d="M8.33333 1L13 5.66667M13 5.66667L8.33333 10.3333M13 5.66667H1"
-                    stroke="white"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
-              </span>
-            </button>
+          <div className="fixed bottom-5 left-0 right-[8.69rem] flex justify-end z-50">
+            <div className='flex justify-center items-center mt-[3.75rem]'>
+              <button className='flex items-center justify-center  py-[1rem] px-[2.3125rem] rounded-[1.875rem]  bg-[#0052CC] text-white button-shadow text-[1rem] font-bold leading-[2rem]'
+                onClick={() => window.location.href = 'https://calendly.com/ujjwal-onepoket'}
+              >Request a free demo
+                <span className='ml-5'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M8.33333 1L13 5.66667M13 5.66667L8.33333 10.3333M13 5.66667H1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </span>
+              </button>
+            </div>
           </div>
         )}
       </div>

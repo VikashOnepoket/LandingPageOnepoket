@@ -4,6 +4,7 @@ import './WarrantyRegistration.css';
 import card1 from '../../assets/card-1.png';
 import card2 from '../../assets/card-2.png';
 import card3 from '../../assets/card-3.png';
+import def from '../../assets/def.png'
 
 const WarrantyRegistration = () => {
     const [selectedOption, setSelectedOption] = useState("QR-Based Warranty Registration");
@@ -22,7 +23,7 @@ const WarrantyRegistration = () => {
         {
             title: "First-Party Data Collection",
             description: "Collect valuable data with every interaction, empowering you to personalize future touchpoints and increase retention.",
-            image: card3,
+            image: def,
         },
     ];
 
@@ -48,7 +49,7 @@ const WarrantyRegistration = () => {
 
             {/* Right Section */}
             <motion.div
-                className="w-full md:w-1/2 bg-blue-50 rounded-lg box-container px-[4.5rem] pt-[4.5rem]"
+                className="w-full md:w-1/2 h-[45rem] xl:h-[50rem] 2xl:h-[60rem] bg-blue-50 rounded-lg box-container px-[4.5rem] pt-[4.5rem]"
                 key={selectedOption}
                 initial={{ scale: 0.9, opacity: 0 }} // Initial scale for push-in effect
                 animate={{ scale: 1, opacity: 1 }} // Push-out effect to normal size
@@ -85,7 +86,7 @@ const WarrantyRegistration = () => {
                     <img
                         src={selectedContent.image}
                         alt={selectedContent.title}
-                        className="w-full h-auto object-contain"
+                        className=""
                     />
                 </motion.div>
             </motion.div>

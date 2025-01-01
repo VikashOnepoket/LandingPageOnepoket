@@ -18,6 +18,8 @@ import ComingSoon from './components/comingSoon/ComingSoon';
 import RejectedInstallation from './components/Dashboard/ServiceRequest/RejectedInstallation/RejectedInstallation';
 import DashboardLayout from './DashboardLayout';
 import Ocr from './components/Navbar/ocr';
+import CustomerSupportAnimation from './components/Card4/GifImage';
+import AnimatedText from './components/Card4/GifImage';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));
@@ -82,7 +84,7 @@ function App() {
               path='/ocr'
               element={
                 <PublicRoute>
-                  <Ocr />
+                  <AnimatedText/>
                 </PublicRoute>
               }
             />

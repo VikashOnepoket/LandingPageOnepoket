@@ -27,7 +27,7 @@ const Analytics = () => {
     // filter
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState(["this_month"])
+    const [selectedCheckboxes, setSelectedCheckboxes] = useState(["this_week"])
     const [selectedScans, setSelectedScans] = useState([])
 
     const dateOptions = [

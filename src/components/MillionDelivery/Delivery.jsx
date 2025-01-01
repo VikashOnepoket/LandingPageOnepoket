@@ -7,36 +7,62 @@ const Delivery = () => {
     const containerRef = useRef(null);
     const isInView = useInView(containerRef, { once: true, amount: 0.1 });
 
-    // Fade-in and push-out effect for text and items
+    // Parent container animation variants with stagger effect
     const containerVariants = {
-        hidden: { opacity: 0, y: 50 },
+        hidden: {
+            opacity: 0,
+        },
         visible: {
             opacity: 1,
-            y: 0,
             transition: {
-                duration: 1.5,
-                staggerChildren: 0.5, // Stagger the children with a delay
+                staggerChildren: 0.5, // Delay between child animations
+                duration: 0.5,
             },
         },
     };
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 }, // Start with opacity 0 and slightly pushed down
+    const animationVariants = {
+        hidden: {
+            opacity: 0,
+            x: -50, // Start off-screen to the left
+            y: -20, // Start slightly above
+            rotate: 5, // Slight rotation
+        },
         visible: {
             opacity: 1,
-            y: 0, // Push to final position
+            x: 0, // Center position
+            y: 0, // Center position
+            rotate: 0, // No rotation
             transition: {
-                duration: 1.2,
-                type: "spring",
-                stiffness: 50,
-                damping: 25,
+                duration: 0.5, // Common duration for all animations
+                ease: "easeInOut", // Smooth easing
+            },
+        },
+    };
+
+    // Unified animation variants for child items
+    const childVariants = {
+        hidden: {
+            opacity: 0,
+            x: 80, // Start off-screen to the right
+            y: -10, // Slightly below the center
+            rotate: -5, // Slight rotation
+        },
+        visible: {
+            opacity: 1,
+            x: 0, // Move to the center
+            y: 0, // Move to the center
+            rotate: 0, // No rotation
+            transition: {
+                duration: 1, // Animation duration
+                ease: "easeInOut",
             },
         },
     };
 
     return (
         <motion.div
-            className="w-full bg-[#004699] h-[11.25rem] mt-[0.62rem] p-10"
+            className="w-full bg-[#004699] h-[11.25rem] mt-[0.62rem] pt-10"
             ref={containerRef}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -44,23 +70,19 @@ const Delivery = () => {
         >
             <div className="w-[90%] mx-auto flex gap-5">
                 {/* Heading Section */}
-                <motion.div
-                    className="w-[35%]"
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    variants={itemVariants} // Apply fade-in and push-out effect to the heading
-                >
-                    <h1 className="text-containerS">
+                <motion.div className="w-[35%]">
+                    <motion.h1
+                        className="text-containerS"
+                        variants={animationVariants}
+                    >
                         Millions trust Onepoket because we deliver
-                    </h1>
+                    </motion.h1>
                 </motion.div>
 
                 {/* Items Section */}
                 <motion.div
                     className="w-[65%] flex gap-[2.38rem] overflow-hidden"
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    variants={containerVariants} // Apply stagger effect to the items container
+                    variants={containerVariants}
                 >
                     {[
                         "Seamless Customer Service",
@@ -70,12 +92,7 @@ const Delivery = () => {
                         <motion.div
                             key={index}
                             className="flex gap-2 items-center w-full"
-                            initial="hidden" // Initial state for push-in effect
-                            animate="visible" // Push-out effect
-                            variants={itemVariants} // Apply push-out effect to each item
-                            transition={{
-                                delay: index * 0.5, // Stagger delay for each item
-                            }}
+                            variants={childVariants}
                         >
                             <motion.img
                                 src={deliver}
