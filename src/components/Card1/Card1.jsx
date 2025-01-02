@@ -63,7 +63,7 @@ const Card1 = () => {
 
   return (
     <motion.div
-      className="w-[90%] mx-auto flex flex-col md:flex-row justify-between overflow-hidden mt-[8rem] gap-[4.1rem] items-center"
+      className="w-[80%] mx-auto flex flex-col md:flex-row justify-between overflow-hidden mt-[8rem] gap-[4rem] items-center"
       ref={containerRef}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"} 
@@ -73,10 +73,10 @@ const Card1 = () => {
         initial={slideInFromLeft.initial}
         animate={isInView ? slideInFromLeft.animate : slideInFromLeft.initial}
         transition={slideInFromLeft.transition}
-        className="w-[45%] mb-8 md:mb-0 relative"
+        className="w-[40%] mb-8 md:mb-0 relative "
       >
-        <div className="flex justify-center items-center relative z-50">
-          <div ref={ref} className="relative z-50">
+        <div className="flex justify-center items-center relative z-50 h-[420px] w-full height-cont">
+          <div ref={ref} className="relative z-50 w-full">
             {isInViews && (
               <>
                 <motion.img
@@ -89,11 +89,11 @@ const Card1 = () => {
                   transition={{ duration: 1 }}
                 />
 
-                <div className="absolute top-0 left-0 flex flex-col gap-4 z-50">
+                <div className="absolute top-0 left-0 flex flex-col gap-4 z-50 cont">
                   <motion.img
                     key={`${key}-1`}  
                     src={text1}
-                    className="w-[11.9375rem] max-w-full"  
+                    className="w-[11.9375rem] max-w-full text1"  
                     custom={0}
                     initial="hidden"
                     animate="visible"
@@ -102,7 +102,7 @@ const Card1 = () => {
                   <motion.img
                     key={`${key}-2`}
                     src={text2}
-                    className="w-[11.9375rem] absolute top-[4rem] -right-12"
+                    className="w-[11.9375rem] absolute top-[4rem] -right-5"
                     custom={1}
                     initial="hidden"
                     animate="visible"
@@ -120,7 +120,7 @@ const Card1 = () => {
                   <motion.img
                     key={`${key}-4`}
                     src={chimney}
-                    className="w-[10.625rem] absolute top-[12rem]"
+                    className="w-[7.625rem] absolute top-[12rem]"
                     custom={3}
                     initial="hidden"
                     animate="visible"
@@ -129,7 +129,7 @@ const Card1 = () => {
                   <motion.img
                     key={`${key}-5`}
                     src={arrow}
-                    className="w-[5rem] absolute top-[23rem] left-[4rem]"
+                    className="w-[4rem] absolute top-[20rem] left-[4rem] "
                     custom={4}
                     initial="hidden"
                     animate="visible"
@@ -138,7 +138,7 @@ const Card1 = () => {
                   <motion.img
                     key={`${key}-6`}
                     src={text4}
-                    className="w-[7rem] absolute top-[23.5rem] -right-[5rem]"
+                    className="w-[6rem] absolute top-[20.5rem] -right-[2rem]"
                     custom={5}
                     initial="hidden"
                     animate="visible"
@@ -147,7 +147,7 @@ const Card1 = () => {
                 </div>
 
                 <motion.div
-                  className="absolute top-5 right-12"
+                  className="absolute top-5 right-8"
                 >
                   <motion.img
                     key={`${key}-7`}
@@ -169,11 +169,14 @@ const Card1 = () => {
         initial={slideInFromRight.initial}
         animate={isInView ? slideInFromRight.animate : slideInFromRight.initial}
         transition={slideInFromRight.transition}
-        className="w-[55%]"
+        className="w-[60%] flex flex-col items-end"
       >
-        <span className="card-text">Strengthen Loyalty, </span><br />
-        <span className="card-text2">Drive Engagement</span>
-        <p className="para-text1 mt-[3.12rem]">
+        <p className="card-text mr-5">Strengthen Loyalty,<br/>
+          <span className="card-text2">Drive Engagement</span>
+        </p>
+
+        {/* <p className="card-text2 "></p> */}
+        <p className="para-text1 mt-[3.12rem] ">
           With Onepoket, you can build deeper connections with your customers<br />
           and create post-purchase experiences that keep them coming back.<br />
           Here's how we help you strengthen customer relationships and optimize<br />

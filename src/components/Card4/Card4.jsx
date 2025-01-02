@@ -34,7 +34,7 @@ const Card4 = () => {
 
     return (
         <motion.div
-            className="w-[90%] mx-auto flex flex-col md:flex-row justify-between overflow-hidden mt-[8rem] items-center mb-16"
+            className="w-[80%] mx-auto flex flex-col md:flex-row justify-between overflow-hidden mt-[8rem] items-center mb-16 gap-[4rem]"
             ref={containerRef}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"} // Trigger visibility based on in-view state
@@ -46,7 +46,7 @@ const Card4 = () => {
                 initial={slideInFromRight.initial}
                 animate={isInView ? slideInFromRight.animate : slideInFromRight.initial} // Trigger animation when in view
                 transition={slideInFromRight.transition}
-                className="w-[45%]"
+                className="w-[55%]"
             >
                 <span className="text-span">Streamline Warranty <br /> Processes for Effortless <br /> Customer Satisfaction</span>
                 <p className="para-text1 mt-[3.12rem]">
@@ -59,7 +59,7 @@ const Card4 = () => {
                 initial={slideInFromLeft.initial}
                 animate={isInView ? slideInFromLeft.animate : slideInFromLeft.initial} // Trigger animation when in view
                 transition={slideInFromLeft.transition}
-                className="w-[55%] mb-8 md:mb-0 flex items-center justify-center"
+                className="w-[45%] mb-8 md:mb-0 flex items-center justify-center"
             >
                 <img
                     src={gif}

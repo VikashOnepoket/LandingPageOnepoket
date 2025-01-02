@@ -68,7 +68,7 @@ const Delivery = () => {
             animate={isInView ? "visible" : "hidden"}
             variants={containerVariants}
         >
-            <div className="w-[90%] mx-auto flex gap-5">
+            <div className="w-[80%] mx-auto flex gap-5">
                 {/* Heading Section */}
                 <motion.div className="w-[35%]">
                     <motion.h1

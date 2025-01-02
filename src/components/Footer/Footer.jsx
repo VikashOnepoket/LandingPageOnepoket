@@ -34,7 +34,7 @@ const Footer = () => {
         >
             <motion.div
                 variants={containerVariants}
-                className=' mx-auto   w-[90%] footer-bg py-8'
+                className=' mx-auto   w-[80%] footer-bg py-8'
             >
                 {/* <motion.div
                     variants={itemVariants}

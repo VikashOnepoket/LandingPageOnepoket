@@ -30,7 +30,7 @@ const WarrantyRegistration = () => {
     const selectedContent = options.find(option => option?.title === selectedOption);
 
     return (
-        <div className="w-[90%] mx-auto flex justify-between gap-6 relative mt-[8.44rem]">
+        <div className="w-[80%] mx-auto flex justify-between gap-6 relative mt-[8.44rem]">
             {/* Left Section */}
             <div className="mt-[3.5rem] relative z-10">
                 <span className="span-1">How do you</span> <br /> <span className="span-2"> help them?</span>

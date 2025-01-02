@@ -34,7 +34,7 @@ const Card3 = () => {
 
   return (
     <motion.div
-      className="w-[90%] mx-auto flex flex-col md:flex-row justify-between overflow-hidden items-center mt-[8rem]"
+      className="w-[80%] mx-auto flex flex-col md:flex-row justify-between overflow-hidden items-center mt-[8rem]"
       ref={containerRef}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"} // Trigger visibility based on in-view state

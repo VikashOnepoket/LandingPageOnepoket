@@ -18,7 +18,7 @@ const AutoPlay = () => {
         autoplaySpeed: 4000,
         cssEase: "linear",
         centerMode: true, // Enables center alignment of slides
-        centerPadding: "15%", // Partial view of the next slide on the right
+        centerPadding: "10%", // Partial view of the next slide on the right
         responsive: [
             {
                 breakpoint: 1024,
@@ -54,7 +54,7 @@ const AutoPlay = () => {
 
     return (
         <motion.div
-            className="slider-container w-[90%] mx-auto md:flex gap-5 mt-32 md:flex-row flex-col justify-between items-center"
+            className="slider-container w-[80%] mx-auto md:flex gap-[4rem] mt-32 md:flex-row flex-col justify-between items-center "
             ref={containerRef}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -62,7 +62,7 @@ const AutoPlay = () => {
         >
             <motion.div
                 variants={itemVariants}
-                className="md:w-[30%] w-[90%] mx-auto"
+                className="md:w-[35%] w-[90%] mx-auto "
             >
                 <p className="text-[1.47681rem] leading-[1.90606rem] text-[#0052CC] font-medium">
                     Be the Captain of your<br />
@@ -77,7 +77,7 @@ const AutoPlay = () => {
             </motion.div>
             <Slider
                 {...settings}
-                className="custom-slider md:w-[70%] w-[90%] md:mt-0 mt-12"
+                className="custom-slider md:w-[65%] w-[90%] md:mt-0 mt-12 "
             >
                 <div className="h-[15.7905rem]">
                     <img src={slider1} className="h-full" alt="Slide 1" />

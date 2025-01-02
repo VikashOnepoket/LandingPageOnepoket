@@ -26,7 +26,7 @@ const HeroMain = () => {
       <h1 className='text-center md:text-[4rem] md:leading-[6rem] text-[2rem] leading-[3rem] font-bold text-[#282828] sintony mt-[1rem]'>
         With One QR
       </h1>
-      <div className='mt-[1.13rem] text-center'>
+      <div className='mt-[1.13rem] text-center '>
         <p className='text-[1.2rem] leading-[2rem] font-normal text-color'>For D2C brands looking to build lasting loyalty, Onepoket simplifies <br/> warranty management, onboarding, and post-purchase engagement <br/> through QR-powered technology and real-time insights.</p>
       </div>
       <div className='flex justify-center items-center mt-[3.75rem]'>
