@@ -1,0 +1,18 @@
+/* Ensure the curve is styled properly */
+.curve {
+    position: absolute; /* Ensure it stays at the top */
+    top: -5rem;         /* Adjust based on your layout */
+    left: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 1;         /* Lower than NavTop */
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in/fade-out */
+    opacity: 1;         /* Default visible */
+    background-color: red;
+  }
+  
+  .curve.hidden {
+    opacity: 0; /* Hide the curve smoothly */
+    pointer-events: none; /* Prevent interactions when hidden */
+  }
+  

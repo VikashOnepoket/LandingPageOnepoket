@@ -29,18 +29,13 @@ const Home = () => {
   const [showButton, setShowButton] = useState(false);
   const [showCurve, setShowCurve] = useState(true); // Control the visibility of the curve
   const deliveryRef = useRef(null); // Reference for the Delivery component
-  const navTopRef = useRef(null); // Reference for NavTop component
   const curveRef = useRef(null); // Reference for the curve image
 
-  // Intersection Observer to hide curve when scrolled down
+  // Intersection Observer to toggle the curve visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowCurve(true); // Show the curve when it's in the viewport
-        } else {
-          setShowCurve(false); // Hide the curve when it's out of the viewport
-        }
+        setShowCurve(entry.isIntersecting); // Show or hide the curve based on its visibility
       },
       {
         root: null, // Use the viewport as the root
@@ -49,12 +44,12 @@ const Home = () => {
     );
 
     if (curveRef.current) {
-      observer.observe(curveRef.current); // Start observing the curve element
+      observer.observe(curveRef.current);
     }
 
     return () => {
       if (curveRef.current) {
-        observer.unobserve(curveRef.current); // Cleanup when unmounted
+        observer.unobserve(curveRef.current);
       }
     };
   }, []);
@@ -63,13 +58,7 @@ const Home = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowButton(true); // Show the button when Delivery is in view
-        } else if (entry.boundingClientRect.top < 0) {
-          setShowButton(true); // Keep button visible when scrolling past Delivery
-        } else {
-          setShowButton(false); // Hide button when scrolling above Delivery
-        }
+        setShowButton(entry.isIntersecting || entry.boundingClientRect.top < 0); // Show the button when Delivery is in view or scrolled past
       },
       {
         root: null, // Use the viewport
@@ -78,28 +67,29 @@ const Home = () => {
     );
 
     if (deliveryRef.current) {
-      observer.observe(deliveryRef.current); // Start observing Delivery section
+      observer.observe(deliveryRef.current);
     }
 
     return () => {
       if (deliveryRef.current) {
-        observer.unobserve(deliveryRef.current); // Cleanup when unmounted
+        observer.unobserve(deliveryRef.current);
       }
     };
   }, []);
 
   return (
     <div className="h-screen overflow-y-auto">
-      <NavTop ref={navTopRef} /> {/* Apply ref to NavTop */}
-
+      <NavTop /> {/* No need for ref here as it's unused */}
+      
       <div className="relative">
         <div className="w-full relative">
-          {/* Only show the white curve if showCurve is true */}
+          {/* Curve image with dynamic visibility */}
           <img
             ref={curveRef}
             src={curve}
             className="w-full absolute -top-[5rem] z-50 left-0 h-[30px] transition-opacity duration-300 ease-in-out"
             style={{ opacity: showCurve ? 1 : 0 }} // Smooth fade-in/fade-out
+            alt="Curve"
           />
         </div>
         <Navbar />
@@ -115,7 +105,6 @@ const Home = () => {
           <Card3 />
           <Card4 />
         </div>
-        {/* <Direct /> */}
         <WarrantyRegistration />
         <CustomerScan />
         <AutoPlay />
@@ -156,4 +145,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 

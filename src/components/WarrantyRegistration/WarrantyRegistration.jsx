@@ -5,6 +5,9 @@ import card1 from '../../assets/card-1.png';
 import card2 from '../../assets/card-2.png';
 import card3 from '../../assets/card-3.png';
 import def from '../../assets/def.png'
+import cardFirst from '../../assets/first party data.png'
+import cardSecond from '../../assets/user analytcs (1).png'
+import cardThird from '../../assets/qr registration.png'
 
 const WarrantyRegistration = () => {
     const [selectedOption, setSelectedOption] = useState("QR-Based Warranty Registration");
@@ -13,17 +16,17 @@ const WarrantyRegistration = () => {
         {
             title: "QR-Based Warranty Registration",
             description: "With OnePocket's QR codes, customers can register warranties in seconds, giving them easy access to post-purchase benefits and support.",
-            image: card1,
+            image: cardThird,
         },
         {
             title: "User-Friendly Analytics",
             description: "Access real-time data to understand customer behavior. Our intuitive analytics help you make informed decisions to proactively engage customers.",
-            image: card2,
+            image: cardSecond,
         },
         {
             title: "First-Party Data Collection",
             description: "Collect valuable data with every interaction, empowering you to personalize future touchpoints and increase retention.",
-            image: def,
+            image: cardFirst,
         },
     ];
 
@@ -49,7 +52,7 @@ const WarrantyRegistration = () => {
 
             {/* Right Section */}
             <motion.div
-                className="w-full md:w-1/2 h-[45rem] xl:h-[50rem] 2xl:h-[60rem] bg-blue-50 rounded-lg box-container px-[4.5rem] pt-[4.5rem]"
+                className="w-full md:w-1/2 "
                 key={selectedOption}
                 initial={{ scale: 0.9, opacity: 0 }} // Initial scale for push-in effect
                 animate={{ scale: 1, opacity: 1 }} // Push-out effect to normal size
@@ -57,24 +60,24 @@ const WarrantyRegistration = () => {
                 transition={{ duration: 0.5 }}
             >
                 {/* Animate the h2 tag */}
-                <motion.h2
+                {/* <motion.h2
                     className="heading-text"
                     initial={{ scale: 0.9, opacity: 0 }} // Initial push-in effect
                     animate={{ scale: 1, opacity: 1 }} // Push-out effect
                     transition={{ duration: 0.4 }}
                 >
                     {selectedContent.title}
-                </motion.h2>
+                </motion.h2> */}
 
                 {/* Animate the p tag */}
-                <motion.p
+                {/* <motion.p
                     className="para-text pt-[2.89rem]"
                     initial={{ scale: 0.9, opacity: 0 }} // Initial push-in effect
                     animate={{ scale: 1, opacity: 1 }} // Push-out effect
                     transition={{ duration: 0.4, delay: 0.2 }} // Delay for staggered animation
                 >
                     {selectedContent.description}
-                </motion.p>
+                </motion.p> */}
 
                 {/* Animate the image */}
                 <motion.div
