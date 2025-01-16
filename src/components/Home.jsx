@@ -77,18 +77,20 @@ const Home = () => {
     };
   }, []);
 
+
+
   return (
     <div className="h-screen overflow-y-auto">
       <NavTop /> {/* No need for ref here as it's unused */}
-      
+
       <div className="relative">
         <div className="w-full relative">
-          {/* Curve image with dynamic visibility */}
+
           <img
             ref={curveRef}
             src={curve}
             className="w-full absolute -top-[5rem] z-50 left-0 h-[30px] transition-opacity duration-300 ease-in-out"
-            style={{ opacity: showCurve ? 1 : 0 }} // Smooth fade-in/fade-out
+            style={{ opacity: showCurve ? 1 : 0 }}
             alt="Curve"
           />
         </div>

@@ -70,7 +70,7 @@ const Purchase = ({ PurchaseOptions = [], onPurchaseOptionsChange, error }) => {
               <input
                 type='text'
                 className='input border border-gray-300 dark:border-gray-600 dark:bg-transparent rounded-md w-full py-2 px-3 focus:border-[#0052cc] focus:border focus-within:ring-1 appearance-none transition duration-150 text-black ease-in-out bg-[#F7F7F7]'
-                placeholder='Product Review URL'
+                placeholder='Enter ASIN or FSN Number'
                 value={option.link}
                 onChange={(e) => handleOptionChange(index, 'link', e.target.value)}
               />

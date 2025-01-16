@@ -84,7 +84,7 @@ function App() {
               path='/ocr'
               element={
                 <PublicRoute>
-                  <AnimatedText/>
+                  <Ocr/>
                 </PublicRoute>
               }
             />

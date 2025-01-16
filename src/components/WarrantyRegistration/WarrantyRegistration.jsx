@@ -36,7 +36,7 @@ const WarrantyRegistration = () => {
         <div className="w-[80%] mx-auto flex justify-between gap-6 relative mt-[8.44rem]">
             {/* Left Section */}
             <div className="mt-[3.5rem] relative z-10">
-                <span className="span-1">How do you</span> <br /> <span className="span-2"> help them?</span>
+                <span className="span-1">Unlock all </span> <br /> <span className="span-2"> with One QR</span>
                 <div className="flex flex-col gap-3 items-start pt-[6.38rem]">
                     {options.map(option => (
                         <button

@@ -54,12 +54,12 @@ const AutoPlay = () => {
     };
 
     // Ensure slider is initialized on mount
-    useEffect(() => {
-        // Trigger a re-render to make sure the slider is initialized properly
-        if (containerRef.current) {
-            containerRef.current.scrollIntoView();
-        }
-    }, []);
+    // useEffect(() => {
+    //     // Trigger a re-render to make sure the slider is initialized properly
+    //     if (containerRef.current) {
+    //         containerRef.current.scrollIntoView();
+    //     }
+    // }, []);
 
     return (
         <motion.div
@@ -88,13 +88,13 @@ const AutoPlay = () => {
                 {...settings}
                 className="custom-slider md:w-[65%] w-[90%] md:mt-0 mt-12 gap-[5rem]"
             >
-                <div className="md:h-[13.7905rem] 2xl:h-[17rem]">
+                <div className="md:h-[15.7905rem] ">
                     <img src={slider1} className="h-full" alt="Slide 1" />
                 </div>
-                <div className="md:h-[13.7905rem] 2xl:h-[17rem]">
+                <div className="md:h-[15.7905rem] ">
                     <img src={slider2} className="h-full" alt="Slide 2" />
                 </div>
-                <div className="md:h-[13.7905rem] 2xl:h-[17rem]">
+                <div className="md:h-[15.7905rem]  ">
                     <img src={slider3} className="h-full" alt="Slide 3" />
                 </div>
             </Slider>
