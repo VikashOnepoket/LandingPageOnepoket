@@ -222,6 +222,47 @@ const PendingInstallation = () => {
 
     }
 
+    // techincal executive 
+    const [technicalExecutiveDetails, setTechnicalExecutiveDetails] = useState([])
+    const fetchTechnicalExecutiveDetails = async () => {
+
+        try {
+
+            setLoading(true)
+            const { data } = await axios.get('/technical_executive_details', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(data, "data")
+            setTechnicalExecutiveDetails(data?.result)
+            // setCount(data?.count)
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+
+    }
+
+    useEffect(() => {
+        fetchTechnicalExecutiveDetails()
+    }, [token])
+
+    const executiveDetails = technicalExecutiveDetails.map((data) => ({
+        label: data.name, // Display name in dropdown
+        value: data.name, // Value associated with the option
+    }));
+
+    // State for selected option
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    // Handle change event
+    const handleChange = (option) => {
+        setSelectedOption(option);
+        console.log("Selected Option:", option);
+    };
+
     return (
         <>
             {loading ? (<SpinnerMain />) : (<div className='mt-3 p-8'>
@@ -348,7 +389,8 @@ const PendingInstallation = () => {
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Product</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Category</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Installation Date-Time</th>
-                                    <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Status</th>
+                                    {/* <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Status</th> */}
+                                    <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Assign To</th>
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Address</th>
 
                                     <th className="py-2 px-4 border-b text-left  text-[#202123BF] text-[12px] leading-[17px] font-semibold">Remarks</th>
@@ -371,7 +413,7 @@ const PendingInstallation = () => {
                                             </td>
 
                                             <td className="py-5 px-4 border-b font-medium text-[#202123BF]">
-                                                <Select
+                                                {/* <Select
                                                     value={statusOptions.find(option => option.value === 'pending')}
                                                     onChange={(selectedOption) => handleStatusChange(selectedOption, installation?.id)}
 
@@ -396,7 +438,17 @@ const PendingInstallation = () => {
                                                     }}
                                                     menuPortalTarget={null} // Dropdown will open within the modal
                                                     menuPosition="fixed"
+                                                /> */}
+                                                <Select
+                                                    options={executiveDetails} // Pass mapped options
+                                                    value={selectedOption} // Controlled value
+                                                    onChange={handleChange} // Change handler
+                                                    placeholder="Select an Executive"
+                                                    menuPortalTarget={null}
+                                                    menuPosition="fixed"
                                                 />
+
+                                                {/* <button className='bg-indigo-300 text-white px-5'>Assign to</button> */}
                                             </td>
                                             {/* <td className="py-2 px-4 border-b text-right">
                                                 <button className="bg-[#0052CC] text-white hover:bg-[#0041a8] px-3 py-2 rounded-md flex items-center">
@@ -404,7 +456,7 @@ const PendingInstallation = () => {
                                                     Message
                                                 </button>
                                             </td> */}
-                                               <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.contact_address}</td>
+                                            <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.contact_address}</td>
                                             <td className="py-2 px-4 border-b text-[14px] leading-[18px] font-medium text-[#8F9091]">{installation?.other_details}</td>
                                         </tr>
                                     ))

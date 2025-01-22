@@ -79,7 +79,7 @@ const Navbar = () => {
 
                     </div>
                     <div className=''>
-                        <button className={`experience-btn ${isScrolled ? 'scrolled-btn' : ''}`}>
+                        <button className={`experience-btn ${isScrolled ? 'scrolled-btn' : ''}`} onClick={openTypeForm}>
                             Experience Now
                         </button>
 
