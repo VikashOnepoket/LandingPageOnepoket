@@ -439,14 +439,14 @@ const PendingInstallation = () => {
                                                     menuPortalTarget={null} // Dropdown will open within the modal
                                                     menuPosition="fixed"
                                                 /> */}
-                                                <Select
+                                                {/* <Select
                                                     options={executiveDetails} // Pass mapped options
                                                     value={selectedOption} // Controlled value
                                                     onChange={handleChange} // Change handler
                                                     placeholder="Select an Executive"
                                                     menuPortalTarget={null}
                                                     menuPosition="fixed"
-                                                />
+                                                /> */}
 
                                                 {/* <button className='bg-indigo-300 text-white px-5'>Assign to</button> */}
                                             </td>
