@@ -163,9 +163,9 @@ const ServiceRequest = () => {
                             <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Completed Installations</h3>
                             </div>
-                            <div className=' '>
+                            {/* <div className=' '>
                                 <MdOutlineArrowOutward size={28} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     {/* pending card */}
@@ -178,13 +178,13 @@ const ServiceRequest = () => {
                             <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Pending Installation</h3>
                             </div>
-                            <div className=' '>
+                            {/* <div className=' '>
                                 <MdOutlineArrowOutward size={28} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     {/* rejected installation */}
-                    <div style={boxShadowStyle} className='px-5 pt-5 pb-[110px] rounded-xl w-[300px] cursor-pointer' onClick={() => navigate(`/service_request/reject_installation`)}>
+                    {/* <div style={boxShadowStyle} className='px-5 pt-5 pb-[110px] rounded-xl w-[300px] cursor-pointer' onClick={() => navigate(`/service_request/reject_installation`)}>
                         <div>
                             <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'><h3>{totalRejected > 0 ? totalRejected : 0}</h3>
                             </h3>
@@ -193,11 +193,9 @@ const ServiceRequest = () => {
                             <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Rejected Installation</h3>
                             </div>
-                            <div className=' '>
-                                <MdOutlineArrowOutward size={28} />
-                            </div>
+                            
                         </div>
-                    </div>
+                    </div> */}
                     {/* serive network details */}
                     <div style={boxShadowStyle} className='px-5 pt-5 pb-[110px] rounded-xl w-[300px] cursor-pointer' onClick={() => navigate(`/service_request/service_network`)}>
                         <div>
@@ -205,11 +203,11 @@ const ServiceRequest = () => {
                         </div>
                         <div className='flex items-center justify-between text-[#0052cc] gap-2 mt-5'>
                             <div className='w-[70%]'>
-                                <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Technical Executive Details</h3>
+                                <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Technical Executive </h3>
                             </div>
-                            <div className=' w-[10%]'>
+                            {/* <div className=' w-[10%]'>
                                 <MdOutlineArrowOutward size={28} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     {/* warranty claims */}
@@ -221,9 +219,9 @@ const ServiceRequest = () => {
                             <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Warranty Claims</h3>
                             </div>
-                            <div className=' '>
+                            {/* <div className=' '>
                                 <MdOutlineArrowOutward size={28} />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

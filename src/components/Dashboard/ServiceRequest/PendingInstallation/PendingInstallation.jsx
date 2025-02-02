@@ -9,6 +9,7 @@ import ModalOTP from './ModalOTP';
 import SpinnerMain from '../../Spinner/SpinnerMain';
 import { DatePicker } from 'antd';
 import { fetchCategory } from '../../slice/categorySlice';
+import { motion } from 'framer-motion'
 const PendingInstallation = () => {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
@@ -251,17 +252,73 @@ const PendingInstallation = () => {
 
     const executiveDetails = technicalExecutiveDetails.map((data) => ({
         label: data.name, // Display name in dropdown
-        value: data.name, // Value associated with the option
+        value: data.id, // Value associated with the option
     }));
 
     // State for selected option
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOptions, setSelectedOptions] = useState({});
 
+    const [openShowModal, setOpenShowModal] = useState(false);
+    const [techId, setTechId] = useState('')
+    const [prodID, setProdID] = useState('')
+    const [custID, setCustID] = useState('')
+    const [techExName, setTechExName] = useState('')
+    const [pendingId, setPendingID] = useState('')
     // Handle change event
-    const handleChange = (option) => {
-        setSelectedOption(option);
-        console.log("Selected Option:", option);
+    const handleChange = (option, installationId, productID, customerID) => {
+        setOpenShowModal(true)
+        setSelectedOptions((prev) => ({
+            ...prev,
+            [installationId]: option,
+        }));
+        setTechId(option?.value)
+        setProdID(productID)
+        setCustID(customerID)
+        setTechExName(option?.label)
+        setPendingID(installationId)
+        console.log(option?.value)
+        console.log(productID)
+        console.log(customerID)
+        console.log(`Selected Option for ID ${installationId}:`, option);
     };
+
+    const onClose = () => {
+        setOpenShowModal(false);
+    };
+
+
+
+    const assignTechnicalExecutive = async () => {
+        try {
+            setLoading(true)
+            const { data } = await axios.post(
+                "assign_technical_executive", // Make sure the URL is correct
+                {
+                    tech_ex_id: techId,
+                    tech_ex_name: techExName,
+                    uid_id: pendingId,
+                    customer_id: custID,
+                    product_id: prodID
+
+                }, // Request body (empty object)
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+            );
+            setLoading(false)
+            setOpenShowModal(false)
+
+            await pendingInstallation()
+        } catch (error) {
+            console.log(error)
+        }
+
+
+    }
+
+
 
     return (
         <>
@@ -439,16 +496,17 @@ const PendingInstallation = () => {
                                                     menuPortalTarget={null} // Dropdown will open within the modal
                                                     menuPosition="fixed"
                                                 /> */}
-                                                {/* <Select
+                                                {installation?.tech_ex_name ? installation?.tech_ex_name : <Select
                                                     options={executiveDetails} // Pass mapped options
-                                                    value={selectedOption} // Controlled value
-                                                    onChange={handleChange} // Change handler
+                                                    value={selectedOptions[installation.id] || null} // Controlled value per row
+                                                    onChange={(option) => handleChange(option, installation.id, installation?.product_id, installation?.customer_id)} // Pass installation ID
                                                     placeholder="Select an Executive"
                                                     menuPortalTarget={null}
                                                     menuPosition="fixed"
-                                                /> */}
+                                                />}
 
-                                                {/* <button className='bg-indigo-300 text-white px-5'>Assign to</button> */}
+                                                {/* 
+                                                <button className='bg-indigo-300 text-white px-5'>Assign to</button> */}
                                             </td>
                                             {/* <td className="py-2 px-4 border-b text-right">
                                                 <button className="bg-[#0052CC] text-white hover:bg-[#0041a8] px-3 py-2 rounded-md flex items-center">
@@ -468,6 +526,37 @@ const PendingInstallation = () => {
                     </div>
                 </div>
             </div>)}
+
+            {openShowModal && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 modal-backdrop"
+                    onClick={(e) => e.target.classList.contains('modal-backdrop') && onClose()}
+                >
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className="bg-white p-8 rounded-lg shadow-lg"
+                        style={{ minWidth: 300, maxWidth: 600 }}
+                    >
+                        <h1>Are you sure want to update the techincal executive Details</h1>
+                        <div className='flex justify-end mt-5  gap-5'>
+                            <button
+                                type="button"
+                                className="text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2"
+                            >
+                                Discard
+                            </button>
+                            <button type='button' className='bg-[#0052CC] text-white rounded-md px-5 py-2' onClick={assignTechnicalExecutive}>
+                                Save
+                            </button>
+                        </div>
+                    </motion.div>
+                </motion.div>
+            )}
         </>
     )
 }

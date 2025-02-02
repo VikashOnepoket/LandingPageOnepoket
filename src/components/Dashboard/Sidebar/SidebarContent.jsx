@@ -61,28 +61,25 @@ const SidebarContent = ({ isCollapsed, activeItem, setActiveItem, menuItems, isA
                 {filteredMenuItems.map((item) => (
                     <div key={item.name}>
                         <li
-                            className={`flex items-center gap-5 p-2 rounded-lg cursor-pointer mb-2 ${
-                                isActive(item.path) || openSubmenu === item.name
-                                    ? 'bg-[#004699] text-white'
-                                    : 'text-[#7A7A7A]'
-                            }`}
+                            className={`flex items-center gap-5 p-2 rounded-lg cursor-pointer mb-2 ${isActive(item.path) || openSubmenu === item.name
+                                ? 'bg-[#004699] text-white'
+                                : 'text-[#7A7A7A]'
+                                }`}
                             onClick={() => handleMenuClick(item)}
                         >
                             <span
-                                className={`material-symbols-outlined text-[22px] leading-[28px] ${
-                                    isActive(item.path) || openSubmenu === item.name
-                                        ? 'text-white'
-                                        : 'text-[#7A7A7A]'
-                                }`}
+                                className={`material-symbols-outlined text-[22px] leading-[28px] ${isActive(item.path) || openSubmenu === item.name
+                                    ? 'text-white'
+                                    : 'text-[#7A7A7A]'
+                                    }`}
                             >
                                 {item.icon}
                             </span>
                             <span
-                                className={`absolute left-16 text-[14px] leading-[18px] font-semibold ${
-                                    isActive(item.path) || openSubmenu === item.name
-                                        ? 'text-white'
-                                        : 'text-[#7A7A7A]'
-                                } ${isCollapsed ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+                                className={`absolute left-16 text-[14px] leading-[18px] font-semibold ${isActive(item.path) || openSubmenu === item.name
+                                    ? 'text-white'
+                                    : 'text-[#7A7A7A]'
+                                    } ${isCollapsed ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
                             >
                                 {item.name}
                             </span>
@@ -98,14 +95,22 @@ const SidebarContent = ({ isCollapsed, activeItem, setActiveItem, menuItems, isA
                                 {item.subMenu.map((subItem) => (
                                     <Link to={subItem.path} key={subItem.name} className="">
                                         <li
-                                            className={`flex items-center gap-5 p-2 rounded-lg cursor-pointer ${
-                                                isActive(subItem.path) ? 'bg-[#e0e0e0]' : 'text-[#7A7A7A]'
-                                            }`}
+                                            className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer ${isActive(subItem.path) ? 'bg-[#e0e0e0]' : 'text-[#7A7A7A] relative'
+                                                }`}
                                             onClick={() => setActiveItem(subItem.path)}
                                         >
+                                            <span
+                                                className={`material-symbols-outlined text-[22px] leading-[28px] ${isActive(subItem.path) || openSubmenu === subItem.name
+                                                    ? 'text-[#7A7A7A]'
+                                                    : 'text-[#7A7A7A]'
+                                                    }`}
+                                            >
+                                                {subItem.icon}
+                                            </span>
                                             <span className="text-[14px] leading-[18px] font-semibold">
                                                 {subItem.name}
                                             </span>
+                                            
                                         </li>
                                     </Link>
                                 ))}

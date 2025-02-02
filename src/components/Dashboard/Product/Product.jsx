@@ -492,7 +492,7 @@ const Product = () => {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="5" className="py-3 px-4 border-b text-center text-[12px] leading-4 font-medium text-[#58595A]">
+                                                <td colSpan="6" className="py-3 px-4 border-b text-center text-[12px] leading-4 font-medium text-[#58595A]">
                                                     No products found.
                                                 </td>
                                             </tr>

@@ -30,15 +30,24 @@ const Sidebar = () => {
             icon: 'analytics',
             path: '/analytics',
             subMenu: [
-                { name: 'Single QR', path: '/analytics/single_qr' },
-                { name: 'Dynamic QR', path: '/analytics/dynamic_qr' },
+                { name: 'Single QR', icon: 'analytics', path: '/analytics/single_qr' },
+                { name: 'Dynamic QR', icon: 'analytics', path: '/analytics/dynamic_qr' },
             ]
         },
         { name: 'Campaign', icon: 'campaign', path: '/campaign' },
         // { name: 'Inventory', icon: 'inventory_2', path: '/inventory' },
         { name: 'Inventory Management', icon: 'factory', path: '/factory' },
         { name: 'Roles & Permissions', icon: 'contacts_product', path: '/roles' },
-        { name: 'Service Request', icon: 'settings', path: '/service_request' },
+        {
+            name: 'Service Request', icon: 'settings', path: '/service_request',
+            // subMenu: [
+            //     { name: 'Completed Installation', icon: 'analytics', path: '/analytics/single_qr' },
+            //     { name: 'Pending Installtion', icon: 'analytics', path: '/analytics/dynamic_qr' },
+            //     { name: 'Service Network', icon: 'analytics', path: '/analytics/single_qr' },
+            //     { name: 'Warranty Claims', icon: 'analytics', path: '/analytics/dynamic_qr' },
+            // ]
+
+        },
         { name: 'Profile', icon: 'account_circle', path: '/profile' },
     ];
 
@@ -65,7 +74,7 @@ const Sidebar = () => {
 
     return (
         <div
-            className={`hidden lg:block h-screen  p-5 bg-[#FFFFFF] transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}
+            className={`hidden lg:block h-screen   p-5 bg-[#FFFFFF] transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}
             style={boxShadowStyle}
         >
             <SidebarContent
