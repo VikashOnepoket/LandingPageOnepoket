@@ -542,11 +542,12 @@ const PendingInstallation = () => {
                         className="bg-white p-8 rounded-lg shadow-lg"
                         style={{ minWidth: 300, maxWidth: 600 }}
                     >
-                        <h1>Are you sure want to update the techincal executive Details</h1>
+                        <h1>Are you sure want to assign this techincal executive ?</h1>
                         <div className='flex justify-end mt-5  gap-5'>
                             <button
                                 type="button"
                                 className="text-[#58595A] border border-[#8F9091] text-[14px] leading-[18px] font-bold rounded-md flex items-center px-3 py-2"
+                                onClick={onClose}
                             >
                                 Discard
                             </button>

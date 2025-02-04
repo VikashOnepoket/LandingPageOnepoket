@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import comp from '../../../assets/comp.png';
+import pending from '../../../assets/pending.png';
+import service from '../../../assets/service.png';
 
 import axios from '../../../api/api';
 import SpinnerMain from '../Spinner/SpinnerMain';
@@ -44,12 +47,12 @@ const ServiceRequest = () => {
         try {
             setLoading(true)
             const { data } = await axios.post('/lp_completed_installation',
-                {}, 
+                {},
                 {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
             console.log(data, "pending installation data")
             setTotalCompleted(data?.count)
             setLoading(false)
@@ -161,6 +164,9 @@ const ServiceRequest = () => {
                         </div>
                         <div className='flex items-center text-[#0052cc] gap-2 mt-5'>
                             <div>
+                                <img src={comp} className='w-[1.3rem]'/>
+                            </div>
+                            <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Completed Installations</h3>
                             </div>
                             {/* <div className=' '>
@@ -175,6 +181,9 @@ const ServiceRequest = () => {
                             </h3>
                         </div>
                         <div className='flex items-center text-[#0052cc] gap-2 mt-5'>
+                            <div>
+                                <img src={pending} className='w-[1.3rem]'/>
+                            </div>
                             <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Pending Installation</h3>
                             </div>
@@ -201,7 +210,10 @@ const ServiceRequest = () => {
                         <div>
                             <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{totalTechicalExceutive > 0 ? totalTechicalExceutive : 0}</h3>
                         </div>
-                        <div className='flex items-center justify-between text-[#0052cc] gap-2 mt-5'>
+                        <div className='flex items-center  text-[#0052cc] gap-2 mt-5'>
+                            <div>
+                                <img src={service} className='w-[1.3rem]'/>
+                            </div>
                             <div className='w-[70%]'>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Technical Executive </h3>
                             </div>
@@ -216,6 +228,9 @@ const ServiceRequest = () => {
                             <h3 className='text-[2.5rem] leading-[3rem] font-bold text-[#202123]'>{warrantyCount > 0 ? warrantyCount : 0}</h3>
                         </div>
                         <div className='flex items-center text-[#0052cc] gap-2 mt-5'>
+                            <div>
+                                <img src={comp} className='w-[1.3rem]'/>
+                            </div>
                             <div>
                                 <h3 className='text-[#0052CC] text-[1.2rem] leading-[2rem] font-semibold'>Warranty Claims</h3>
                             </div>
