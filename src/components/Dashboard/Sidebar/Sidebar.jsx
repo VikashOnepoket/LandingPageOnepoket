@@ -6,6 +6,9 @@ import { useSidebar } from './context/SidebarContext';
 import { Drawer } from '@mui/material';
 import SidebarContent from './SidebarContent';
 import FreePlan from './FreePlan';
+import qr11 from '../../../assets/qr11.png';
+import qr22 from '../../../assets/qr22.png';
+
 
 
 
@@ -30,8 +33,8 @@ const Sidebar = () => {
             icon: 'analytics',
             path: '/analytics',
             subMenu: [
-                { name: 'Single QR', icon: 'analytics', path: '/analytics/single_qr' },
-                { name: 'Dynamic QR', icon: 'analytics', path: '/analytics/dynamic_qr' },
+                { name: 'Single QR', icon: qr11, path: '/analytics/single_qr' },
+                { name: 'Dynamic QR', icon: qr22, path: '/analytics/dynamic_qr' },
             ]
         },
         { name: 'Campaign', icon: 'campaign', path: '/campaign' },
