@@ -99,14 +99,7 @@ const SidebarContent = ({ isCollapsed, activeItem, setActiveItem, menuItems, isA
                                                 }`}
                                             onClick={() => setActiveItem(subItem.path)}
                                         >
-                                            {/* <span
-                                                className={`material-symbols-outlined text-[22px] leading-[28px] ${isActive(subItem.path) || openSubmenu === subItem.name
-                                                    ? 'text-[#7A7A7A]'
-                                                    : 'text-[#7A7A7A]'
-                                                    }`}
-                                            >
-                                                {subItem.icon}
-                                            </span> */}
+                                            
                                             <img src={subItem.icon} alt={subItem.name} className={`w-[22px] h-[22px] ${isActive(subItem.path) || openSubmenu === subItem.name
                                                     ? 'text-[#7A7A7A]'
                                                     : 'text-[#7A7A7A]'
