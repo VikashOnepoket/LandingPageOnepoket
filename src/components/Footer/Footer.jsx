@@ -91,22 +91,22 @@ const Footer = () => {
                 </motion.div> */}
                 <div className='lg:flex lg:items-start lg:justify-between lg:gap-5 pt-24 md:grid md:grid-cols-3 sm:grid gap-10 sm:grid-cols-2 grid grid-cols-1'>
                     {/* Logo Section */}
-                    <div className='w-[215px] flex flex-col'>
+                    <div className=' flex flex-col w-[25%]'>
                         <div>
-                            <img src={Logo} alt="Logo" />
+                            <img src={Logo} alt="Logo" className='w-[14.84375rem]' />
                         </div>
                         <div className='pt-5'>
-                            <p className='text-[18px] font-normal leading-[31px] text-[#ABCAF6] pt-5 flex  gap-2'>
+                            <p className='text-[1.125rem] font-normal leading-[31px] text-[#ABCAF6] pt-5 flex  gap-2 '>
                                 <span class="material-symbols-outlined pt-2">
                                     pin_drop
                                 </span>
-                                Mayur Vihar, Delhi 896467</p>
-                            <p className='text-[18px] font-normal leading-[31px] text-[#ABCAF6] pt-5 flex gap-2'>
+                                D 57/3-1, Satshri complex, Sigra, Varanasi - 221010</p>
+                            <p className='text-[1.125rem] font-normal leading-[31px] text-[#ABCAF6] pt-5 flex gap-2'>
                                 <span class="material-symbols-outlined pt-1">
                                     call
                                 </span>
                                 +917875637893</p>
-                            <p className='text-[18px] font-normal leading-[31px] text-[#ABCAF6] pt-5 flex gap-2'>
+                            <p className='text-[1.125rem] font-normal leading-[31px] text-[#ABCAF6] pt-5 flex gap-2'>
                                 <span class="material-symbols-outlined pt-1">
                                     drafts
                                 </span>
@@ -117,45 +117,45 @@ const Footer = () => {
                     {/* Resources Section */}
                     <div className='flex flex-col'>
                         <div>
-                            <p className='text-[24px] font-bold leading-[31px] text-white'>Resources</p>
+                            <p className='text-[1.5rem] font-bold leading-[31px] text-white'>Resources</p>
                         </div>
                         <div className='pt-5'>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>FAQs</p>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>Blogs</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>FAQs</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>Blogs</p>
                         </div>
                     </div>
 
                     {/* Company Section */}
                     <div className='flex flex-col'>
                         <div>
-                            <p className='text-[24px] font-bold leading-[31px] text-white'>Company</p>
+                            <p className='text-[1.5rem] font-bold leading-[31px] text-white'>Company</p>
                         </div>
                         <div className='pt-5'>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>About Us</p>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>Careers</p>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>Our Team</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>About Us</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>Careers</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>Our Team</p>
                         </div>
                     </div>
 
                     {/* Support Section */}
                     <div className='flex flex-col'>
                         <div>
-                            <p className='text-[24px] font-bold leading-[31px] text-white'>Support</p>
+                            <p className='text-[1.5rem] font-bold leading-[31px] text-white'>Support</p>
                         </div>
                         <div className='pt-5'>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>Contact Us</p>
-                            <p className='text-[24px] font-medium leading-[31px] text-white pt-5'>Help Center</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>Contact Us</p>
+                            <p className='text-[1.125rem] font-medium leading-[31px] text-[#ABCAF6] pt-5'>Help Center</p>
                         </div>
                     </div>
 
                     {/* Social Section */}
                     <div className='flex flex-col'>
                         <div>
-                            <p className='text-[24px] font-bold leading-[31px] text-white'>Social</p>
+                            <p className='text-[1.5rem] font-bold leading-[31px] text-white'>Social</p>
                         </div>
 
                         <div className='pt-5'>
-                            <div className='pt-5 flex gap-5 items-center text-white'>
+                            <div className='pt-5 flex gap-5 items-center text-[#ABCAF6]'>
                                 <FaLinkedin size={30} />
                                 <FaInstagram size={30} />
                             </div>
